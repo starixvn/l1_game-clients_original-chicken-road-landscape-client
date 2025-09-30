@@ -95,7 +95,7 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     onLoad() {
-        this.loadFonts();
+        //this.loadFonts();
         this.levelUpNode.active = false;
 
         this.startAxePosition = v3(this.spineAxe.node.parent.position);
@@ -471,7 +471,7 @@ export default class PlaceBetButton extends ObserverComponent {
 
         this.cashOutButtonInteractable = buttonCashOut.interactable;
 
-        this.updateFontButtonCashOut();
+        //this.updateFontButtonCashOut();
         const animation = this.lblMoney.getComponent(Animation);
         if (animation) {
             if (buttonCashOut.interactable) {

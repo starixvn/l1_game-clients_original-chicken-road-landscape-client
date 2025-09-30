@@ -32,6 +32,12 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
         this.betStore.amount = this.calculateNewBetAmount(current, change);
     }
 
+    multiplyBetAmount(multiplier: number) {
+        const newAmount = this.betStore.amount * multiplier;
+        const [minBet, maxBet] = [this.gameConfig.minBet, this.gameConfig.maxBet];
+        this.betStore.amount = Math.min(Math.max(newAmount, minBet), maxBet);
+    }
+
     private calculateNewBetAmount(current: number, change: number): number {
         const [minBet, maxBet] = [this.gameConfig.minBet, this.gameConfig.maxBet];
         return Math.min(Math.max(current + change, minBet), maxBet);

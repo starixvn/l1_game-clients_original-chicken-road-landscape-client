@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, instantiate, Label, Node, Prefab, tween, Vec3 } from "cc";
+import { _decorator, Button, instantiate, Label, Node, Prefab, tween, Vec3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 
@@ -8,6 +8,7 @@ import { InstantWinConfigStore } from "../../../game-configs/instant-win-config-
 import { BetAmountHandlers } from "../bet-amount-handlers";
 import { BetAmountStore } from "../bet-amount-store";
 import BetLevelsContainer from "./bet-levels-container";
+import { BetValueItem } from "./bet-value-item";
 
 const { FormatUtils } = gc;
 const { ccclass, property } = _decorator;
@@ -15,12 +16,6 @@ const { observer, render, handle } = Observer;
 
 @ccclass
 export default class BetAmount extends ObserverComponent {
-    @property(Node)
-    nodeBetLevelsContainer: Node = null;
-
-    @property(Prefab)
-    prfBetLevelsContainer: Prefab = null;
-
     @property(Label)
     lblBetLevelDefault: Label = null;
 
@@ -35,6 +30,21 @@ export default class BetAmount extends ObserverComponent {
 
     @property(Node)
     nodeDisabledBetAmount: Node = null;
+
+    @property(Button)
+    btnHalfBet: Button = null;
+
+    @property(Node)
+    disabledHalfBet: Node = null;
+
+    @property(Button)
+    btnDoubleBet: Button = null;
+
+    @property(Node)
+    disabledDoubleBet: Node = null;
+
+    @property(Node)
+    nodeBetAmountValue: Node = null;
 
     private betAmount = 0;
     private betLevels = [];
@@ -74,61 +84,14 @@ export default class BetAmount extends ObserverComponent {
             return;
         }
         this.betLevels = betLevels;
-        this.nodeBetLevelsContainer.destroyAllChildren();
-        const container = instantiate(this.prfBetLevelsContainer);
-        const betLevelsContainer = container.getComponent(BetLevelsContainer);
+        const betLevelsContainer = this.nodeBetAmountValue.getComponent(BetLevelsContainer);
         betLevelsContainer.setBetLevels(betLevels);
-        this.nodeBetLevelsContainer.addChild(container);
-        this.hideBetLevelsContainer(true);
-    }
-
-    hideBetLevelsContainer(quickly = false) {
-        if (!this.nodeBetLevelsContainer) {
-            return;
-        }
-        this.nodeOverlayBg.active = false;
-
-        if (quickly) {
-            this.nodeBetLevelsContainer.active = false;
-        } else {
-            tween(this.nodeBetLevelsContainer)
-                .to(0.2, { scale: new Vec3(1, 0, 1) })
-                .call(() => {
-                    this.nodeBetLevelsContainer.active = false;
-                })
-                .start();
-        }
-    }
-
-    showBetLevelsContainer() {
-        if (!this.nodeBetLevelsContainer) {
-            return;
-        }
-        this.nodeOverlayBg.active = true;
-        this.nodeBetLevelsContainer.active = true;
-        this.nodeBetLevelsContainer.setScale(new Vec3(1, 0, 1));
-        tween(this.nodeBetLevelsContainer)
-            .to(0.2, { scale: new Vec3(1, 1, 1) })
-            .start();
-    }
-
-    onBetLevelButtonClick() {
-        this.playSound(AudioIds.CLICK);
-        const isShowing = this.isShowStakeLevels();
-        if (!isShowing) {
-            this.openBetAmountPopup(true);
-        } else {
-            this.openBetAmountPopup(false);
-        }
+        console.log("betLevels", betLevels);
     }
 
     @handle(BetAmountHandlers, (handle, isOpen: boolean) => handle.updateStatusBetAmountPopup(isOpen))
     openBetAmountPopup(isOpen: boolean) {
         return isOpen;
-    }
-
-    isShowStakeLevels(): boolean {
-        return this.nodeBetLevelsContainer && this.nodeBetLevelsContainer.active && this.nodeBetLevelsContainer.scale.y === 1;
     }
 
     @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
@@ -146,17 +109,28 @@ export default class BetAmount extends ObserverComponent {
         this.playSound(AudioIds.CLICK);
     }
 
+    @handle(BetAmountHandlers, (handler, data: { multiplier: number }) => handler.multiplyBetAmount(data.multiplier))
+    onClickHalfBet() {
+        this.playSound(AudioIds.CLICK);
+        return {
+            multiplier: 0.5,
+        };
+    }
+
+    @handle(BetAmountHandlers, (handler, data: { multiplier: number }) => handler.multiplyBetAmount(data.multiplier))
+    onClickDoubleBet() {
+        this.playSound(AudioIds.CLICK);
+        return {
+            multiplier: 2,
+        };
+    }
+
     findIndexBetLevel(): number {
         return this.betLevels.findIndex((amount) => amount === this.betAmount);
     }
 
     onClickOverlayBg() {
         this.openBetAmountPopup(false);
-    }
-
-    @render(BetAmountStore, (store) => store.isOpenBetAmountPopup)
-    setVisibilityBetAmountPopup(isOpenBetAmountPopup: boolean) {
-        isOpenBetAmountPopup ? this.showBetLevelsContainer() : this.hideBetLevelsContainer();
     }
 
     @render(BetAmountStore, (store) => store.disabledBetAmount)
@@ -167,10 +141,29 @@ export default class BetAmount extends ObserverComponent {
     @render(BetAmountStore, (store) => store.isMaxbetLevelValue || store.disabledBetAmount)
     disabledMaxBetLevel(disabled: boolean) {
         this.nodeDisabledInscrease.active = disabled;
+        this.disabledDoubleBet.active = disabled;
     }
 
     @render(BetAmountStore, (store) => store.isMinBetLevelValue || store.disabledBetAmount)
     disabledMinBetLevel(disabled: boolean) {
         this.nodeDisabledDescrease.active = disabled;
+        this.disabledHalfBet.active = disabled;
+    }
+
+    setActiveHalfBet(active: boolean) {
+        this.btnHalfBet.interactable = active;
+    }
+
+    setActiveDoubleBet(active: boolean) {
+        this.btnDoubleBet.interactable = active;
+    }
+
+    renderBetValue(betValue: number[]) {
+       this.nodeBetAmountValue.children.forEach((child, index) => {
+           const item = child.getComponent(BetValueItem);
+           if (index < betValue.length) {
+            item.setValue(betValue[index]);
+           }
+       });
     }
 }

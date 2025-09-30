@@ -4,12 +4,13 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "generate-tolgee-data": "ts-node ./tolgee-generator/index.ts"
+        "get-new-tolgee-data": "npx tolgee-generator ./tolgee.json"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@cli/tolgee-generator": "^1.1.5",
         "@tolgee/web": "^5.10.1",
         "ts-node": "^10.9.1"
     }

@@ -1,13 +1,36 @@
 {
-    "lobbyNames": {},
+    "lobbyNames": {
+        "en": "Chicken Road",
+        "th": "Chicken Road",
+        "id": "Chicken Road",
+        "vi": "Chicken Road",
+        "zh_cn": "Chicken Road",
+        "zh_tw": "Chicken Road",
+        "ja": "Chicken Road",
+        "es": "Chicken Road",
+        "tr": "Chicken Road",
+        "fil_ph": "Chicken Road",
+        "pt_br": "Chicken Road",
+        "ko": "Chicken Road",
+        "bn_bd": "Chicken Road",
+        "hi_in": "Chicken Road",
+        "ms_my": "Chicken Road"
+    },
     "gameNames": {
-        "en": "Crypto Mining",
-        "id": "Penambangan Kripto",
-        "th": "การขุดคริปโต",
-        "vi": "Đào Coin",
-        "zh_cn": "加密币挖矿",
-        "zh_tw": "加密幣挖礦",
-        "ja": "仮想通貨マイニング",
-        "es": "Crypto Mining"
+        "en": "Chicken Road",
+        "th": "Chicken Road",
+        "id": "Chicken Road",
+        "vi": "Chicken Road",
+        "zh_cn": "Chicken Road",
+        "zh_tw": "Chicken Road",
+        "ja": "Chicken Road",
+        "es": "Chicken Road",
+        "tr": "Chicken Road",
+        "fil_ph": "Chicken Road",
+        "pt_br": "Chicken Road",
+        "ko": "Chicken Road",
+        "bn_bd": "Chicken Road",
+        "hi_in": "Chicken Road",
+        "ms_my": "Chicken Road"
     }
 }

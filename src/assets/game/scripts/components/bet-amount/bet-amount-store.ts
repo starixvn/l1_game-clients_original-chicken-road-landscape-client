@@ -9,10 +9,15 @@ const { injectable, inject } = inversify;
 export class BetAmountStore {
     @inject(gc.Bet.BetStore) private readonly betBaseStore: gc.Bet.BetStore;
     @inject(BetStore) private readonly betStore: BetStore;
-    @inject(InstantWinConfigStore) private readonly gameConfig: InstantWinConfigStore;
+    @inject(InstantWinConfigStore) gameConfig: InstantWinConfigStore;
+    @inject(gc.Player.MainPlayerStore)  mainPlayerStore: gc.Player.MainPlayerStore;
+
     constructor() {
         mobx.makeAutoObservable(this);
     }
+
+    inputValues: number[] = [];
+    selectedInputIndex: { [betKey: number]: number } = {};
 
     isOpenBetAmountPopup = false;
 

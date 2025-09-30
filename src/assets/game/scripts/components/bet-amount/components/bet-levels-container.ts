@@ -22,14 +22,15 @@ export default class BetLevelsContainer extends ObserverComponent {
         if (betLevels.length <= 0) {
             return;
         }
-        betLevels.sort((a, b) => a - b);
+        //betLevels.sort((a, b) => a - b);
         this.betLevels = betLevels;
         this.initBetLevelItems(betLevels);
         this.calculateContainerWidth();
+
     }
 
     initBetLevelItems(betLevels: number[]) {
-        betLevels.forEach((value) => {
+        betLevels.forEach((value, index) => {
             const node = instantiate(this.prfBetLevelItem);
             this.content.addChild(node);
 
