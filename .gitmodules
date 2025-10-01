@@ -14,3 +14,6 @@
 	path = src/extensions/i18n
 	url = ../game-client-packages/i18n.git
 	branch = main
+[submodule "src/extensions/direct-shared-components"]
+	path = src/extensions/direct-shared-components
+	url = ../game-client-packages/direct-shared-components.git

@@ -18,15 +18,13 @@ export type BetHistoryBodyItemType = {
 
 @ccclass("instant_win_bet_history_body_item")
 export class InstantWinBetHistoryBodyItem extends BetHistoryNewBodyItem {
-    @property(Label)
-    lblMultiplier: Label = null;
+
 
     setData(data: BetHistoryBodyItemType) {
         const { betwin, multiplier } = data.betHistoryLog;
         super.setData(data);
         this.lblWin.color = betwin > 0 ? new Color().fromHEX("F1E344") : new Color().fromHEX("ffffff");
-        this.lblMultiplier.color = multiplier > 0 ? new Color().fromHEX("F1E344") : new Color().fromHEX("ffffff");
-        this.lblMultiplier.string = multiplier === 0 ? "-" : `${FormatUtils.numberWithCommas(multiplier, 2, false)}x`;
+
     }
 
     @handle(HashHandlers, (handle, roundId: number) => handle.openVerificationHistory(roundId))
