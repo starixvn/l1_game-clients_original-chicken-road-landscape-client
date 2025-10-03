@@ -20,7 +20,7 @@ export class TopWinnerItem extends Component {
 
     setData(data: TopWinner, isMainPlayer: boolean) {
         this.lblName.string = isMainPlayer ? truncatedNickname(data.name, 7) : this.encryptedName(data.name);
-        this.lblName.color = isMainPlayer ? new Color("#FCE966") : new Color("#41DEFF");
+        this.lblName.color = isMainPlayer ? new Color("#FCE966") : new Color("#B3BEC1");
         this.lblBalance.string = "+" + FormatUtils.numberWithCommas(data.winningAmount, 2);
     }
 }

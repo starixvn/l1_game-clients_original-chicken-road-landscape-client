@@ -96,7 +96,10 @@
             "handleTemplateMd5Link": true
           },
           "wasmCompressionMode": false,
-          "buildMode": "normal"
+          "buildMode": "normal",
+          "engineModulesConfigKey": "migrationsConfig",
+          "mangleProperties": false,
+          "inlineEnum": true
         },
         "time": "2-11-2025 15:10:15",
         "dirty": false

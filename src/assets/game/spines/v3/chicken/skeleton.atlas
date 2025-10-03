@@ -1,0 +1,173 @@
+
+skeleton.webp
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ga/barrel
+  rotate: true
+  xy: 2, 74
+  size: 247, 121
+  orig: 247, 121
+  offset: 0, 0
+  index: -1
+ga/bg2
+  rotate: false
+  xy: 2, 323
+  size: 790, 860
+  orig: 790, 860
+  offset: 0, 0
+  index: -1
+ga/bg3
+  rotate: true
+  xy: 794, 1255
+  size: 790, 860
+  orig: 790, 860
+  offset: 0, 0
+  index: -1
+ga/bg4
+  rotate: false
+  xy: 794, 393
+  size: 790, 860
+  orig: 790, 860
+  offset: 0, 0
+  index: -1
+ga/bg5
+  rotate: false
+  xy: 2, 1185
+  size: 790, 860
+  orig: 790, 860
+  offset: 0, 0
+  index: -1
+ga/bottom L
+  rotate: true
+  xy: 194, 2
+  size: 31, 70
+  orig: 31, 70
+  offset: 0, 0
+  index: -1
+ga/bottom R
+  rotate: true
+  xy: 266, 5
+  size: 28, 60
+  orig: 28, 60
+  offset: 0, 0
+  index: -1
+ga/canh
+  rotate: true
+  xy: 125, 74
+  size: 77, 72
+  orig: 77, 72
+  offset: 0, 0
+  index: -1
+ga/chanphai
+  rotate: true
+  xy: 100, 5
+  size: 67, 92
+  orig: 67, 92
+  offset: 0, 0
+  index: -1
+ga/chantrai
+  rotate: true
+  xy: 2, 2
+  size: 70, 96
+  orig: 70, 96
+  offset: 0, 0
+  index: -1
+ga/duoi
+  rotate: false
+  xy: 589, 102
+  size: 104, 127
+  orig: 104, 127
+  offset: 0, 0
+  index: -1
+ga/eye L
+  rotate: false
+  xy: 247, 94
+  size: 19, 20
+  orig: 19, 20
+  offset: 0, 0
+  index: -1
+ga/eye R
+  rotate: true
+  xy: 247, 75
+  size: 17, 20
+  orig: 17, 20
+  offset: 0, 0
+  index: -1
+ga/head 1
+  rotate: true
+  xy: 328, 22
+  size: 130, 158
+  orig: 130, 158
+  offset: 0, 0
+  index: -1
+ga/head 2
+  rotate: false
+  xy: 125, 153
+  size: 139, 168
+  orig: 139, 168
+  offset: 0, 0
+  index: -1
+ga/mouse1
+  rotate: true
+  xy: 278, 53
+  size: 61, 43
+  orig: 63, 45
+  offset: 1, 1
+  index: -1
+ga/mouth2
+  rotate: false
+  xy: 199, 87
+  size: 46, 64
+  orig: 46, 64
+  offset: 0, 0
+  index: -1
+ga/shadow mid
+  rotate: false
+  xy: 247, 116
+  size: 79, 35
+  orig: 81, 37
+  offset: 1, 1
+  index: -1
+ga/shadow side
+  rotate: false
+  xy: 194, 35
+  size: 82, 37
+  orig: 83, 37
+  offset: 1, 0
+  index: -1
+ga/smoke L
+  rotate: false
+  xy: 407, 231
+  size: 194, 90
+  orig: 194, 90
+  offset: 0, 0
+  index: -1
+ga/smoke R
+  rotate: true
+  xy: 488, 61
+  size: 168, 99
+  orig: 168, 99
+  offset: 0, 0
+  index: -1
+ga/than
+  rotate: false
+  xy: 266, 154
+  size: 139, 167
+  orig: 139, 167
+  offset: 0, 0
+  index: -1
+
+skeleton2.webp
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ga/bg1
+  rotate: false
+  xy: 2, 2
+  size: 786, 859
+  orig: 786, 859
+  offset: 0, 0
+  index: -1

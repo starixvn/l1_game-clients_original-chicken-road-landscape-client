@@ -21,8 +21,8 @@ const defaultConfig: gc.Configs.SiteConfigs = {
     enableMsgpackParserAllGames: false,
     enableMsgpackParserOnNotification: false,
     websocket: {
-        proxyPath: "coinmining",
-        route: "coinmining",
+        proxyPath: "chickenroad",
+        route: "chickenroad",
     },
     tolgeeUrl: "",
     sentry: {

@@ -24,6 +24,7 @@ import { AudioIds } from "../../../../audios/AudioIds";
 import { changeCursorPointer, changePointerWhenHover, getCurrentAnimationLevel, MULTIPLIER_FONT_NAME, resetCursor } from "../../../utils";
 import { BetHandler } from "../bet-handler";
 import { BetStore, BetUIState } from "../bet-store";
+import { ChickenController } from "../../chicken/chicken";
 
 const { ccclass, property } = _decorator;
 const { handle, render } = Observer;
@@ -52,6 +53,9 @@ export default class PlaceBetButton extends ObserverComponent {
     effect: sp.Skeleton = null;
 
     @property(sp.Skeleton)
+    chickenEffect: sp.Skeleton = null;
+
+    @property(sp.Skeleton)
     spineAxe: sp.Skeleton = null;
 
     @property(Node)
@@ -59,6 +63,12 @@ export default class PlaceBetButton extends ObserverComponent {
 
     @property(Node)
     debugNode: Node = null;
+
+    @property(ChickenController)
+    chickenCtrl: ChickenController = null;
+
+    @property(Node)
+    playModeNode: Node = null;
 
     private isStateBet = false;
     private upgradingAxe = false;
@@ -178,6 +188,10 @@ export default class PlaceBetButton extends ObserverComponent {
     onClickCashOut() {
         this.playSound(AudioIds.BTN_CASHOUT);
         this.hideAxe();
+        if (this.chickenCtrl) {
+            this.chickenCtrl.playCrash();
+        }
+
     }
 
     @render(BetStore, (store) => store.multiplier)
@@ -208,6 +222,10 @@ export default class PlaceBetButton extends ObserverComponent {
                 this.upgradingAxe = false;
             }
             this.axeLevel = level;
+
+            if (this.lblMultiplier) {
+                this.lblMultiplier.string = `${gc.FormatUtils.numberWithCommas(multiplier, 2, false)}x`;
+            }
         } catch (e) {}
     }
 
@@ -446,13 +464,16 @@ export default class PlaceBetButton extends ObserverComponent {
     @render(BetStore, (store) => store.uiState)
     updateUIState(uiState: BetUIState) {
         this.startBetButton.active = uiState === BetUIState.Start;
+        this.playModeNode.active = uiState === BetUIState.Start;
 
         this.hitStoneButton.active = uiState >= BetUIState.Started;
+        this.cashOutButton.active = uiState >= BetUIState.Started;
 
         this.isStateBet = uiState > BetUIState.Start && uiState !== BetUIState.Settle;
 
         if (uiState === BetUIState.Started) {
             this.showAxe();
+            this.chickenCtrl?.playIdle();
         }
     }
 
