@@ -188,10 +188,6 @@ export default class PlaceBetButton extends ObserverComponent {
     onClickCashOut() {
         this.playSound(AudioIds.BTN_CASHOUT);
         this.hideAxe();
-        if (this.chickenCtrl) {
-            this.chickenCtrl.playCrash();
-        }
-
     }
 
     @render(BetStore, (store) => store.multiplier)
@@ -214,7 +210,7 @@ export default class PlaceBetButton extends ObserverComponent {
             }
 
             this.lblMultiplier.string = `${gc.FormatUtils.numberWithCommas(multiplier, 2, false)}x`;
-            this.updateMultiplierColor(level);
+            //this.updateMultiplierColor(level);
 
             if (this.upgradingAxe && timeStamp === this.upgradeTimeStamp) {
                 this.playSound(AudioIds.CHANGE_AXE);
@@ -473,7 +469,6 @@ export default class PlaceBetButton extends ObserverComponent {
 
         if (uiState === BetUIState.Started) {
             this.showAxe();
-            this.chickenCtrl?.playIdle();
         }
     }
 

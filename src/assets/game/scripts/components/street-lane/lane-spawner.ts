@@ -33,10 +33,12 @@ export class LaneSpawner extends ObserverComponent {
     @property(ScrollView)
     scrollView: ScrollView = null;
 
+    @property(Node)
+    centerNode: Node = null;
+
     private chickenCtrl: ChickenController = null;
     private laneWidth = 0;
     private chicken: Node = null;
-    private currentLaneIndex = 0;
     private currentLane = -1;
 
     start() {
@@ -79,14 +81,12 @@ export class LaneSpawner extends ObserverComponent {
 
     spawnChickenAtStart() {
         if (this.startPoint) {
-            // world -> local (Canvas)
             const startWorld = this.startPoint.worldPosition;
             const parent = this.chickenNode.parent;
             const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(startWorld);
 
             this.chickenNode.setPosition(v3(localPos.x, localPos.y, 0));
         } else {
-            // fallback: nếu ko có startPoint thì để ngay lane 0
             const firstLane = this.laneContent.children[0];
             if (firstLane) {
                 const laneWorld = firstLane.worldPosition;
@@ -100,10 +100,9 @@ export class LaneSpawner extends ObserverComponent {
         this.currentLane = -1;
     }
 
-    /** Nhảy sang lane tiếp theo (chỉ đổi X, giữ nguyên Y) */
     moveChicken() {
         const nextLane = this.currentLane + 1;
-        if (!this.laneContent.children[nextLane]) return; // hết lane
+        if (!this.laneContent.children[nextLane]) return;
 
         this.currentLane = nextLane;
         const lane = this.laneContent.children[nextLane];
@@ -112,9 +111,9 @@ export class LaneSpawner extends ObserverComponent {
         const parent = this.chickenNode.parent;
         const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
 
-        this.chickenCtrl.playStep();
+        this.chickenCtrl.playStepSuccess();
         tween(this.chickenNode)
-            .to(0.3, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
+            .to(0.5, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
             .call(() => this.chickenCtrl.playIdle())
             .start();
 
@@ -143,21 +142,44 @@ export class LaneSpawner extends ObserverComponent {
         this.scrollView.scrollToPercentHorizontal(ratio, 0.3, true);
     }
 
-
-    /** Mỗi lần multiplier thay đổi → gà nhảy next lane */
     @render(BetStore, (store) => store.multiplier)
     updateMultiplier(multiplier) {
-        console.log("updateMultiplier", multiplier);
-        if (this.chickenCtrl && multiplier > 1) {
-            this.moveChicken();
+        if (!this.chickenCtrl) return;
+
+        if (multiplier > 1) {
+            const nextLane = this.currentLane + 1;
+            if (nextLane < this.totalLanes) {
+                this.moveChicken();
+            }
         }
     }
 
     @render(BetStore, (store) => store.uiState)
     updateUIState(uiState: BetUIState) {
-        console.log("updateUIState", uiState);
         if (uiState === BetUIState.Start) {
             this.currentLane = -1;
+
+            if (this.startPoint && this.chickenNode) {
+                const startWorld = this.startPoint.worldPosition;
+                const parent = this.chickenNode.parent;
+                const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(startWorld);
+                this.chickenNode.setPosition(localPos);
+            }
+
+            this.chickenCtrl?.playIdle();
+
+            if (this.scrollView) {
+                this.scrollView.scrollToLeft(0.2);
+            }
+        }
+    }
+
+    @render(BetStore, (store) => store.settleStatus, { fireImmediately: false })
+    handleCrash(settleStatus: any) {
+        if (!settleStatus || !this.chickenCtrl) return;
+
+        if (!settleStatus.win) {
+            this.chickenCtrl.playCrashAtCenter(this.centerNode);
         }
     }
 }

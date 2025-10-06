@@ -94,7 +94,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -189.837,
+      "y": -203.939,
       "z": 0
     },
     "_lrot": {
@@ -144,7 +144,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 3.605,
+      "y": 10.4,
       "z": 0
     },
     "_lrot": {
@@ -184,7 +184,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.70751953125,
+      "width": 150,
       "height": 54.4
     },
     "_anchorPoint": {
@@ -223,8 +223,8 @@
     "_string": "1.05x",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 26,
-    "_fontSize": 25,
+    "_actualFontSize": 41,
+    "_fontSize": 40,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
     "_overflow": 2,
@@ -296,8 +296,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 99,
-      "height": 65
+      "width": 198,
+      "height": 130
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -338,7 +338,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -394,7 +394,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 73,
+      "x": 123,
       "y": 0,
       "z": 0
     },
@@ -436,7 +436,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 4,
-      "height": 507
+      "height": 1344
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -475,9 +475,9 @@
       "__uuid__": "dc2bc45e-1523-4969-9cc0-1656264d810f@e5395",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "_type": 0,
+    "_type": 2,
     "_fillType": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -506,7 +506,7 @@
     "__prefab": {
       "__id__": 20
     },
-    "_alignFlags": 32,
+    "_alignFlags": 37,
     "_target": null,
     "_left": 0,
     "_right": 0,
@@ -521,7 +521,7 @@
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
-    "_originalHeight": 0,
+    "_originalHeight": 507,
     "_alignMode": 2,
     "_lockFlags": 0,
     "_id": ""
@@ -557,8 +557,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
-      "height": 786
+      "width": 250,
+      "height": 1344
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
