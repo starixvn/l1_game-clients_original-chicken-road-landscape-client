@@ -147,7 +147,7 @@ export const languages = {
         "name_invalid": "The entered nickname is invalid, please try again",
         "nickname_requirement": "Note:\n      + Nickname must be between 3 and 14 characters long.\n      + Cannot contain spaces, special characters, and non-English characters. \n      + Cannot change the nickname after submitting.",
         "no_data": "No data available",
-        "non_winning_payline": "Non-winning Paylines",
+        "non_winning_payline": "No Winning Paylines",
         "not_enough_money": "Your account has insufficient funds.",
         "notice": "notice",
         "odds": "Odds",
@@ -291,7 +291,25 @@ export const languages = {
         "title_multiplier": "Multiplier ",
         "crash_start_in": "Start in %{time}",
         "crashed": "Crashed",
-        "start": "Start"
+        "start": "Start",
+        "max": "Max",
+        "stop_auto_bet": "Stop Auto Bet",
+        "msg_rotate_to_portrait": "Please rotate your screen to portrait mode to play",
+        "auto_bet_header": "Auto Bet Guide",
+        "how_to_use_auto_bet": "How to use Auto Bet",
+        "auto_bet_para_1": "Auto Bet lets you set rules for automatic betting until your chosen conditions are met.",
+        "auto_bet_para_2": "Number of Bets: Total rounds to auto-bet.",
+        "auto_bet_para_3": "On Win:",
+        "auto_bet_para_3_1": "Reset: Return to your starting bet after a win.",
+        "auto_bet_para_3_2": "Increase by: Raise your bet by a set percentage when you win.",
+        "auto_bet_para_3_3": "(Example: Set +20% → Start with $10 → win → next bet $12)",
+        "auto_bet_para_4": "On Loss:",
+        "auto_bet_para_4_1": "Reset: Return to your starting bet after a loss.",
+        "auto_bet_para_4_2": "Increase by: Raise your bet by a set percentage when you lose.",
+        "auto_bet_para_4_3": "(Example: Set +50% → Start with $10 → lose → next bet $15)",
+        "auto_bet_para_5": "Stop on Win: Stop Auto Bet when reaching your win target.",
+        "auto_bet_para_6": "Stop on Loss: Stop Auto Bet when reaching your loss limit.",
+        "tooltip_live_stat": "Live Stat"
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto cash out in",
@@ -618,7 +636,11 @@ export const languages = {
     "ChickenRoad": {
         "game_name": "Chicken Road",
         "game_icon_name": "Chicken Road",
-        "go": "Go"
+        "go": "Go",
+        "difficulty_easy": "Easy",
+        "difficulty_hard": "Hard",
+        "difficulty_hardcore": "Hardcore",
+        "difficulty_medium": "Medium"
     }
 };
 

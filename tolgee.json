@@ -1,4 +1,4 @@
 {
     "mainNamespace": "ChickenRoad",
-    "additionalNamespaces": ["Common", "CoinMining", "ui"]
+    "additionalNamespaces": ["Common", "CoinMining", "ui", "ChickenRoad"]
 }

@@ -591,7 +591,25 @@ export const languages = {
         "title_multiplier": "Çarpan",
         "crash_start_in": "Başlayacak",
         "crashed": "ÇÖKTÜ",
-        "start": "Başlat"
+        "start": "Başlat",
+        "max": "Maks.",
+        "stop_auto_bet": "Otomatik Bahsi Durdur",
+        "msg_rotate_to_portrait": "Lütfen oynamak için ekranınızı dikey moda döndürün",
+        "auto_bet_header": "Otomatik Bahis Rehberi",
+        "how_to_use_auto_bet": "Auto Bet Nasıl Kullanılır",
+        "auto_bet_para_1": "Auto Bet, seçtiğiniz koşullar karşılanana kadar otomatik bahis için kurallar belirlemenizi sağlar.",
+        "auto_bet_para_2": "Bahis Sayısı: Otomatik bahis yapılacak toplam tur sayısı.",
+        "auto_bet_para_3": "Kazanınca",
+        "auto_bet_para_3_1": "Sıfırla: Kazandıktan sonra başlangıç bahsinize geri dönün.",
+        "auto_bet_para_3_2": "Artış miktarı: Kazandığınızda bahsinizi belirli bir yüzde oranında artırın.",
+        "auto_bet_para_3_3": "(Örnek: +%20 Ayarla → 10$ ile Başla → kazan → sonraki bahis 12$)",
+        "auto_bet_para_4": "Kaybedince:",
+        "auto_bet_para_4_1": "Reset: Kaybettikten sonra başlangıç bahsinize geri dönün.",
+        "auto_bet_para_4_2": "Artış miktarı: Kaybettiğinizde bahsinizi belirli bir yüzde oranında artırın.",
+        "auto_bet_para_4_3": "(Örnek: +%50 Ayarla → 10$ ile Başla → kaybet → sonraki bahis 15$)",
+        "auto_bet_para_5": "Kazanınca Dur: Kazanma hedefinize ulaştığınızda Otomatik Bahsi durdurun.",
+        "auto_bet_para_6": "Kayba Durdurma: Kayıp sınırınıza ulaştığınızda Otomatik Bahsi durdurun.",
+        "tooltip_live_stat": "Canlı İstatistik"
     },
     "CoinMining": {
         "header_mining_attempts": "Madencilik Denemeleri",
@@ -618,7 +636,11 @@ export const languages = {
     "ChickenRoad": {
         "game_name": "Chicken Road",
         "game_icon_name": "Chicken Road",
-        "go": "Başla"
+        "go": "Başla",
+        "difficulty_easy": "Kolay",
+        "difficulty_hard": "Zor",
+        "difficulty_hardcore": "Hardcore",
+        "difficulty_medium": "Orta"
     }
 };
 

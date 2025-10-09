@@ -291,7 +291,25 @@ export const languages = {
         "title_multiplier": "Multiplicador",
         "crash_start_in": "Comienza en ",
         "crashed": "SE ESTRELLÓ",
-        "start": "Iniciar"
+        "start": "Iniciar",
+        "max": "Máx.",
+        "stop_auto_bet": "Detener apuesta automática",
+        "msg_rotate_to_portrait": "Gira la pantalla a modo vertical para jugar.",
+        "auto_bet_header": "Guía de Apuesta Automática",
+        "how_to_use_auto_bet": "Cómo usar Apuesta Automática",
+        "auto_bet_para_1": "Apuesta Automática te permite establecer reglas para las apuestas automáticas hasta que se cumplan las condiciones elegidas.",
+        "auto_bet_para_2": "Número de apuestas: rondas totales para apostar automáticamente.",
+        "auto_bet_para_3": "Al ganar:",
+        "auto_bet_para_3_1": "Restablecer: Regresa a tu apuesta inicial después de una ganancia.",
+        "auto_bet_para_3_2": "Aumentar en: Aumenta tu apuesta en un porcentaje fijo cuando ganes.",
+        "auto_bet_para_3_3": "(Ejemplo: Establecer +20% → Empezar con $10 → ganar → siguiente apuesta $12)",
+        "auto_bet_para_4": "En caso de pérdida:",
+        "auto_bet_para_4_1": "Reset: Regresa a tu apuesta inicial después de una pérdida.",
+        "auto_bet_para_4_2": "Aumentar en: Aumenta tu apuesta en un porcentaje fijo cuando pierdes.",
+        "auto_bet_para_4_3": "(Ejemplo: Establecer +50% → Empezar con $10 → perder → siguiente apuesta $15)",
+        "auto_bet_para_5": "Parar al ganar: Detener la apuesta automática al alcanzar tu objetivo de ganancias.",
+        "auto_bet_para_6": "Detener en pérdida: Detén la apuesta automática al alcanzar tu límite de pérdida.",
+        "tooltip_live_stat": "Estadísticas en vivo"
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto retiro en",
@@ -618,7 +636,11 @@ export const languages = {
     "ChickenRoad": {
         "game_name": "Chicken Road",
         "game_icon_name": "Chicken Road",
-        "go": "Jugar"
+        "go": "Jugar",
+        "difficulty_easy": "Fácil",
+        "difficulty_hard": "Difícil",
+        "difficulty_hardcore": "Hardcore",
+        "difficulty_medium": "Medio"
     }
 };
 

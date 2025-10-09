@@ -26,6 +26,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         const betData: any = this.createCommonBetData();
         betData.action = this.betsStore.betCount === 0 ? BetAction.Bet : BetAction.Mine;
         betData.clientSeed = this.pfStore.clientSeed;
+        betData.multiplierMode = 2;
         this.betsStore.betCount++;
         this.handleBetData(betData);
     }

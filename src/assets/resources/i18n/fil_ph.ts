@@ -591,7 +591,25 @@ export const languages = {
         "title_multiplier": "Multiplier",
         "crash_start_in": "Magsisimula Sa",
         "crashed": "NATAPOS",
-        "start": "Simula"
+        "start": "Simula",
+        "max": "Max",
+        "stop_auto_bet": "Itigil ang Auto Bet",
+        "msg_rotate_to_portrait": "Paki-rotate ang iyong screen sa portrait mode para makapaglaro",
+        "auto_bet_header": "Gabay sa Auto Bet",
+        "how_to_use_auto_bet": "Paano Gamitin ang Auto Bet",
+        "auto_bet_para_1": "Hinahayaan ka ng Auto Bet na magtakda ng mga panuntunan para sa awtomatikong pagtaya hanggang sa matugunan ang iyong napiling mga kundisyon.",
+        "auto_bet_para_2": "Bilang ng mga Taya: Kabuuang mga round sa auto-bet.",
+        "auto_bet_para_3": "Sa Panalo:",
+        "auto_bet_para_3_1": "I-reset: Bumalik sa iyong panimulang taya pagkatapos manalo.",
+        "auto_bet_para_3_2": "Dagdagan ng: Itaas ang iyong taya sa isang nakatakdang porsyento kapag nanalo ka.",
+        "auto_bet_para_3_3": "(Halimbawa: Itakda ang +20% → Magsimula sa $10 → manalo → susunod na taya $12)",
+        "auto_bet_para_4": "Sa Pagkatalo:",
+        "auto_bet_para_4_1": "Reset: Bumalik sa iyong panimulang taya pagkatapos ng pagkatalo.",
+        "auto_bet_para_4_2": "Palakihin ng: Itaas ang iyong taya ng isang takdang porsyento kapag natalo ka.",
+        "auto_bet_para_4_3": "(Halimbawa: Itakda ang +50% → Magsimula sa $10 → matalo → susunod na taya $15)",
+        "auto_bet_para_5": "Huminto sa Panalo: Itigil ang Auto Bet kapag naabot mo na ang iyong target na panalo.",
+        "auto_bet_para_6": "Itigil sa Pagkawala: Ihinto ang Auto Bet kapag naabot mo na ang iyong limitasyon sa pagkawala.",
+        "tooltip_live_stat": "Live Stat"
     },
     "CoinMining": {
         "header_mining_attempts": "Mining Attempts",
@@ -618,7 +636,11 @@ export const languages = {
     "ChickenRoad": {
         "game_name": "Chicken Road",
         "game_icon_name": "Chicken Road",
-        "go": "Sige"
+        "go": "Sige",
+        "difficulty_easy": "Madali",
+        "difficulty_hard": "Mahirap",
+        "difficulty_hardcore": "Hardcore",
+        "difficulty_medium": "Katamtaman"
     }
 };
 

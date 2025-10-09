@@ -291,7 +291,25 @@ export const languages = {
         "title_multiplier": "乘數",
         "crash_start_in": "開始於",
         "crashed": "墜毀",
-        "start": "開始"
+        "start": "開始",
+        "max": "最大",
+        "stop_auto_bet": "停止自動投注",
+        "msg_rotate_to_portrait": "請將螢幕旋轉為直式模式以進行遊戲。",
+        "auto_bet_header": "自動投注指南",
+        "how_to_use_auto_bet": "如何使用Auto Bet",
+        "auto_bet_para_1": "透過自動投注，您可以設定自動投注的規則，直到滿足您選擇的條件。",
+        "auto_bet_para_2": "投注次數：自動投注的總輪數。",
+        "auto_bet_para_3": "獲勝時",
+        "auto_bet_para_3_1": "重置：贏了之後返回您的初始投注。",
+        "auto_bet_para_3_2": "增加：在您獲勝時，按設定的百分比提高您的投注額。",
+        "auto_bet_para_3_3": "（範例：設定 +20% → 以 10 美元開始 → 贏 → 下一個賭注 12 美元）",
+        "auto_bet_para_4": "失敗時:",
+        "auto_bet_para_4_1": "Reset：在失敗後返回您的起始賭注。",
+        "auto_bet_para_4_2": "增加：在您輸掉時，按設定的百分比增加您的投注。",
+        "auto_bet_para_4_3": "（範例：設定 +50% → 從 $10 開始 → 輸掉 → 下次投注 $15）",
+        "auto_bet_para_5": "Stop on Win：當達到您的贏錢目標時停止自動投注。",
+        "auto_bet_para_6": "損失停止：達到損失上限時停止自動投注。",
+        "tooltip_live_stat": "即時統計"
     },
     "CoinMining": {
         "auto_cash_out_in": "自動提現",
@@ -618,7 +636,11 @@ export const languages = {
     "ChickenRoad": {
         "game_name": "Chicken Road",
         "game_icon_name": "Chicken Road",
-        "go": "開始"
+        "go": "開始",
+        "difficulty_easy": "簡單",
+        "difficulty_hard": "困難",
+        "difficulty_hardcore": "Hardcore",
+        "difficulty_medium": "中"
     }
 };
 

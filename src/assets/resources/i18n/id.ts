@@ -291,7 +291,25 @@ export const languages = {
         "title_multiplier": "Pengali",
         "crash_start_in": "Mulai masuk %{time}",
         "crashed": "TERJATUH",
-        "start": "Mulai"
+        "start": "Mulai",
+        "max": "Maks",
+        "stop_auto_bet": "Berhenti Taruhan Otomatis",
+        "msg_rotate_to_portrait": "Silakan putar layar ke mode potret untuk bermain.",
+        "auto_bet_header": "Panduan Taruhan Otomatis",
+        "how_to_use_auto_bet": "Cara menggunakan Taruhan Otomatis",
+        "auto_bet_para_1": "Taruhan Otomatis memungkinkan Anda menetapkan aturan untuk taruhan otomatis hingga kondisi yang Anda pilih terpenuhi.",
+        "auto_bet_para_2": "Jumlah Taruhan: Jumlah putaran untuk taruhan otomatis.",
+        "auto_bet_para_3": "Saat Menang",
+        "auto_bet_para_3_1": "Reset: Kembali ke taruhan awal Anda setelah menang.",
+        "auto_bet_para_3_2": "Tambah dengan: Tingkatkan taruhan Anda dengan persentase yang ditetapkan saat Anda menang.",
+        "auto_bet_para_3_3": "(Contoh: Setel +20% → Mulai dengan $10 → menang → taruhan berikutnya $12)",
+        "auto_bet_para_4": "Saat Kalah:",
+        "auto_bet_para_4_1": "Reset: Kembali ke taruhan awal Anda setelah kalah.",
+        "auto_bet_para_4_2": "Tambahkan: Tingkatkan taruhan Anda dengan persentase yang ditetapkan saat Anda kalah.",
+        "auto_bet_para_4_3": "(Contoh: Set +50% → Mulai dengan $10 → kalah → taruhan berikutnya $15)",
+        "auto_bet_para_5": "Berhenti saat Menang: Hentikan Taruhan Otomatis saat mencapai target kemenangan Anda.",
+        "auto_bet_para_6": "Berhenti saat Kalah: Hentikan Taruhan Otomatis saat mencapai batas kerugian Anda.",
+        "tooltip_live_stat": "Statistik Langsung"
     },
     "CoinMining": {
         "auto_cash_out_in": "Pencairan otomatis masuk",
@@ -618,7 +636,11 @@ export const languages = {
     "ChickenRoad": {
         "game_name": "Chicken Road",
         "game_icon_name": "Chicken Road",
-        "go": "Mulai"
+        "go": "Mulai",
+        "difficulty_easy": "Mudah",
+        "difficulty_hard": "Sulit",
+        "difficulty_hardcore": "Hardcore",
+        "difficulty_medium": "Sedang"
     }
 };
 

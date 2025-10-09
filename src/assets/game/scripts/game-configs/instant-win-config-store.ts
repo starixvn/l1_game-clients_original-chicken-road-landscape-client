@@ -1,9 +1,16 @@
 import inversify from "inversify";
 import mobx from "mobx";
 const { injectable, inject } = inversify;
+export type FixedStepsMultiplierConfig = {
+    mode: number;
+    values: number[];
+};
 
 @injectable()
 export class InstantWinConfigStore  {
+    
+    private _fixedStepsMultiplierConfigs: FixedStepsMultiplierConfig[] = [];
+    
     private _defaultBetLevel = 1;
     private _betLevels = [];
     private _minBet = 0;
@@ -11,6 +18,14 @@ export class InstantWinConfigStore  {
     // 1,2,5,10,15,20,25,50, 75, 100, 200, 500, 1000, 1500, 2000, 5000
     constructor() {
         mobx.makeAutoObservable(this);
+    }
+
+    get fixedStepsMultiplierConfigs() {
+        return this._fixedStepsMultiplierConfigs;
+    }
+
+    set fixedStepsMultiplierConfigs(fixedStepsMultiplierConfigs: FixedStepsMultiplierConfig[]) {
+        this._fixedStepsMultiplierConfigs = fixedStepsMultiplierConfigs;
     }
 
     get betLevels() {

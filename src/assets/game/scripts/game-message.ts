@@ -1,7 +1,10 @@
+import { FixedStepsMultiplierConfig } from "./game-configs";
+
 export namespace GameServiceMessage {
     export class InstantGameConfigs {
         defaultBetLevel: number;
         chips: number[];
+        fixedStepsMultiplierConfigs: FixedStepsMultiplierConfig[];
 
         static eventName = "gameConfigs";
     }

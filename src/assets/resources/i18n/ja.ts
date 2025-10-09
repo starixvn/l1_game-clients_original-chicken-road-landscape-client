@@ -291,7 +291,25 @@ export const languages = {
         "title_multiplier": "マルチプライヤー",
         "crash_start_in": "開始まで",
         "crashed": "クラッシュ",
-        "start": "スタート"
+        "start": "スタート",
+        "max": "最大値",
+        "stop_auto_bet": "自動ベットを停止",
+        "msg_rotate_to_portrait": "画面を縦向きに回してプレイしてください。",
+        "auto_bet_header": "自動ベットガイド",
+        "how_to_use_auto_bet": "自動ベットの使い方",
+        "auto_bet_para_1": "自動ベットでは、選択した条件が満たされるまで、自動ベットのルールを設定できます。",
+        "auto_bet_para_2": "ベット数：自動ベットの合計ラウンド数。",
+        "auto_bet_para_3": "勝利時",
+        "auto_bet_para_3_1": "リセット：勝利後、最初のベットに戻ります。",
+        "auto_bet_para_3_2": "増加: 勝利時に設定された割合でベットを上げます。",
+        "auto_bet_para_3_3": "（例：+20%に設定 → 10ドルから開始 → 勝利 → 次のベット12ドル）",
+        "auto_bet_para_4": "敗北時:",
+        "auto_bet_para_4_1": "Reset: 負けた後、最初の賭け金に戻ります。",
+        "auto_bet_para_4_2": "増加額：負けた場合、設定された割合でベットを上げます。",
+        "auto_bet_para_4_3": "（例：+50%に設定 → $10から開始 → 負け → 次のベット $15）",
+        "auto_bet_para_5": "勝利時に停止：勝利目標に達したら自動ベットを停止します。",
+        "auto_bet_para_6": "損失ストップ：損失限度額に達した場合、自動ベットを停止します。",
+        "tooltip_live_stat": "ライブ統計"
     },
     "CoinMining": {
         "auto_cash_out_in": "オートキャッシュアウト倍率",
@@ -618,7 +636,11 @@ export const languages = {
     "ChickenRoad": {
         "game_name": "Chicken Road",
         "game_icon_name": "Chicken Road",
-        "go": "ゴー"
+        "go": "ゴー",
+        "difficulty_easy": "簡単",
+        "difficulty_hard": "難しい",
+        "difficulty_hardcore": "Hardcore",
+        "difficulty_medium": "中"
     }
 };
 

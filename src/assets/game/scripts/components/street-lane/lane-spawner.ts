@@ -1,13 +1,15 @@
-import { _decorator, Component, Node, Prefab, instantiate, Label, UITransform, v3, tween, ScrollView } from 'cc';
-import { ChickenController } from '../chicken/chicken';
+import { _decorator, instantiate, Node, Prefab, ScrollView, tween, UITransform, v3 } from "cc";
+import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
-import { BetStore, BetUIState } from '../bets/bet-store';
-import { ObserverComponent } from 'db://shared-components/shared/common-components/observer-component/scripts/observer-component';
+import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
+import { BetStore, BetUIState } from "../bets/bet-store";
+import { ChickenController } from "../chicken/chicken";
+import LandItem from "./land-item";
 
 const { ccclass, property } = _decorator;
 const { render } = Observer;
 
-@ccclass('LaneSpawner')
+@ccclass("LaneSpawner")
 export class LaneSpawner extends ObserverComponent {
     @property(Prefab)
     lanePrefab: Prefab = null;
@@ -40,8 +42,23 @@ export class LaneSpawner extends ObserverComponent {
     private laneWidth = 0;
     private chicken: Node = null;
     private currentLane = -1;
+    private fixedStepsMultiplierConfig: FixedStepsMultiplierConfig[];
+    private currentConfig: FixedStepsMultiplierConfig;
 
-    start() {
+    onLoad() {
+        super.onLoad();
+    }
+
+    @render(InstantWinConfigStore, (store) => store.fixedStepsMultiplierConfigs, { fireImmediately: false })
+    setGameConfigs(fixedStepsMultiplierConfig: FixedStepsMultiplierConfig[]) {
+        this.fixedStepsMultiplierConfig = fixedStepsMultiplierConfig;
+        if (this.fixedStepsMultiplierConfig.length > 0) {
+            this.currentConfig = this.fixedStepsMultiplierConfig[0];
+            this.renderLane();
+        }
+    }
+
+    renderLane() {
         this.spawnLanes();
         this.updateStreetFullViewWidth();
 
@@ -51,22 +68,18 @@ export class LaneSpawner extends ObserverComponent {
         }
     }
 
-    onLoad() {
-        super.onLoad();
-    }
-
     spawnLanes() {
-        if (!this.lanePrefab || !this.laneContent) return;
+        if (!this.lanePrefab || !this.laneContent || !this.currentConfig) return;
 
         this.laneWidth = this.lanePrefab.data.getComponent(UITransform).width;
 
-        for (let i = 0; i < this.totalLanes; i++) {
+        for (let i = 0; i < this.currentConfig.values.length; i++) {
             const lane = instantiate(this.lanePrefab);
             this.laneContent.addChild(lane);
 
-            const multiplierLabel = lane.getChildByName("Multiplier")?.getComponent(Label);
+            const multiplierLabel = lane.getComponent(LandItem).lblMultiplier;
             if (multiplierLabel) {
-                multiplierLabel.string = `${(1 + Math.random() * 2).toFixed(2)}x`;
+                multiplierLabel.string = `${this.currentConfig.values[i]}x`;
             }
         }
     }

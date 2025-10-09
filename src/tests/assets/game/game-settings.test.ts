@@ -1,8 +1,8 @@
 import { GameConfigs } from "@sg/game-client-base";
 import { LogStore } from "db://shared-components/game/scripts/stores/log-store";
 
-import { settings } from "../../../assets/game/scripts/game-settings";
 import { containerOptions } from "../../../assets/game/scripts/containerOptions";
+import { settings } from "../../../assets/game/scripts/game-settings";
 
 jest.mock("db://shared-components/shared/scripts/startup", () => ({
     getSharedContainer: jest.fn(() => ({ sharedContainer: true })),
@@ -12,10 +12,10 @@ describe("settings", () => {
     it("should have data as expected", () => {
         // Assert
         expect(settings).toStrictEqual({
-            id: 109,
-            name: "CoinMining",
-            observerNamespace: "CoinMining",
-            namespaces: ["CoinMining"],
+            id: 157,
+            name: "ChickenRoad",
+            observerNamespace: "ChickenRoad",
+            namespaces: ["ChickenRoad"],
             durations: {
                 wholeRound: 14,
                 lockingBet: 3,
