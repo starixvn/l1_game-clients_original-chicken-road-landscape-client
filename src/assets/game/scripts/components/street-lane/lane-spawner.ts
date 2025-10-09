@@ -42,18 +42,16 @@ export class LaneSpawner extends ObserverComponent {
     private laneWidth = 0;
     private chicken: Node = null;
     private currentLane = -1;
-    private fixedStepsMultiplierConfig: FixedStepsMultiplierConfig[];
     private currentConfig: FixedStepsMultiplierConfig;
 
     onLoad() {
         super.onLoad();
     }
 
-    @render(InstantWinConfigStore, (store) => store.fixedStepsMultiplierConfigs, { fireImmediately: false })
-    setGameConfigs(fixedStepsMultiplierConfig: FixedStepsMultiplierConfig[]) {
-        this.fixedStepsMultiplierConfig = fixedStepsMultiplierConfig;
-        if (this.fixedStepsMultiplierConfig.length > 0) {
-            this.currentConfig = this.fixedStepsMultiplierConfig[0];
+    @render(InstantWinConfigStore, (store) => store.currentMultiplierConfig, { fireImmediately: false })
+    setMultiplierConfig(currentMultiplierConfig: FixedStepsMultiplierConfig) {
+        this.currentConfig = currentMultiplierConfig;
+        if (this.currentConfig) {
             this.renderLane();
         }
     }
@@ -70,7 +68,7 @@ export class LaneSpawner extends ObserverComponent {
 
     spawnLanes() {
         if (!this.lanePrefab || !this.laneContent || !this.currentConfig) return;
-
+        this.laneContent.children.length > 0 && this.laneContent.removeAllChildren();
         this.laneWidth = this.lanePrefab.data.getComponent(UITransform).width;
 
         for (let i = 0; i < this.currentConfig.values.length; i++) {

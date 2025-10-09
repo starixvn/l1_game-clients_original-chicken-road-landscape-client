@@ -10,7 +10,7 @@ export type FixedStepsMultiplierConfig = {
 export class InstantWinConfigStore  {
     
     private _fixedStepsMultiplierConfigs: FixedStepsMultiplierConfig[] = [];
-    
+    private _currentMultiplierConfig: FixedStepsMultiplierConfig = null;
     private _defaultBetLevel = 1;
     private _betLevels = [];
     private _minBet = 0;
@@ -26,6 +26,14 @@ export class InstantWinConfigStore  {
 
     set fixedStepsMultiplierConfigs(fixedStepsMultiplierConfigs: FixedStepsMultiplierConfig[]) {
         this._fixedStepsMultiplierConfigs = fixedStepsMultiplierConfigs;
+    }
+
+    get currentMultiplierConfig() {
+        return this._currentMultiplierConfig;
+    }
+
+    set currentMultiplierConfig(currentMultiplierConfig: FixedStepsMultiplierConfig) {
+        this._currentMultiplierConfig = currentMultiplierConfig;
     }
 
     get betLevels() {

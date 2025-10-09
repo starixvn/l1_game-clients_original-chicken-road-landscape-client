@@ -18,6 +18,9 @@ export class InstantWinConfigHandler implements gc.Shared.IMultipleHandlers {
             .filter((value) => value >= this.instantWinConfigStore.minBet && value <= this.instantWinConfigStore.maxBet);
         this.instantWinConfigStore.defaultBetLevel = gameConfigs.defaultBetLevel;
         this.instantWinConfigStore.fixedStepsMultiplierConfigs = gameConfigs.fixedStepsMultiplierConfigs;
+        if (gameConfigs.fixedStepsMultiplierConfigs.length > 0) {
+            this.setCurrentMultiplierConfig(gameConfigs.fixedStepsMultiplierConfigs[0].mode);
+        }
     }
 
     eventHandleList = [
@@ -26,4 +29,8 @@ export class InstantWinConfigHandler implements gc.Shared.IMultipleHandlers {
             handle: this.handleGameConfigs,
         },
     ];
+
+    setCurrentMultiplierConfig(mode: number) {
+        this.instantWinConfigStore.currentMultiplierConfig = this.instantWinConfigStore.fixedStepsMultiplierConfigs.find(config => config.mode === mode);
+    }
 }
