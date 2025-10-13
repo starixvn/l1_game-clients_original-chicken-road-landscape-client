@@ -2950,10 +2950,7 @@
       "b": 255,
       "a": 255
     },
-    "_skeletonData": {
-      "__uuid__": "",
-      "__expectedType__": "sp.SkeletonData"
-    },
+    "_skeletonData": {},
     "defaultSkin": "default",
     "defaultAnimation": "pickaxe-1-kick",
     "_premultipliedAlpha": true,

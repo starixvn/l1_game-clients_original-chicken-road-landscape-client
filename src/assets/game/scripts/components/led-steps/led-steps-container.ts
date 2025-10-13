@@ -4,7 +4,6 @@ import Observer from "observer";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
 import { BetStore } from "../bets/bet-store";
 import { LedStepItem } from "./led-step-item";
-// import LandItem from "./land-item";
 
 const { ccclass, property } = _decorator;
 const { render } = Observer;
@@ -44,10 +43,12 @@ export class LedStepsContainer extends ObserverComponent {
     }
 
     renderLedSteps() {
-        if (!this.ledStepItemPrefab || !this.ledStepsContent || !this.currentConfig) return;
+        if (!this.ledStepItemPrefab || !this.ledStepsContent || !this.currentConfig) {
+            return;
+        }
         this.ledStepsContent.children.length > 0 && this.ledStepsContent.removeAllChildren();
 
-        for (let i = 0; i < this.currentConfig.multiplierSteps.length; i++) {
+        for (const _ of this.currentConfig.multiplierSteps) {
             const ledStepItem = instantiate(this.ledStepItemPrefab);
             this.ledStepsContent.addChild(ledStepItem);
         }

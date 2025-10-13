@@ -22,7 +22,6 @@ export default class BetLevelsContainer extends ObserverComponent {
         if (betLevels.length <= 0) {
             return;
         }
-        //betLevels.sort((a, b) => a - b);
         this.betLevels = betLevels;
         this.initBetLevelItems(betLevels);
         this.calculateContainerWidth();

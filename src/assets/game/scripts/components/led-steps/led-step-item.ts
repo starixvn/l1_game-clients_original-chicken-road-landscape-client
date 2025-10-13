@@ -1,6 +1,5 @@
 import { _decorator, Component, Node } from "cc";
 import Observer from "observer";
-// import LandItem from "./land-item";
 
 const { ccclass, property } = _decorator;
 const { render } = Observer;

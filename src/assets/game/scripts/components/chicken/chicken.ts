@@ -1,4 +1,4 @@
-import { _decorator, Node, sp, tween, UITransform, v3, Vec3 } from "cc";
+import { _decorator, Node, sp, tween, v3, Vec3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
@@ -11,7 +11,7 @@ export class ChickenController extends ObserverComponent {
     spineChicken: sp.Skeleton = null;
 
     private startPos: Vec3 = v3(0, 0, 0);
-    private isCrashing: boolean = false;
+    private isCrashing = false;
 
     onLoad() {
         this.initMix();
@@ -19,7 +19,9 @@ export class ChickenController extends ObserverComponent {
     }
 
     initMix() {
-        if (!this.spineChicken) return;
+        if (!this.spineChicken) {
+            return;
+        }
 
         this.spineChicken.setMix("idle", "moving", 0.2);
         this.spineChicken.setMix("moving", "win", 0.2);
@@ -30,7 +32,9 @@ export class ChickenController extends ObserverComponent {
     }
 
     async playAnim(animName: string, loop: boolean) {
-        if (!this.spineChicken) return;
+        if (!this.spineChicken) {
+            return;
+        }
         await AnimationUtils.playSpine(this.spineChicken, animName, loop);
     }
 
@@ -64,11 +68,12 @@ export class ChickenController extends ObserverComponent {
 
     /** Gọi khi crash → anim + move vào giữa scene + reset */
     async playCrashAtCenter(centerNode: Node) {
-        if (this.isCrashing) return;
+        if (this.isCrashing) {
+            return;
+        }
         this.isCrashing = true;
 
         // Lấy vị trí giữa màn hình (theo Node)
-        const uiTransform = centerNode.getComponent(UITransform);
         const midWorld = v3(0, 0, 0);
         centerNode.getWorldPosition(midWorld);
 

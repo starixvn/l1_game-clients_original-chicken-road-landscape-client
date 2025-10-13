@@ -2,7 +2,6 @@ import gc from "@sg/game-client-base";
 import { _decorator, EditBox, UIOpacity } from "cc";
 import { ClientSeedSettingsPopup } from "db://shared-components/game-crash/provably-fair/scripts/client-seed-settings-popup";
 import Observer from "observer";
-//import { BetControlStore } from "../../handlers/crash-v2/bet/bet-control-store";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
@@ -73,19 +72,4 @@ export class ClientSeedSettingsDirectPopup extends ClientSeedSettingsPopup {
         this.updateInputOpacity(!randomClientSeedEnabled);
     }
 
-    // @render(BetControlStore, (store) => store.notAllowChangeClientSeed, { fireImmediately: true })
-    // setDisplayComponentsNew(notAllowChangeClientSeed: boolean) {
-    //     this.setDisplayComponents(notAllowChangeClientSeed);
-
-    //     if (this.tglManualClientSeed.isChecked) {
-    //         this.updateInputOpacity(!notAllowChangeClientSeed);
-    //     } else {
-    //         this.updateRandomLabelOpacity(!notAllowChangeClientSeed);
-    //     }
-
-    //     if (!notAllowChangeClientSeed) {
-    //         this.setDisplayContentManualMode(this.tglManualClientSeed.isChecked);
-    //         this.setDisplayContentRandomMode(this.tglRandomClientSeed.isChecked);
-    //     }
-    // }
 }

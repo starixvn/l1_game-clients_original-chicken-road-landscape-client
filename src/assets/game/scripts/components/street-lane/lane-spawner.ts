@@ -17,9 +17,6 @@ export class LaneSpawner extends ObserverComponent {
     @property(Node)
     laneContent: Node = null;
 
-    @property
-    totalLanes: number = 30;
-
     @property(Node)
     streetFullView: Node = null;
 
@@ -40,7 +37,6 @@ export class LaneSpawner extends ObserverComponent {
 
     private chickenCtrl: ChickenController = null;
     private laneWidth = 0;
-    private chicken: Node = null;
     private currentLane = -1;
     private currentConfig: FixedStepsMultiplierConfig;
 
@@ -67,24 +63,26 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     spawnLanes() {
-        if (!this.lanePrefab || !this.laneContent || !this.currentConfig) return;
+        if (!this.lanePrefab || !this.laneContent || !this.currentConfig) {
+            return;
+        }
         this.laneContent.children.length > 0 && this.laneContent.removeAllChildren();
         this.laneWidth = this.lanePrefab.data.getComponent(UITransform).width;
 
-        for (let i = 0; i < this.currentConfig.multiplierSteps.length; i++) {
+        for (const step of this.currentConfig.multiplierSteps) {
             const lane = instantiate(this.lanePrefab);
             this.laneContent.addChild(lane);
 
             const multiplierLabel = lane.getComponent(LandItem).lblMultiplier;
             if (multiplierLabel) {
-                multiplierLabel.string = `${this.currentConfig.multiplierSteps[i]}x`;
+                multiplierLabel.string = `${step}x`;
             }
         }
     }
 
     updateStreetFullViewWidth() {
-        if (this.streetFullView && this.laneContent) {
-            const laneContentWidth = this.lanePrefab.data.getComponent(UITransform).width * this.totalLanes;
+        if (this.streetFullView && this.laneContent && this.currentConfig) {
+            const laneContentWidth = this.lanePrefab.data.getComponent(UITransform).width * (this.currentConfig.multiplierSteps.length + 1);
             const newWidth = laneContentWidth + 162;
             this.streetFullView.getComponent(UITransform).width = newWidth;
         }
@@ -113,7 +111,9 @@ export class LaneSpawner extends ObserverComponent {
 
     moveChicken() {
         const nextLane = this.currentLane + 1;
-        if (!this.laneContent.children[nextLane]) return;
+        if (!this.laneContent.children[nextLane]) {
+            return;
+        }
 
         this.currentLane = nextLane;
         const lane = this.laneContent.children[nextLane];
@@ -132,10 +132,14 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     scrollToLane(laneIndex: number) {
-        if (!this.scrollView) return;
+        if (!this.scrollView) {
+            return;
+        }
 
         const lane = this.laneContent.children[laneIndex];
-        if (!lane) return;
+        if (!lane) {
+            return;
+        }
 
         const content = this.laneContent.getComponent(UITransform);
         const scroll = this.scrollView;
@@ -155,14 +159,22 @@ export class LaneSpawner extends ObserverComponent {
 
     @render(BetStore, (store) => store.multiplier)
     updateMultiplier(multiplier) {
-        if (!this.chickenCtrl) return;
+        if (!this.chickenCtrl) {
+            return;
+        }
 
         if (multiplier > 0) {
             const nextLane = this.currentLane + 1;
-            if (nextLane < this.totalLanes) {
+            if (nextLane < this.currentConfig.multiplierSteps.length) {
                 this.moveChicken();
+            } else {
+                this.moveChickenToLastLane();
             }
         }
+    }
+
+    moveChickenToLastLane() {
+        console.log("play anim win at last lane");
     }
 
     @render(BetStore, (store) => store.uiState)
@@ -188,7 +200,9 @@ export class LaneSpawner extends ObserverComponent {
 
     @render(BetStore, (store) => store.settleStatus, { fireImmediately: false })
     handleCrash(settleStatus: any) {
-        if (!settleStatus || !this.chickenCtrl) return;
+        if (!settleStatus || !this.chickenCtrl) {
+            return;
+        }
 
         if (!settleStatus.win) {
             this.chickenCtrl.playCrashAtCenter(this.centerNode);

@@ -1,9 +1,7 @@
 import gc from "@sg/game-client-base";
 import { _decorator, instantiate, Node, Prefab } from 'cc';
-import { NodeContainer } from "db://shared-components/shared/common-components/node-container/node-container";
-import Observer from "observer";
-import { MyBetTableBody } from "./my-bet-table-body";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
+import Observer from "observer";
 
 const { ccclass, property } = _decorator;
 const { render } = Observer;

@@ -2,26 +2,23 @@ import gc from "@sg/game-client-base";
 import {
     _decorator,
     Animation,
-    BitmapFont,
     Button,
     EventTouch,
     Font,
     Intersection2D,
     Label,
-    log,
     math,
     Node,
     PolygonCollider2D,
     sp,
-    v3,
+    v3
 } from "cc";
-import { bundleManager } from "db://shared-components/shared/common-components/bundle-manager/bundle-manager";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { AudioIds } from "../../../../audios/AudioIds";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../../game-configs";
-import { changeCursorPointer, MULTIPLIER_FONT_NAME } from "../../../utils";
+import { changeCursorPointer } from "../../../utils";
 import { ChickenController } from "../../chicken/chicken";
 import { BetHandler } from "../bet-handler";
 import { BetStore, BetUIState } from "../bet-store";
@@ -46,12 +43,6 @@ export default class PlaceBetButton extends ObserverComponent {
     @property(Label)
     lblMoney: Label = null;
 
-    @property(Node)
-    tapArea: Node = null;
-
-    @property(sp.Skeleton)
-    effect: sp.Skeleton = null;
-
     @property(sp.Skeleton)
     chickenEffect: sp.Skeleton = null;
 
@@ -65,17 +56,12 @@ export default class PlaceBetButton extends ObserverComponent {
     playModeNode: Node = null;
 
     private isStateBet = false;
-    private upgradeTimeStamp = 0;
     private multiplier = 0;
-    private currentAnimationName = "";
     private readonly fontMultipliers: Font[] = [];
-    private activeMoneyFont: Font = null;
-    private disableMoneyFont: Font = null;
     private isPlayAnimation = false;
 
     private readonly EFFECT_RESET_DELAY = 1;
 
-    private nodeGuideHit: Node = null;
     private cashOutButtonInteractable = false;
     private currentConfig: FixedStepsMultiplierConfig;
 
@@ -85,50 +71,18 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     onLoad() {
-        //this.loadFonts();
 
-        this.nodeGuideHit = this.hitStoneButton.getChildByName("hand");
-        this.initializeAnimations();
         super.onLoad();
     }
 
-    async loadFonts() {
-        bundleManager.loadAssetsFromBundle("resources", `fonts/yellow-number`, Font, null).then((font) => {
-            try {
-                this.activeMoneyFont = font;
-                this.updateFontButtonCashOut();
-            } catch (e) {}
-        });
-        bundleManager.loadAssetsFromBundle("resources", `fonts/gray-number`, Font, null).then((font) => {
-            try {
-                this.disableMoneyFont = font;
-                this.updateFontButtonCashOut();
-            } catch (e) {}
-        });
-        for (const fontName of MULTIPLIER_FONT_NAME) {
-            const font = await bundleManager.loadAssetsFromBundle("resources", `fonts/${fontName}-number`, BitmapFont, null);
-            this.fontMultipliers.push(font);
-        }
-    }
 
     onDestroy(): void {
         this.removeEvent();
         super.onDestroy();
     }
 
-    private initializeAnimations(): void {
-        this.resetEffect();
-    }
-
-    resetEffect() {
-        this.effect && this.effect.setAnimation(0, "levitation", true);
-    }
-
     @handle(BetHandler, (handler) => handler.handle())
-    onBet() {
-        this.unschedule(this.resetEffect);
-        this.scheduleOnce(this.resetEffect, this.EFFECT_RESET_DELAY);
-    }
+    onBet() {}
 
     @handle(BetHandler, (handler) => handler.handle())
     onClickStartBet() {
@@ -153,7 +107,6 @@ export default class PlaceBetButton extends ObserverComponent {
             this.multiplier = multiplier;
 
             this.lblMultiplier.string = `${gc.FormatUtils.numberWithCommas(multiplier, 2, false)}x`;
-            //this.updateMultiplierColor(level);
             await AnimationUtils.delayTime(2);
             this.isPlayAnimation = false;
             if (this.lblMultiplier) {
@@ -172,18 +125,8 @@ export default class PlaceBetButton extends ObserverComponent {
         this.lblMoney.string = gc.FormatUtils.numberWithCommas(cashOutValue, 2, true);
     }
 
-    updateMultiplierColor(level: number) {
-        const index = level - 1;
-        if (index < this.fontMultipliers.length) {
-            this.lblMultiplier.font = this.fontMultipliers[index];
-        } else {
-            log("not exist font multiplier with index ", index);
-        }
-    }
-
     onClickBetButton() {
         if (this.canBet) {
-            console.log(`onClickBetButton : canBet:${this.isStateBet} ${!this.isPlayAnimation} ${this.isStateBet && !this.isPlayAnimation}`);
             this.onBet();
             this.isPlayAnimation = true;
         }
@@ -199,21 +142,10 @@ export default class PlaceBetButton extends ObserverComponent {
         }
     }
 
-    onTap(event: EventTouch) {
-        if (this.touchInPolygon(event, this.tapArea) && this.canBet) {
-            this.nodeGuideHit.active = false;
-            this.onBet();
-        }
-    }
-
     protected touchInPolygon(event: EventTouch, node: Node) {
         const location = event.getUILocation();
         const polygon = node.getComponent(PolygonCollider2D).worldPoints;
         return Intersection2D.pointInPolygon(math.v2(location.x, location.y), polygon);
-    }
-
-    async playTapAnimation() {
-        this.effect.setAnimation(0, `tap_3`, false);
     }
 
     async playCrashAnimation() {
@@ -238,9 +170,6 @@ export default class PlaceBetButton extends ObserverComponent {
 
         this.isStateBet = uiState > BetUIState.Start && uiState !== BetUIState.Settle;
 
-        if (uiState === BetUIState.Started) {
-            // this.showAxe();
-        }
     }
 
     @render(BetStore, (store) => store.multiplierVisible)
@@ -258,7 +187,6 @@ export default class PlaceBetButton extends ObserverComponent {
 
         this.cashOutButtonInteractable = buttonCashOut.interactable;
 
-        //this.updateFontButtonCashOut();
         const animation = this.lblMoney.getComponent(Animation);
         if (animation) {
             if (buttonCashOut.interactable) {
@@ -270,10 +198,4 @@ export default class PlaceBetButton extends ObserverComponent {
         }
     }
 
-    private updateFontButtonCashOut() {
-        const font = this.cashOutButtonInteractable ? this.activeMoneyFont : this.disableMoneyFont;
-        if (font) {
-            this.lblMoney.font = font;
-        }
-    }
 }

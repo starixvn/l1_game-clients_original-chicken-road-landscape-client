@@ -1,4 +1,4 @@
-import { _decorator, Color, Component, Label, Node } from 'cc';
+import { _decorator, Color, Label } from 'cc';
 import { TabsControl } from './tabs-control/tabs-control';
 const { ccclass, property } = _decorator;
 

@@ -2,8 +2,8 @@ import gc from "@sg/game-client-base";
 import { _decorator, instantiate, Node, Prefab, UITransform } from 'cc';
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
-import MyBetBodyRow from "./my-bet-body-row";
 import { MyBetModel, MyBetStore } from "../bet-history/bet-history-store";
+import MyBetBodyRow from "./my-bet-body-row";
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
@@ -18,13 +18,12 @@ export class MyBetTableBody extends ObserverComponent {
     private readonly TOOLTIP_POSITION_X = 318;
     private readonly TOOLTIP_POSITION_Y_BUFFER = 48;
 
-    private startYPosition = 0;
-    private itemHeight = 0;
-    private currentPageIndex = 1;
+    private readonly startYPosition = 0;
+    private readonly itemHeight = 0;
     private currentIndex = 0;
     private isFetchingData = false;
     private isNodataToFetch = false;
-    private pageSize = 0;
+    private readonly pageSize = 0;
 
     private getHistoryItemComponent(node: Node): MyBetBodyRow {
         return node.getComponent(MyBetBodyRow);

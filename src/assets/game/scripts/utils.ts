@@ -1,4 +1,4 @@
-import { Color, Node } from "cc";
+import { Node } from "cc";
 
 export const MULTIPLIER_THRESHOLDS = {
     LEVEL_4: 100,

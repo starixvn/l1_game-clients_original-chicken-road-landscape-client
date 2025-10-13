@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Color, Label, Prefab } from "cc";
+import { _decorator, Color, Prefab } from "cc";
 import { BetHistoryNewBodyItem } from "db://shared-components/game/bet-history-new/scripts/bet-history-new-body-item";
 import Observer from "observer";
 import { HashHandlers } from "../hash/hash-handlers";
@@ -21,7 +21,7 @@ export class InstantWinBetHistoryBodyItem extends BetHistoryNewBodyItem {
 
 
     setData(data: BetHistoryBodyItemType) {
-        const { betwin, multiplier } = data.betHistoryLog;
+        const { betwin } = data.betHistoryLog;
         super.setData(data);
         this.lblWin.color = betwin > 0 ? new Color().fromHEX("F1E344") : new Color().fromHEX("ffffff");
 
