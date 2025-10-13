@@ -3,7 +3,7 @@ import mobx from "mobx";
 const { injectable, inject } = inversify;
 export type FixedStepsMultiplierConfig = {
     mode: number;
-    values: number[];
+    multiplierSteps: number[];
 };
 
 @injectable()

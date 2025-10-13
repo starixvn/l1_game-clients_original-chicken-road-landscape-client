@@ -71,13 +71,13 @@ export class LaneSpawner extends ObserverComponent {
         this.laneContent.children.length > 0 && this.laneContent.removeAllChildren();
         this.laneWidth = this.lanePrefab.data.getComponent(UITransform).width;
 
-        for (let i = 0; i < this.currentConfig.values.length; i++) {
+        for (let i = 0; i < this.currentConfig.multiplierSteps.length; i++) {
             const lane = instantiate(this.lanePrefab);
             this.laneContent.addChild(lane);
 
             const multiplierLabel = lane.getComponent(LandItem).lblMultiplier;
             if (multiplierLabel) {
-                multiplierLabel.string = `${this.currentConfig.values[i]}x`;
+                multiplierLabel.string = `${this.currentConfig.multiplierSteps[i]}x`;
             }
         }
     }
@@ -157,7 +157,7 @@ export class LaneSpawner extends ObserverComponent {
     updateMultiplier(multiplier) {
         if (!this.chickenCtrl) return;
 
-        if (multiplier > 1) {
+        if (multiplier > 0) {
             const nextLane = this.currentLane + 1;
             if (nextLane < this.totalLanes) {
                 this.moveChicken();
@@ -175,6 +175,7 @@ export class LaneSpawner extends ObserverComponent {
                 const parent = this.chickenNode.parent;
                 const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(startWorld);
                 this.chickenNode.setPosition(localPos);
+                this.chickenCtrl?.setStartPos(localPos);
             }
 
             this.chickenCtrl?.playIdle();

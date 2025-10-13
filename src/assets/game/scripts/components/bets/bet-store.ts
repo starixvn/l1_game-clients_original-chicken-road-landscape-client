@@ -32,7 +32,7 @@ export class BetStore {
         mobx.makeAutoObservable(this);
     }
 
-    multiplier = 1.0;
+    multiplier = 0;
     betCount = 0;
     endBet = 0;
     roundId = 0;

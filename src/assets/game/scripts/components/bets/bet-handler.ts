@@ -1,5 +1,6 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
+import { InstantWinConfigStore } from "../../game-configs";
 import { GameServiceMessage } from "../../game-message";
 import { HashHandlers } from "../hash/hash-handlers";
 import { BetStore, BetUIState } from "./bet-store";
@@ -18,6 +19,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     @inject(gc.Bet.BetResponseHandlers) protected readonly betResponseHandlers: gc.Bet.BetResponseHandlers;
     @inject(gc.RoundBasePF.ProvablyFairStore) protected readonly pfStore: gc.RoundBasePF.ProvablyFairStore;
     @inject(HashHandlers) protected readonly hashHandlers: HashHandlers;
+    @inject(InstantWinConfigStore) protected readonly instantWinConfigStore: InstantWinConfigStore;
 
     private readonly BIG_WIN_MULTIPLIER = 2.0;
     private autoCashOutTimeOut = null;
@@ -26,7 +28,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         const betData: any = this.createCommonBetData();
         betData.action = this.betsStore.betCount === 0 ? BetAction.Bet : BetAction.Mine;
         betData.clientSeed = this.pfStore.clientSeed;
-        betData.multiplierMode = 2;
+        betData.multiplierMode = this.instantWinConfigStore.currentMultiplierConfig.mode;
         this.betsStore.betCount++;
         this.handleBetData(betData);
     }
@@ -76,7 +78,8 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
 
     changeStarted() {
         this.betsStore.uiState = BetUIState.Started;
-        this.handleMine(1.0);
+        const minMultiplier = this.getMinMultiplier();
+        this.handleMine(minMultiplier);
     }
 
     resetBet() {
@@ -85,7 +88,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         this.betsStore.reachMaxWin = false;
         this.betsStore.settleStatus = null;
         this.betsStore.winAmount = 0;
-        this.updateMultiplier(1.0);
+        this.updateMultiplier(0);
         this.updateEndBet(0);
         this.hashHandlers.handleGenerateRandomClientSeed();
     }
@@ -109,7 +112,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
             return;
         }
         this.updateEndBet(endBet);
-        this.handleMine(1.01);
+        this.handleMine(this.getMinMultiplier());
     }
 
     handleMine(multiplier: number) {
@@ -117,12 +120,18 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
             this.clearAutoCashOut();
             return;
         }
-        if (multiplier >= 1.01) {
-            this.betsStore.uiState = multiplier === 1.01 ? BetUIState.Bet : BetUIState.Mining;
-            this.triggerAutoCashOut();
+
+        const minMultiplier = this.getMinMultiplier();
+        if (multiplier >= minMultiplier) {
+            this.betsStore.uiState = multiplier === minMultiplier ? BetUIState.Bet : BetUIState.Mining;
+            // this.triggerAutoCashOut();
         }
 
         this.updateMultiplier(multiplier);
+    }
+
+    getMinMultiplier() {
+        return this.instantWinConfigStore.currentMultiplierConfig.multiplierSteps[0];
     }
 
     triggerAutoCashOut() {

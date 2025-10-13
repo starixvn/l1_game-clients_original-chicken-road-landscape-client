@@ -1,5 +1,4 @@
-import gc from "@sg/game-client-base";
-import { _decorator, sp, tween, UITransform, v3, Vec3, Node } from "cc";
+import { _decorator, Node, sp, tween, UITransform, v3, Vec3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";

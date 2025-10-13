@@ -2280,10 +2280,9 @@
     "tapArea": null,
     "effect": null,
     "chickenEffect": null,
-    "spineAxe": null,
-    "levelUpNode": null,
     "debugNode": null,
     "chickenCtrl": null,
+    "playModeNode": null,
     "_id": ""
   },
   {
