@@ -1,5 +1,5 @@
 import { _decorator, Color, Label } from 'cc';
-import { TabsControl } from './tabs-control/tabs-control';
+import { TabsControl } from './bet-result/tabs-control';
 const { ccclass, property } = _decorator;
 
 @ccclass('BetResultContainer')

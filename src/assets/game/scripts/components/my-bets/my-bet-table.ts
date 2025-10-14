@@ -15,8 +15,6 @@ export class MyBetTable extends ObserverComponent {
     @property({ type: Prefab })
     bodyPrefab: Prefab = null;
 
-
-
     onLoad() {
         const body = instantiate(this.bodyPrefab);
         this.bodyContent.addChild(body);
