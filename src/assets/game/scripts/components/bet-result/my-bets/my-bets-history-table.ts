@@ -2,8 +2,8 @@ import { _decorator, Component, instantiate, Node, Prefab } from "cc";
 
 const { ccclass, property } = _decorator;
 
-@ccclass("BetHistoryRocketXTable")
-export default class BetHistoryRocketXTable extends Component {
+@ccclass("MyBetsBetHistoryTable")
+export default class MyBetsBetHistoryTable extends Component {
     @property({ type: Node })
     headerContent: Node = null;
 

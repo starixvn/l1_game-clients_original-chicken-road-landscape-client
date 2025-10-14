@@ -21,6 +21,7 @@ export type BetHistoryLog = {
     settlementResult: DynamicObject<boolean>;
     betLogDetails?: Array<DynamicObject<object>>;
     verifiable?: boolean;
+    reachMaxWin: boolean;
 };
 
 export type BetHistoryModel = {
