@@ -2,6 +2,7 @@ import gc from "@sg/game-client-base";
 import { LogStore } from "db://shared-components/game/scripts/stores/log-store";
 import { sharedContainer } from "../../scripts/shared-container";
 import { settings } from "./game-settings";
+import * as CrashGameV2 from "./handlers/crash-v2";
 import { NullRoundTimeHandlers } from "./handlers/null-round-time-handlers";
 import * as InstantWinFeature from "./index";
 
@@ -13,5 +14,7 @@ export const containerOptions: gc.IContainerOptions = {
 
         container.bind(gc.Rounds.RoundTimeHandlers).to(NullRoundTimeHandlers);
     },
-    features: [InstantWinFeature, gc.BetDetailsNew, ...gc.defaultFeatures],
+    features: [
+        CrashGameV2, 
+        InstantWinFeature, gc.BetDetailsNew, ...gc.defaultFeatures],
 };

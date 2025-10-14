@@ -12,7 +12,7 @@ export type BetHistoryLog = {
     time: string;
     roundId: number;
     win: number;
-    betwin: number;
+    betWin: number;
     totalAmount: number;
     freeBet: boolean;
     winLoss?: number;
@@ -23,7 +23,7 @@ export type BetHistoryLog = {
     verifiable?: boolean;
 };
 
-export type BetHistoryRocketXModel = {
+export type BetHistoryModel = {
     page: number;
     pageSize: number;
     total: number;
@@ -40,18 +40,18 @@ export type MyBetModel = {
 };
 
 @injectable()
-export class BetHistoryRocketXStore {
+export class BetHistoryStore {
     @inject(gc.Player.MainPlayerStore) protected readonly mainPlayerStore: gc.Player.MainPlayerStore;
 
     constructor() {
         mobx.makeAutoObservable(this);
     }
 
-    betHistoryRocketXModel: BetHistoryRocketXModel = null;
+    betHistoryModel: BetHistoryModel = null;
 
-    setData(betHistoryRocketXModel: BetHistoryRocketXModel) {
-        betHistoryRocketXModel.fractionalOddsFormat = this.mainPlayerStore?.fractionalOddsFormat;
-        this.betHistoryRocketXModel = betHistoryRocketXModel;
+    setData(betHistoryModel: BetHistoryModel) {
+        betHistoryModel.fractionalOddsFormat = this.mainPlayerStore?.fractionalOddsFormat;
+        this.betHistoryModel = betHistoryModel;
     }
 }
 

@@ -4,6 +4,7 @@ import Observer from "observer";
 
 import { DynamicObject } from "@sg/game-client-base/dist/game/bet-history";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
+import { BetHistoryLog } from "../../handlers/crash-v2/bet/crash-bet-history-store";
 import { formatDate, formatTime } from "../../utils";
 
 
@@ -12,7 +13,7 @@ const { BetHistory, FormatUtils } = gc;
 const { handle } = Observer;
 
 export type BetResultHistoryBodyItemType = {
-    betHistoryLog: gc.BetHistory.BetHistoryLog;
+    betHistoryLog: BetHistoryLog;
     index: number;
     betKey: number;
     fractionalOddsFormat?: boolean;
@@ -53,7 +54,7 @@ export default class MyBetBodyRow extends ObserverComponent {
     @property(Label)
     lblWin: Label = null;
 
-    betHistoryLog: gc.BetHistory.BetHistoryLog = null;
+    betHistoryLog: BetHistoryLog = null;
 
     setData(data: BetResultHistoryBodyItemType) {
         const { betHistoryLog, index } = data;
@@ -62,19 +63,19 @@ export default class MyBetBodyRow extends ObserverComponent {
         this.setLabels(betHistoryLog);
     }
 
-    private getBetTime(betHistoryLog: gc.BetHistory.BetHistoryLog, betKey: number): string {
+    private getBetTime(betHistoryLog: BetHistoryLog, betKey: number): string {
         return betHistoryLog.betLogDetails.find((element) => this.isBetRowData(element, betKey.toString()))?.time.toString();
     }
 
-    private setLabels(betHistoryLog: gc.BetHistory.BetHistoryLog) {
+    private setLabels(betHistoryLog: BetHistoryLog) {
         this.lblDate.string = formatDate(betHistoryLog.time);
         this.lblTime.string = formatTime(betHistoryLog.time);
         this.lblRound.string = betHistoryLog.roundId.toString();
 
         const totalAmount = this.getTotalAmountFromBetLogDetails(betHistoryLog);
         this.lblTotalStake.string = FormatUtils.numberWithCommas(totalAmount, 2);
-        this.lblWin.string = FormatUtils.numberWithCommas(betHistoryLog.betwin, 2);
-        if (betHistoryLog.betwin > 0) {
+        this.lblWin.string = FormatUtils.numberWithCommas(betHistoryLog.betWin, 2);
+        if (betHistoryLog.betWin > 0) {
             this.lblWin.color = new Color().fromHEX("FFF600");
         }
     }
@@ -84,7 +85,7 @@ export default class MyBetBodyRow extends ObserverComponent {
         return betDetail === undefined ? 0 : Number(betDetail.amount);
     }
 
-    public getTotalAmountFromBetLogDetails(betHistoryLog: gc.BetHistory.BetHistoryLog): number {
+    public getTotalAmountFromBetLogDetails(betHistoryLog: BetHistoryLog): number {
         return betHistoryLog.betLogDetails
             .filter((element) => this.isBetRowData(element, element.betKey.toString()))
             .reduce((total, betDetail) => total + Number(betDetail.amount), 0);

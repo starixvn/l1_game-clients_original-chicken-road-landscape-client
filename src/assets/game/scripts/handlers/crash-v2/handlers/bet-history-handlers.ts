@@ -1,9 +1,9 @@
 import gc from "@sg/game-client-base";
 import inversify from "inversify";
 
-import { IMultipleHandlers } from "@sg/game-client-base/dist/shared";
 
-import { BetHistoryRocketXModel, BetHistoryRocketXStore, MyBetModel, MyBetStore } from "./bet-history-store";
+import { IMultipleHandlers } from "@sg/game-client-base/dist/shared";
+import { BetHistoryModel, BetHistoryStore, MyBetModel, MyBetStore } from "../bet/crash-bet-history-store";
 
 const { injectable, inject } = inversify;
 
@@ -17,11 +17,11 @@ export class HistoryConstants {
     static readonly exitHoverTriggerParent = "exit-hover-trigger-parent";
 }
 
-export namespace BetHistoryRocketXHandlers {
+export namespace BetHistoryHandlers {
     @injectable()
     export class BetHistoryHandlers implements IMultipleHandlers {
         @inject(MyBetStore) protected readonly myBetStore: MyBetStore;
-        @inject(BetHistoryRocketXStore) protected readonly betHistoryStore: BetHistoryRocketXStore;
+        @inject(BetHistoryStore) protected readonly betHistoryStore: BetHistoryStore;
         @inject(gc.Connection.ConnectionStore) protected readonly connectionStore: gc.Connection.ConnectionStore;
 
         eventHandleList = [
@@ -43,7 +43,7 @@ export namespace BetHistoryRocketXHandlers {
             this.myBetStore.setData(data);
         }
 
-        handleBetHistory(data: BetHistoryRocketXModel) {
+        handleBetHistory(data: BetHistoryModel) {
             this.betHistoryStore.setData(data);
         }
 

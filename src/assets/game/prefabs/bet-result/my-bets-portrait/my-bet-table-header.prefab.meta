@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "9cea4ef1-f3ba-4a72-9bf1-ec9fe72cd6fc",
+  "uuid": "4c321e72-e37c-42bd-9db2-9aadad0c89a2",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "bet-history-dialog"
+    "syncNodeName": "my-bet-table-header"
   }
 }

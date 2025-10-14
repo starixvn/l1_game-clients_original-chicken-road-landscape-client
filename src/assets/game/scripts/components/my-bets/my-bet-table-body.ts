@@ -1,8 +1,7 @@
-import gc from "@sg/game-client-base";
 import { _decorator, instantiate, Node, Prefab, UITransform } from 'cc';
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
-import { MyBetModel, MyBetStore } from "../bet-history/bet-history-store";
+import { BetHistoryLog, MyBetModel, MyBetStore } from "../../handlers/crash-v2/bet/crash-bet-history-store";
 import MyBetBodyRow from "./my-bet-body-row";
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
@@ -31,7 +30,7 @@ export class MyBetTableBody extends ObserverComponent {
 
     private buildBodyRow(
         bodyItemPrefab: Prefab,
-        betHistoryLog: gc.BetHistory.BetHistoryLog,
+        betHistoryLog: BetHistoryLog,
         index: number,
         betKey: number,
         fractionalOddsFormat = false
@@ -48,8 +47,8 @@ export class MyBetTableBody extends ObserverComponent {
         return bodyItem;
     }
 
-    private processBetHistory(betHistoryLog: gc.BetHistory.BetHistoryLog, rowIndex: number): void {
-        const item = this.buildBodyRow(this.itemPrefab, betHistoryLog, rowIndex, Number(betHistoryLog.betwin));
+    private processBetHistory(betHistoryLog: BetHistoryLog, rowIndex: number): void {
+        const item = this.buildBodyRow(this.itemPrefab, betHistoryLog, rowIndex, Number(betHistoryLog.betWin));
         this.content.addChild(item);
         const currentPosition = item.getPosition();
         const y = this.startYPosition - this.currentIndex * this.itemHeight;
@@ -65,7 +64,7 @@ export class MyBetTableBody extends ObserverComponent {
 
     private renderData(myBetModel: MyBetModel): void {
         myBetModel.betLogs.forEach((betLogItem, rowIndex) => {
-           this.processBetHistory(betLogItem, rowIndex);
+           this.processBetHistory(betLogItem as BetHistoryLog, rowIndex);
         });
 
         this.updateUIAfterRender(myBetModel);
