@@ -31,35 +31,35 @@ export class ChickenController extends ObserverComponent {
         this.spineChicken.setMix("moving", "idle", 0.2);
     }
 
-    async playAnim(animName: string, loop: boolean) {
+    async playAnim({ animName, loop, duration }: { animName: string; loop: boolean; duration?: number }) {
         if (!this.spineChicken) {
             return;
         }
-        await AnimationUtils.playSpine(this.spineChicken, animName, loop);
+        await AnimationUtils.playSpine(this.spineChicken, animName, loop, duration);
     }
 
     playIdle() {
-        this.playAnim("idle", true);
+        this.playAnim({ animName: "idle", loop: true });
     }
 
     playStep() {
-        this.playAnim("moving", false);
+        this.playAnim({ animName: "moving", loop: false });
     }
 
     playCrash() {
-        this.playAnim("crash", false);
+        this.playAnim({ animName: "crash", loop: false });
     }
 
     async playStepSuccess() {
         console.log("playStepSuccess");
-        await this.playAnim("moving", false);
-        await this.playAnim("win", false);
+        await this.playAnim({ animName: "moving", loop: false });
+        await this.playAnim({ animName: "win", loop: false });
     }
 
     async playStepFail() {
         console.log("playStepFail");
-        await this.playAnim("moving", false);
-        await this.playAnim("crash", false);
+        await this.playAnim({ animName: "moving", loop: false });
+        await this.playAnim({ animName: "crash", loop: false });
     }
 
     setStartPos(pos: Vec3) {

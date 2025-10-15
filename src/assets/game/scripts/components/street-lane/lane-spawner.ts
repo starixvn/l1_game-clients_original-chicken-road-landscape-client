@@ -124,6 +124,7 @@ export class LaneSpawner extends ObserverComponent {
 
         this.chickenCtrl.playStepSuccess();
         tween(this.chickenNode)
+            .delay(0.2)
             .to(0.5, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
             .call(() => this.chickenCtrl.playIdle())
             .start();
