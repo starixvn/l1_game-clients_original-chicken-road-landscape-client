@@ -5,6 +5,7 @@ import { CrashGameBetDetailLogTable } from "db://shared-components/game-crash/be
 import { ReachMaxWin } from "db://shared-components/game-crash/bet-history-details/scripts/reach-max-win";
 import Observer from "observer";
 import { BetHistoryLog } from "../../../handlers/crash-v2/bet/crash-bet-history-store";
+import { HashHandlers } from "../../hash/hash-handlers";
 const { FormatUtils } = gc;
 
 const { handle } = Observer;
@@ -33,7 +34,7 @@ export class CrashFixedStepsBetDetailTable extends CrashGameBetDetailLogTable {
 
     betHistoryLog: BetHistoryLog = null;
 
-    @handle(gc.GameCrash.ProvablyFair.ProvablyFairHandler, (handle, roundId: number) => handle.openVerificationHistory(roundId))
+    @handle(HashHandlers, (handle, roundId: number) => handle.openVerificationHistory(roundId))
     onClickVerify() {
         this.playSoundClick();
         return this.betHistoryLog.roundId;
