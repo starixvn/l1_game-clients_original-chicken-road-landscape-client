@@ -1,7 +1,7 @@
 import gc from "@sg/game-client-base";
 import { _decorator, Label } from "cc";
-import Observer from "observer";
 import LoadWebView from "db://shared-components/shared/common-components/web-view/load-web-view";
+import Observer from "observer";
 
 import { HashStore, ProvablyFair } from "../hash-store";
 const { UrlUtils, PFVerification } = gc;
@@ -21,7 +21,7 @@ export default class WebViewVerification extends LoadWebView {
 
     @handle(PFVerification.WebViewPFVerificationHandlers.GetVerificationURL)
     initUrl(specialDirection = "", scrollToId = "") {
-        const theme = "blue";
+        const theme = "original";
         return { theme, specialDirection, scrollToId };
     }
 
