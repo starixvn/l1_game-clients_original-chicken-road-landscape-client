@@ -29,6 +29,7 @@ describe("settings", () => {
             },
             numberOfRoundHistory: 11,
             validateBalanceWhenBet: true,
+            gameTypeId: 13,
         });
     });
 });

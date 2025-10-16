@@ -3,6 +3,7 @@ import { _decorator, Label } from "cc";
 import LoadWebView from "db://shared-components/shared/common-components/web-view/load-web-view";
 import Observer from "observer";
 
+import { settings } from "../../../game-settings";
 import { HashStore, ProvablyFair } from "../hash-store";
 const { UrlUtils, PFVerification } = gc;
 const { handle, render } = Observer;
@@ -33,8 +34,10 @@ export default class WebViewVerification extends LoadWebView {
 
     sendDataToIframe(provablyFair: ProvablyFair) {
         const guideUrl = UrlUtils.getSubDomain(this.url);
+        const gameTypeId = settings.gameTypeId;
+        const data = { ...provablyFair, gameTypeId };
         this.onWebViewLoaded = () => {
-            (document.getElementById("webview") as HTMLIFrameElement)?.contentWindow?.postMessage(JSON.stringify(provablyFair), guideUrl);
+            (document.getElementById("webview") as HTMLIFrameElement)?.contentWindow?.postMessage(JSON.stringify(data), guideUrl);
         };
     }
 

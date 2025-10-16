@@ -745,7 +745,7 @@
     "node": {
       "__id__": 13
     },
-    "_enabled": true,
+    "_enabled": false,
     "__prefab": {
       "__id__": 30
     },
@@ -1065,7 +1065,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -895.7845,
+      "y": -587.73,
       "z": 0
     },
     "_lrot": {
@@ -1106,7 +1106,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 746,
-      "height": 1791.569
+      "height": 1175.46
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2318,7 +2318,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 337.578125,
+      "width": 97.91015625,
       "height": 44
     },
     "_anchorPoint": {
@@ -16071,7 +16071,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 746,
-      "height": 1791.569
+      "height": 1175.46
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",

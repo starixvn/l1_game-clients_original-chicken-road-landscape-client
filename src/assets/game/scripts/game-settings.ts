@@ -1,5 +1,3 @@
-
-
 const GAME_NAME = "ChickenRoad";
 
 export const settings = {
@@ -20,6 +18,5 @@ export const settings = {
     },
     numberOfRoundHistory: 11,
     validateBalanceWhenBet: true,
+    gameTypeId: 13,
 };
-
-
