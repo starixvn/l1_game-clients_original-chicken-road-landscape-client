@@ -3,15 +3,19 @@ import {
     _decorator,
     Animation,
     Button,
+    EventKeyboard,
     EventTouch,
     Font,
+    input,
+    Input,
     Intersection2D,
+    KeyCode,
     Label,
     math,
     Node,
     PolygonCollider2D,
     sp,
-    v3
+    v3,
 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
@@ -64,6 +68,12 @@ export default class PlaceBetButton extends ObserverComponent {
 
     private cashOutButtonInteractable = false;
     private currentConfig: FixedStepsMultiplierConfig;
+    private uiState: BetUIState = BetUIState.Start;
+
+    @render(BetStore, (store) => store.uiState, { fireImmediately: false })
+    setUIState(uiState: BetUIState) {
+        this.uiState = uiState;
+    }
 
     @render(InstantWinConfigStore, (store) => store.currentMultiplierConfig, { fireImmediately: false })
     setMultiplierConfig(currentMultiplierConfig: FixedStepsMultiplierConfig) {
@@ -72,9 +82,19 @@ export default class PlaceBetButton extends ObserverComponent {
 
     onLoad() {
 
+        input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         super.onLoad();
     }
 
+    onKeyDown(event: EventKeyboard) {
+        if (event.keyCode === KeyCode.SPACE) {
+            if (this.uiState === BetUIState.Start) {
+                this.onClickStartBet();
+            } else if (this.canBet) {
+                this.onClickBetButton();
+            }
+        }
+    }
 
     onDestroy(): void {
         this.removeEvent();
@@ -169,7 +189,6 @@ export default class PlaceBetButton extends ObserverComponent {
         this.cashOutButton.active = uiState >= BetUIState.Started;
 
         this.isStateBet = uiState > BetUIState.Start && uiState !== BetUIState.Settle;
-
     }
 
     @render(BetStore, (store) => store.multiplierVisible)
@@ -197,5 +216,4 @@ export default class PlaceBetButton extends ObserverComponent {
             }
         }
     }
-
 }
