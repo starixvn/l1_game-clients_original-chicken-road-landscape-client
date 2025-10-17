@@ -145,7 +145,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 738,
+      "width": 737.9999999999999,
       "height": 90.39999999999999
     },
     "_anchorPoint": {
@@ -1014,7 +1014,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Crash Point:",
+    "_string": "Result:",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -1077,7 +1077,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 157.80078125,
+      "width": 87.91015625,
       "height": 55.44
     },
     "_anchorPoint": {
@@ -1103,7 +1103,7 @@
     "__prefab": {
       "__id__": 42
     },
-    "key": "Common.glossary_crash_point",
+    "key": "Common.result",
     "format": 3,
     "prefix": "",
     "suffix": ":",
@@ -1496,7 +1496,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 786,
+      "width": 785.9999999999999,
       "height": 140.39999999999998
     },
     "_anchorPoint": {
