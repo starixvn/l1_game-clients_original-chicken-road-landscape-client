@@ -75,7 +75,7 @@ export class LaneSpawner extends ObserverComponent {
 
             const multiplierLabel = lane.getComponent(LandItem).lblMultiplier;
             if (multiplierLabel) {
-                multiplierLabel.string = `${step}x`;
+                multiplierLabel.string = `${step.toFixed(2)}x`;
             }
         }
     }

@@ -391,7 +391,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -17.499999999999886,
       "z": 0
     },
     "_lrot": {
@@ -517,7 +517,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 441.8643583621987,
+      "y": 429,
       "z": 0
     },
     "_lrot": {
@@ -726,8 +726,6 @@
       "__id__": 0
     },
     "fileId": "28WaiGO2NAtKfogNNxoxF3",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -876,7 +874,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 254.73399999999992,
-      "y": 444.024,
+      "y": 431.1596416378013,
       "z": 0
     },
     "_lrot": {
@@ -1186,8 +1184,6 @@
       "__id__": 0
     },
     "fileId": "d8+0YDTdhFVb+r90S8pWlc",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -1258,7 +1254,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 577.7934670107503,
-      "height": 880.2008197286892
+      "height": 854.4721030042919
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1516,7 +1512,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 577.7934670107503,
-      "height": 940.2008197286892
+      "height": 914.4721030042919
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1640,8 +1636,6 @@
       "__id__": 0
     },
     "fileId": "2dB0CmBhtHI5ezlfCRFbq1",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -1659,7 +1653,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 975.5498392282958,
-      "height": 1587.4405144694535
+      "height": 1544
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1684,12 +1678,12 @@
     "__prefab": {
       "__id__": 77
     },
-    "_alignFlags": 45,
+    "_alignFlags": 41,
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
+    "_top": 35,
+    "_bottom": -166.79099999999997,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -1717,8 +1711,6 @@
       "__id__": 0
     },
     "fileId": "d0pPh/7/NM4rTkyGp48aIe",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
