@@ -3441,8 +3441,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -246.61,
-      "y": 31.538,
+      "x": 0,
+      "y": 58.221,
       "z": 0
     },
     "_lrot": {
@@ -3482,13 +3482,13 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
-      "height": 43
+      "width": 712,
+      "height": 240.021
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0.5
+      "y": 1
     },
     "_id": ""
   },
@@ -3504,7 +3504,7 @@
     "node": {
       "__id__": 151
     },
-    "_enabled": true,
+    "_enabled": false,
     "__prefab": {
       "__id__": 155
     },
@@ -3624,7 +3624,9 @@
     "nodeDisabledInscrease": {
       "__id__": 60
     },
-    "nodeOverlayBg": null,
+    "nodeOverlayBg": {
+      "__id__": 151
+    },
     "nodeDisabledBetAmount": {
       "__id__": 151
     },
