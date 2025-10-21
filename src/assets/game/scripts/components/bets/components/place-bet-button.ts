@@ -42,9 +42,6 @@ export default class PlaceBetButton extends ObserverComponent {
     hitStoneButton: Node = null;
 
     @property(Label)
-    lblMultiplier: Label = null;
-
-    @property(Label)
     lblMoney: Label = null;
 
     @property(sp.Skeleton)
@@ -60,7 +57,7 @@ export default class PlaceBetButton extends ObserverComponent {
     playModeNode: Node = null;
 
     private isStateBet = false;
-    private multiplier = 0;
+
     private readonly fontMultipliers: Font[] = [];
     private isPlayAnimation = false;
 
@@ -81,7 +78,6 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     onLoad() {
-
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         super.onLoad();
     }
@@ -124,14 +120,8 @@ export default class PlaceBetButton extends ObserverComponent {
     @render(BetStore, (store) => store.multiplier)
     async updateMultiplier(multiplier: number) {
         try {
-            this.multiplier = multiplier;
-
-            this.lblMultiplier.string = `${gc.FormatUtils.numberWithCommas(multiplier, 2, false)}x`;
             await AnimationUtils.delayTime(2);
             this.isPlayAnimation = false;
-            if (this.lblMultiplier) {
-                this.lblMultiplier.string = `${gc.FormatUtils.numberWithCommas(multiplier, 2, false)}x`;
-            }
         } catch (e) {}
     }
 
@@ -189,11 +179,6 @@ export default class PlaceBetButton extends ObserverComponent {
         this.cashOutButton.active = uiState >= BetUIState.Started;
 
         this.isStateBet = uiState > BetUIState.Start && uiState !== BetUIState.Settle;
-    }
-
-    @render(BetStore, (store) => store.multiplierVisible)
-    updateMultiplierVisible(multiplierVisible: boolean) {
-        this.lblMultiplier.node.active = multiplierVisible;
     }
 
     @render(BetStore, (store) => store.uiState)

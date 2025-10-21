@@ -55,7 +55,7 @@ export default class CashOutHistory extends ObserverComponent {
             const multiplierIndex = getCurrentAnimationLevel(item.multiplier) - 1;
             label.font = this.fontMultipliers[multiplierIndex];
             background.spriteFrame = this.bgMultipliers[multiplierIndex];
-            lblCashOutHistory.setPosition(0, index * -40);
+            lblCashOutHistory.setPosition(0, index * -80);
             lblCashOutHistory.on(Node.EventType.TOUCH_END, () => {
                 this.onClickRoundItem(item.roundId);
             });
