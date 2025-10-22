@@ -1,13 +1,13 @@
 import gc from "@sg/game-client-base";
 import { _decorator, EditBox, UIOpacity } from "cc";
-import { ClientSeedSettingsPopup } from "db://shared-components/game-crash/provably-fair/scripts/client-seed-settings-popup";
+import { ClientSeedSettingsPopup as ClientSeedSettingsPopupRoundBase } from "db://shared-components/provably-fair/round-base/scripts/client-seed-settings-popup";
 import Observer from "observer";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
 @ccclass
-export class ClientSeedSettingsDirectPopup extends ClientSeedSettingsPopup {
+export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopupRoundBase {
     @property(EditBox)
     private readonly inputManualSeed: EditBox = null;
 
@@ -24,15 +24,15 @@ export class ClientSeedSettingsDirectPopup extends ClientSeedSettingsPopup {
     }
 
     private updateInputOpacity(enabled: boolean) {
-        const opacity = enabled ? ClientSeedSettingsDirectPopup.OPACITY_ENABLED : ClientSeedSettingsDirectPopup.OPACITY_DISABLED;
+        const opacity = enabled ? ChickenRoadPFClientSeedSettingsPopup.OPACITY_ENABLED : ChickenRoadPFClientSeedSettingsPopup.OPACITY_DISABLED;
         this.inputManualSeed.enabled = enabled;
         this.inputManualSeed.node.getComponent(UIOpacity).opacity = opacity;
     }
 
     private updateRandomLabelOpacity(enabled: boolean) {
         this.lblRandomClientSeed.node.getComponent(UIOpacity).opacity = enabled ?
-            ClientSeedSettingsDirectPopup.OPACITY_ENABLED :
-            ClientSeedSettingsDirectPopup.OPACITY_DISABLED;
+            ChickenRoadPFClientSeedSettingsPopup.OPACITY_ENABLED :
+            ChickenRoadPFClientSeedSettingsPopup.OPACITY_DISABLED;
     }
 
     clickManualOption() {
