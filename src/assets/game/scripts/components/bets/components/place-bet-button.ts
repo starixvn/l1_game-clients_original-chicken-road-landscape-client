@@ -5,7 +5,6 @@ import {
     Button,
     EventKeyboard,
     EventTouch,
-    Font,
     input,
     Input,
     Intersection2D,
@@ -21,7 +20,6 @@ import { ObserverComponent } from "db://shared-components/shared/common-componen
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { AudioIds } from "../../../../audios/AudioIds";
-import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../../game-configs";
 import { changeCursorPointer } from "../../../utils";
 import { ChickenController } from "../../chicken/chicken";
 import { BetHandler } from "../bet-handler";
@@ -58,23 +56,13 @@ export default class PlaceBetButton extends ObserverComponent {
 
     private isStateBet = false;
 
-    private readonly fontMultipliers: Font[] = [];
-    private isPlayAnimation = false;
+    private isFinishedPlayAnim = true;
 
-    private readonly EFFECT_RESET_DELAY = 1;
-
-    private cashOutButtonInteractable = false;
-    private currentConfig: FixedStepsMultiplierConfig;
     private uiState: BetUIState = BetUIState.Start;
 
     @render(BetStore, (store) => store.uiState, { fireImmediately: false })
     setUIState(uiState: BetUIState) {
         this.uiState = uiState;
-    }
-
-    @render(InstantWinConfigStore, (store) => store.currentMultiplierConfig, { fireImmediately: false })
-    setMultiplierConfig(currentMultiplierConfig: FixedStepsMultiplierConfig) {
-        this.currentConfig = currentMultiplierConfig;
     }
 
     onLoad() {
@@ -84,11 +72,18 @@ export default class PlaceBetButton extends ObserverComponent {
 
     onKeyDown(event: EventKeyboard) {
         if (event.keyCode === KeyCode.SPACE) {
-            if (this.uiState === BetUIState.Start) {
-                this.onClickStartBet();
-            } else if (this.canBet) {
-                this.onClickBetButton();
-            }
+            this.onClickSpace();
+        }
+    }
+
+    private onClickSpace() {
+        if (!this.isFinishedPlayAnim) {
+            return;
+        }
+        if (this.uiState === BetUIState.Start) {
+            this.onClickStartBet();
+        } else if (this.canBet) {
+            this.onClickBetButton();
         }
     }
 
@@ -103,6 +98,7 @@ export default class PlaceBetButton extends ObserverComponent {
     @handle(BetHandler, (handler) => handler.handle())
     onClickStartBet() {
         this.playSound(AudioIds.BTN_START);
+        this.isFinishedPlayAnim = false;
     }
 
     @render(BetStore, (store) => store.settleStatus, { fireImmediately: false })
@@ -121,7 +117,7 @@ export default class PlaceBetButton extends ObserverComponent {
     async updateMultiplier(multiplier: number) {
         try {
             await AnimationUtils.delayTime(2);
-            this.isPlayAnimation = false;
+            this.isFinishedPlayAnim = true;
         } catch (e) {}
     }
 
@@ -138,12 +134,12 @@ export default class PlaceBetButton extends ObserverComponent {
     onClickBetButton() {
         if (this.canBet) {
             this.onBet();
-            this.isPlayAnimation = true;
+            this.isFinishedPlayAnim = false;
         }
     }
 
     get canBet() {
-        return this.isStateBet && !this.isPlayAnimation;
+        return this.isStateBet && this.isFinishedPlayAnim;
     }
 
     validTapArea() {
@@ -189,7 +185,6 @@ export default class PlaceBetButton extends ObserverComponent {
         const hitStoneButton = this.hitStoneButton.getComponent(Button);
         hitStoneButton.interactable = uiState !== BetUIState.Settle;
 
-        this.cashOutButtonInteractable = buttonCashOut.interactable;
 
         const animation = this.lblMoney.getComponent(Animation);
         if (animation) {
