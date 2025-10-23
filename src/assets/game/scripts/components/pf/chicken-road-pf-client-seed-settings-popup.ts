@@ -48,7 +48,19 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
     }
 
     private onEditEndManualSeed() {
-        const manualInputValue = this.inputManualSeed.string;
+        let manualInputValue = this.inputManualSeed.string;
+        
+        // Remove any non-numeric characters (extra safety)
+        manualInputValue = manualInputValue.replace(/\D/g, '');
+        
+        // Limit to 4 digits (extra safety)
+        if (manualInputValue.length > 4) {
+            manualInputValue = manualInputValue.substring(0, 4);
+        }
+        
+        // Update the input field with cleaned value
+        this.inputManualSeed.string = manualInputValue;
+        
         if (manualInputValue) {
             this.updateValueManualMode(manualInputValue);
         }
