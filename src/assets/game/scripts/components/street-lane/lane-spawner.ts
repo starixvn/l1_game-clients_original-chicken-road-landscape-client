@@ -1,5 +1,6 @@
 import { _decorator, instantiate, Node, Prefab, ScrollView, tween, UITransform, v3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
+import { AnimationUtils } from "db://shared-components/shared/utils/utils";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
 import { BetStore, BetUIState } from "../bets/bet-store";
@@ -69,13 +70,17 @@ export class LaneSpawner extends ObserverComponent {
         this.laneContent.children.length > 0 && this.laneContent.removeAllChildren();
         this.laneWidth = this.lanePrefab.data.getComponent(UITransform).width;
 
-        for (const step of this.currentConfig.multiplierSteps) {
+        for (let index = 0; index < this.currentConfig.multiplierSteps.length; index++) {
+            const step = this.currentConfig.multiplierSteps[index];
             const lane = instantiate(this.lanePrefab);
             this.laneContent.addChild(lane);
 
-            const multiplierLabel = lane.getComponent(LandItem).lblMultiplier;
-            if (multiplierLabel) {
-                multiplierLabel.string = `${step.toFixed(2)}x`;
+            const landItem = lane.getComponent(LandItem);
+            if (landItem) {
+                landItem.lblMultiplier.string = `${step.toFixed(2)}x`;
+                if (index === 0) {
+                    landItem.multiplierBg.spriteFrame = landItem.nextStepMultiplierBgFrame;
+                }
             }
         }
     }
@@ -159,7 +164,7 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     @render(BetStore, (store) => store.multiplier)
-    updateMultiplier(multiplier) {
+    async updateMultiplier(multiplier) {
         if (!this.chickenCtrl) {
             return;
         }
@@ -171,11 +176,35 @@ export class LaneSpawner extends ObserverComponent {
             } else {
                 this.moveChickenToLastLane();
             }
+            try {
+                await AnimationUtils.delayTime(1);
+                this.updateLandItemBackground();
+            } catch (e) {}
+        }
+    }
+
+    updateLandItemBackground() {
+        const currentLandItem = this.laneContent.children[this.currentLane];
+
+        if (currentLandItem) {
+            const landItemComponent = currentLandItem.getComponent(LandItem);
+            if (landItemComponent) {
+                landItemComponent.multiplierBg.spriteFrame = landItemComponent.currentStepMultiplierBgFrame;
+            }
+        }
+
+        const nextLandItem = this.laneContent.children[this.currentLane + 1];
+        if (nextLandItem) {
+            const landItemComponent = nextLandItem.getComponent(LandItem);
+            if (landItemComponent) {
+                landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
+            }
         }
     }
 
     moveChickenToLastLane() {
         console.log("play anim win at last lane");
+        this.resetLandItemsBackground();
     }
 
     @render(BetStore, (store) => store.uiState)
@@ -200,13 +229,30 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     @render(BetStore, (store) => store.settleStatus, { fireImmediately: false })
-    handleCrash(settleStatus: any) {
+    async handleCrash(settleStatus: any) {
         if (!settleStatus || !this.chickenCtrl) {
             return;
         }
 
         if (!settleStatus.win) {
             this.chickenCtrl.playCrashAtCenter(this.centerNode);
+        }
+        try {
+            await AnimationUtils.delayTime(2);
+            this.resetLandItemsBackground();
+        } catch (e) {}
+    }
+
+    private resetLandItemsBackground() {
+        const landItems = this.laneContent.children;
+        for (let index = 0; index < landItems.length; index++) {
+            const landItem = landItems[index];
+            const landItemComponent = landItem.getComponent(LandItem);
+            if (index === 0) {
+                landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
+            } else {
+                landItemComponent.multiplierBg.spriteFrame = landItemComponent.defaultMultiplierBgFrame;
+            }
         }
     }
 }

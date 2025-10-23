@@ -625,6 +625,21 @@
     "lblMultiplier": {
       "__id__": 6
     },
+    "multiplierBg": {
+      "__id__": 11
+    },
+    "defaultMultiplierBgFrame": {
+      "__uuid__": "dc2bc45e-1523-4969-9cc0-1656264d810f@b2502",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "currentStepMultiplierBgFrame": {
+      "__uuid__": "dc2bc45e-1523-4969-9cc0-1656264d810f@8ca33",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "nextStepMultiplierBgFrame": {
+      "__uuid__": "dc2bc45e-1523-4969-9cc0-1656264d810f@7eaa6",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_id": ""
   },
   {
