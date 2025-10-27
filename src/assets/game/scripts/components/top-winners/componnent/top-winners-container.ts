@@ -7,8 +7,8 @@ import { TopWinner, TopWinnersStore } from "../top-winners-store";
 import { TopWinnerItem } from "./top-winner-item";
 const { ccclass, property } = _decorator;
 
-const { Rounds, Player } = gc;
-const { render, handle } = Observer;
+const { Player } = gc;
+const { render } = Observer;
 const { MainPlayerStore } = Player;
 
 @ccclass
@@ -20,78 +20,99 @@ export class TopWinnersContainer extends ObserverComponent {
     topWinnerPrefab: Prefab = null;
 
     @property
-    itemSize = 50;
+    itemSize = 72;
+
     @property
     padding = 5;
 
     playerName = "";
-
     items: Node[] = [];
 
     @render(TopWinnersStore, (store) => store.winners)
     renderWinners(winners: TopWinner[]) {
-        winners.forEach((winner) => {
-            this.addItem(winner);
-        });
+        this.container.removeAllChildren();
+        this.items = [];
+        winners.forEach((winner) => this.addItem(winner, false));
+        this.layoutItems();
     }
 
-    @render(gc.Player.MainPlayerStore, (store) => store.name)
+    @render(MainPlayerStore, (store) => store.name)
     renderPlayerName(name: string) {
         this.playerName = name;
     }
 
-    private addItem(winner: TopWinner) {
-        const winnerNode = instantiate(this.topWinnerPrefab);
-        const count = this.container.children.length;
-        const topWinnerItem = winnerNode.getComponent(TopWinnerItem);
-        const isMainPlayer = winner.name === this.playerName;
-
-        topWinnerItem.setData(winner, isMainPlayer);
-        this.container.addChild(winnerNode);
-
-        let lastItemPositionY = 0;
-        if (count > 0) {
-            lastItemPositionY = this.container.children[count - 1].position.y;
-        }
-        winnerNode.setPosition(0, lastItemPositionY - this.itemSize - this.padding, 0);
-
-        this.items.push(winnerNode);
-    }
-
     @render(TopWinnersStore, (store) => store.newTopWinner)
-    renderNewTopWinner(newTopWinner: TopWinner) {
+    renderNewTopWinner(newTopWinner: TopWinner | TopWinner[]) {
         if (!newTopWinner) {
             return;
         }
-        this.addItem(newTopWinner);
-        this.movingUp();
+
+        const newList = Array.isArray(newTopWinner)
+            ? newTopWinner
+            : [newTopWinner];
+
+        newList.forEach((winner) => this.addItem(winner, false));
+
+        newList.forEach((_, index) => {
+            const node = this.items[index];
+            AnimationUtils.setOpacityNode(node, 0);
+            AnimationUtils.fadeIn(node, 0.3);
+        });
+
+        this.pushDownOldItems(newList.length);
     }
 
-    movingUp() {
-        const count = this.items.length;
-        const noMoving = count <= 10;
+    private addItem(winner: TopWinner, isNew: boolean) {
+        const winnerNode = instantiate(this.topWinnerPrefab);
+        const topWinnerItem = winnerNode.getComponent(TopWinnerItem);
+        const isMainPlayer = winner.name === this.playerName;
+        topWinnerItem.setData(winner, isMainPlayer);
 
-        if (noMoving) {
+        this.container.insertChild(winnerNode, 0);
+        this.items.unshift(winnerNode);
+
+        winnerNode.setPosition(0, 0, 0);
+
+        if (isNew) {
+            AnimationUtils.setOpacityNode(winnerNode, 0);
+            AnimationUtils.fadeIn(winnerNode, 0.3);
+        }
+    }
+
+    private pushDownOldItems(newCount = 1) {
+        if (this.items.length <= 10) {
+            this.layoutItemsWithAnimation(newCount);
             return;
         }
 
-        const oldest = this.items.shift();
-        AnimationUtils.fadeOut(oldest, 0.5).then(() => {
-            oldest.destroy();
+        const removed = this.items.splice(10);
+        removed.forEach((node) => {
+            AnimationUtils.fadeOut(node, 0.3).then(() => node.destroy());
         });
 
-        this.items.forEach((child, index) => {
-            const isNew = index === this.items.length - 1;
-            if (isNew) {
-                AnimationUtils.setOpacityNode(child, 1);
-                AnimationUtils.fadeIn(child, 0.5);
+        this.layoutItemsWithAnimation(newCount);
+    }
+
+    private layoutItems() {
+        this.items.forEach((item, index) => {
+            const y = -(this.itemSize + this.padding) * index;
+            item.setPosition(0, y, 0);
+        });
+    }
+
+    private layoutItemsWithAnimation(newCount = 1) {
+        this.items.forEach((item, index) => {
+            const targetY = -(this.itemSize + this.padding) * index;
+
+            if (index < newCount) {
+                item.setPosition(0, targetY, 0);
+                return;
             }
-        });
 
-        const destination = -this.items[0].position.y - this.itemSize - this.padding;
-        Tween.stopAllByTarget(this.container);
-        tween(this.container)
-            .to(0.5, { position: v3(0, destination, 0) })
-            .start();
+            Tween.stopAllByTarget(item);
+            tween(item)
+                .to(0.3, { position: v3(0, targetY, 0) })
+                .start();
+        });
     }
 }
