@@ -3,12 +3,13 @@ import { ObserverComponent } from "db://shared-components/shared/common-componen
 import { AnimationUtils } from "db://shared-components/shared/utils/utils";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
+import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { ChickenController } from "../chicken/chicken";
 import LandItem from "./land-item";
 
 const { ccclass, property } = _decorator;
-const { render } = Observer;
+const { render, handle } = Observer;
 
 @ccclass("LaneSpawner")
 export class LaneSpawner extends ObserverComponent {
@@ -38,7 +39,7 @@ export class LaneSpawner extends ObserverComponent {
 
     private chickenCtrl: ChickenController = null;
     private laneWidth = 0;
-    private currentLane = -1;
+    private currentLaneIndex = -1;
     private currentConfig: FixedStepsMultiplierConfig;
 
     onLoad() {
@@ -95,9 +96,7 @@ export class LaneSpawner extends ObserverComponent {
 
     spawnChickenAtStart() {
         if (this.startPoint) {
-            const startWorld = this.startPoint.worldPosition;
-            const parent = this.chickenNode.parent;
-            const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(startWorld);
+            const localPos = this.getStartPos();
 
             this.chickenNode.setPosition(v3(localPos.x, localPos.y, 0));
         } else {
@@ -111,27 +110,46 @@ export class LaneSpawner extends ObserverComponent {
         }
 
         this.chickenCtrl?.playIdle();
-        this.currentLane = -1;
+        this.currentLaneIndex = -1;
     }
 
     moveChicken() {
-        const nextLane = this.currentLane + 1;
+        const nextLaneIndex = this.currentLaneIndex + 1;
+        if (!this.laneContent.children[nextLaneIndex]) {
+            return;
+        }
+
+        this.currentLaneIndex = nextLaneIndex;
+        const lane = this.laneContent.children[nextLaneIndex];
+
+        const laneWorld = lane.worldPosition;
+        const parent = this.chickenNode.parent;
+        const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
+
+        tween(this.chickenNode)
+            .delay(0.3)
+            .to(0.3, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
+            .start();
+
+        this.scrollToLane(nextLaneIndex);
+    }
+
+    moveChickenWhenCrash() {
+        const nextLane = this.currentLaneIndex + 1;
         if (!this.laneContent.children[nextLane]) {
             return;
         }
 
-        this.currentLane = nextLane;
+        this.currentLaneIndex = nextLane;
         const lane = this.laneContent.children[nextLane];
 
         const laneWorld = lane.worldPosition;
         const parent = this.chickenNode.parent;
         const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
 
-        this.chickenCtrl.playStepSuccess();
         tween(this.chickenNode)
-            .delay(0.2)
-            .to(0.5, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
-            .call(() => this.chickenCtrl.playIdle())
+            .delay(0.3)
+            .to(0.3, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
             .start();
 
         this.scrollToLane(nextLane);
@@ -169,12 +187,18 @@ export class LaneSpawner extends ObserverComponent {
             return;
         }
 
-        if (multiplier > 0) {
-            const nextLane = this.currentLane + 1;
-            if (nextLane < this.currentConfig.multiplierSteps.length) {
+        const minMultiplier = this.currentConfig.multiplierSteps[0];
+        if (multiplier >= minMultiplier) {
+            const nextLane = this.currentLaneIndex + 1;
+            const isStepNext = nextLane < this.currentConfig.multiplierSteps.length - 1;
+            if (isStepNext) {
                 this.moveChicken();
+                this.chickenCtrl.playStepSuccess();
             } else {
-                this.moveChickenToLastLane();
+                this.moveChicken();
+                await this.chickenCtrl.playStepSuccessAtLastLane();
+
+                this.reset();
             }
             try {
                 await AnimationUtils.delayTime(1);
@@ -184,7 +208,7 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     updateLandItemBackground() {
-        const currentLandItem = this.laneContent.children[this.currentLane];
+        const currentLandItem = this.laneContent.children[this.currentLaneIndex];
 
         if (currentLandItem) {
             const landItemComponent = currentLandItem.getComponent(LandItem);
@@ -193,7 +217,7 @@ export class LaneSpawner extends ObserverComponent {
             }
         }
 
-        const nextLandItem = this.laneContent.children[this.currentLane + 1];
+        const nextLandItem = this.laneContent.children[this.currentLaneIndex + 1];
         if (nextLandItem) {
             const landItemComponent = nextLandItem.getComponent(LandItem);
             if (landItemComponent) {
@@ -202,45 +226,54 @@ export class LaneSpawner extends ObserverComponent {
         }
     }
 
-    moveChickenToLastLane() {
-        console.log("play anim win at last lane");
-        this.resetLandItemsBackground();
-    }
-
     @render(BetStore, (store) => store.uiState)
     updateUIState(uiState: BetUIState) {
         if (uiState === BetUIState.Start) {
-            this.currentLane = -1;
-
-            if (this.startPoint && this.chickenNode) {
-                const startWorld = this.startPoint.worldPosition;
-                const parent = this.chickenNode.parent;
-                const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(startWorld);
-                this.chickenNode.setPosition(localPos);
-                this.chickenCtrl?.setStartPos(localPos);
-            }
-
-            this.chickenCtrl?.playIdle();
-
-            if (this.scrollView) {
-                this.scrollView.scrollToLeft(0.2);
-            }
+            this.currentLaneIndex = -1;
         }
     }
 
     @render(BetStore, (store) => store.settleStatus, { fireImmediately: false })
-    async handleCrash(settleStatus: any) {
+    async handleWinStatus(settleStatus: any) {
         if (!settleStatus || !this.chickenCtrl) {
             return;
         }
 
-        if (!settleStatus.win) {
-            this.chickenCtrl.playCrashAtCenter(this.centerNode);
-        }
         try {
-            await AnimationUtils.delayTime(2);
-            this.resetLandItemsBackground();
+            if (!settleStatus.win) {
+                this.moveChicken();
+
+                await this.chickenCtrl.playCrashAtCenter();
+            }
+            if (this.chickenCtrl.isPlayAnimation) {
+                return;
+            }
+            this.reset();
         } catch (e) {}
+    }
+
+    private reset() {
+        this.resetLandItemsBackground();
+        this.resetChicken();
+        this.scrollView.scrollToLeft(0.2);
+        this.completeSettle();
+    }
+
+    @handle(BetHandler, (handler) => handler.completeSettle())
+    completeSettle() {}
+
+    private getStartPos() {
+        const startWorld = this.startPoint.worldPosition;
+        const parent = this.chickenNode.parent;
+        const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(startWorld);
+        return localPos;
+    }
+
+    private resetChicken() {
+        const startPos = this.getStartPos();
+        this.chickenNode.setPosition(startPos);
+        this.chickenCtrl.playIdle();
+        this.chickenCtrl.hideBarrier();
     }
 
     private resetLandItemsBackground() {

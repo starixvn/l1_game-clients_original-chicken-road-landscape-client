@@ -93,19 +93,20 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     @handle(BetHandler, (handler) => handler.handle())
-    onBet() {}
+    onBet() {
+        this.setActiveBetButtons(false);
+    }
 
     @handle(BetHandler, (handler) => handler.handle())
     onClickStartBet() {
         this.playSound(AudioIds.BTN_START);
         this.isFinishedPlayAnim = false;
+        this.setActiveBetButtons(false);
     }
 
-    @render(BetStore, (store) => store.settleStatus, { fireImmediately: false })
-    handleCrash(settleStatus: any) {
-        if (settleStatus) {
-            !settleStatus.win && this.playCrashAnimation();
-        }
+    private setActiveBetButtons(active: boolean) {
+        this.setActiveButton(this.cashOutButton, active);
+        this.setActiveButton(this.hitStoneButton, active);
     }
 
     @handle(BetHandler, (handler) => handler.handleCashOut())
@@ -118,6 +119,7 @@ export default class PlaceBetButton extends ObserverComponent {
         try {
             await AnimationUtils.delayTime(2);
             this.isFinishedPlayAnim = true;
+            this.setActiveBetButtons(true);
         } catch (e) {}
     }
 
@@ -154,13 +156,6 @@ export default class PlaceBetButton extends ObserverComponent {
         return Intersection2D.pointInPolygon(math.v2(location.x, location.y), polygon);
     }
 
-    async playCrashAnimation() {
-        try {
-            this.playSound(AudioIds.CRASHED);
-            this.completeSettle();
-        } catch (e) {}
-    }
-
     @handle(BetHandler, (handler) => handler.completeSettle())
     completeSettle() {}
 
@@ -185,7 +180,6 @@ export default class PlaceBetButton extends ObserverComponent {
         const hitStoneButton = this.hitStoneButton.getComponent(Button);
         hitStoneButton.interactable = uiState !== BetUIState.Settle;
 
-
         const animation = this.lblMoney.getComponent(Animation);
         if (animation) {
             if (buttonCashOut.interactable) {
@@ -195,5 +189,10 @@ export default class PlaceBetButton extends ObserverComponent {
                 this.lblMoney.node.scale = v3(1, 1, 1);
             }
         }
+    }
+
+    setActiveButton(button: Node, active: boolean) {
+        button.getComponent(Button).interactable = active;
+        button.getChildByPath("bg/disable").active = !active;
     }
 }

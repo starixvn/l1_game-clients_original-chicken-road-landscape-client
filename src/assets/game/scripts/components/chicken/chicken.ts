@@ -1,17 +1,23 @@
-import { _decorator, Node, sp, tween, v3, Vec3 } from "cc";
+import gc from "@sg/game-client-base";
+
+import { _decorator, sp, v3, Vec3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
+import { AudioIds } from "../../../audios/AudioIds";
 const { ccclass, property } = _decorator;
-const { render } = Observer;
+const { render, handle } = Observer;
 
 @ccclass("ChickenController")
 export class ChickenController extends ObserverComponent {
     @property(sp.Skeleton)
     spineChicken: sp.Skeleton = null;
 
+    @property(sp.Skeleton)
+    barrelSpine: sp.Skeleton = null;
+
     private startPos: Vec3 = v3(0, 0, 0);
-    private isCrashing = false;
+    isPlayAnimation = false;
 
     onLoad() {
         this.initMix();
@@ -19,7 +25,8 @@ export class ChickenController extends ObserverComponent {
     }
 
     initMix() {
-        if (!this.spineChicken) {
+        if (!this.spineChicken || !this.barrelSpine) {
+            console.error("SpineChicken or barrel is not assigned");
             return;
         }
 
@@ -29,9 +36,10 @@ export class ChickenController extends ObserverComponent {
         this.spineChicken.setMix("win", "idle", 0.2);
         this.spineChicken.setMix("crash", "idle", 0.2);
         this.spineChicken.setMix("moving", "idle", 0.2);
+        this.spineChicken.setMix("moving", "final", 0.2);
     }
 
-    async playAnim({ animName, loop, duration }: { animName: string; loop: boolean; duration?: number }) {
+    async playAnim({ animName, loop, duration }: { animName: string; loop?: boolean; duration?: number }) {
         if (!this.spineChicken) {
             return;
         }
@@ -43,56 +51,84 @@ export class ChickenController extends ObserverComponent {
     }
 
     playStep() {
-        this.playAnim({ animName: "moving", loop: false });
+        this.playAnim({ animName: "moving" });
     }
 
     playCrash() {
-        this.playAnim({ animName: "crash", loop: false });
+        this.playAnim({ animName: "crash" });
+    }
+
+    async playFinalStep() {
+        await this.playAnim({ animName: "moving" });
+        await this.playAnim({ animName: "final" });
+    }
+
+    async playStepSuccessAtLastLane() {
+        this.isPlayAnimation = true;
+
+        if (this.barrelSpine.node.active) {
+            this.barrelSpine.node.active = false;
+        }
+        console.log("playStepSuccessAtLastLane");
+        await this.playAnim({ animName: "moving" });
+        this.barrelSpine.node.active = true;
+        AnimationUtils.playSpine(this.barrelSpine, "barrel");
+        await this.playAnim({ animName: "final" });
+        await AnimationUtils.delayTime(1);
+        this.playIdle();
+        this.isPlayAnimation = false;
     }
 
     async playStepSuccess() {
+        if (this.barrelSpine.node.active) {
+            this.barrelSpine.node.active = false;
+        }
         console.log("playStepSuccess");
-        await this.playAnim({ animName: "moving", loop: false });
-        await this.playAnim({ animName: "win", loop: false });
+        await this.playAnim({ animName: "moving" });
+        this.barrelSpine.node.active = true;
+        AnimationUtils.playSpine(this.barrelSpine, "barrel");
+        await this.playAnim({ animName: "win" });
+        this.playIdle();
     }
 
     async playStepFail() {
+        if (this.barrelSpine.node.active) {
+            this.barrelSpine.node.active = false;
+        }
         console.log("playStepFail");
-        await this.playAnim({ animName: "moving", loop: false });
-        await this.playAnim({ animName: "crash", loop: false });
+        await this.playAnim({ animName: "moving" });
+        await this.playAnim({ animName: "crash" });
     }
 
     setStartPos(pos: Vec3) {
         this.startPos = pos.clone();
     }
 
+    resetPos() {
+        this.node.setPosition(this.startPos);
+    }
+
     /** Gọi khi crash → anim + move vào giữa scene + reset */
-    async playCrashAtCenter(centerNode: Node) {
-        if (this.isCrashing) {
+    async playCrashAtCenter() {
+        if (this.isPlayAnimation) {
             return;
         }
-        this.isCrashing = true;
+        this.isPlayAnimation = true;
 
-        // Lấy vị trí giữa màn hình (theo Node)
-        const midWorld = v3(0, 0, 0);
-        centerNode.getWorldPosition(midWorld);
+        this.playSound(AudioIds.CAR_HIT);
+        this.playStepFail();
+        await AnimationUtils.delayTime(5);
+        this.isPlayAnimation = false;
+    }
 
-        // Di chuyển gà ra giữa
-        tween(this.node)
-            .to(0.3, { worldPosition: midWorld })
-            .call(async () => {
-                this.playStepFail();
-                // Giữ anim crash 3s
-                await new Promise((res) => setTimeout(res, 3000));
-                // Reset về start point
-                tween(this.node)
-                    .to(0.3, { position: this.startPos })
-                    .call(() => {
-                        this.playIdle();
-                        this.isCrashing = false;
-                    })
-                    .start();
-            })
-            .start();
+    hideBarrier() {
+        if (this.barrelSpine.node.active) {
+            this.barrelSpine.node.active = false;
+        }
+    }
+
+    @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
+    playSound(id: string) {
+        return id;
     }
 }

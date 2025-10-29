@@ -112,19 +112,20 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
             return;
         }
         this.updateEndBet(endBet);
-        this.handleMine(this.getMinMultiplier());
+        if (!this.betsStore.autoCashOutEnable) {
+            this.triggerAutoCashOut();
+        }
     }
 
     handleMine(multiplier: number) {
-        if (multiplier === 0) {
+        if (multiplier === 0 && this.betsStore.autoCashOutEnable) {
             this.clearAutoCashOut();
-            return;
         }
 
         const minMultiplier = this.getMinMultiplier();
         if (multiplier >= minMultiplier) {
             this.betsStore.uiState = multiplier === minMultiplier ? BetUIState.Bet : BetUIState.Mining;
-            // this.triggerAutoCashOut();
+            this.triggerAutoCashOut();
         }
 
         this.updateMultiplier(multiplier);
