@@ -1,6 +1,6 @@
 import gc from "@sg/game-client-base";
 
-import { _decorator, sp, v3, Vec3 } from "cc";
+import { _decorator, Node, sp, v3, Vec3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
@@ -18,6 +18,12 @@ export class ChickenController extends ObserverComponent {
 
     private startPos: Vec3 = v3(0, 0, 0);
     isPlayAnimation = false;
+
+    @property(Node)
+    vehicleNode: Node = null;
+
+    @property(Node)
+    vehicleStartPoint: Node = null;
 
     onLoad() {
         this.initMix();
@@ -96,9 +102,23 @@ export class ChickenController extends ObserverComponent {
             this.barrelSpine.node.active = false;
         }
         console.log("playStepFail");
+        // this.playVehicle();
         await this.playAnim({ animName: "moving" });
         await this.playAnim({ animName: "crash" });
     }
+
+    // private playVehicle() {
+    //     const vehicleStartPos = this.vehicleStartPoint.position;
+    //     this.vehicleNode.active = true;
+    //     tween(this.vehicleNode)
+    //         .to(1, { position: v3(0, vehicleStartPos.y - 500, 0) })
+    //         .start();
+    // }
+
+    // private resetVehicle() {
+    //     this.vehicleNode.setPosition(this.vehicleStartPoint.position);
+    //     this.vehicleNode.active = false;
+    // }
 
     setStartPos(pos: Vec3) {
         this.startPos = pos.clone();
@@ -118,6 +138,7 @@ export class ChickenController extends ObserverComponent {
         this.playSound(AudioIds.CAR_HIT);
         this.playStepFail();
         await AnimationUtils.delayTime(5);
+        // this.resetVehicle();
         this.isPlayAnimation = false;
     }
 

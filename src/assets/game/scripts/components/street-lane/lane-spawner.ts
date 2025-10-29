@@ -6,6 +6,7 @@ import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-co
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { ChickenController } from "../chicken/chicken";
+import { VehicleController } from "../chicken/vehicle";
 import LandItem from "./land-item";
 
 const { ccclass, property } = _decorator;
@@ -25,6 +26,9 @@ export class LaneSpawner extends ObserverComponent {
     @property(Node)
     chickenNode: Node = null;
 
+    @property(Node)
+    vehicleNode: Node = null;
+
     @property(Prefab)
     chickenPrefab: Prefab = null;
 
@@ -38,6 +42,7 @@ export class LaneSpawner extends ObserverComponent {
     centerNode: Node = null;
 
     private chickenCtrl: ChickenController = null;
+    private vehicleCtrl: VehicleController = null;
     private laneWidth = 0;
     private currentLaneIndex = -1;
     private currentConfig: FixedStepsMultiplierConfig;
@@ -61,6 +66,9 @@ export class LaneSpawner extends ObserverComponent {
         if (this.chickenNode) {
             this.chickenCtrl = this.chickenNode.getComponent(ChickenController);
             this.spawnChickenAtStart();
+        }
+        if (this.vehicleNode) {
+            this.vehicleCtrl = this.vehicleNode.getComponent(VehicleController);
         }
     }
 
@@ -96,7 +104,7 @@ export class LaneSpawner extends ObserverComponent {
 
     spawnChickenAtStart() {
         if (this.startPoint) {
-            const localPos = this.getStartPos();
+            const localPos = this.getStartPosition();
 
             this.chickenNode.setPosition(v3(localPos.x, localPos.y, 0));
         } else {
@@ -134,25 +142,26 @@ export class LaneSpawner extends ObserverComponent {
         this.scrollToLane(nextLaneIndex);
     }
 
-    moveChickenWhenCrash() {
-        const nextLane = this.currentLaneIndex + 1;
-        if (!this.laneContent.children[nextLane]) {
+    moveChickenAndVehicle() {
+        const nextLaneIndex = this.currentLaneIndex + 1;
+        if (!this.laneContent.children[nextLaneIndex]) {
             return;
         }
 
-        this.currentLaneIndex = nextLane;
-        const lane = this.laneContent.children[nextLane];
+        this.currentLaneIndex = nextLaneIndex;
+        const lane = this.laneContent.children[nextLaneIndex];
 
         const laneWorld = lane.worldPosition;
         const parent = this.chickenNode.parent;
         const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
+        this.vehicleCtrl.setVehicleLandPosition(v3(localPos.x, this.vehicleNode.position.y, 0));
 
         tween(this.chickenNode)
             .delay(0.3)
             .to(0.3, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
             .start();
 
-        this.scrollToLane(nextLane);
+        this.scrollToLane(nextLaneIndex);
     }
 
     scrollToLane(laneIndex: number) {
@@ -241,8 +250,8 @@ export class LaneSpawner extends ObserverComponent {
 
         try {
             if (!settleStatus.win) {
-                this.moveChicken();
-
+                this.moveChickenAndVehicle();
+                this.vehicleCtrl.playVehicle();
                 await this.chickenCtrl.playCrashAtCenter();
             }
             if (this.chickenCtrl.isPlayAnimation) {
@@ -262,15 +271,14 @@ export class LaneSpawner extends ObserverComponent {
     @handle(BetHandler, (handler) => handler.completeSettle())
     completeSettle() {}
 
-    private getStartPos() {
+    private getStartPosition() {
         const startWorld = this.startPoint.worldPosition;
         const parent = this.chickenNode.parent;
-        const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(startWorld);
-        return localPos;
+        return parent.getComponent(UITransform).convertToNodeSpaceAR(startWorld);
     }
 
     private resetChicken() {
-        const startPos = this.getStartPos();
+        const startPos = this.getStartPosition();
         this.chickenNode.setPosition(startPos);
         this.chickenCtrl.playIdle();
         this.chickenCtrl.hideBarrier();
