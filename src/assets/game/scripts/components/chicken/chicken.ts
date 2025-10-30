@@ -102,23 +102,9 @@ export class ChickenController extends ObserverComponent {
             this.barrelSpine.node.active = false;
         }
         console.log("playStepFail");
-        // this.playVehicle();
         await this.playAnim({ animName: "moving" });
         await this.playAnim({ animName: "crash" });
     }
-
-    // private playVehicle() {
-    //     const vehicleStartPos = this.vehicleStartPoint.position;
-    //     this.vehicleNode.active = true;
-    //     tween(this.vehicleNode)
-    //         .to(1, { position: v3(0, vehicleStartPos.y - 500, 0) })
-    //         .start();
-    // }
-
-    // private resetVehicle() {
-    //     this.vehicleNode.setPosition(this.vehicleStartPoint.position);
-    //     this.vehicleNode.active = false;
-    // }
 
     setStartPos(pos: Vec3) {
         this.startPos = pos.clone();
@@ -138,7 +124,6 @@ export class ChickenController extends ObserverComponent {
         this.playSound(AudioIds.CAR_HIT);
         this.playStepFail();
         await AnimationUtils.delayTime(5);
-        // this.resetVehicle();
         this.isPlayAnimation = false;
     }
 

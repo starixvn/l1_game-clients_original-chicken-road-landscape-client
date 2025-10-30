@@ -15,9 +15,14 @@ export class GameMode extends ObserverComponent {
     @property(Label)
     currentModeLbl: Label = null;
 
+    @property(Node)
+    buttonArrowDown: Node = null;
+
     private currentMultiplierConfig: FixedStepsMultiplierConfig;
 
     onLoad() {
+        this.modeDialog.active = false;
+        this.buttonArrowDown.active = false;
         super.onLoad();
     }
 
@@ -26,29 +31,44 @@ export class GameMode extends ObserverComponent {
         if (currentMultiplierConfig) {
             this.currentMultiplierConfig = currentMultiplierConfig;
             this.currentModeLbl.string = this.getMultiplierModeTranslate(this.currentMultiplierConfig.mode);
+            this.updateSelectedMode(this.currentMultiplierConfig.mode);
+        }
+    }
+
+    private updateSelectedMode(mode: number) {
+        const selectedModeName = `${this.getStringModeValue(mode)}-mode`;
+        for (const child of this.modeDialog.children) {
+            if (child.name === selectedModeName) {
+                child.getChildByName(`name-lbl`).active = false;
+                child.getChildByName(`selected-name-lbl`).active = true;
+            } else {
+                child.getChildByName(`name-lbl`).active = true;
+                child.getChildByName(`selected-name-lbl`).active = false;
+            }
         }
     }
 
     private getMultiplierModeTranslate(mode: number) {
-        let key = "difficulty_";
+        let key = `difficulty_${this.getStringModeValue(mode)}`;
+        return gc.Translator.gameTranslate(key);
+    }
+
+    private getStringModeValue(mode: number) {
+        let value = "";
         switch (mode) {
             case 1:
-                key += `easy`;
+                value = `easy`;
                 break;
             case 2:
-                key += `medium`;
+                value = `medium`;
                 break;
             case 3:
-                key += `hard`;
+                value = `hard`;
                 break;
             case 4:
-                key += `hardcore`;
-                break;
-            default:
-                key += `easy`;
-                break;
+                value = `hardcore`;
         }
-        return gc.Translator.gameTranslate(key);
+        return value;
     }
 
     @handle(InstantWinConfigHandler, (handler, mode: number) => handler.setCurrentMultiplierConfig(mode))
@@ -59,5 +79,6 @@ export class GameMode extends ObserverComponent {
 
     private toggleModeDialog(show = true) {
         this.modeDialog.active = show;
+        this.buttonArrowDown.active = show;
     }
 }

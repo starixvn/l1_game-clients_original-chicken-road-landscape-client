@@ -187,7 +187,7 @@ export class LaneSpawner extends ObserverComponent {
 
         const ratio = maxOffset > 0 ? targetX / maxOffset : 0;
 
-        this.scrollView.scrollToPercentHorizontal(ratio, 0.3, true);
+        this.scrollView.scrollToPercentHorizontal(ratio, 1, true);
     }
 
     @render(BetStore, (store) => store.multiplier)
