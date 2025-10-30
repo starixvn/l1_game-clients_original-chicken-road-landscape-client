@@ -6,7 +6,8 @@ import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-co
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { ChickenController } from "../chicken/chicken";
-import { VehicleController } from "../chicken/vehicle";
+import { CrashVehicleController } from "../random-vehicle/crash-vehicle";
+import { RandomVehicleController } from "../random-vehicle/random-vehicle";
 import LandItem from "./land-item";
 
 const { ccclass, property } = _decorator;
@@ -27,7 +28,10 @@ export class LaneSpawner extends ObserverComponent {
     chickenNode: Node = null;
 
     @property(Node)
-    vehicleNode: Node = null;
+    crashVehicleNode: Node = null;
+
+    @property(Node)
+    randomVehicleNode: Node = null;
 
     @property(Prefab)
     chickenPrefab: Prefab = null;
@@ -42,10 +46,13 @@ export class LaneSpawner extends ObserverComponent {
     centerNode: Node = null;
 
     private chickenCtrl: ChickenController = null;
-    private vehicleCtrl: VehicleController = null;
+    private crashVehicleCtrl: CrashVehicleController = null;
+    private randomVehicleCtrl: RandomVehicleController = null;
     private laneWidth = 0;
     private currentLaneIndex = -1;
     private currentConfig: FixedStepsMultiplierConfig;
+
+    private hasRandomVehicle = false;
 
     onLoad() {
         super.onLoad();
@@ -67,8 +74,11 @@ export class LaneSpawner extends ObserverComponent {
             this.chickenCtrl = this.chickenNode.getComponent(ChickenController);
             this.spawnChickenAtStart();
         }
-        if (this.vehicleNode) {
-            this.vehicleCtrl = this.vehicleNode.getComponent(VehicleController);
+        if (this.crashVehicleNode) {
+            this.crashVehicleCtrl = this.crashVehicleNode.getComponent(CrashVehicleController);
+        }
+        if (this.randomVehicleNode) {
+            this.randomVehicleCtrl = this.randomVehicleNode.getComponent(RandomVehicleController);
         }
     }
 
@@ -140,6 +150,29 @@ export class LaneSpawner extends ObserverComponent {
             .start();
 
         this.scrollToLane(nextLaneIndex);
+        this.updateRandomVehiclePosition();
+        this.randomVehicleCtrl.startRandomSpawning();
+    }
+
+    updateRandomVehiclePosition() {
+        if (!this.randomVehicleCtrl) {
+            return;
+        }
+
+        const nextVehicleLaneIndex = this.currentLaneIndex + 1;
+        if (nextVehicleLaneIndex >= this.laneContent.children.length) {
+            return;
+        }
+
+        const vehicleLane = this.laneContent.children[nextVehicleLaneIndex];
+        if (!vehicleLane) {
+            return;
+        }
+
+        const vehicleLaneWorld = vehicleLane.worldPosition;
+        const parent = this.randomVehicleNode.parent;
+        const vehicleLocalPos = parent.getComponent(UITransform).convertToNodeSpaceAR(vehicleLaneWorld);
+        this.randomVehicleCtrl.setVehicleLandPosition(v3(vehicleLocalPos.x, this.randomVehicleNode.position.y, 0));
     }
 
     moveChickenAndVehicle() {
@@ -154,7 +187,7 @@ export class LaneSpawner extends ObserverComponent {
         const laneWorld = lane.worldPosition;
         const parent = this.chickenNode.parent;
         const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
-        this.vehicleCtrl.setVehicleLandPosition(v3(localPos.x, this.vehicleNode.position.y, 0));
+        this.crashVehicleCtrl.setVehicleLandPosition(v3(localPos.x, this.crashVehicleNode.position.y, 0));
 
         tween(this.chickenNode)
             .delay(0.3)
@@ -200,9 +233,14 @@ export class LaneSpawner extends ObserverComponent {
         if (multiplier >= minMultiplier) {
             const nextLane = this.currentLaneIndex + 1;
             const isStepNext = nextLane < this.currentConfig.multiplierSteps.length - 1;
+            if (this.randomVehicleCtrl.isPLayingAnimation) {
+                await AnimationUtils.delayTime(2);
+                this.randomVehicleCtrl.stopSpawnVehicle();
+            }
             if (isStepNext) {
                 this.moveChicken();
                 this.chickenCtrl.playStepSuccess();
+                this.showBarrier(nextLane);
             } else {
                 this.moveChicken();
                 await this.chickenCtrl.playStepSuccessAtLastLane();
@@ -214,6 +252,19 @@ export class LaneSpawner extends ObserverComponent {
                 this.updateLandItemBackground();
             } catch (e) {}
         }
+    }
+
+    async showBarrier(landIndex: number) {
+        try {
+            await AnimationUtils.delayTime(2);
+            const landItem = this.laneContent.children[landIndex];
+            if (landItem) {
+                const landItemComponent = landItem.getComponent(LandItem);
+                if (landItemComponent) {
+                    landItemComponent.barrierNode.active = true;
+                }
+            }
+        } catch (error) {}
     }
 
     updateLandItemBackground() {
@@ -251,7 +302,7 @@ export class LaneSpawner extends ObserverComponent {
         try {
             if (!settleStatus.win) {
                 this.moveChickenAndVehicle();
-                this.vehicleCtrl.playVehicle();
+                this.crashVehicleCtrl.playVehicle();
                 await this.chickenCtrl.playCrashAtCenter();
             }
             if (this.chickenCtrl.isPlayAnimation) {
@@ -266,6 +317,7 @@ export class LaneSpawner extends ObserverComponent {
         this.resetChicken();
         this.scrollView.scrollToLeft(0.2);
         this.completeSettle();
+        this.randomVehicleCtrl.stopSpawnVehicle();
     }
 
     @handle(BetHandler, (handler) => handler.completeSettle())
@@ -289,6 +341,7 @@ export class LaneSpawner extends ObserverComponent {
         for (let index = 0; index < landItems.length; index++) {
             const landItem = landItems[index];
             const landItemComponent = landItem.getComponent(LandItem);
+            landItemComponent.barrierNode.active = false;
             if (index === 0) {
                 landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
             } else {

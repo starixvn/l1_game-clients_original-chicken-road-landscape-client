@@ -1,4 +1,4 @@
-import { _decorator, Component, Label, Sprite, SpriteFrame } from "cc";
+import { _decorator, Component, Label, Node, Sprite, SpriteFrame } from "cc";
 
 const { ccclass, property } = _decorator;
 
@@ -18,4 +18,11 @@ export default class LandItem extends Component {
 
     @property(SpriteFrame)
     nextStepMultiplierBgFrame: SpriteFrame = null;
+
+    @property(Node)
+    barrierNode: Node = null;
+    
+    onLoad(): void {
+        this.barrierNode.active = false;
+    }
 }

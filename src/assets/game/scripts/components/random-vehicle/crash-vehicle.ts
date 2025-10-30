@@ -5,8 +5,8 @@ import Observer from "observer";
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
-@ccclass("VehicleController")
-export class VehicleController extends ObserverComponent {
+@ccclass("CrashVehicleController")
+export class CrashVehicleController extends ObserverComponent {
     @property(Node)
     vehicleNode: Node = null;
 

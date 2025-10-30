@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "jFfXqmtxL+9VMuGWK0ckBzZDzY8", "spine": "3.8.99", "images": "./ga/", "audio": "D:/MYWORKFOLDER/design/Chicken-crash/animation/ga" },
+"skeleton": { "hash": "o51NyeqoRtK2MUSg6SK/5nVkV6s", "spine": "3.8.99", "images": "./ga/", "audio": "D:/MYWORKFOLDER/design/Chicken-crash/animation/ga" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "barrel", "parent": "root", "y": -0.99 },
@@ -44,7 +44,7 @@
 	}
 ],
 "animations": {
-	"barrel": {
+	"barrier": {
 		"slots": {
 			"ga/barrel": {
 				"color": [

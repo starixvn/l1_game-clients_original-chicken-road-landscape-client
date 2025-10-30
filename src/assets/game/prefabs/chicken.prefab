@@ -42,8 +42,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 165.64,
+      "y": -225.353,
       "z": 0
     },
     "_lrot": {
@@ -55,8 +55,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0.8,
+      "y": 0.8,
       "z": 1
     },
     "_mobility": 0,
@@ -71,14 +71,14 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "barrel",
+    "_name": "barrier",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
       "__id__": 1
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 3
@@ -170,7 +170,7 @@
       "a": 255
     },
     "_skeletonData": {
-      "__uuid__": "25232f99-67b1-46f2-9c7c-35f227753672",
+      "__uuid__": "7721da25-bcf4-4f31-a27d-a8b487ce79cd",
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
@@ -241,8 +241,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.7,
-      "y": 0.7,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_mobility": 0,
@@ -310,7 +310,7 @@
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
-    "defaultAnimation": "",
+    "defaultAnimation": "idle",
     "_premultipliedAlpha": false,
     "_timeScale": 1,
     "_preCacheMode": 0,
@@ -703,7 +703,7 @@
     "spineChicken": {
       "__id__": 11
     },
-    "barrelSpine": {
+    "barrierSpine": {
       "__id__": 5
     },
     "vehicleNode": {
@@ -727,7 +727,6 @@
       "__id__": 0
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
-    "instance": null,
-    "targetOverrides": null
+    "targetOverrides": []
   }
 ]

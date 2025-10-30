@@ -14,7 +14,7 @@ export class ChickenController extends ObserverComponent {
     spineChicken: sp.Skeleton = null;
 
     @property(sp.Skeleton)
-    barrelSpine: sp.Skeleton = null;
+    barrierSpine: sp.Skeleton = null;
 
     private startPos: Vec3 = v3(0, 0, 0);
     isPlayAnimation = false;
@@ -31,8 +31,8 @@ export class ChickenController extends ObserverComponent {
     }
 
     initMix() {
-        if (!this.spineChicken || !this.barrelSpine) {
-            console.error("SpineChicken or barrel is not assigned");
+        if (!this.spineChicken || !this.barrierSpine) {
+            console.error("SpineChicken or barrier is not assigned");
             return;
         }
 
@@ -72,13 +72,13 @@ export class ChickenController extends ObserverComponent {
     async playStepSuccessAtLastLane() {
         this.isPlayAnimation = true;
 
-        if (this.barrelSpine.node.active) {
-            this.barrelSpine.node.active = false;
+        if (this.barrierSpine.node.active) {
+            this.barrierSpine.node.active = false;
         }
         console.log("playStepSuccessAtLastLane");
         await this.playAnim({ animName: "moving" });
-        this.barrelSpine.node.active = true;
-        AnimationUtils.playSpine(this.barrelSpine, "barrel");
+        this.barrierSpine.node.active = true;
+        AnimationUtils.playSpine(this.barrierSpine, "barrier");
         await this.playAnim({ animName: "final" });
         await AnimationUtils.delayTime(1);
         this.playIdle();
@@ -86,20 +86,18 @@ export class ChickenController extends ObserverComponent {
     }
 
     async playStepSuccess() {
-        if (this.barrelSpine.node.active) {
-            this.barrelSpine.node.active = false;
-        }
         console.log("playStepSuccess");
         await this.playAnim({ animName: "moving" });
-        this.barrelSpine.node.active = true;
-        AnimationUtils.playSpine(this.barrelSpine, "barrel");
+        this.barrierSpine.node.active = true;
+        AnimationUtils.playSpine(this.barrierSpine, "barrier");
         await this.playAnim({ animName: "win" });
+        this.barrierSpine.node.active = false;
         this.playIdle();
     }
 
     async playStepFail() {
-        if (this.barrelSpine.node.active) {
-            this.barrelSpine.node.active = false;
+        if (this.barrierSpine.node.active) {
+            this.barrierSpine.node.active = false;
         }
         console.log("playStepFail");
         await this.playAnim({ animName: "moving" });
@@ -128,8 +126,8 @@ export class ChickenController extends ObserverComponent {
     }
 
     hideBarrier() {
-        if (this.barrelSpine.node.active) {
-            this.barrelSpine.node.active = false;
+        if (this.barrierSpine.node.active) {
+            this.barrierSpine.node.active = false;
         }
     }
 
