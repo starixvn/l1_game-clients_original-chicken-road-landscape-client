@@ -81,4 +81,8 @@ export class GameMode extends ObserverComponent {
         this.modeDialog.active = show;
         this.buttonArrowDown.active = show;
     }
+    
+    private closeModeDialog() {
+        this.toggleModeDialog(false);
+    }
 }
