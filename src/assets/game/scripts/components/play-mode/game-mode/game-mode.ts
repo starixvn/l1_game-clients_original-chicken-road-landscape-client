@@ -3,6 +3,7 @@ import { _decorator, Label, Node } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig, InstantWinConfigHandler, InstantWinConfigStore } from "../../../game-configs";
+import { GameModeItem } from "./game-mode-item";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
@@ -39,9 +40,11 @@ export class GameMode extends ObserverComponent {
         const selectedModeName = `${this.getStringModeValue(mode)}-mode`;
         for (const child of this.modeDialog.children) {
             if (child.name === selectedModeName) {
+                child.getComponent(GameModeItem).setSelectedItem(true);
                 child.getChildByName(`name-lbl`).active = false;
                 child.getChildByName(`selected-name-lbl`).active = true;
             } else {
+                child.getComponent(GameModeItem).setSelectedItem(false);
                 child.getChildByName(`name-lbl`).active = true;
                 child.getChildByName(`selected-name-lbl`).active = false;
             }
@@ -81,7 +84,7 @@ export class GameMode extends ObserverComponent {
         this.modeDialog.active = show;
         this.buttonArrowDown.active = show;
     }
-    
+
     private closeModeDialog() {
         this.toggleModeDialog(false);
     }
