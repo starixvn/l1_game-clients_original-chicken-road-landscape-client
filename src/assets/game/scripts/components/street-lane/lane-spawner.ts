@@ -52,8 +52,6 @@ export class LaneSpawner extends ObserverComponent {
     private currentLaneIndex = -1;
     private currentConfig: FixedStepsMultiplierConfig;
 
-    private hasRandomVehicle = false;
-
     onLoad() {
         super.onLoad();
     }

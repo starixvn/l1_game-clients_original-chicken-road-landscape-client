@@ -52,7 +52,7 @@ export class GameMode extends ObserverComponent {
     }
 
     private getMultiplierModeTranslate(mode: number) {
-        let key = `difficulty_${this.getStringModeValue(mode)}`;
+        const key = `difficulty_${this.getStringModeValue(mode)}`;
         return gc.Translator.gameTranslate(key);
     }
 

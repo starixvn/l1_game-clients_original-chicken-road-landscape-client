@@ -12,7 +12,7 @@ export class GameModeItem extends Component {
     @property(Node)
     hoverName: Node = null;
 
-    private isSelected: boolean = false;
+    private isSelected = false;
 
     onLoad() {
         // Add hover event listeners
