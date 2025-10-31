@@ -31,6 +31,9 @@ export class LaneSpawner extends ObserverComponent {
     crashVehicleNode: Node = null;
 
     @property(Node)
+    nextStepRandomVehicleNode: Node = null;
+
+    @property(Node)
     randomVehicleNode: Node = null;
 
     @property(Prefab)
@@ -47,6 +50,7 @@ export class LaneSpawner extends ObserverComponent {
 
     private chickenCtrl: ChickenController = null;
     private crashVehicleCtrl: CrashVehicleController = null;
+    private nextStepRandomVehicleCtrl: RandomVehicleController = null;
     private randomVehicleCtrl: RandomVehicleController = null;
     private laneWidth = 0;
     private currentLaneIndex = -1;
@@ -74,6 +78,9 @@ export class LaneSpawner extends ObserverComponent {
         }
         if (this.crashVehicleNode) {
             this.crashVehicleCtrl = this.crashVehicleNode.getComponent(CrashVehicleController);
+        }
+        if (this.nextStepRandomVehicleNode) {
+            this.nextStepRandomVehicleCtrl = this.nextStepRandomVehicleNode.getComponent(RandomVehicleController);
         }
         if (this.randomVehicleNode) {
             this.randomVehicleCtrl = this.randomVehicleNode.getComponent(RandomVehicleController);
@@ -148,16 +155,19 @@ export class LaneSpawner extends ObserverComponent {
             .start();
 
         this.scrollToLane(nextLaneIndex);
+
+        this.updateRandomVehiclePosition(true);
+        this.nextStepRandomVehicleCtrl.startRandomSpawning();
         this.updateRandomVehiclePosition();
         this.randomVehicleCtrl.startRandomSpawning();
     }
 
-    updateRandomVehiclePosition() {
-        if (!this.randomVehicleCtrl) {
+    updateRandomVehiclePosition(isNextStep = false) {
+        if (!this.nextStepRandomVehicleCtrl || !this.randomVehicleCtrl) {
             return;
         }
 
-        const nextVehicleLaneIndex = this.currentLaneIndex + 1;
+        const nextVehicleLaneIndex = isNextStep ? this.currentLaneIndex + 1 : this.currentLaneIndex + 2;
         if (nextVehicleLaneIndex >= this.laneContent.children.length) {
             return;
         }
@@ -168,9 +178,13 @@ export class LaneSpawner extends ObserverComponent {
         }
 
         const vehicleLaneWorld = vehicleLane.worldPosition;
-        const parent = this.randomVehicleNode.parent;
+        const parent = isNextStep ? this.nextStepRandomVehicleNode.parent : this.randomVehicleNode.parent;
         const vehicleLocalPos = parent.getComponent(UITransform).convertToNodeSpaceAR(vehicleLaneWorld);
-        this.randomVehicleCtrl.setVehicleLandPosition(v3(vehicleLocalPos.x, this.randomVehicleNode.position.y, 0));
+        if (isNextStep) {
+            this.nextStepRandomVehicleCtrl.setVehicleLandPosition(v3(vehicleLocalPos.x, this.nextStepRandomVehicleNode.position.y, 0));
+        } else {
+            this.randomVehicleCtrl.setVehicleLandPosition(v3(vehicleLocalPos.x, this.randomVehicleNode.position.y, 0));
+        }
     }
 
     moveChickenAndVehicle() {
@@ -231,9 +245,9 @@ export class LaneSpawner extends ObserverComponent {
         if (multiplier >= minMultiplier) {
             const nextLane = this.currentLaneIndex + 1;
             const isStepNext = nextLane < this.currentConfig.multiplierSteps.length - 1;
-            if (this.randomVehicleCtrl.isPLayingAnimation) {
+            if (this.nextStepRandomVehicleCtrl.isPLayingAnimation) {
                 await AnimationUtils.delayTime(2);
-                this.randomVehicleCtrl.stopSpawnVehicle();
+                this.nextStepRandomVehicleCtrl.stopSpawnVehicle();
             }
             if (isStepNext) {
                 this.moveChicken();
@@ -315,7 +329,7 @@ export class LaneSpawner extends ObserverComponent {
         this.resetChicken();
         this.scrollView.scrollToLeft(0.2);
         this.completeSettle();
-        this.randomVehicleCtrl.stopSpawnVehicle();
+        this.nextStepRandomVehicleCtrl.stopSpawnVehicle();
     }
 
     @handle(BetHandler, (handler) => handler.completeSettle())
