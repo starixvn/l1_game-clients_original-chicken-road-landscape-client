@@ -71,7 +71,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "bigwin",
+    "_name": "big-win",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -133,13 +133,13 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 554,
-      "height": 159
+      "width": 810.5399780273438,
+      "height": 768.72998046875
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.4963898916967509,
-      "y": 0.5
+      "x": 0.48229578308911814,
+      "y": 0.35665320774994774
     },
     "_id": ""
   },
@@ -170,7 +170,7 @@
       "a": 255
     },
     "_skeletonData": {
-      "__uuid__": "5acbb221-c30a-4767-87ab-40accc9a93ec",
+      "__uuid__": "67c6afc9-04de-464e-8547-559a972c9b34",
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
@@ -238,7 +238,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -24,
+      "y": 29.165,
       "z": 0
     },
     "_lrot": {
@@ -278,7 +278,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
+      "width": 45,
       "height": 64
     },
     "_anchorPoint": {
@@ -314,7 +314,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "",
+    "_string": "0",
     "_horizontalAlign": 1,
     "_verticalAlign": 0,
     "_actualFontSize": 48,
@@ -406,7 +406,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 53.165,
       "z": 0
     },
     "_lrot": {
@@ -541,7 +541,7 @@
     "skeleton": {
       "__id__": 5
     },
-    "boneName": "text-big-win",
+    "boneName": "title",
     "_id": ""
   },
   {
@@ -607,7 +607,7 @@
     "lblWin": {
       "__id__": 12
     },
-    "animationName": "bigwin",
+    "animationName": "big-win",
     "_id": ""
   },
   {
@@ -623,6 +623,7 @@
       "__id__": 0
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
+    "instance": null,
     "targetOverrides": []
   }
 ]
