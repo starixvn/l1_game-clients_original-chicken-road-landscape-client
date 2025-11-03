@@ -303,14 +303,18 @@ export const languages = {
         "hot_key_double_bet": "Gấp đôi tiền cược",
         "hot_key_half_bet": "Giảm một nửa tiền cược",
         "hot_key_min_bet": "Cược tối thiểu",
-        "pop_over_on_win_reset": "Đặt lại: Quay lại mức cược ban đầu sau khi thắng.",
-        "pop_over_on_win_increase_by": "Tăng theo: Tăng mức cược của bạn theo một tỷ lệ phần trăm nhất định khi bạn thắng.",
+        "pop_over_on_win_reset": "Quay lại mức cược ban đầu sau khi thắng.",
+        "pop_over_on_win_increase_by": "Tăng mức cược của bạn theo một tỷ lệ phần trăm nhất định khi bạn thắng.",
         "pop_over_on_win_example": "(Ví dụ: Đặt +20% → Bắt đầu với $10 → thắng → cược tiếp theo $12)",
-        "pop_over_on_loss_reset": "Đặt lại: Quay lại mức cược ban đầu sau khi thua.",
-        "pop_over_on_loss_increase_by": "Tăng thêm: Tăng mức cược của bạn theo một tỷ lệ phần trăm nhất định khi bạn thua.",
+        "pop_over_on_loss_reset": "Đặt lại mức cược ban đầu sau khi thua.",
+        "pop_over_on_loss_increase_by": "Tăng tiền cược của bạn theo một tỷ lệ phần trăm nhất định khi bạn thua.",
         "pop_over_on_loss_example": "(Ví dụ: Đặt +50% → Bắt đầu với $10 → thua → lần đặt cược tiếp theo $15).",
-        "hot_key_enabled": "Đã bật Hotkeys",
-        "auto_bet_warning": "Việc sử dụng script là tùy chọn và người chơi phải hoàn toàn chịu trách nhiệm cho mọi rủi ro đi kèm. Chúng tôi sẽ không chịu trách nhiệm về vấn đề này."
+        "auto_bet_warning": "Bật Tự Động Cược đồng nghĩa với việc người chơi tự chịu trách nhiệm, nhà cung cấp không chịu trách nhiệm cho bất kỳ kết quả nào",
+        "hot_key_enable": "Đã bật phím tắt",
+        "pop_over_demo_mode": "Cược 0 sẽ kích hoạt chế độ chơi thử",
+        "hot_key_disable": "Đã tắt phím tắt",
+        "balance": "Số dư",
+        "num_of_auto_play": "Chọn Số Lượt Chơi"
     },
     "CoinMining": {
         "auto_cash_out_in": "Tự động rút tiền sau",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "Dễ",
         "difficulty_hard": "Khó",
         "difficulty_hardcore": "Mạo Hiểm",
-        "difficulty_medium": "Trung Bình"
+        "difficulty_medium": "Trung Bình",
+        "num_of_lanes": "Số Làn"
     }
 };
 

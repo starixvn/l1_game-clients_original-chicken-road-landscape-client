@@ -38,7 +38,6 @@ export class BetStore {
     roundId = 0;
     settleStatus: SettleStatus = null;
     uiState = BetUIState.Start;
-    isAutoStart = false;
 
     autoCashOutTimer = AutoCashOutTiming.Start;
     autoCashOutEnable = false;

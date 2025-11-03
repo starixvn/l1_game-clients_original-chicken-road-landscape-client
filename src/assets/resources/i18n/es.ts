@@ -303,14 +303,18 @@ export const languages = {
         "hot_key_double_bet": "Doblar el importe de la apuesta",
         "hot_key_half_bet": "Reducir a la mitad el importe de la apuesta",
         "hot_key_min_bet": "Apuesta mínima",
-        "pop_over_on_win_reset": "Restablecer: Regresa a tu apuesta inicial después de una ganancia.",
-        "pop_over_on_win_increase_by": "Aumentar por: Aumenta tu apuesta en un porcentaje fijo cuando ganes.",
+        "pop_over_on_win_reset": "Regresa a tu apuesta inicial después de una victoria.",
+        "pop_over_on_win_increase_by": "Aumenta tu apuesta en un porcentaje fijo cuando ganes.",
         "pop_over_on_win_example": "(Ejemplo: Establecer +20% → Comienza con $10 → gana → siguiente apuesta $12)",
-        "pop_over_on_loss_reset": "Restablecer: Vuelve a tu apuesta inicial después de una pérdida.",
-        "pop_over_on_loss_increase_by": "Aumentar en: Aumenta tu apuesta en un porcentaje fijo cuando pierdes.",
+        "pop_over_on_loss_reset": "Vuelva a su apuesta inicial después de una pérdida.",
+        "pop_over_on_loss_increase_by": "Aumente su apuesta en un porcentaje establecido cuando pierda.",
         "pop_over_on_loss_example": "(Ejemplo: Establecer +50% → Comenzar con $10 → perder → siguiente apuesta $15).",
-        "hot_key_enabled": "Teclas de acceso rápido habilitadas",
-        "auto_bet_warning": "El uso de scripts es opcional y los jugadores deben asumir toda la responsabilidad por cualquier riesgo asociado. No seremos responsables en este sentido."
+        "auto_bet_warning": "Al habilitar Auto Bet, los jugadores aceptan toda la responsabilidad por su uso, y el proveedor del juego no asume ninguna responsabilidad por los resultados.",
+        "hot_key_enable": "Teclas de acceso rápido habilitadas",
+        "pop_over_demo_mode": "Apostar 0 activará el modo Demo",
+        "hot_key_disable": "Teclas de acceso rápido deshabilitadas",
+        "balance": "SALDO",
+        "num_of_auto_play": "Número de giros automáticos:"
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto retiro en",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "Fácil",
         "difficulty_hard": "Difícil",
         "difficulty_hardcore": "Hardcore",
-        "difficulty_medium": "Medio"
+        "difficulty_medium": "Medio",
+        "num_of_lanes": "Número de carriles"
     }
 };
 

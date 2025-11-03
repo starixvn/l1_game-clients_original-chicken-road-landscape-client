@@ -591,7 +591,7 @@ export const languages = {
         "title_multiplier": "গুণক",
         "crash_start_in": "শুরু হবে %{time}",
         "crashed": "বিধ্বস্ত",
-        "start": "শুরু করুন",
+        "start": "শুরু",
         "max": "সর্বোচ্চ",
         "stop_auto_bet": "অটো বেট বন্ধ করুন",
         "msg_rotate_to_portrait": "খেলতে আপনার স্ক্রিনটি পোর্ট্রেট মোডে ঘোরান",
@@ -603,14 +603,18 @@ export const languages = {
         "hot_key_double_bet": "বাজির পরিমাণ দ্বিগুণ করুন",
         "hot_key_half_bet": "বেটের পরিমাণ অর্ধেক করুন",
         "hot_key_min_bet": "সর্বনিম্ন বেট",
-        "pop_over_on_win_reset": "রিসেট: জেতার পরে আপনার শুরুর বেটে ফিরে যান।",
-        "pop_over_on_win_increase_by": "Increase by: আপনি জিতলে একটি নির্দিষ্ট শতাংশ দ্বারা আপনার বাজি বাড়ান।",
+        "pop_over_on_win_reset": "জেতার পরে আপনার প্রারম্ভিক বাজি তে ফিরে যান।",
+        "pop_over_on_win_increase_by": "আপনি জিতলে একটি নির্দিষ্ট শতাংশ দ্বারা আপনার বাজি বাড়ান।",
         "pop_over_on_win_example": "(উদাহরণ: +20% সেট করুন → $10 দিয়ে শুরু করুন → জিতুন → পরবর্তী বাজি $12)",
-        "pop_over_on_loss_reset": "রিসেট: হারানোর পরে আপনার শুরুর বাজি তে ফিরে যান।",
-        "pop_over_on_loss_increase_by": "বৃদ্ধি করুন: হারলে একটি নির্দিষ্ট শতাংশ হারে আপনার বাজি বাড়ান।",
+        "pop_over_on_loss_reset": "হারার পরে আপনার শুরুর বাজিতে ফিরে যান।",
+        "pop_over_on_loss_increase_by": "হারলে একটি নির্দিষ্ট শতাংশে আপনার বাজি বাড়ান।",
         "pop_over_on_loss_example": "(উদাহরণ: +50% সেট করুন → $10 দিয়ে শুরু করুন → হারুন → পরবর্তী বাজি $15)।",
-        "hot_key_enabled": "হটকি সক্রিয় করা হয়েছে",
-        "auto_bet_warning": "স্ক্রিপ্টের ব্যবহার ঐচ্ছিক এবং খেলোয়াড়দের যেকোন সম্ভাব্য ঝুঁকির জন্য সম্পূর্ণ দায়িত্ব নিতে হবে। আমরা এই ব্যাপারে দায়ী থাকব না।"
+        "auto_bet_warning": "স্ক্রিপ্টের ব্যবহার ঐচ্ছিক এবং খেলোয়াড়দের যেকোন সম্ভাব্য ঝুঁকির জন্য সম্পূর্ণ দায়িত্ব নিতে হবে। আমরা এই ব্যাপারে দায়ী থাকব না।",
+        "hot_key_enable": "হটকি সক্রিয় করা হয়েছে",
+        "pop_over_demo_mode": "বেট 0 ডেমো মোড সক্রিয় করবে",
+        "hot_key_disable": "হটকী নিষ্ক্রিয় করা হয়েছে",
+        "balance": "ব্যালেন্স",
+        "num_of_auto_play": "অটো-প্লে সংখ্যা:"
     },
     "CoinMining": {
         "header_mining_attempts": "খনন প্রচেষ্টা",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "সহজ",
         "difficulty_hard": "কঠিন",
         "difficulty_hardcore": "হার্ডকোর",
-        "difficulty_medium": "মাঝারি"
+        "difficulty_medium": "মাঝারি",
+        "num_of_lanes": "লেনের সংখ্যা"
     }
 };
 

@@ -603,14 +603,18 @@ export const languages = {
         "hot_key_double_bet": "Bahis Miktarını İkiye Katla",
         "hot_key_half_bet": "Bahis Miktarını Yarıya Düşür",
         "hot_key_min_bet": "Minimum Bahis",
-        "pop_over_on_win_reset": "Sıfırla: Kazandıktan sonra başlangıç bahsinize dönün.",
-        "pop_over_on_win_increase_by": "Artış miktarı: Kazandığınızda bahsinizi belirli bir yüzde oranında artırın.",
+        "pop_over_on_win_reset": "Kazanmanın ardından başlangıç bahsinize geri dönün.",
+        "pop_over_on_win_increase_by": "Kazandığınızda bahsinizi belirli bir yüzde artırın.",
         "pop_over_on_win_example": "(Örnek: +%20 ayarla → 10$ ile başla → kazan → sonraki bahis 12$)",
-        "pop_over_on_loss_reset": "Sıfırla: Kaybettikten sonra başlangıç bahsinize geri dönün.",
-        "pop_over_on_loss_increase_by": "Artış: Kaybettiğinizde bahsinizi belirli bir yüzde oranında artırın.",
+        "pop_over_on_loss_reset": "Kaybettikten sonra başlangıç bahsinize geri dönün.",
+        "pop_over_on_loss_increase_by": "Kaybettiğinizde bahsinizi belirli bir yüzde artırın.",
         "pop_over_on_loss_example": "(Örnek: %50 Ayarla → 10$ ile Başla → kaybet → sonraki bahis 15$).",
-        "hot_key_enabled": "Kısayol Tuşları Etkin",
-        "auto_bet_warning": "Betik kullanımı isteğe bağlıdır ve oyuncular olası risklerin tüm sorumluluğunu üstlenmelidir. Bu konuda herhangi bir sorumluluk kabul etmeyeceğiz."
+        "auto_bet_warning": "Auto Bet'i etkinleştirerek, oyuncular kullanımının tüm sorumluluğunu kabul eder ve oyun sağlayıcısı herhangi bir sonuç için hiçbir sorumluluk kabul etmez.",
+        "hot_key_enable": "Kısayol Tuşları Etkin",
+        "pop_over_demo_mode": "0 Bahsi Demo Modunu etkinleştirecektir",
+        "hot_key_disable": "Kısayol Tuşları Devre Dışı",
+        "balance": "BAKİYE",
+        "num_of_auto_play": "Otomatik Oynatma Sayısı:"
     },
     "CoinMining": {
         "header_mining_attempts": "Madencilik Denemeleri",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "Kolay",
         "difficulty_hard": "Zor",
         "difficulty_hardcore": "Hardcore",
-        "difficulty_medium": "Orta"
+        "difficulty_medium": "Orta",
+        "num_of_lanes": "Şerit Sayısı"
     }
 };
 

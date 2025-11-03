@@ -303,14 +303,18 @@ export const languages = {
         "hot_key_double_bet": "双倍下注金额",
         "hot_key_half_bet": "下注金额减半",
         "hot_key_min_bet": "最小投注",
-        "pop_over_on_win_reset": "重置：赢了之后返回到您的起始投注。",
-        "pop_over_on_win_increase_by": "增加：赢了之后按设定的百分比提高您的投注。",
+        "pop_over_on_win_reset": "赢了之后回到您的起始赌注。",
+        "pop_over_on_win_increase_by": "获胜时，按设定的百分比提高您的赌注。",
         "pop_over_on_win_example": "（示例：设置 +20% → 以 10 美元开始 → 赢 → 下一个赌注 12 美元）",
-        "pop_over_on_loss_reset": "重置：在输掉后返回到您的起始赌注。",
-        "pop_over_on_loss_increase_by": "增加：在输掉后，按设定的百分比增加您的赌注。",
+        "pop_over_on_loss_reset": "输了之后回到您的起始赌注。",
+        "pop_over_on_loss_increase_by": "失败时，按设定的百分比提高您的投注额。",
         "pop_over_on_loss_example": "（示例：设置 +50% → 从 $10 开始 → 输掉 → 下一个投注 $15）。",
-        "hot_key_enabled": "已启用热键",
-        "auto_bet_warning": "使用脚本是可选的，玩家必须对任何伴随的风险承担全部责任。 我们对此概不负责。"
+        "auto_bet_warning": "启用自动投注后，玩家将对其使用承担全部责任，游戏提供商对任何结果不承担任何责任。",
+        "hot_key_enable": "已启用热键",
+        "pop_over_demo_mode": "下注 0 将激活演示模式",
+        "hot_key_disable": "热键已禁用",
+        "balance": "余额",
+        "num_of_auto_play": "数量 自动游戏:"
     },
     "CoinMining": {
         "auto_cash_out_in": "自动提现",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "简单",
         "difficulty_hard": "困难",
         "difficulty_hardcore": "Hardcore",
-        "difficulty_medium": "中等"
+        "difficulty_medium": "中等",
+        "num_of_lanes": "赛道数量"
     }
 };
 

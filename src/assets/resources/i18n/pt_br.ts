@@ -603,14 +603,18 @@ export const languages = {
         "hot_key_double_bet": "Dobrar o valor da aposta",
         "hot_key_half_bet": "Diminuir o Valor da Aposta Pela Metade",
         "hot_key_min_bet": "Aposta Mínima",
-        "pop_over_on_win_reset": "Redefinir: Retorne à sua aposta inicial após uma vitória.",
-        "pop_over_on_win_increase_by": "Aumentar por: Aumente sua aposta em uma porcentagem definida quando você ganhar.",
+        "pop_over_on_win_reset": "Retorne à sua aposta inicial após uma vitória.",
+        "pop_over_on_win_increase_by": "Aumente sua aposta em uma porcentagem definida quando você ganhar.",
         "pop_over_on_win_example": "(Exemplo: Definir +20% → Começar com $10 → ganhar → próxima aposta $12)",
-        "pop_over_on_loss_reset": "Redefinir: Retorne à sua aposta inicial após uma perda.",
-        "pop_over_on_loss_increase_by": "Aumentar em: Aumente sua aposta em uma porcentagem definida quando você perde.",
+        "pop_over_on_loss_reset": "Retorne à sua aposta inicial após uma derrota.",
+        "pop_over_on_loss_increase_by": "Aumente sua aposta em uma porcentagem definida quando você perde.",
         "pop_over_on_loss_example": "(Exemplo: Defina +50% → Comece com $10 → perca → próxima aposta $15).",
-        "hot_key_enabled": "Teclas de atalho ativadas",
-        "auto_bet_warning": "O uso de script é opcional e os jogadores devem assumir total responsabilidade por quaisquer riscos inerentes. Não seremos responsabilizados a este respeito."
+        "auto_bet_warning": "Ao ativar o Auto Bet, os jogadores aceitam total responsabilidade pelo seu uso, e o provedor do jogo não assume nenhuma responsabilidade por quaisquer resultados.",
+        "hot_key_enable": "Teclas de atalho ativadas",
+        "pop_over_demo_mode": "A aposta 0 ativará o Modo Demo",
+        "hot_key_disable": "Teclas de atalho desativadas",
+        "balance": "SALDO",
+        "num_of_auto_play": "Número de Jogadas Automáticas:"
     },
     "CoinMining": {
         "header_mining_attempts": "Tentativas de Mineração",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "Fácil",
         "difficulty_hard": "Difícil",
         "difficulty_hardcore": "Radical",
-        "difficulty_medium": "Médio"
+        "difficulty_medium": "Médio",
+        "num_of_lanes": "Número de Pistas"
     }
 };
 

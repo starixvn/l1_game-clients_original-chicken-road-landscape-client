@@ -603,14 +603,18 @@ export const languages = {
         "hot_key_double_bet": "Gandakan Jumlah Pertaruhan",
         "hot_key_half_bet": "Kurangkan Separuh Jumlah Taruhan",
         "hot_key_min_bet": "Taruhan Min",
-        "pop_over_on_win_reset": "Tetapkan Semula: Kembali ke pertaruhan permulaan anda selepas menang.",
-        "pop_over_on_win_increase_by": "Tambah sebanyak: Naikkan pertaruhan anda sebanyak peratusan yang ditetapkan apabila anda menang.",
+        "pop_over_on_win_reset": "Kembali ke pertaruhan permulaan anda selepas menang.",
+        "pop_over_on_win_increase_by": "Naikkan pertaruhan anda dengan peratusan yang ditetapkan apabila anda menang.",
         "pop_over_on_win_example": "(Contoh: Tetapkan +20% → Mula dengan $10 → menang → pertaruhan seterusnya $12)",
-        "pop_over_on_loss_reset": "Tetapkan Semula: Kembali ke pertaruhan permulaan anda selepas kalah.",
-        "pop_over_on_loss_increase_by": "Tingkatkan sebanyak: Naikkan pertaruhan anda dengan peratusan yang ditetapkan apabila anda kalah.",
+        "pop_over_on_loss_reset": "Kembali ke pertaruhan permulaan anda selepas kerugian.",
+        "pop_over_on_loss_increase_by": "Naikkan pertaruhan anda dengan peratusan yang ditetapkan apabila anda kalah.",
         "pop_over_on_loss_example": "(Contoh: Tetapkan +50% → Mulakan dengan $10 → kalah → pertaruhan seterusnya $15).",
-        "hot_key_enabled": "Kekunci Pintas Didayakan",
-        "auto_bet_warning": "Penggunaan skrip adalah pilihan dan pemain harus bertanggungjawab sepenuhnya atas sebarang risiko yang berkaitan. Kami tidak akan bertanggungjawab dalam hal ini."
+        "auto_bet_warning": "Dengan mendayakan Auto Bet, pemain menerima tanggungjawab penuh untuk penggunaannya, dan pembekal permainan tidak bertanggungjawab terhadap sebarang keputusan.",
+        "hot_key_enable": "Kekunci Pintas Didayakan",
+        "pop_over_demo_mode": "Taruhan 0 akan mengaktifkan Mod Demo",
+        "hot_key_disable": "Kekunci Pintas Dilumpuhkan",
+        "balance": "BALANCE",
+        "num_of_auto_play": "Bilangan Auto-Main:"
     },
     "CoinMining": {
         "header_mining_attempts": "Percubaan Perlombongan",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "Mudah",
         "difficulty_hard": "Sukar",
         "difficulty_hardcore": "Tegar",
-        "difficulty_medium": "Sederhana"
+        "difficulty_medium": "Sederhana",
+        "num_of_lanes": "Bilangan Lorong"
     }
 };
 

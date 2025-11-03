@@ -603,14 +603,18 @@ export const languages = {
         "hot_key_double_bet": "Dobleng Halaga ng Bet",
         "hot_key_half_bet": "Hatiin ang Halaga ng Pusta",
         "hot_key_min_bet": "Pinakamababang Pusta",
-        "pop_over_on_win_reset": "I-reset: Bumalik sa iyong panimulang taya pagkatapos manalo.",
-        "pop_over_on_win_increase_by": "Palakihin nang: Itaas ang iyong taya sa isang nakatakdang porsyento kapag nanalo ka.",
+        "pop_over_on_win_reset": "Bumalik sa iyong panimulang taya pagkatapos manalo.",
+        "pop_over_on_win_increase_by": "Taasan ang iyong taya ng isang set na porsyento kapag nanalo ka.",
         "pop_over_on_win_example": "(Halimbawa: Itakda ang +20% → Magsimula sa $10 → manalo → susunod na taya $12)",
-        "pop_over_on_loss_reset": "I-reset: Bumalik sa iyong panimulang taya pagkatapos matalo.",
-        "pop_over_on_loss_increase_by": "Dagdagan ng: Itaas ang iyong taya nang may nakatakdang porsyento kapag natalo ka.",
+        "pop_over_on_loss_reset": "Bumalik sa iyong panimulang taya pagkatapos ng pagkatalo.",
+        "pop_over_on_loss_increase_by": "Taasan ang iyong taya sa isang takdang porsyento kapag natalo ka.",
         "pop_over_on_loss_example": "(Halimbawa: Itakda ang +50% → Magsimula sa $10 → matalo → susunod na taya $15).",
-        "hot_key_enabled": "Pinagana ang mga Hotkey",
-        "auto_bet_warning": "Ang paggamit ng script ay opsyonal at dapat akuin ng mga manlalaro ang buong responsibilidad para sa anumang kaakibat na panganib. Hindi kami mananagot dito."
+        "auto_bet_warning": "Sa pagpapagana ng Auto Bet, tinatanggap ng mga manlalaro ang buong responsibilidad para sa paggamit nito, at ang provider ng laro ay hindi tumatanggap ng pananagutan para sa anumang resulta.",
+        "hot_key_enable": "Pinagana ang mga Hotkey",
+        "pop_over_demo_mode": "Ang pagtaya ng 0 ay magpapagana sa Demo Mode",
+        "hot_key_disable": "Hindi Pinagana ang mga Hotkey",
+        "balance": "BALANCE",
+        "num_of_auto_play": "Bilang ng Auto-Play:"
     },
     "CoinMining": {
         "header_mining_attempts": "Mining Attempts",
@@ -637,11 +641,12 @@ export const languages = {
     "ChickenRoad": {
         "game_name": "Chicken Road",
         "game_icon_name": "Chicken Road",
-        "go": "Sige",
-        "difficulty_easy": "Madali",
-        "difficulty_hard": "Mahirap",
+        "go": "Go",
+        "difficulty_easy": "Easy",
+        "difficulty_hard": "Hard",
         "difficulty_hardcore": "Hardcore",
-        "difficulty_medium": "Katamtaman"
+        "difficulty_medium": "Medium",
+        "num_of_lanes": "Bilang ng mga Linya"
     }
 };
 

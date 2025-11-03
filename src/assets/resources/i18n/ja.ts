@@ -303,14 +303,18 @@ export const languages = {
         "hot_key_double_bet": "ベット額を2倍にする",
         "hot_key_half_bet": "ベット額を半分にする",
         "hot_key_min_bet": "最小ベット",
-        "pop_over_on_win_reset": "リセット：勝利後、最初のベットに戻ります。",
-        "pop_over_on_win_increase_by": "増加：勝利時に、設定された割合でベットを上げます。",
+        "pop_over_on_win_reset": "勝利後、最初の賭け金に戻ります。",
+        "pop_over_on_win_increase_by": "勝利したときに、設定されたパーセンテージでベットを上げます。",
         "pop_over_on_win_example": "（例：+20%に設定 → $10から開始 → 勝利 → 次のベット $12）",
-        "pop_over_on_loss_reset": "リセット：負けた後に最初の賭け金に戻ります。",
-        "pop_over_on_loss_increase_by": "増額：負けた際に、設定された割合でベット額を上げます。",
+        "pop_over_on_loss_reset": "負けた後は、最初の賭け金に戻してください。",
+        "pop_over_on_loss_increase_by": "負けた場合、設定された割合でベットを上げます。",
         "pop_over_on_loss_example": "（例：+50%に設定 → $10から開始 → 負け → 次のベット $15）。",
-        "hot_key_enabled": "ホットキー有効",
-        "auto_bet_warning": "スクリプトの使用は任意であり、プレイヤーは付随するリスクについて全責任を負う必要があります。 当社はこれに関して一切責任を負いません。"
+        "auto_bet_warning": "Auto Betを有効にすると、プレイヤーはその使用に関するすべての責任を負い、ゲームプロバイダーはいかなる結果に対しても責任を負いません。",
+        "hot_key_enable": "ホットキー有効",
+        "pop_over_demo_mode": "ベット 0 でデモモードが有効になります",
+        "hot_key_disable": "ホットキーは無効です",
+        "balance": "残高",
+        "num_of_auto_play": "オートプレイ回数:"
     },
     "CoinMining": {
         "auto_cash_out_in": "オートキャッシュアウト倍率",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "簡単",
         "difficulty_hard": "難しい",
         "difficulty_hardcore": "Hardcore",
-        "difficulty_medium": "中"
+        "difficulty_medium": "中",
+        "num_of_lanes": "レーン数"
     }
 };
 

@@ -22,6 +22,7 @@ import Observer from "observer";
 import { AudioIds } from "../../../../audios/AudioIds";
 import { changeCursorPointer } from "../../../utils";
 import { ChickenController } from "../../chicken/chicken";
+import { AutoPlayHandler, AutoPlayStore } from "../../play-mode/auto-play";
 import { BetHandler } from "../bet-handler";
 import { BetStore, BetUIState } from "../bet-store";
 
@@ -57,6 +58,7 @@ export default class PlaceBetButton extends ObserverComponent {
     private isStateBet = false;
 
     private isFinishedPlayAnim = true;
+    private isAutoPlay = false;
 
     private uiState: BetUIState = BetUIState.Start;
 
@@ -65,6 +67,10 @@ export default class PlaceBetButton extends ObserverComponent {
         this.uiState = uiState;
     }
 
+    @render(AutoPlayStore, (store) => store.isAutoplay)
+    setIsAutoPlay(isAutoPlay: boolean) {
+        this.isAutoPlay = isAutoPlay;
+    }
     onLoad() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         super.onLoad();
@@ -120,7 +126,20 @@ export default class PlaceBetButton extends ObserverComponent {
             await AnimationUtils.delayTime(2);
             this.isFinishedPlayAnim = true;
             this.setActiveBetButtons(true);
+            // this.checkPlaceBetNextRound(multiplier);
         } catch (e) {}
+    }
+
+    @handle(AutoPlayHandler, (handle, multiplier: number) => handle.checkSpinNextRound(multiplier))
+    checkPlaceBetNextRound(multiplier: number) {
+        return multiplier;
+    }
+
+    @render(AutoPlayStore, (store) => store.triggerBet)
+    renderTriggerBet(triggerBet: boolean) {
+        if (triggerBet) {
+            this.onClickSpace();
+        }
     }
 
     @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
@@ -163,14 +182,36 @@ export default class PlaceBetButton extends ObserverComponent {
 
     @render(BetStore, (store) => store.uiState)
     updateUIState(uiState: BetUIState) {
+        this.isStateBet = uiState > BetUIState.Start && uiState !== BetUIState.Settle;
+
+        if (this.isAutoPlay) {
+            if (uiState === BetUIState.Started) {
+                this.countDownRoundAutoPlay();
+            }
+            return;
+        }
+
+        this.updateButtonState(uiState);
+    }
+
+    @render(AutoPlayStore, (store) => store.isAutoplay)
+    updateButtonStateByAutoPlay(isAutoPlay: boolean) {
+        if (isAutoPlay) {
+            return;
+        }
+
+        this.updateButtonState(this.uiState);
+    }
+
+    private updateButtonState(uiState: BetUIState) {
         this.startBetButton.active = uiState === BetUIState.Start;
         this.playModeNode.active = uiState === BetUIState.Start;
-
         this.hitStoneButton.active = uiState >= BetUIState.Started;
         this.cashOutButton.active = uiState >= BetUIState.Started;
-
-        this.isStateBet = uiState > BetUIState.Start && uiState !== BetUIState.Settle;
     }
+
+    @handle(AutoPlayHandler, (handle) => handle.countDownRoundAutoPlay())
+    countDownRoundAutoPlay() {}
 
     @render(BetStore, (store) => store.uiState)
     updateButtonInteractable(uiState: BetUIState) {

@@ -603,14 +603,18 @@ export const languages = {
         "hot_key_double_bet": "बेट राशि दोगुनी करें",
         "hot_key_half_bet": "बेट की राशि आधी करें",
         "hot_key_min_bet": "न्यूनतम बेट",
-        "pop_over_on_win_reset": "रीसेट: जीतने के बाद अपनी शुरुआती बेट पर वापस जाएँ।",
-        "pop_over_on_win_increase_by": "Increase by: जीतने पर अपनी बेट को एक निश्चित प्रतिशत से बढ़ाएँ।",
+        "pop_over_on_win_reset": "जीतने के बाद अपनी शुरुआती बेट पर वापस लौटें।",
+        "pop_over_on_win_increase_by": "जीतने पर अपनी बेट को एक निर्धारित प्रतिशत से बढ़ाएँ।",
         "pop_over_on_win_example": "(उदाहरण: +20% सेट करें → $10 से शुरू करें → जीतें → अगला बेट $12)",
-        "pop_over_on_loss_reset": "रीसेट: हारने के बाद अपनी शुरुआती बाजी पर वापस लौटें।",
-        "pop_over_on_loss_increase_by": "वृद्धि करें: हारने पर एक निश्चित प्रतिशत से अपनी शर्त बढ़ाएँ।",
+        "pop_over_on_loss_reset": "हारने के बाद अपनी शुरुआती शर्त पर वापस लौटें।",
+        "pop_over_on_loss_increase_by": "हारने पर एक निश्चित प्रतिशत से अपनी बेट बढ़ाएँ।",
         "pop_over_on_loss_example": "(उदाहरण: +50% सेट करें → $10 से शुरू करें → हारें → अगला दांव $15)।",
-        "hot_key_enabled": "हॉटकी सक्षम की गई हैं",
-        "auto_bet_warning": "स्क्रिप्ट का उपयोग वैकल्पिक है और खिलाड़ियों को किसी भी संबंधित जोखिम के लिए पूरी जिम्मेदारी लेनी होगी। हम इस संबंध में उत्तरदायी नहीं होंगे।"
+        "auto_bet_warning": "Auto Bet को सक्षम करने पर, खिलाड़ी इसके उपयोग के लिए पूरी जिम्मेदारी स्वीकार करते हैं, और गेम प्रदाता किसी भी परिणाम के लिए कोई दायित्व नहीं लेता है।",
+        "hot_key_enable": "हॉटकी सक्षम की गई हैं",
+        "pop_over_demo_mode": "शर्त 0 डेमो मोड को सक्रिय करेगा",
+        "hot_key_disable": "हॉटकी अक्षम की गई",
+        "balance": "बैलेंस",
+        "num_of_auto_play": "ऑटो-प्ले की संख्या:"
     },
     "CoinMining": {
         "header_mining_attempts": "माइनिंग के प्रयास",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "आसान",
         "difficulty_hard": "कठिन",
         "difficulty_hardcore": "कट्टर",
-        "difficulty_medium": "मध्यम"
+        "difficulty_medium": "मध्यम",
+        "num_of_lanes": "लेन की संख्या"
     }
 };
 

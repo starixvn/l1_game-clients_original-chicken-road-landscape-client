@@ -3,6 +3,7 @@ import { _decorator, Label, Node } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig, InstantWinConfigHandler, InstantWinConfigStore } from "../../../game-configs";
+import { AutoPlayStore } from "../auto-play/auto-play-store";
 import { GameModeItem } from "./game-mode-item";
 
 const { ccclass, property } = _decorator;
@@ -87,5 +88,17 @@ export class GameMode extends ObserverComponent {
 
     private closeModeDialog() {
         this.toggleModeDialog(false);
+    }
+
+    @render(AutoPlayStore, (store) => store.isOpenAutoplayPopup)
+    renderClosePopup(isOpenAutoPlayPopup: boolean) {
+        if (!isOpenAutoPlayPopup) {
+            this.toggleModeDialog(false);
+        }
+    }
+
+    @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
+    playSoundClick() {
+        return gc.Audios.AudioIds.CLICK;
     }
 }

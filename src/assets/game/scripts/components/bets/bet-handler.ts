@@ -3,6 +3,7 @@ import inversify from "inversify";
 import { InstantWinConfigStore } from "../../game-configs";
 import { GameServiceMessage } from "../../game-message";
 import { HashHandlers } from "../hash/hash-handlers";
+import { AutoPlayStore } from "../play-mode/auto-play/auto-play-store";
 import { BetStore, BetUIState } from "./bet-store";
 
 const { injectable, inject } = inversify;
@@ -20,6 +21,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     @inject(gc.RoundBasePF.ProvablyFairStore) protected readonly pfStore: gc.RoundBasePF.ProvablyFairStore;
     @inject(HashHandlers) protected readonly hashHandlers: HashHandlers;
     @inject(InstantWinConfigStore) protected readonly instantWinConfigStore: InstantWinConfigStore;
+    @inject(AutoPlayStore) protected readonly autoPlayStore: AutoPlayStore;
 
     private readonly BIG_WIN_MULTIPLIER = 2.0;
     private autoCashOutTimeOut = null;
@@ -113,7 +115,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         }
         this.updateEndBet(endBet);
         if (!this.betsStore.autoCashOutEnable) {
-            this.triggerAutoCashOut();
+            // this.triggerAutoCashOut();
         }
     }
 
@@ -125,7 +127,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         const minMultiplier = this.getMinMultiplier();
         if (multiplier >= minMultiplier) {
             this.betsStore.uiState = multiplier === minMultiplier ? BetUIState.Bet : BetUIState.Mining;
-            this.triggerAutoCashOut();
+            // this.triggerAutoCashOut();
         }
 
         this.updateMultiplier(multiplier);
@@ -170,15 +172,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     completeSettle() {
         this.resetBet();
 
-        if (this.betsStore.isAutoStart) {
-            this.changeStarted();
-        }
-    }
-
-    updateAutoStart() {
-        this.betsStore.isAutoStart = !this.betsStore.isAutoStart;
-
-        if (this.betsStore.isAutoStart && this.betsStore.uiState === BetUIState.Start) {
+        if (this.autoPlayStore.isAutoplay) {
             this.changeStarted();
         }
     }

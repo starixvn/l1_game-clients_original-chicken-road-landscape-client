@@ -309,8 +309,12 @@ export const languages = {
         "pop_over_on_loss_reset": "Return to your starting bet after a loss.",
         "pop_over_on_loss_increase_by": "Raise your bet by a set percentage when you lose.",
         "pop_over_on_loss_example": "(Example: Set +50% → Start with $10 → lose → next bet $15).",
-        "hot_key_enabled": "Hotkeys Enabled",
-        "auto_bet_warning": "Use of script is optional and players must take full responsibility for any attendant risks. We will not be held liable in this regard."
+        "auto_bet_warning": "By enabling Auto Bet, players accept full responsibility for its use, and the game provider assumes no liability for any results.",
+        "hot_key_enable": "Hotkeys Enabled",
+        "pop_over_demo_mode": "Bet 0 will activate Demo Mode",
+        "hot_key_disable": "Hotkeys Disabled",
+        "balance": "Balance",
+        "num_of_auto_play": "Number of Auto-Play"
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto cash out in",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "Easy",
         "difficulty_hard": "Hard",
         "difficulty_hardcore": "Hardcore",
-        "difficulty_medium": "Medium"
+        "difficulty_medium": "Medium",
+        "num_of_lanes": "Number Of Lanes"
     }
 };
 

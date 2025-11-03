@@ -603,14 +603,18 @@ export const languages = {
         "hot_key_double_bet": "배팅 금액 두 배",
         "hot_key_half_bet": "베팅 금액 절반으로 줄이기",
         "hot_key_min_bet": "최소 베팅",
-        "pop_over_on_win_reset": "재설정: 승리 후 시작 베팅으로 돌아갑니다.",
-        "pop_over_on_win_increase_by": "증가: 승리 시 설정된 비율만큼 베팅액을 올립니다.",
+        "pop_over_on_win_reset": "승리 후 시작 베팅으로 돌아갑니다.",
+        "pop_over_on_win_increase_by": "승리 시 설정된 비율만큼 베팅액을 올리십시오.",
         "pop_over_on_win_example": "(예: +20% 설정 → $10에서 시작 → 승리 → 다음 베팅 $12)",
-        "pop_over_on_loss_reset": "리셋: 패배 후 처음 베팅 금액으로 돌아갑니다.",
-        "pop_over_on_loss_increase_by": "증가: 패배 시 설정된 비율만큼 베팅액을 올립니다.",
+        "pop_over_on_loss_reset": "패배 후 시작 베팅으로 돌아갑니다.",
+        "pop_over_on_loss_increase_by": "패배 시 설정된 비율로 베팅액을 올립니다.",
         "pop_over_on_loss_example": "(예: +50% 설정 → $10부터 시작 → 패배 → 다음 베팅 $15).",
-        "hot_key_enabled": "핫키 활성화됨",
-        "auto_bet_warning": "스크립트 사용은 선택 사항이며, 플레이어는 모든 관련 위험에 대한 전적인 책임을 져야 합니다. 당사는 이와 관련하여 책임을 지지 않습니다."
+        "auto_bet_warning": "Auto Bet을 활성화하면 플레이어는 사용에 대한 모든 책임을 지며, 게임 제공자는 결과에 대해 어떠한 책임도 지지 않습니다.",
+        "hot_key_enable": "핫키 활성화됨",
+        "pop_over_demo_mode": "0을 베팅하면 데모 모드가 활성화됩니다.",
+        "hot_key_disable": "단축키 비활성화됨",
+        "balance": "잔액",
+        "num_of_auto_play": "자동 플레이 횟수:"
     },
     "CoinMining": {
         "header_mining_attempts": "채굴 시도",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "쉬움",
         "difficulty_hard": "어려움",
         "difficulty_hardcore": "하드코어",
-        "difficulty_medium": "중간"
+        "difficulty_medium": "중간",
+        "num_of_lanes": "레인 수"
     }
 };
 

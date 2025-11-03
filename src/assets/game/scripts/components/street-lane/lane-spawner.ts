@@ -6,6 +6,7 @@ import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-co
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { ChickenController } from "../chicken/chicken";
+import { AutoPlayHandler } from "../play-mode/auto-play/auto-play-handler";
 import { CrashVehicleController } from "../random-vehicle/crash-vehicle";
 import { RandomVehicleController } from "../random-vehicle/random-vehicle";
 import LandItem from "./land-item";
@@ -264,6 +265,18 @@ export class LaneSpawner extends ObserverComponent {
                 this.updateLandItemBackground();
             } catch (e) {}
         }
+        this.checkPlaceBetNextRound(multiplier);
+    }
+
+    @handle(AutoPlayHandler, (handle, multiplier: number) => handle.checkSpinNextRound(multiplier))
+    async checkPlaceBetNextRound(multiplier: number) {
+        if (multiplier === 0) {
+            await AnimationUtils.delayTime(3);
+        } else {
+            await AnimationUtils.delayTime(2);
+        }
+        console.log("checkPlaceBetNextRound", multiplier);
+        return multiplier;
     }
 
     async showBarrier(landIndex: number) {

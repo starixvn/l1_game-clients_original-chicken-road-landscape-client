@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "44aed122-c273-447d-a1d5-ff7365484d91",
+  "uuid": "40e7ebfb-c230-4f53-a385-e878544c80e9",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "auto-start"
+    "syncNodeName": "auto-play-item"
   }
 }

@@ -1,0 +1,35 @@
+import gc from "@sg/game-client-base";
+import { _decorator, Node } from "cc";
+import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
+import Observer from "observer";
+import { AutoPlayHandler } from "../auto-play-handler";
+import { AutoPlayStore } from "../auto-play-store";
+
+const { ccclass, property } = _decorator;
+const { render, handle } = Observer;
+
+@ccclass
+export default class ButtonPause extends ObserverComponent {
+    @property(Node)
+    btnPause: Node = null;
+
+    onLoad() {
+        super.onLoad();
+        this.btnPause.active = false;
+    }
+
+    @render(AutoPlayStore, (store) => store.isAutoplay)
+    renderButton(enable: boolean) {
+        this.btnPause.active = enable;
+    }
+
+    @handle(AutoPlayHandler, (handle) => handle.clickAutoPlay())
+    onClick() {
+        this.playSoundClick();
+    }
+
+    @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
+    playSoundClick() {
+        return gc.Audios.AudioIds.CLICK;
+    }
+}

@@ -303,14 +303,18 @@ export const languages = {
         "hot_key_double_bet": "雙倍下注金額",
         "hot_key_half_bet": "下注金額減半",
         "hot_key_min_bet": "最小投注",
-        "pop_over_on_win_reset": "重置：贏了之後返回到您的起始投注。",
-        "pop_over_on_win_increase_by": "增加：贏了之後按設定的百分比提高您的投注。",
+        "pop_over_on_win_reset": "贏了之後回到您的起始賭注。",
+        "pop_over_on_win_increase_by": "獲勝時，按設定的百分比提高您的賭注。",
         "pop_over_on_win_example": "（範例：設定 +20% → 從 10 美元開始 → 贏 → 下次投注 12 美元）",
-        "pop_over_on_loss_reset": "重置：在輸掉後返回到您的起始賭注。",
-        "pop_over_on_loss_increase_by": "加碼：在您輸的時候，以固定的百分比提高您的賭注。",
+        "pop_over_on_loss_reset": "輸了之後回到您的起始賭注。",
+        "pop_over_on_loss_increase_by": "失敗時，按設定的百分比提高您的投注額。",
         "pop_over_on_loss_example": "（範例：設定 +50% → 從 $10 開始 → 輸掉 → 下一個投注 $15）。",
-        "hot_key_enabled": "已啟用熱鍵",
-        "auto_bet_warning": "使用腳本是可選的，玩家必須對任何伴隨的風險承擔全部責任。 我們對此概不負責。"
+        "auto_bet_warning": "啟用自動投注後，玩家將對其使用承擔全部責任，遊戲供應商對任何結果不承擔任何責任。",
+        "hot_key_enable": "已啟用熱鍵",
+        "pop_over_demo_mode": "下注 0 將激活演示模式",
+        "hot_key_disable": "熱鍵已停用",
+        "balance": "餘額",
+        "num_of_auto_play": "數量 自動遊戲:"
     },
     "CoinMining": {
         "auto_cash_out_in": "自動提現",
@@ -641,7 +645,8 @@ export const languages = {
         "difficulty_easy": "簡單",
         "difficulty_hard": "困難",
         "difficulty_hardcore": "Hardcore",
-        "difficulty_medium": "中"
+        "difficulty_medium": "中等",
+        "num_of_lanes": "賽道數量"
     }
 };
 
