@@ -20,6 +20,8 @@ export class RandomVehicleController extends ObserverComponent {
     isSpawning = false;
     minSpawnInterval = 2;
     maxSpawnInterval = 5;
+    vehicleAnimationDuration = 2.2; // Track the animation duration
+    vehicleStartTime = 0; // Track when the vehicle started
 
     onLoad() {
         this.resetVehicle();
@@ -29,16 +31,41 @@ export class RandomVehicleController extends ObserverComponent {
 
     async spawnVehicle() {
         this.isPLayingAnimation = true;
+        this.vehicleStartTime = Date.now(); // Record start time
         const randomVehicle = this.vehicles[Math.floor(Math.random() * this.vehicles.length)];
         this.vehicleNode.getComponent(Sprite).spriteFrame = randomVehicle;
         const vehicleStartPos = this.vehicleStartPoint.position;
         this.vehicleNode.active = true;
-        tween(this.vehicleNode)
-            .to(2.2, { position: v3(0, -vehicleStartPos.y, 0) })
-            .start();
-        await AnimationUtils.delayTime(3);
+        
+        // Create a promise to track when the tween finishes
+        await new Promise<void>((resolve) => {
+            tween(this.vehicleNode)
+                .to(this.vehicleAnimationDuration, { position: v3(0, -vehicleStartPos.y, 0) })
+                .call(() => resolve()) // Resolve when tween completes
+                .start();
+        });
+        
+        // Wait a bit more after vehicle reaches the end
+        await AnimationUtils.delayTime(0.8);
         this.resetVehicle();
         this.isPLayingAnimation = false;
+    }
+
+    // Get how much time has elapsed since the vehicle started
+    getElapsedTime(): number {
+        if (!this.isPLayingAnimation) {
+            return 0;
+        }
+        return (Date.now() - this.vehicleStartTime) / 1000;
+    }
+
+    // Get remaining time until vehicle animation completes
+    getRemainingTime(): number {
+        if (!this.isPLayingAnimation) {
+            return 0;
+        }
+        const elapsed = this.getElapsedTime();
+        return Math.max(0, this.vehicleAnimationDuration - elapsed);
     }
 
     resetVehicle() {

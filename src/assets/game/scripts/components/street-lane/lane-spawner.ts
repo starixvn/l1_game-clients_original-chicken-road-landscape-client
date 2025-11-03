@@ -137,7 +137,7 @@ export class LaneSpawner extends ObserverComponent {
         this.currentLaneIndex = -1;
     }
 
-    moveChicken() {
+    async moveChicken() {
         const nextLaneIndex = this.currentLaneIndex + 1;
         if (!this.laneContent.children[nextLaneIndex]) {
             return;
@@ -159,6 +159,17 @@ export class LaneSpawner extends ObserverComponent {
 
         this.updateRandomVehiclePosition(true);
         this.nextStepRandomVehicleCtrl.startRandomSpawning();
+        
+        // Wait for randomVehicleCtrl to finish current spawn before updating position
+        await this.waitForVehicleAndUpdatePosition();
+    }
+
+    async waitForVehicleAndUpdatePosition() {
+        if (this.randomVehicleCtrl.isPLayingAnimation) {
+            const remainingTime = this.randomVehicleCtrl.getRemainingTime();
+            await AnimationUtils.delayTime(remainingTime);
+            this.randomVehicleCtrl.stopSpawnVehicle();
+        }
         this.updateRandomVehiclePosition();
         this.randomVehicleCtrl.startRandomSpawning();
     }
@@ -247,7 +258,10 @@ export class LaneSpawner extends ObserverComponent {
             const nextLane = this.currentLaneIndex + 1;
             const isStepNext = nextLane < this.currentConfig.multiplierSteps.length - 1;
             if (this.nextStepRandomVehicleCtrl.isPLayingAnimation) {
-                await AnimationUtils.delayTime(2);
+                // Get the remaining time for the vehicle animation and wait for it
+                const remainingTime = this.nextStepRandomVehicleCtrl.getRemainingTime();
+                const waitTime = Math.max(remainingTime, 0.1); // Wait at least 0.1s
+                await AnimationUtils.delayTime(waitTime);
                 this.nextStepRandomVehicleCtrl.stopSpawnVehicle();
             }
             if (isStepNext) {
