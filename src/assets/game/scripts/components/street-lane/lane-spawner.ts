@@ -159,7 +159,7 @@ export class LaneSpawner extends ObserverComponent {
 
         this.updateRandomVehiclePosition(true);
         this.nextStepRandomVehicleCtrl.startRandomSpawning();
-        
+
         // Wait for randomVehicleCtrl to finish current spawn before updating position
         await this.waitForVehicleAndUpdatePosition();
     }
@@ -266,7 +266,9 @@ export class LaneSpawner extends ObserverComponent {
             }
             if (isStepNext) {
                 this.moveChicken();
-                this.chickenCtrl.playStepSuccess();
+                this.chickenCtrl.playStepSuccess().then(() => {
+                    this.checkPlaceBetNextRound();
+                });
                 this.showBarrier(nextLane);
             } else {
                 this.moveChicken();
@@ -279,18 +281,11 @@ export class LaneSpawner extends ObserverComponent {
                 this.updateLandItemBackground();
             } catch (e) {}
         }
-        this.checkPlaceBetNextRound(multiplier);
     }
 
-    @handle(AutoPlayHandler, (handle, multiplier: number) => handle.checkSpinNextRound(multiplier))
-    async checkPlaceBetNextRound(multiplier: number) {
-        if (multiplier === 0) {
-            await AnimationUtils.delayTime(3);
-        } else {
-            await AnimationUtils.delayTime(2);
-        }
-        console.log("checkPlaceBetNextRound", multiplier);
-        return multiplier;
+    @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
+    checkPlaceBetNextRound() {
+        console.log("checkPlaceBetNextRound");
     }
 
     async showBarrier(landIndex: number) {

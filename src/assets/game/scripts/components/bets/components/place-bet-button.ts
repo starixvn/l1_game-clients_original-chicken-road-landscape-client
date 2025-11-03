@@ -126,13 +126,7 @@ export default class PlaceBetButton extends ObserverComponent {
             await AnimationUtils.delayTime(2);
             this.isFinishedPlayAnim = true;
             this.setActiveBetButtons(true);
-            // this.checkPlaceBetNextRound(multiplier);
         } catch (e) {}
-    }
-
-    @handle(AutoPlayHandler, (handle, multiplier: number) => handle.checkSpinNextRound(multiplier))
-    checkPlaceBetNextRound(multiplier: number) {
-        return multiplier;
     }
 
     @render(AutoPlayStore, (store) => store.triggerBet)
@@ -187,12 +181,16 @@ export default class PlaceBetButton extends ObserverComponent {
         if (this.isAutoPlay) {
             if (uiState === BetUIState.Started) {
                 this.countDownRoundAutoPlay();
+                this.checkAutoBetNextRound();
             }
             return;
         }
 
         this.updateButtonState(uiState);
     }
+
+    @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
+    checkAutoBetNextRound() {}
 
     @render(AutoPlayStore, (store) => store.isAutoplay)
     updateButtonStateByAutoPlay(isAutoPlay: boolean) {

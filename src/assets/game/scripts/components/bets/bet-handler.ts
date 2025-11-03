@@ -80,8 +80,6 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
 
     changeStarted() {
         this.betsStore.uiState = BetUIState.Started;
-        const minMultiplier = this.getMinMultiplier();
-        this.handleMine(minMultiplier);
     }
 
     resetBet() {

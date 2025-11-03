@@ -4,14 +4,15 @@ import mobx from "mobx";
 import { InstantWinConfigStore } from "../../../game-configs/instant-win-config-store";
 import { BetAmountStore } from "../../bet-amount/bet-amount-store";
 import { BetHandler } from "../../bets/bet-handler";
+import { BetStore } from "../../bets/bet-store";
 import { AutoPlayStore } from "./auto-play-store";
 
 const { injectable, inject } = inversify;
 
 @injectable()
 export class AutoPlayHandler implements gc.Shared.IHandler<number> {
-    // @inject(AutoPlayStore) protected readonly autoPlayStore: AutoPlayStore;
-    @inject(gc.Bet.BetStore) private readonly betStore: gc.Bet.BetStore;
+    @inject(BetStore) private readonly betStore: BetStore;
+    @inject(gc.Bet.BetStore) private readonly baseBetStore: gc.Bet.BetStore;
     @inject(BetAmountStore) protected readonly betAmountStore: BetAmountStore;
     @inject(gc.Notices.NoticeStore) private readonly noticeStore: gc.Notices.NoticeStore;
     @inject(gc.Error.ErrorStore) private readonly errorStore: gc.Error.ErrorStore;
@@ -91,15 +92,15 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     isEnoughMoney() {
-        return this.betStore.amount <= this.betStore.availableBalance;
+        return this.baseBetStore.amount <= this.baseBetStore.availableBalance;
     }
 
     isAmountGreaterMinBet() {
-        return this.betStore.amount >= this.roundStore.minBet;
+        return this.baseBetStore.amount >= this.roundStore.minBet;
     }
 
     private showNotEnoughMoney() {
-        const { freebetEnabled } = this.betStore;
+        const { freebetEnabled } = this.baseBetStore;
         const message = freebetEnabled
             ? gc.Translator.commonTranslate("not_enough_scoin")
             : gc.Translator.commonTranslate("not_enough_money");
@@ -142,24 +143,26 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
         return this.autoPlayStore.isAutoplay && this.autoPlayStore.roundsAutoplay <= 0;
     }
 
-    checkSpinNextRound(multiplier: number) {
+    checkAutoBetNextRound() {
         if (!this.autoPlayStore.isAutoplay) {
             return;
         }
 
-        if (this.isCashOut(multiplier)) {
+        if (this.isCurrentStepCashOut()) {
             // cash out
             this.betHandler.handleCashOut();
             return;
         }
+
         this.handleAutoPlaceBet();
     }
 
-    isCashOut(multiplier) {
+    isCurrentStepCashOut() {
         const cashOutLand = this.autoPlayStore.noOfLanes;
         const cashOutMultiplier = this.autoPlayStore.currentMultiplierConfig.multiplierSteps[cashOutLand - 1];
-        return multiplier === cashOutMultiplier;
+        return this.betStore.multiplier === cashOutMultiplier;
     }
+
     updateNoOfRounds(rounds: number) {
         this.autoPlayStore.selectedRoundOnPopup = rounds;
     }
