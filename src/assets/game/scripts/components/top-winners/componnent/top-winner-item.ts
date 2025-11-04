@@ -20,17 +20,33 @@ export class TopWinnerItem extends Component {
     @property(Label)
     lblWin: Label = null;
 
+    public winnerData: TopWinner = null;
+    private isMainPlayer = false;
 
-
-    private encryptedName(name: string): string {
-        return `${name.substring(0, 1)}***${name.substring(name.length - 3, name.length)}`;
+    private getColor(isMain: boolean) {
+        return new Color(isMain ? "#36DCFF" : "#B3BEC1");
     }
 
-    setData(data: TopWinner, isMainPlayer: boolean) {
-        this.lblName.string = isMainPlayer ? truncatedNickname(data.name, 7) : this.encryptedName(data.name);
-        this.lblName.color = isMainPlayer ? new Color("#FCE966") : new Color("#B3BEC1");
+    private formatName(name: string, isMain: boolean) {
+        return isMain ? name : `${name[0]}***${name.slice(-3)}`;
+    }
+
+    setData(data: TopWinner, isMain: boolean) {
+        this.winnerData = data;
+        this.isMainPlayer = isMain;
+
+        this.lblName.string = this.formatName(data.name, isMain);
+        this.lblName.color = this.getColor(isMain);
+
         this.lblWin.string = FormatUtils.numberWithCommas(data.winningAmount, 2);
         this.lblBet.string = FormatUtils.numberWithCommas(data.amount, 2);
         this.lblMultiplier.string = FormatUtils.numberWithCommas(data.multiplier, 2);
+    }
+
+    setHighlight(isMain: boolean) {
+        if (!this.winnerData || this.isMainPlayer === isMain) { return; }
+        this.isMainPlayer = isMain;
+        this.lblName.string = this.formatName(this.winnerData.name, isMain);
+        this.lblName.color = this.getColor(isMain);
     }
 }

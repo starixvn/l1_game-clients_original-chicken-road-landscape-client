@@ -107,7 +107,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -230.635,
+      "x": -240.635,
       "y": -41.601,
       "z": 0
     },
@@ -148,7 +148,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 110.93359375,
+      "width": 192,
       "height": 47.88
     },
     "_anchorPoint": {
@@ -184,14 +184,14 @@
       "b": 193,
       "a": 255
     },
-    "_string": "Nissan...",
+    "_string": "ColorGame11",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
     "_fontSize": 28,
     "_fontFamily": "Arial",
     "_lineHeight": 38,
-    "_overflow": 0,
+    "_overflow": 2,
     "_enableWrapText": false,
     "_font": {
       "__uuid__": "e3d36477-6fd0-4ee4-b4cc-ed05fa79994a",
@@ -290,7 +290,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -71.101,
+      "x": -46.101,
       "y": -40.525,
       "z": 0
     },
@@ -331,7 +331,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 62.97265625,
+      "width": 171,
       "height": 47.88
     },
     "_anchorPoint": {
@@ -367,14 +367,14 @@
       "b": 193,
       "a": 255
     },
-    "_string": "1234",
+    "_string": "1,000,000.00",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
     "_fontSize": 28,
     "_fontFamily": "Arial",
     "_lineHeight": 38,
-    "_overflow": 0,
+    "_overflow": 2,
     "_enableWrapText": false,
     "_font": {
       "__uuid__": "e3d36477-6fd0-4ee4-b4cc-ed05fa79994a",
@@ -473,7 +473,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 83.915,
+      "x": 95.915,
       "y": -40.525,
       "z": 0
     },
@@ -656,7 +656,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 271.699,
+      "x": 306.699,
       "y": -40.525,
       "z": 0
     },
@@ -697,7 +697,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 62.97265625,
+      "width": 171,
       "height": 47.88
     },
     "_anchorPoint": {
@@ -733,14 +733,14 @@
       "b": 193,
       "a": 255
     },
-    "_string": "1234",
-    "_horizontalAlign": 1,
+    "_string": "1,000,000.00",
+    "_horizontalAlign": 2,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
     "_fontSize": 28,
     "_fontFamily": "Arial",
     "_lineHeight": 38,
-    "_overflow": 0,
+    "_overflow": 2,
     "_enableWrapText": false,
     "_font": {
       "__uuid__": "e3d36477-6fd0-4ee4-b4cc-ed05fa79994a",

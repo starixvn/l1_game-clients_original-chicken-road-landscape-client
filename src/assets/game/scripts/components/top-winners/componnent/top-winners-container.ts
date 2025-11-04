@@ -26,7 +26,27 @@ export class TopWinnersContainer extends ObserverComponent {
     padding = 5;
 
     playerName = "";
+
     items: Node[] = [];
+
+    onLoad() {
+        super.onLoad();
+    }
+
+    @render(gc.Player.MainPlayerStore, (store) => store.name)
+    renderPlayerName(name: string) {
+    this.playerName = name;
+
+    if (this.items?.length) {
+        this.items.forEach((node) => {
+            const item = node.getComponent(TopWinnerItem);
+            if (!item || !item.winnerData) return;
+
+            const isMainPlayer = item.winnerData.name === this.playerName;
+            item.setHighlight(isMainPlayer);
+        });
+    }
+}
 
     @render(TopWinnersStore, (store) => store.winners)
     renderWinners(winners: TopWinner[]) {
@@ -34,11 +54,6 @@ export class TopWinnersContainer extends ObserverComponent {
         this.items = [];
         winners.forEach((winner) => this.addItem(winner, false));
         this.layoutItems();
-    }
-
-    @render(MainPlayerStore, (store) => store.name)
-    renderPlayerName(name: string) {
-        this.playerName = name;
     }
 
     @render(TopWinnersStore, (store) => store.newTopWinner)
@@ -66,6 +81,7 @@ export class TopWinnersContainer extends ObserverComponent {
         const winnerNode = instantiate(this.topWinnerPrefab);
         const topWinnerItem = winnerNode.getComponent(TopWinnerItem);
         const isMainPlayer = winner.name === this.playerName;
+
         topWinnerItem.setData(winner, isMainPlayer);
 
         this.container.insertChild(winnerNode, 0);
