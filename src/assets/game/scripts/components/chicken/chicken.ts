@@ -80,7 +80,6 @@ export class ChickenController extends ObserverComponent {
         this.barrierSpine.node.active = true;
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
         await this.playAnim({ animName: "final" });
-        await AnimationUtils.delayTime(1);
         this.playIdle();
         this.isPlayAnimation = false;
     }

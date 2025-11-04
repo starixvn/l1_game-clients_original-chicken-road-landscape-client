@@ -8,6 +8,7 @@ import GameComponent from "db://shared-components/game/scripts/components/game-c
 import { siteConfigs } from "../../../scripts/site-configs";
 import { AudioIds } from "../../audios/AudioIds";
 import { containerOptions } from "../containerOptions";
+import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../game-configs/instant-win-config-store";
 import { settings } from "../game-settings";
 import "./../../../resources/i18n";
 import { BetHandler } from "./bets/bet-handler";
@@ -43,6 +44,8 @@ export default class Game extends GameComponent {
     override namespace = settings.name;
     protected override enableEventShowHideGame = false;
     override containerOptions = containerOptions;
+    private multiplier = 0;
+    private _currentMultiplierConfig: FixedStepsMultiplierConfig = null;
 
     onLoad() {
         super.onLoad();
@@ -74,7 +77,13 @@ export default class Game extends GameComponent {
         const isBigWin = settleStatus.isBigWin;
 
         const node = this.nodeWinNotice.getChildByName(isBigWin ? "big" : "normal");
-        const duration = isBigWin ? settings.durations.bigWinNotice : settings.durations.normalWinNotice;
+        let duration = isBigWin ? settings.durations.bigWinNotice : settings.durations.normalWinNotice;
+
+        const maxMultiplier = this._currentMultiplierConfig.multiplierSteps.at(-1);
+        if (this.multiplier === maxMultiplier) {
+            duration = settings.durations.winAnimation;
+        }
+
         const winNotice = node.getComponentInChildren(GameWinNotice);
         isBigWin ? this.playSound(AudioIds.BIGWIN) : this.playSound(AudioIds.NORMALWIN);
         winNotice?.show(settleStatus.bet, duration);
@@ -88,6 +97,16 @@ export default class Game extends GameComponent {
         this.scheduleOnce(() => {
             this.completeSettle();
         }, duration);
+    }
+
+    @render(InstantWinConfigStore, (store) => store.currentMultiplierConfig)
+    renderCurrentMultiplierConfig(currentMultiplierConfig: FixedStepsMultiplierConfig) {
+        this._currentMultiplierConfig = currentMultiplierConfig;
+    }
+
+    @render(BetStore, (store) => store.multiplier)
+    renderMultiplier(multiplier: number) {
+        this.multiplier = multiplier;
     }
 
     @handle(BetHandler, (handler) => handler.completeSettle())
