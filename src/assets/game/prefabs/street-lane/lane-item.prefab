@@ -252,9 +252,9 @@
       "r": 34,
       "g": 29,
       "b": 151,
-      "a": 255
+      "a": 163
     },
-    "_outlineWidth": 2,
+    "_outlineWidth": 4,
     "_enableShadow": false,
     "_shadowColor": {
       "__type__": "cc.Color",
@@ -442,7 +442,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 4,
-      "height": 800
+      "height": 1344
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -700,7 +700,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 250,
-      "height": 800
+      "height": 1344
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -797,6 +797,7 @@
       "__id__": 0
     },
     "fileId": "be2fNGbk9PvqxUIETt0Ti8",
+    "instance": null,
     "targetOverrides": []
   }
 ]
