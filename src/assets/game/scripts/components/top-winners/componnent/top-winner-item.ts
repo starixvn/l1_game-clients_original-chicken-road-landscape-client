@@ -1,6 +1,5 @@
 import gc from "@sg/game-client-base";
 import { _decorator, Color, Component, Label } from "cc";
-import { truncatedNickname } from "db://shared-components/shared/utils/utils";
 import { TopWinner } from "../top-winners-store";
 const { ccclass, property } = _decorator;
 

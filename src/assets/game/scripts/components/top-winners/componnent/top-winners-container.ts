@@ -40,7 +40,7 @@ export class TopWinnersContainer extends ObserverComponent {
     if (this.items?.length) {
         this.items.forEach((node) => {
             const item = node.getComponent(TopWinnerItem);
-            if (!item || !item.winnerData) return;
+            if (!item || !item.winnerData) { return; }
 
             const isMainPlayer = item.winnerData.name === this.playerName;
             item.setHighlight(isMainPlayer);
