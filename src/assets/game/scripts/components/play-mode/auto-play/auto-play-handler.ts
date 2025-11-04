@@ -125,7 +125,6 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
         this.autoPlayStore.isAutoplay = true;
         if (this.isValidBet()) {
             this.autoPlaceBet();
-            this.countDownRoundAutoPlay();
         } else {
             this.cancelAutoPlay();
         }

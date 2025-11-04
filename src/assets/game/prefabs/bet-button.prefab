@@ -3448,7 +3448,7 @@
     },
     "component": "",
     "_componentId": "e9408N/76ZD7ouDiMy12FK/",
-    "handler": "onBet",
+    "handler": "onClickStartBet",
     "customEventData": ""
   },
   {
@@ -3688,6 +3688,7 @@
       "__id__": 0
     },
     "fileId": "eduR7uW9BL9IFBdVNJGtec",
+    "instance": null,
     "targetOverrides": []
   }
 ]

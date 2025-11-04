@@ -78,8 +78,12 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         this.betsStore.endBet = endBet;
     }
 
-    changeStarted() {
-        this.betsStore.uiState = BetUIState.Started;
+    setUIAnimatingState() {
+        this.betsStore.uiState = BetUIState.Animating;
+    }
+
+    setUIMiningState() {
+        this.betsStore.uiState = BetUIState.Mining;
     }
 
     resetBet() {
@@ -124,7 +128,6 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
 
         const minMultiplier = this.getMinMultiplier();
         if (multiplier >= minMultiplier) {
-            this.betsStore.uiState = multiplier === minMultiplier ? BetUIState.Bet : BetUIState.Mining;
             // this.triggerAutoCashOut();
         }
 
@@ -169,10 +172,6 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
 
     completeSettle() {
         this.resetBet();
-
-        if (this.autoPlayStore.isAutoplay) {
-            this.changeStarted();
-        }
     }
 
     handleRoundId(roundId: number) {

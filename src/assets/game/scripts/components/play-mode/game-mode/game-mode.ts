@@ -13,6 +13,10 @@ const { render, handle } = Observer;
 export class GameMode extends ObserverComponent {
     @property(Node)
     modeDialog: Node = null;
+    
+    
+    @property(Node)
+    disableNode: Node = null;
 
     @property(Label)
     currentModeLbl: Label = null;
@@ -25,6 +29,7 @@ export class GameMode extends ObserverComponent {
     onLoad() {
         this.modeDialog.active = false;
         this.buttonArrowDown.active = false;
+        this.disableNode.active = false;
         super.onLoad();
     }
 
@@ -95,6 +100,11 @@ export class GameMode extends ObserverComponent {
         if (!isOpenAutoPlayPopup) {
             this.toggleModeDialog(false);
         }
+    }
+
+    @render(AutoPlayStore, (store) => store.isAutoplay)
+    renderDisableNode(isAutoplay: boolean) {
+        this.disableNode.active = isAutoplay;
     }
 
     @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))

@@ -7,6 +7,7 @@ import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { ChickenController } from "../chicken/chicken";
 import { AutoPlayHandler } from "../play-mode/auto-play/auto-play-handler";
+import { AutoPlayStore } from "../play-mode/auto-play/auto-play-store";
 import { CrashVehicleController } from "../random-vehicle/crash-vehicle";
 import { RandomVehicleController } from "../random-vehicle/random-vehicle";
 import LandItem from "./land-item";
@@ -57,6 +58,8 @@ export class LaneSpawner extends ObserverComponent {
     private currentLaneIndex = -1;
     private currentConfig: FixedStepsMultiplierConfig;
 
+    private isAutoPlay = false;
+
     onLoad() {
         super.onLoad();
     }
@@ -67,6 +70,11 @@ export class LaneSpawner extends ObserverComponent {
         if (this.currentConfig) {
             this.renderLane();
         }
+    }
+
+    @render(AutoPlayStore, (store) => store.isAutoplay)
+    setIsAutoPlay(isAutoPlay: boolean) {
+        this.isAutoPlay = isAutoPlay;
     }
 
     renderLane() {
@@ -267,7 +275,10 @@ export class LaneSpawner extends ObserverComponent {
             if (isStepNext) {
                 this.moveChicken();
                 this.chickenCtrl.playStepSuccess().then(() => {
-                    this.checkPlaceBetNextRound();
+                    this.setUIMiningState();
+                    if (this.isAutoPlay) {
+                        this.checkPlaceBetNextRound();
+                    }
                 });
                 this.showBarrier(nextLane);
             } else {
@@ -283,10 +294,11 @@ export class LaneSpawner extends ObserverComponent {
         }
     }
 
+    @handle(BetHandler, (handler) => handler.setUIMiningState())
+    setUIMiningState() {}
+
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
-    checkPlaceBetNextRound() {
-        console.log("checkPlaceBetNextRound");
-    }
+    checkPlaceBetNextRound() {}
 
     async showBarrier(landIndex: number) {
         try {
@@ -339,9 +351,7 @@ export class LaneSpawner extends ObserverComponent {
                 this.crashVehicleCtrl.playVehicle();
                 await this.chickenCtrl.playCrashAtCenter();
             }
-            if (this.chickenCtrl.isPlayAnimation) {
-                return;
-            }
+
             this.reset();
         } catch (e) {}
     }
@@ -350,12 +360,8 @@ export class LaneSpawner extends ObserverComponent {
         this.resetLandItemsBackground();
         this.resetChicken();
         this.scrollView.scrollToLeft(0.2);
-        this.completeSettle();
         this.nextStepRandomVehicleCtrl.stopSpawnVehicle();
     }
-
-    @handle(BetHandler, (handler) => handler.completeSettle())
-    completeSettle() {}
 
     private getStartPosition() {
         const startWorld = this.startPoint.worldPosition;

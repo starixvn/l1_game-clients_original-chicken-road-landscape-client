@@ -1,26 +1,8 @@
 import gc from "@sg/game-client-base";
-import {
-    _decorator,
-    Animation,
-    Button,
-    EventKeyboard,
-    EventTouch,
-    input,
-    Input,
-    Intersection2D,
-    KeyCode,
-    Label,
-    math,
-    Node,
-    PolygonCollider2D,
-    sp,
-    v3,
-} from "cc";
+import { _decorator, Animation, Button, EventKeyboard, input, Input, KeyCode, Label, Node, sp, v3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
-import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { AudioIds } from "../../../../audios/AudioIds";
-import { changeCursorPointer } from "../../../utils";
 import { ChickenController } from "../../chicken/chicken";
 import { AutoPlayHandler, AutoPlayStore } from "../../play-mode/auto-play";
 import { BetHandler } from "../bet-handler";
@@ -57,15 +39,9 @@ export default class PlaceBetButton extends ObserverComponent {
 
     private isStateBet = false;
 
-    private isFinishedPlayAnim = true;
     private isAutoPlay = false;
 
     private uiState: BetUIState = BetUIState.Start;
-
-    @render(BetStore, (store) => store.uiState, { fireImmediately: false })
-    setUIState(uiState: BetUIState) {
-        this.uiState = uiState;
-    }
 
     @render(AutoPlayStore, (store) => store.isAutoplay)
     setIsAutoPlay(isAutoPlay: boolean) {
@@ -83,7 +59,7 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     private onClickSpace() {
-        if (!this.isFinishedPlayAnim) {
+        if (this.uiState === BetUIState.Animating || this.uiState === BetUIState.Settle) {
             return;
         }
         if (this.uiState === BetUIState.Start) {
@@ -94,7 +70,6 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     onDestroy(): void {
-        this.removeEvent();
         super.onDestroy();
     }
 
@@ -106,8 +81,7 @@ export default class PlaceBetButton extends ObserverComponent {
     @handle(BetHandler, (handler) => handler.handle())
     onClickStartBet() {
         this.playSound(AudioIds.BTN_START);
-        this.isFinishedPlayAnim = false;
-        this.setActiveBetButtons(false);
+        this.setUIAnimatingState();
     }
 
     private setActiveBetButtons(active: boolean) {
@@ -118,15 +92,6 @@ export default class PlaceBetButton extends ObserverComponent {
     @handle(BetHandler, (handler) => handler.handleCashOut())
     onClickCashOut() {
         this.playSound(AudioIds.BTN_CASHOUT);
-    }
-
-    @render(BetStore, (store) => store.multiplier)
-    async updateMultiplier(multiplier: number) {
-        try {
-            await AnimationUtils.delayTime(2);
-            this.isFinishedPlayAnim = true;
-            this.setActiveBetButtons(true);
-        } catch (e) {}
     }
 
     @render(AutoPlayStore, (store) => store.triggerBet)
@@ -149,44 +114,55 @@ export default class PlaceBetButton extends ObserverComponent {
     onClickBetButton() {
         if (this.canBet) {
             this.onBet();
-            this.isFinishedPlayAnim = false;
+            this.setUIAnimatingState();
         }
     }
+
+    @handle(BetHandler, (handler) => handler.setUIAnimatingState())
+    setUIAnimatingState() {}
 
     get canBet() {
-        return this.isStateBet && this.isFinishedPlayAnim;
+        return this.isStateBet;
     }
 
-    validTapArea() {
-        if (this.canBet) {
-            changeCursorPointer();
+    getBetUIStateString(uiState: BetUIState) {
+        switch (uiState) {
+            case BetUIState.Start:
+                return "Start";
+            case BetUIState.Mining:
+                return "Mining";
+            case BetUIState.Settle:
+                return "Settle";
+            case BetUIState.Animating:
+                return "Animating";
         }
+        return "Unknown";
     }
-
-    protected touchInPolygon(event: EventTouch, node: Node) {
-        const location = event.getUILocation();
-        const polygon = node.getComponent(PolygonCollider2D).worldPoints;
-        return Intersection2D.pointInPolygon(math.v2(location.x, location.y), polygon);
-    }
-
-    @handle(BetHandler, (handler) => handler.completeSettle())
-    completeSettle() {}
-
-    removeEvent() {}
-
-    @render(BetStore, (store) => store.uiState)
+    @render(BetStore, (store) => store.uiState, { fireImmediately: false })
     updateUIState(uiState: BetUIState) {
-        this.isStateBet = uiState > BetUIState.Start && uiState !== BetUIState.Settle;
+        const currentUIState = this.uiState;
+        this.uiState = uiState;
+        this.isStateBet = uiState === BetUIState.Mining;
+        this.updateButtonInteractable(uiState);
 
         if (this.isAutoPlay) {
-            if (uiState === BetUIState.Started) {
-                this.countDownRoundAutoPlay();
-                this.checkAutoBetNextRound();
-            }
+            this.handleAutoPlay(currentUIState, uiState);
             return;
         }
 
         this.updateButtonState(uiState);
+    }
+
+    private handleAutoPlay(previousUIState: BetUIState, uiState: BetUIState) {
+        if (previousUIState === BetUIState.Start) {
+            this.countDownRoundAutoPlay();
+        }
+
+        if (uiState === BetUIState.Start) {
+            this.scheduleOnce(() => {
+                this.checkAutoBetNextRound();
+            }, 0.1);
+        }
     }
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
@@ -204,20 +180,20 @@ export default class PlaceBetButton extends ObserverComponent {
     private updateButtonState(uiState: BetUIState) {
         this.startBetButton.active = uiState === BetUIState.Start;
         this.playModeNode.active = uiState === BetUIState.Start;
-        this.hitStoneButton.active = uiState >= BetUIState.Started;
-        this.cashOutButton.active = uiState >= BetUIState.Started;
+        this.hitStoneButton.active = uiState > BetUIState.Start;
+        this.cashOutButton.active = uiState > BetUIState.Start;
+        this.setActiveBetButtons(this.isStateBet);
     }
 
     @handle(AutoPlayHandler, (handle) => handle.countDownRoundAutoPlay())
     countDownRoundAutoPlay() {}
 
-    @render(BetStore, (store) => store.uiState)
     updateButtonInteractable(uiState: BetUIState) {
         const buttonCashOut = this.cashOutButton.getComponent(Button);
-        buttonCashOut.interactable = uiState !== BetUIState.Settle && uiState !== BetUIState.Start && uiState !== BetUIState.Started;
+        buttonCashOut.interactable = uiState === BetUIState.Mining;
 
         const hitStoneButton = this.hitStoneButton.getComponent(Button);
-        hitStoneButton.interactable = uiState !== BetUIState.Settle;
+        hitStoneButton.interactable = uiState === BetUIState.Mining;
 
         const animation = this.lblMoney.getComponent(Animation);
         if (animation) {

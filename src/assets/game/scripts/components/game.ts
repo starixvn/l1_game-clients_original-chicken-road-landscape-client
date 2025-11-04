@@ -64,7 +64,10 @@ export default class Game extends GameComponent {
         }
 
         if (!settleStatus.win) {
-            this.shake(this.centerNode, settings.durations.loseNotice);
+            this.scheduleOnce(() => {
+                this.completeSettle();
+            }, settings.durations.crashAnimation);
+
             return;
         }
 
