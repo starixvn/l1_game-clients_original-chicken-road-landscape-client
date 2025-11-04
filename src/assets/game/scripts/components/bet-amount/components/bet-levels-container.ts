@@ -3,6 +3,7 @@ import { _decorator, instantiate, Layout, Node, Prefab, UITransform } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import BetLevelItem from "./bet-level-item";
+import { BetAmountStore } from "../bet-amount-store";
 
 const { Connection } = gc;
 const { ccclass, property } = _decorator;
@@ -63,5 +64,12 @@ export default class BetLevelsContainer extends ObserverComponent {
             const comp = selectedNode.getComponent(BetLevelItem);
             comp.setSelectedNode(true);
         }
+    }
+
+    @render(BetAmountStore, (store) => store.disabledBetAmount)
+    renderDisabledBetAmount(disabledBetAmount: boolean) {
+        this.content.children.forEach((child) => {
+            child.getComponent(BetLevelItem).setDisabledNode(disabledBetAmount);
+        });
     }
 }

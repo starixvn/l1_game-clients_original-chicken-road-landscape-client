@@ -16,6 +16,9 @@ export default class BetLevelItem extends ObserverComponent {
     @property(Node)
     nodeSelectedBg: Node = null;
 
+    @property(Node)
+    nodeDisabledLayer: Node = null;
+
     private currentBetLevel = 0;
 
     @handle(BetAmountHandlers, (handler, amount: number) => handler.updateBetAmount(amount))
@@ -30,5 +33,9 @@ export default class BetLevelItem extends ObserverComponent {
 
     setSelectedNode(isSelected: boolean) {
         this.nodeSelectedBg.active = isSelected;
+    }
+
+    setDisabledNode(isDisabled: boolean) {
+        this.nodeDisabledLayer.active = isDisabled;
     }
 }

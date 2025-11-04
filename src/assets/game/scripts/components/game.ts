@@ -38,9 +38,6 @@ export default class Game extends GameComponent {
     nodeWinNotice: Node = null;
 
     @property(Node)
-    crashedNotice: Node = null;
-
-    @property(Node)
     centerNode: Node = null;
 
     override namespace = settings.name;
@@ -48,7 +45,6 @@ export default class Game extends GameComponent {
     override containerOptions = containerOptions;
 
     onLoad() {
-        this.crashedNotice.active = false;
         super.onLoad();
     }
 
@@ -64,12 +60,10 @@ export default class Game extends GameComponent {
     @render(BetStore, (store) => store.settleStatus)
     renderSettleStatus(settleStatus: SettleStatus) {
         if (!settleStatus || Object.keys(settleStatus).length === 0) {
-            this.crashedNotice.active = false;
             return;
         }
 
         if (!settleStatus.win) {
-            this.crashedNotice.active = true;
             this.shake(this.centerNode, settings.durations.loseNotice);
             return;
         }
