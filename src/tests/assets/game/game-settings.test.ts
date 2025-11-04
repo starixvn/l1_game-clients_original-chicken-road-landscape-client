@@ -25,7 +25,8 @@ describe("settings", () => {
 
                 bigWinNotice: 5,
                 normalWinNotice: 3,
-                loseNotice: 1,
+                crashAnimation: 5,
+                winAnimation: 6,
             },
             numberOfRoundHistory: 11,
             validateBalanceWhenBet: true,
