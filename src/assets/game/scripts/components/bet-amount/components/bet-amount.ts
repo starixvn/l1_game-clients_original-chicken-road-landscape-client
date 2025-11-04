@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Button, Label, Node } from "cc";
+import { _decorator, Button, EditBox, Label, Node, warn } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 
@@ -46,12 +46,50 @@ export default class BetAmount extends ObserverComponent {
     @property(Node)
     nodeBetAmountValue: Node = null;
 
+    @property(EditBox)
+    inputBetAmount: EditBox = null;
+
     private betAmount = 0;
     private betLevels = [];
 
     onLoad() {
+        this.inputBetAmount.node.on(EditBox.EventType.EDITING_DID_ENDED, this.onEditEndBetAmount, this);
+        this.inputBetAmount.node.on(EditBox.EventType.EDITING_DID_BEGAN, this.onEditBegin, this);
+
         super.onLoad();
         this.nodeOverlayBg.active = false;
+    }
+
+    onEditBegin(editBox: EditBox) {
+        const text = editBox.string;
+        const cleanText = text.replace(/,/g, "").replace(/x/g, "");
+        const numValue = Number(cleanText);
+        editBox.string = numValue.toString();
+        editBox.placeholder = numValue.toString();
+    }
+
+    onEditEndBetAmount(editBox: EditBox) {
+        const validValue = this.onEditEnd(editBox, false);
+        let validAmount = Math.min(validValue, this.betLevels.at(-1));
+        validAmount = Math.max(validAmount, this.betLevels.at(0));
+
+        this.updateBetAmount(Number(validAmount));
+        this.setBetAmount(Number(validAmount));
+    }
+
+    onEditEnd(editBox: EditBox, noZero: boolean) {
+        try {
+            let value = Number(editBox.string);
+            if (isNaN(value)) {
+                value = this.betLevels[0];
+            }
+            const valueString = gc.FormatUtils.numberWithCommas(value, 2, noZero);
+            const validValue = valueString.replace(/,/g, "").replace(/x/g, "");
+            return Number(validValue);
+        } catch (error) {
+            warn("input edit box error ----------------- ", editBox.string);
+            return this.betLevels[0];
+        }
     }
 
     @render(InstantWinConfigStore, (store) => store.defaultBetLevel)
@@ -76,6 +114,7 @@ export default class BetAmount extends ObserverComponent {
     setBetAmount(betAmount: number) {
         this.lblBetLevelDefault.string = FormatUtils.numberWithCommas(betAmount, 2);
         this.betAmount = betAmount;
+        this.inputBetAmount.string = betAmount.toString();
     }
 
     @render(BetAmountStore, (store) => store.betLevels)
@@ -136,6 +175,7 @@ export default class BetAmount extends ObserverComponent {
     @render(BetAmountStore, (store) => store.disabledBetAmount)
     disabledBetAmount(disabledBetAmount: boolean) {
         this.nodeDisabledBetAmount.active = disabledBetAmount;
+        this.inputBetAmount.enabled = !disabledBetAmount;
     }
 
     @render(BetAmountStore, (store) => store.isMaxbetLevelValue || store.disabledBetAmount)
@@ -159,11 +199,11 @@ export default class BetAmount extends ObserverComponent {
     }
 
     renderBetValue(betValue: number[]) {
-       this.nodeBetAmountValue.children.forEach((child, index) => {
-           const item = child.getComponent(BetValueItem);
-           if (index < betValue.length) {
-            item.setValue(betValue[index]);
-           }
-       });
+        this.nodeBetAmountValue.children.forEach((child, index) => {
+            const item = child.getComponent(BetValueItem);
+            if (index < betValue.length) {
+                item.setValue(betValue[index]);
+            }
+        });
     }
 }
