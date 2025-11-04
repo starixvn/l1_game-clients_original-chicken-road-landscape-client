@@ -163,6 +163,7 @@ export default class PlaceBetButton extends ObserverComponent {
                 this.checkAutoBetNextRound();
             }, 0.1);
         }
+        this.startBetButton.active = false;
     }
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
