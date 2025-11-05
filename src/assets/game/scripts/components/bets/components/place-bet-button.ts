@@ -40,6 +40,7 @@ export default class PlaceBetButton extends ObserverComponent {
     private isStateBet = false;
 
     private isAutoPlay = false;
+    private roundsAutoPlay = 0;
 
     private uiState: BetUIState = BetUIState.Start;
 
@@ -47,6 +48,12 @@ export default class PlaceBetButton extends ObserverComponent {
     setIsAutoPlay(isAutoPlay: boolean) {
         this.isAutoPlay = isAutoPlay;
     }
+
+    @render(AutoPlayStore, (store) => store.roundsAutoplay)
+    setRoundsAutoPlay(rounds: number) {
+        this.roundsAutoPlay = rounds;
+    }
+
     onLoad() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         super.onLoad();
@@ -159,12 +166,14 @@ export default class PlaceBetButton extends ObserverComponent {
         }
 
         if (uiState === BetUIState.Start) {
-            this.scheduleOnce(() => {
-                this.checkAutoBetNextRound();
-            }, 0.1);
+            const handle = this.roundsAutoPlay > 0 ? this.checkAutoBetNextRound : this.cancelAutoPlay;
+            this.scheduleOnce(() => handle(), 0.1);
         }
         this.startBetButton.active = false;
     }
+
+    @handle(AutoPlayHandler, (handle) => handle.cancelAutoPlay())
+    cancelAutoPlay() {}
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
     checkAutoBetNextRound() {}

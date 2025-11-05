@@ -23,6 +23,9 @@ export default class ButtonCountDown extends ObserverComponent {
 
     @render(AutoPlayStore, (store) => store.roundsAutoplay)
     renderCountdown(countdown: number) {
+        if (countdown < 0) {
+            return;
+        }
         this.lblCountdown.string = countdown.toString();
     }
 

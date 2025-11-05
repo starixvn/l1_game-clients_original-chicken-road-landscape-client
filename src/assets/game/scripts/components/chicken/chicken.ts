@@ -75,7 +75,6 @@ export class ChickenController extends ObserverComponent {
         if (this.barrierSpine.node.active) {
             this.barrierSpine.node.active = false;
         }
-        console.log("playStepSuccessAtLastLane");
         await this.playAnim({ animName: "moving" });
         this.barrierSpine.node.active = true;
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
@@ -85,7 +84,6 @@ export class ChickenController extends ObserverComponent {
     }
 
     async playStepSuccess() {
-        console.log("playStepSuccess");
         await this.playAnim({ animName: "moving" });
         this.barrierSpine.node.active = true;
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
@@ -98,7 +96,6 @@ export class ChickenController extends ObserverComponent {
         if (this.barrierSpine.node.active) {
             this.barrierSpine.node.active = false;
         }
-        console.log("playStepFail");
         await this.playAnim({ animName: "moving" });
         await this.playAnim({ animName: "crash" });
     }
