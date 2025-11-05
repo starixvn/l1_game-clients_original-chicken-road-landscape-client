@@ -23,10 +23,12 @@ describe("settings", () => {
                 generatingResult: 0,
                 startRound: 1,
 
+                stepAnimation: 1,
+                winAnimation: 1,
                 bigWinNotice: 5,
                 normalWinNotice: 3,
                 crashAnimation: 5,
-                winAnimation: 7,
+                winAllStepAnimation: 6,
             },
             numberOfRoundHistory: 11,
             validateBalanceWhenBet: true,

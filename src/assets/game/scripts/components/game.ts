@@ -63,6 +63,7 @@ export default class Game extends GameComponent {
 
     @render(BetStore, (store) => store.settleStatus)
     async renderSettleStatus(settleStatus: SettleStatus) {
+        const { bigWinNotice, normalWinNotice, crashAnimation, winAnimation, stepAnimation, winAllStepAnimation } = settings.durations;
         if (!settleStatus || Object.keys(settleStatus).length === 0) {
             return;
         }
@@ -70,7 +71,7 @@ export default class Game extends GameComponent {
         if (!settleStatus.win) {
             this.scheduleOnce(() => {
                 this.completeSettle();
-            }, settings.durations.crashAnimation);
+            }, crashAnimation);
 
             return;
         }
@@ -78,20 +79,20 @@ export default class Game extends GameComponent {
         const isBigWin = settleStatus.isBigWin;
 
         const node = this.nodeWinNotice.getChildByName(isBigWin ? "big" : "normal");
-        let duration = isBigWin ? settings.durations.bigWinNotice : settings.durations.normalWinNotice;
+        let duration = isBigWin ? bigWinNotice : normalWinNotice;
 
         const maxMultiplier = this._currentMultiplierConfig.multiplierSteps.at(-1);
         const isWinAllStep = this.multiplier === maxMultiplier;
         if (isWinAllStep) {
-            duration = settings.durations.winAnimation;
+            duration = winAllStepAnimation;
         }
 
         const winNotice = node.getComponentInChildren(GameWinNotice);
         isBigWin ? this.playSound(AudioIds.BIGWIN) : this.playSound(AudioIds.NORMALWIN);
         let showWinNoticeDuration = duration;
         if (isWinAllStep) {
-            const delayShowWinDuration = 2;
-            duration = settings.durations.winAnimation - delayShowWinDuration;
+            const delayShowWinDuration = winAnimation + stepAnimation;
+            showWinNoticeDuration = winAllStepAnimation - delayShowWinDuration;
             await AnimationUtils.delayTime(delayShowWinDuration);
         }
         winNotice?.show(settleStatus.bet, showWinNoticeDuration);

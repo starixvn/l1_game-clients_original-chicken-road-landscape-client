@@ -5,6 +5,7 @@ import { ObserverComponent } from "db://shared-components/shared/common-componen
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { AudioIds } from "../../../audios/AudioIds";
+import { settings } from "../../game-settings";
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
@@ -17,7 +18,6 @@ export class ChickenController extends ObserverComponent {
     barrierSpine: sp.Skeleton = null;
 
     private startPos: Vec3 = v3(0, 0, 0);
-    isPlayAnimation = false;
 
     @property(Node)
     vehicleNode: Node = null;
@@ -70,8 +70,6 @@ export class ChickenController extends ObserverComponent {
     }
 
     async playStepSuccessAtLastLane() {
-        this.isPlayAnimation = true;
-
         if (this.barrierSpine.node.active) {
             this.barrierSpine.node.active = false;
         }
@@ -80,7 +78,6 @@ export class ChickenController extends ObserverComponent {
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
         await this.playAnim({ animName: "final" });
         this.playIdle();
-        this.isPlayAnimation = false;
     }
 
     async playStepSuccess() {
@@ -110,15 +107,9 @@ export class ChickenController extends ObserverComponent {
 
     /** Gọi khi crash → anim + move vào giữa scene + reset */
     async playCrashAtCenter() {
-        if (this.isPlayAnimation) {
-            return;
-        }
-        this.isPlayAnimation = true;
-
         this.playSound(AudioIds.CAR_HIT);
         this.playStepFail();
-        await AnimationUtils.delayTime(5);
-        this.isPlayAnimation = false;
+        await AnimationUtils.delayTime(settings.durations.crashAnimation);
     }
 
     hideBarrier() {

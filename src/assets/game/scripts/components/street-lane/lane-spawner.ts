@@ -3,6 +3,7 @@ import { ObserverComponent } from "db://shared-components/shared/common-componen
 import { AnimationUtils } from "db://shared-components/shared/utils/utils";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
+import { settings } from "../../game-settings";
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { ChickenController } from "../chicken/chicken";
@@ -263,38 +264,37 @@ export class LaneSpawner extends ObserverComponent {
         if (!this.chickenCtrl) {
             return;
         }
-
-        const minMultiplier = this.currentConfig.multiplierSteps[0];
-        if (multiplier >= minMultiplier) {
-            const nextLane = this.currentLaneIndex + 1;
-            const isStepNext = nextLane < this.currentConfig.multiplierSteps.length - 1;
-            if (this.nextStepRandomVehicleCtrl.isPLayingAnimation) {
-                // Get the remaining time for the vehicle animation and wait for it
-                const remainingTime = this.nextStepRandomVehicleCtrl.getRemainingTime();
-                const waitTime = Math.max(remainingTime, 0.1); // Wait at least 0.1s
-                await AnimationUtils.delayTime(waitTime);
-                this.nextStepRandomVehicleCtrl.stopSpawnVehicle();
+        try {
+            const minMultiplier = this.currentConfig.multiplierSteps[0];
+            if (multiplier >= minMultiplier) {
+                const nextLane = this.currentLaneIndex + 1;
+                const isStepNext = nextLane < this.currentConfig.multiplierSteps.length - 1;
+                if (this.nextStepRandomVehicleCtrl.isPLayingAnimation) {
+                    // Get the remaining time for the vehicle animation and wait for it
+                    const remainingTime = this.nextStepRandomVehicleCtrl.getRemainingTime();
+                    const waitTime = Math.max(remainingTime, 0.1); // Wait at least 0.1s
+                    await AnimationUtils.delayTime(waitTime);
+                    this.nextStepRandomVehicleCtrl.stopSpawnVehicle();
+                }
+                if (isStepNext) {
+                    this.moveChicken();
+                    this.chickenCtrl.playStepSuccess().then(() => {
+                        this.setUIMiningState();
+                        if (this.isAutoPlay) {
+                            this.checkPlaceBetNextRound();
+                        }
+                        this.updateLandItemBackground();
+                        this.showBarrier(nextLane);
+                    });
+                } else {
+                    this.moveChicken(true);
+                    AnimationUtils.delayTime(settings.durations.stepAnimation).then(() => {
+                        this.updateLandItemBackground();
+                    });
+                    this.chickenCtrl.playStepSuccessAtLastLane();
+                }
             }
-            if (isStepNext) {
-                this.moveChicken();
-                this.chickenCtrl.playStepSuccess().then(() => {
-                    this.setUIMiningState();
-                    if (this.isAutoPlay) {
-                        this.checkPlaceBetNextRound();
-                    }
-                });
-                this.showBarrier(nextLane);
-            } else {
-                this.moveChicken(true);
-                await this.chickenCtrl.playStepSuccessAtLastLane();
-
-                this.reset();
-            }
-            try {
-                await AnimationUtils.delayTime(1);
-                this.updateLandItemBackground();
-            } catch (e) {}
-        }
+        } catch (e) {}
     }
 
     @handle(BetHandler, (handler) => handler.setUIMiningState())
@@ -305,7 +305,6 @@ export class LaneSpawner extends ObserverComponent {
 
     async showBarrier(landIndex: number) {
         try {
-            await AnimationUtils.delayTime(2);
             const landItem = this.laneContent.children[landIndex];
             if (landItem) {
                 const landItemComponent = landItem.getComponent(LandItem);
@@ -339,6 +338,7 @@ export class LaneSpawner extends ObserverComponent {
     updateUIState(uiState: BetUIState) {
         if (uiState === BetUIState.Start) {
             this.currentLaneIndex = -1;
+            this.reset();
         }
     }
 
@@ -354,10 +354,6 @@ export class LaneSpawner extends ObserverComponent {
                 this.crashVehicleCtrl.playVehicle();
                 await this.chickenCtrl.playCrashAtCenter();
             }
-            if (this.chickenCtrl.isPlayAnimation) {
-                return;
-            }
-            this.reset();
         } catch (e) {}
     }
 
