@@ -314,7 +314,8 @@ export const languages = {
         "pop_over_demo_mode": "Cược 0 sẽ kích hoạt chế độ chơi thử",
         "hot_key_disable": "Đã tắt phím tắt",
         "balance": "Số Dư",
-        "num_of_auto_play": "Chọn Số Lượt Chơi"
+        "num_of_auto_play": "Chọn Số Lượt Chơi",
+        "big_wins": "Thắng Lớn"
     },
     "CoinMining": {
         "auto_cash_out_in": "Tự động rút tiền sau",
@@ -646,7 +647,7 @@ export const languages = {
         "difficulty_hard": "Khó",
         "difficulty_hardcore": "Mạo Hiểm",
         "difficulty_medium": "Trung Bình",
-        "num_of_lanes": "Số Làn"
+        "num_of_lanes": "Số Làn Đường"
     }
 };
 

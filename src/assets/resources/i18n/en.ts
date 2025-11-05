@@ -314,7 +314,8 @@ export const languages = {
         "pop_over_demo_mode": "Bet 0 will activate Demo Mode",
         "hot_key_disable": "Hotkeys Disabled",
         "balance": "Balance",
-        "num_of_auto_play": "Number of Auto-Play"
+        "num_of_auto_play": "Number of Auto-Play",
+        "big_wins": "Big Wins"
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto cash out in",

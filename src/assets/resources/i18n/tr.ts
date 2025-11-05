@@ -561,7 +561,7 @@ export const languages = {
         "label_custom_rounds": "Özel tur sayısı",
         "scoreboard_odd": "O",
         "scoreboard_even": "E",
-        "tooltip_double": "Önceki Bahsi İkiye Katla",
+        "tooltip_double": "Çiftli",
         "tooltip_sound": "Ses",
         "tooltip_guide": "Oyun Kuralları",
         "tooltip_fairness": "Adillik",
@@ -614,7 +614,8 @@ export const languages = {
         "pop_over_demo_mode": "0 Bahsi Demo Modunu etkinleştirecektir",
         "hot_key_disable": "Kısayol Tuşları Devre Dışı",
         "balance": "BAKİYE",
-        "num_of_auto_play": "Otomatik Oynatma Sayısı:"
+        "num_of_auto_play": "Otomatik Oynatma Sayısı:",
+        "big_wins": "Büyük Kazanır"
     },
     "CoinMining": {
         "header_mining_attempts": "Madencilik Denemeleri",

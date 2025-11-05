@@ -261,7 +261,7 @@ export const languages = {
         "label_custom_rounds": "Número de rondas personalizado",
         "scoreboard_odd": "I",
         "scoreboard_even": "P",
-        "tooltip_double": "Doblar la apuesta anterior",
+        "tooltip_double": "Doble",
         "tooltip_sound": "Sonido",
         "tooltip_guide": "Guías de Juego",
         "tooltip_fairness": "Equidad",
@@ -314,7 +314,8 @@ export const languages = {
         "pop_over_demo_mode": "Apostar 0 activará el modo Demo",
         "hot_key_disable": "Teclas de acceso rápido deshabilitadas",
         "balance": "SALDO",
-        "num_of_auto_play": "Número de giros automáticos:"
+        "num_of_auto_play": "Número de giros automáticos:",
+        "big_wins": "Gana la Grande"
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto retiro en",

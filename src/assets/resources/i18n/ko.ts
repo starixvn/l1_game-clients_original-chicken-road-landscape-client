@@ -561,7 +561,7 @@ export const languages = {
         "label_custom_rounds": "라운드 수 사용자 지정",
         "scoreboard_odd": "O",
         "scoreboard_even": "E",
-        "tooltip_double": "이전 베팅 두 배",
+        "tooltip_double": "더블",
         "tooltip_sound": "사운드",
         "tooltip_guide": "게임 가이드",
         "tooltip_fairness": "공정성",
@@ -614,7 +614,8 @@ export const languages = {
         "pop_over_demo_mode": "0을 베팅하면 데모 모드가 활성화됩니다.",
         "hot_key_disable": "단축키 비활성화됨",
         "balance": "잔액",
-        "num_of_auto_play": "자동 플레이 횟수:"
+        "num_of_auto_play": "자동 플레이 횟수:",
+        "big_wins": "빅 승"
     },
     "CoinMining": {
         "header_mining_attempts": "채굴 시도",

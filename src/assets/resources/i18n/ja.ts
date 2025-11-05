@@ -261,7 +261,7 @@ export const languages = {
         "label_custom_rounds": "カスタムラウンド数",
         "scoreboard_odd": "奇",
         "scoreboard_even": "終",
-        "tooltip_double": "前のベットを倍にする",
+        "tooltip_double": "ダブル",
         "tooltip_sound": "サウンド",
         "tooltip_guide": "ゲームガイド",
         "tooltip_fairness": "公平性",
@@ -314,7 +314,8 @@ export const languages = {
         "pop_over_demo_mode": "ベット 0 でデモモードが有効になります",
         "hot_key_disable": "ホットキーは無効です",
         "balance": "残高",
-        "num_of_auto_play": "オートプレイ回数:"
+        "num_of_auto_play": "オートプレイ回数:",
+        "big_wins": "大が勝ち"
     },
     "CoinMining": {
         "auto_cash_out_in": "オートキャッシュアウト倍率",

@@ -261,7 +261,7 @@ export const languages = {
         "label_custom_rounds": "自定义回合数",
         "scoreboard_odd": "单",
         "scoreboard_even": "双",
-        "tooltip_double": "双倍之前的投注",
+        "tooltip_double": "双倍",
         "tooltip_sound": "声音",
         "tooltip_guide": "游戏指南",
         "tooltip_fairness": "公平",
@@ -314,7 +314,8 @@ export const languages = {
         "pop_over_demo_mode": "下注 0 将激活演示模式",
         "hot_key_disable": "热键已禁用",
         "balance": "余额",
-        "num_of_auto_play": "数量 自动游戏:"
+        "num_of_auto_play": "数量 自动游戏:",
+        "big_wins": "大赢"
     },
     "CoinMining": {
         "auto_cash_out_in": "自动提现",

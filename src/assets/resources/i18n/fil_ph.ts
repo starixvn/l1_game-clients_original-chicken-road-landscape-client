@@ -561,7 +561,7 @@ export const languages = {
         "label_custom_rounds": "Pasadyang bilang ng mga round",
         "scoreboard_odd": "O",
         "scoreboard_even": "E",
-        "tooltip_double": "Dobleng Nakaraang Bet",
+        "tooltip_double": "Doble",
         "tooltip_sound": "Tunog",
         "tooltip_guide": "Gabay sa Laro",
         "tooltip_fairness": "Fairness",
@@ -614,7 +614,8 @@ export const languages = {
         "pop_over_demo_mode": "Ang pagtaya ng 0 ay magpapagana sa Demo Mode",
         "hot_key_disable": "Hindi Pinagana ang mga Hotkey",
         "balance": "BALANCE",
-        "num_of_auto_play": "Bilang ng Auto-Play:"
+        "num_of_auto_play": "Bilang ng Auto-Play:",
+        "big_wins": "Big Wins"
     },
     "CoinMining": {
         "header_mining_attempts": "Mining Attempts",

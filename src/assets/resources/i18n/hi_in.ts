@@ -614,7 +614,8 @@ export const languages = {
         "pop_over_demo_mode": "शर्त 0 डेमो मोड को सक्रिय करेगा",
         "hot_key_disable": "हॉटकी अक्षम की गई",
         "balance": "बैलेंस",
-        "num_of_auto_play": "ऑटो-प्ले की संख्या:"
+        "num_of_auto_play": "ऑटो-प्ले की संख्या:",
+        "big_wins": "Big Wins"
     },
     "CoinMining": {
         "header_mining_attempts": "माइनिंग के प्रयास",

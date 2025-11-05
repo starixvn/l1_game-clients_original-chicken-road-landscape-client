@@ -614,7 +614,8 @@ export const languages = {
         "pop_over_demo_mode": "Taruhan 0 akan mengaktifkan Mod Demo",
         "hot_key_disable": "Kekunci Pintas Dilumpuhkan",
         "balance": "BALANCE",
-        "num_of_auto_play": "Bilangan Auto-Main:"
+        "num_of_auto_play": "Bilangan Auto-Main:",
+        "big_wins": "Big Wins"
     },
     "CoinMining": {
         "header_mining_attempts": "Percubaan Perlombongan",

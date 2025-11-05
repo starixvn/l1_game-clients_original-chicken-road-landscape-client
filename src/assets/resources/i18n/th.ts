@@ -261,7 +261,7 @@ export const languages = {
         "label_custom_rounds": "จำนวนรอบที่กำหนดเอง",
         "scoreboard_odd": "คี่",
         "scoreboard_even": "คู่",
-        "tooltip_double": "เดิมพันสองเท่าก่อนหน้า",
+        "tooltip_double": "สองเท่า",
         "tooltip_sound": "เสียง",
         "tooltip_guide": "คู่มือเกม",
         "tooltip_fairness": "ยุติธรรม",
@@ -314,7 +314,8 @@ export const languages = {
         "pop_over_demo_mode": "เดิมพัน 0 จะเปิดใช้งานโหมดทดลองเล่น",
         "hot_key_disable": "ปิดใช้งานปุ่มลัด",
         "balance": "ยอดคงเหลือ",
-        "num_of_auto_play": "จำนวนการ เล่นอัตโนมัติ:"
+        "num_of_auto_play": "จำนวนการ เล่นอัตโนมัติ:",
+        "big_wins": "ชนะรางวัลใหญ่"
     },
     "CoinMining": {
         "auto_cash_out_in": "ถอนเงินอัตโนมัติใน",

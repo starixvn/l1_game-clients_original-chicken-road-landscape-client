@@ -561,7 +561,7 @@ export const languages = {
         "label_custom_rounds": "Número personalizado de rodadas",
         "scoreboard_odd": "O",
         "scoreboard_even": "E",
-        "tooltip_double": "Dobrar Aposta Anterior",
+        "tooltip_double": "Dupla",
         "tooltip_sound": "Som",
         "tooltip_guide": "Regras do Jogo",
         "tooltip_fairness": "Justeza",
@@ -614,7 +614,8 @@ export const languages = {
         "pop_over_demo_mode": "A aposta 0 ativará o Modo Demo",
         "hot_key_disable": "Teclas de atalho desativadas",
         "balance": "SALDO",
-        "num_of_auto_play": "Número de Jogadas Automáticas:"
+        "num_of_auto_play": "Número de Jogadas Automáticas:",
+        "big_wins": "Grandes vitórias"
     },
     "CoinMining": {
         "header_mining_attempts": "Tentativas de Mineração",

@@ -261,7 +261,7 @@ export const languages = {
         "label_custom_rounds": "自訂回合數",
         "scoreboard_odd": "單",
         "scoreboard_even": "雙",
-        "tooltip_double": "雙倍先前的投注",
+        "tooltip_double": "雙倍",
         "tooltip_sound": "音效",
         "tooltip_guide": "遊戲指南",
         "tooltip_fairness": "公平",
@@ -314,7 +314,8 @@ export const languages = {
         "pop_over_demo_mode": "下注 0 將激活演示模式",
         "hot_key_disable": "熱鍵已停用",
         "balance": "餘額",
-        "num_of_auto_play": "數量 自動遊戲:"
+        "num_of_auto_play": "數量 自動遊戲:",
+        "big_wins": "大贏"
     },
     "CoinMining": {
         "auto_cash_out_in": "自動提現",

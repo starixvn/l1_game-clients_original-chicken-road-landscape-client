@@ -261,7 +261,7 @@ export const languages = {
         "label_custom_rounds": "Jumlah ronde khusus",
         "scoreboard_odd": "GE",
         "scoreboard_even": "GE",
-        "tooltip_double": "Gandakan Taruhan Sebelumnya",
+        "tooltip_double": "DOUBLE",
         "tooltip_sound": "Suara",
         "tooltip_guide": "Panduan Permainan",
         "tooltip_fairness": "adil",
@@ -314,7 +314,8 @@ export const languages = {
         "pop_over_demo_mode": "Taruhan 0 akan mengaktifkan Mode Demo",
         "hot_key_disable": "Tombol Pintas Dinonaktifkan",
         "balance": "saldo ",
-        "num_of_auto_play": "Jumlah Auto-Play:"
+        "num_of_auto_play": "Jumlah Auto-Play:",
+        "big_wins": "Kemenangan Besar"
     },
     "CoinMining": {
         "auto_cash_out_in": "Pencairan otomatis masuk",
