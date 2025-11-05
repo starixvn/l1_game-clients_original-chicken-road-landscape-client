@@ -25,7 +25,7 @@ export class LedStepsContainer extends ObserverComponent {
     @render(InstantWinConfigStore, (store) => store.currentMultiplierConfig, { fireImmediately: false })
     setMultiplierConfig(currentMultiplierConfig: FixedStepsMultiplierConfig) {
         this.currentConfig = currentMultiplierConfig;
-        if (this.currentConfig) {
+        if (this.currentConfig.multiplierSteps && this.currentConfig.multiplierSteps.length > 0) {
             this.renderLedSteps();
         }
     }
