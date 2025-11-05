@@ -5,6 +5,7 @@ import Observer from "observer";
 
 import { BalanceEffectHandlers } from "db://shared-components/game/balance-effect/scripts/handlers/balance-effect-handlers";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
+import { AnimationUtils } from "db://shared-components/shared/utils/utils";
 import { siteConfigs } from "../../../scripts/site-configs";
 import { AudioIds } from "../../audios/AudioIds";
 import { containerOptions } from "../containerOptions";
@@ -61,7 +62,7 @@ export default class Game extends GameComponent {
     }
 
     @render(BetStore, (store) => store.settleStatus)
-    renderSettleStatus(settleStatus: SettleStatus) {
+    async renderSettleStatus(settleStatus: SettleStatus) {
         if (!settleStatus || Object.keys(settleStatus).length === 0) {
             return;
         }
@@ -80,13 +81,20 @@ export default class Game extends GameComponent {
         let duration = isBigWin ? settings.durations.bigWinNotice : settings.durations.normalWinNotice;
 
         const maxMultiplier = this._currentMultiplierConfig.multiplierSteps.at(-1);
-        if (this.multiplier === maxMultiplier) {
+        const isWinAllStep = this.multiplier === maxMultiplier;
+        if (isWinAllStep) {
             duration = settings.durations.winAnimation;
         }
 
         const winNotice = node.getComponentInChildren(GameWinNotice);
         isBigWin ? this.playSound(AudioIds.BIGWIN) : this.playSound(AudioIds.NORMALWIN);
-        winNotice?.show(settleStatus.bet, duration);
+        let showWinNoticeDuration = duration;
+        if (isWinAllStep) {
+            const delayShowWinDuration = 2;
+            duration = settings.durations.winAnimation - delayShowWinDuration;
+            await AnimationUtils.delayTime(delayShowWinDuration);
+        }
+        winNotice?.show(settleStatus.bet, showWinNoticeDuration);
 
         this.mainPlayerIncreaseBalance(settleStatus.bet);
         this.mainPlayerPlayWinningEffect();
