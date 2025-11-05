@@ -315,7 +315,8 @@ export const languages = {
         "hot_key_disable": "Đã tắt phím tắt",
         "balance": "Số Dư",
         "num_of_auto_play": "Chọn Số Lượt Chơi",
-        "big_wins": "Thắng Lớn"
+        "big_wins": "Thắng Lớn",
+        "turn_based_pf_settings_para_1": "Kết quả cuối cùng được xác định dựa trên sự kết hợp giữa Server Seed và Client Seed."
     },
     "CoinMining": {
         "auto_cash_out_in": "Tự động rút tiền sau",

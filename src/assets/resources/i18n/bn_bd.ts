@@ -615,7 +615,8 @@ export const languages = {
         "hot_key_disable": "হটকী নিষ্ক্রিয় করা হয়েছে",
         "balance": "ব্যালেন্স",
         "num_of_auto_play": "অটো-প্লে সংখ্যা:",
-        "big_wins": "Big Wins"
+        "big_wins": "Big Wins",
+        "turn_based_pf_settings_para_1": "চূড়ান্ত ফলাফল সার্ভার Seed এবং ক্লায়েন্ট Seed এর সংমিশ্রণে নির্ধারিত হয়।"
     },
     "CoinMining": {
         "header_mining_attempts": "খনন প্রচেষ্টা",

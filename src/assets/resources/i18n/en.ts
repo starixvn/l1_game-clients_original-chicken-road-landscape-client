@@ -315,7 +315,8 @@ export const languages = {
         "hot_key_disable": "Hotkeys Disabled",
         "balance": "Balance",
         "num_of_auto_play": "Number of Auto-Play",
-        "big_wins": "Big Wins"
+        "big_wins": "Big Wins",
+        "turn_based_pf_settings_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed."
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto cash out in",

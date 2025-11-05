@@ -187,7 +187,7 @@ export const languages = {
         "pf_settings_para_1": "最終結果は、サーバーシードとラウンド最初の5人のプレイヤーのクライアントシードの組み合わせによって決定されます。",
         "pf_settings_para_2": "プレイヤーはクライアントシード値を変更し、ベット履歴からゲーム結果の公平性を確認できます。",
         "pf_title_new_client_seed": "新規クライアントシード",
-        "pf_title_provably_fair": "プロバブリーフェア",
+        "pf_title_provably_fair": "PROVABLY FAIR",
         "pf_title_provably_fair_settings": "プロバブリーフェア設定",
         "pf_title_verification": "認証",
         "pf_verification_para_1": "最終結果",
@@ -315,7 +315,8 @@ export const languages = {
         "hot_key_disable": "ホットキーは無効です",
         "balance": "残高",
         "num_of_auto_play": "オートプレイ回数:",
-        "big_wins": "大が勝ち"
+        "big_wins": "大が勝ち",
+        "turn_based_pf_settings_para_1": "最終結果は、サーバーシードとクライアントシードの組み合わせによって決定されます。"
     },
     "CoinMining": {
         "auto_cash_out_in": "オートキャッシュアウト倍率",

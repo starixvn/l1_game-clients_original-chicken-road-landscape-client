@@ -428,7 +428,7 @@ export const languages = {
         "pf_button_clear": "Limpar",
         "pf_button_save": "Salvar",
         "pf_client_seed_para_1": "(Não é possível alterar a semente após a aposta ser aceita)",
-        "pf_title_provably_fair": "PROVAVELMENTE JUSTO",
+        "pf_title_provably_fair": "PROVABLY FAIR",
         "pf_header_server_seed_sha256": "Server Seed SHA256",
         "pf_header_server_seed": "Server Seed",
         "pf_client_seed_tooltip_para_1": "A Semente do Cliente é gerada pelo lado do Jogador.",
@@ -615,7 +615,8 @@ export const languages = {
         "hot_key_disable": "Teclas de atalho desativadas",
         "balance": "SALDO",
         "num_of_auto_play": "Número de Jogadas Automáticas:",
-        "big_wins": "Grandes vitórias"
+        "big_wins": "Grandes vitórias",
+        "turn_based_pf_settings_para_1": "O resultado final é determinado por uma combinação da Semente do Servidor e da Semente do Cliente."
     },
     "CoinMining": {
         "header_mining_attempts": "Tentativas de Mineração",

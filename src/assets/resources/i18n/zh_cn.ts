@@ -166,7 +166,7 @@ export const languages = {
         "pf_settings_para_1": "最终结果由本轮前五名投注玩家的服务器种子和客户种子组合决定。",
         "pf_settings_para_2": "玩家可以更改客户种子值并从投注历史记录中检查游戏结果的公平性。",
         "pf_title_new_client_seed": "新客户种子",
-        "pf_title_provably_fair": "可证明公平",
+        "pf_title_provably_fair": "PROVABLY FAIR",
         "pf_title_provably_fair_settings": "可证明公平的环境",
         "pf_title_verification": "确认",
         "pf_verification_para_1": "最后结果",
@@ -315,7 +315,8 @@ export const languages = {
         "hot_key_disable": "热键已禁用",
         "balance": "余额",
         "num_of_auto_play": "数量 自动游戏:",
-        "big_wins": "大赢"
+        "big_wins": "大赢",
+        "turn_based_pf_settings_para_1": "最终结果由服务器种子和客户端种子的组合决定。"
     },
     "CoinMining": {
         "auto_cash_out_in": "自动提现",

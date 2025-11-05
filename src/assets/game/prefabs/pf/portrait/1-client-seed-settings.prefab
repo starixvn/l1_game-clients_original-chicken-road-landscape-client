@@ -1150,7 +1150,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -368.99999999999994,
-      "y": -65.19999999999999,
+      "y": -45.19999999999999,
       "z": 0
     },
     "_lrot": {
@@ -1191,7 +1191,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 737.9999999999999,
-      "height": 130.39999999999998
+      "height": 90.39999999999999
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1226,7 +1226,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "The final result is determined by a combination of the Server Seed and the Client Seed of the first five betting players of the round.",
+    "_string": "The final result is determined by a combination of the Server Seed and the Client Seed.",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -1287,7 +1287,7 @@
     "__prefab": {
       "__id__": 61
     },
-    "key": "Common.pf_settings_para_1",
+    "key": "Common.turn_based_pf_settings_para_1",
     "format": 0,
     "prefix": "",
     "suffix": "",
@@ -1362,8 +1362,6 @@
       "__id__": 0
     },
     "fileId": "34Mef1DpdI9KMipJ+Vyj9g",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -1399,7 +1397,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": -368.99999999999994,
-      "y": -195.59999999999997,
+      "y": -155.59999999999997,
       "z": 0
     },
     "_lrot": {
@@ -1630,7 +1628,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 785.9999999999999,
-      "height": 240.79999999999995
+      "height": 200.79999999999998
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1764,7 +1762,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -525.553,
+      "y": -471.6120000000001,
       "z": 0
     },
     "_lrot": {
@@ -6431,7 +6429,7 @@
     "_target": null,
     "_left": 24,
     "_right": 24,
-    "_top": 350.95300000000003,
+    "_top": 297.01200000000006,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -6498,8 +6496,6 @@
       "__id__": 0
     },
     "fileId": "9dxRjx5/pMPZ2N8hXOoi0M",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -6536,7 +6532,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -739.283,
+      "y": -685.342,
       "z": 0
     },
     "_lrot": {
@@ -9138,8 +9134,6 @@
       "__id__": 0
     },
     "fileId": "f6KFvsqYpBHJnSuTHp1b+e",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {

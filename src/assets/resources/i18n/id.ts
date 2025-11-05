@@ -184,7 +184,7 @@ export const languages = {
         "pf_settings_para_1": "Hasil akhir ditentukan oleh kombinasi Server Seed dan Seed Klien dari lima pemain taruhan pertama pada putaran tersebut.",
         "pf_settings_para_2": "Pemain dapat mengubah nilai Seed Klien dan memeriksa kewajaran hasil permainan dari riwayat Taruhan.",
         "pf_title_new_client_seed": "SEED KLIEN BARU",
-        "pf_title_provably_fair": "Terbukti Adil",
+        "pf_title_provably_fair": "PROVABLY FAIR",
         "pf_title_provably_fair_settings": "PENGATURAN YANG TERBUKTI ADIL",
         "pf_title_verification": "Verifikasi",
         "pf_verification_para_1": "Hasil Akhir",
@@ -315,7 +315,8 @@ export const languages = {
         "hot_key_disable": "Tombol Pintas Dinonaktifkan",
         "balance": "saldo ",
         "num_of_auto_play": "Jumlah Auto-Play:",
-        "big_wins": "Kemenangan Besar"
+        "big_wins": "Kemenangan Besar",
+        "turn_based_pf_settings_para_1": "Hasil akhir ditentukan oleh kombinasi Server Seed dan Client Seed."
     },
     "CoinMining": {
         "auto_cash_out_in": "Pencairan otomatis masuk",

@@ -615,7 +615,8 @@ export const languages = {
         "hot_key_disable": "Hindi Pinagana ang mga Hotkey",
         "balance": "BALANCE",
         "num_of_auto_play": "Bilang ng Auto-Play:",
-        "big_wins": "Big Wins"
+        "big_wins": "Big Wins",
+        "turn_based_pf_settings_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed.\n"
     },
     "CoinMining": {
         "header_mining_attempts": "Mining Attempts",

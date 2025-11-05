@@ -428,7 +428,7 @@ export const languages = {
         "pf_button_clear": "Temizle",
         "pf_button_save": "Kaydet",
         "pf_client_seed_para_1": "(Bahis kabul edildikten sonra tohum değiştirilemez)",
-        "pf_title_provably_fair": "KANITLANABİLİR ADİL",
+        "pf_title_provably_fair": "PROVABLY FAIR",
         "pf_header_server_seed_sha256": "Sunucu Tohumu SHA256",
         "pf_header_server_seed": "Sunucu Tohumu",
         "pf_client_seed_tooltip_para_1": "Müşteri Tohumu oyuncu tarafından oluşturulur.",
@@ -615,7 +615,8 @@ export const languages = {
         "hot_key_disable": "Kısayol Tuşları Devre Dışı",
         "balance": "BAKİYE",
         "num_of_auto_play": "Otomatik Oynatma Sayısı:",
-        "big_wins": "Büyük Kazanır"
+        "big_wins": "Büyük Kazanır",
+        "turn_based_pf_settings_para_1": "Nihai sonuç, Sunucu Tohumu ve İstemci Tohumu kombinasyonuyla belirlenir."
     },
     "CoinMining": {
         "header_mining_attempts": "Madencilik Denemeleri",

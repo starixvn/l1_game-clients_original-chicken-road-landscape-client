@@ -615,7 +615,8 @@ export const languages = {
         "hot_key_disable": "Kekunci Pintas Dilumpuhkan",
         "balance": "BALANCE",
         "num_of_auto_play": "Bilangan Auto-Main:",
-        "big_wins": "Big Wins"
+        "big_wins": "Big Wins",
+        "turn_based_pf_settings_para_1": "Keputusan akhir ditentukan oleh gabungan Server Seed dan Client Seed."
     },
     "CoinMining": {
         "header_mining_attempts": "Percubaan Perlombongan",

@@ -187,7 +187,7 @@ export const languages = {
         "pf_settings_para_1": "El resultado final se determina mediante una combinación de la Semilla del Servidor y la Semilla del Cliente de los cinco primeros jugadores que apostaron en la ronda.",
         "pf_settings_para_2": "Puedes modificar la Semilla del Cliente y verificar la equidad del resultado de tu partida en el historial de apuestas.",
         "pf_title_new_client_seed": "Nueva Semilla del Cliente",
-        "pf_title_provably_fair": "Demostrablemente Justo",
+        "pf_title_provably_fair": "PROVABLY FAIR",
         "pf_title_provably_fair_settings": "AJUSTES DE JUEGO JUSTO COMPROBABLE",
         "pf_title_verification": "Verificación",
         "pf_verification_para_1": "Resultado Final",
@@ -315,7 +315,8 @@ export const languages = {
         "hot_key_disable": "Teclas de acceso rápido deshabilitadas",
         "balance": "SALDO",
         "num_of_auto_play": "Número de giros automáticos:",
-        "big_wins": "Gana la Grande"
+        "big_wins": "Gana la Grande",
+        "turn_based_pf_settings_para_1": "El resultado final se determina por una combinación de la Semilla del Servidor y la Semilla del Cliente."
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto retiro en",

@@ -315,7 +315,8 @@ export const languages = {
         "hot_key_disable": "ปิดใช้งานปุ่มลัด",
         "balance": "ยอดคงเหลือ",
         "num_of_auto_play": "จำนวนการ เล่นอัตโนมัติ:",
-        "big_wins": "ชนะรางวัลใหญ่"
+        "big_wins": "ชนะรางวัลใหญ่",
+        "turn_based_pf_settings_para_1": "ผลลัพธ์สุดท้ายจะถูกกำหนดโดยการรวมกันของ Server Seed และ Client Seed"
     },
     "CoinMining": {
         "auto_cash_out_in": "ถอนเงินอัตโนมัติใน",
