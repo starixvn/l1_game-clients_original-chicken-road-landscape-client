@@ -33,12 +33,12 @@ export class GameWinNotice extends Component {
                 { value: value },
                 {
                     onUpdate: (target) => {
-                        this.lblWin.string = `${gc.FormatUtils.numberWithCommas(target.value, 2)}`;
+                        this.lblWin.string = `${gc.FormatUtils.numberWithCommas(target.value, 2, false)}`;
                     },
                 }
             )
             .call(() => {
-                this.lblWin.string = `${gc.FormatUtils.numberWithCommas(value, 2)}`;
+                this.lblWin.string = `${gc.FormatUtils.numberWithCommas(value, 2, false)}`;
                 this.zooming();
             })
             .delay(this.durationShowing)
