@@ -2,7 +2,7 @@ import gc from "@sg/game-client-base";
 import { _decorator, EditBox, UIOpacity } from "cc";
 import { ClientSeedSettingsPopup as ClientSeedSettingsPopupRoundBase } from "db://shared-components/provably-fair/round-base/scripts/client-seed-settings-popup";
 import Observer from "observer";
-import { PfStore } from "./pf-store";
+import { AutoPlayStore } from "../play-mode/auto-play";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
@@ -19,7 +19,7 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
         super.onLoad();
     }
 
-    @render(PfStore, (store) => store.isAutoplay)
+    @render(AutoPlayStore, (store) => store.isAutoplay)
     renderIsAutoPlay(isAutoPlay: boolean) {
         this.isAutoPlay = isAutoPlay;
     }
