@@ -76,8 +76,8 @@ export default class AutoPlay extends ObserverComponent {
         }
         this.currentConfig = currentMultiplierConfig;
         this.maxNumberOfLanes = this.currentConfig.multiplierSteps.length;
-        this.numberOfLanesEditBox.string = this.maxNumberOfLanes.toString();
-        this.updateNumberOfLanes(this.maxNumberOfLanes);
+        this.numberOfLanesEditBox.string = "1";
+        this.updateNumberOfLanes(1);
     }
 
     @render(AutoPlayStore, (store) => store.roundsList)
