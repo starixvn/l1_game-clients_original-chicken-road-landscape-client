@@ -351,7 +351,7 @@ export class LaneSpawner extends ObserverComponent {
         }
     }
 
-    @render(BetStore, (store) => store.uiState)
+    @render(BetStore, (store) => store.uiState, { fireImmediately: false })
     updateUIState(uiState: BetUIState) {
         if (uiState === BetUIState.Start) {
             this.currentLaneIndex = -1;
