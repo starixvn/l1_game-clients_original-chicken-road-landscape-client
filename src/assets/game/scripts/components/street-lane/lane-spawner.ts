@@ -11,7 +11,7 @@ import { AutoPlayHandler } from "../play-mode/auto-play/auto-play-handler";
 import { AutoPlayStore } from "../play-mode/auto-play/auto-play-store";
 import { CrashVehicleController } from "../random-vehicle/crash-vehicle";
 import { RandomVehicleController } from "../random-vehicle/random-vehicle";
-import LandItem from "./land-item";
+import LaneItem from "./lane-item";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
@@ -105,13 +105,13 @@ export class LaneSpawner extends ObserverComponent {
         this.laneWidth = this.lanePrefab.data.getComponent(UITransform).width;
 
         for (let index = 0; index < this.currentConfig.multiplierSteps.length; index++) {
-            const step = this.currentConfig.multiplierSteps[index];
+            const multiplier = this.currentConfig.multiplierSteps[index];
             const lane = instantiate(this.lanePrefab);
             this.laneContent.addChild(lane);
 
-            const landItem = lane.getComponent(LandItem);
+            const landItem = lane.getComponent(LaneItem);
             if (landItem) {
-                landItem.lblMultiplier.string = `${step.toFixed(2)}x`;
+                landItem.setMultiplier(multiplier);
                 if (index === 0) {
                     landItem.multiplierBg.spriteFrame = landItem.nextStepMultiplierBgFrame;
                 }
@@ -266,6 +266,7 @@ export class LaneSpawner extends ObserverComponent {
         }
         try {
             const minMultiplier = this.currentConfig.multiplierSteps[0];
+
             if (multiplier >= minMultiplier) {
                 const nextLane = this.currentLaneIndex + 1;
                 const isStepNext = nextLane < this.currentConfig.multiplierSteps.length - 1;
@@ -276,23 +277,29 @@ export class LaneSpawner extends ObserverComponent {
                     await AnimationUtils.delayTime(waitTime);
                     this.nextStepRandomVehicleCtrl.stopSpawnVehicle();
                 }
+                this.updateCurrentLaneItemBackground();
+
                 if (isStepNext) {
                     this.moveChicken();
+                    AnimationUtils.delayTime(settings.durations.stepAnimation).then(() => {
+                        this.updateCurrentAndNextLaneItemBackground();
+                    });
                     this.chickenCtrl.playStepSuccess().then(() => {
                         this.setUIMiningState();
                         if (this.isAutoPlay) {
                             this.checkPlaceBetNextRound();
                         }
-                        this.updateLandItemBackground();
                         this.showBarrier(nextLane);
                     });
                 } else {
                     this.moveChicken(true);
                     AnimationUtils.delayTime(settings.durations.stepAnimation).then(() => {
-                        this.updateLandItemBackground();
+                        this.updateCurrentAndNextLaneItemBackground();
                     });
                     this.chickenCtrl.playStepSuccessAtLastLane();
                 }
+            } else {
+                this.updateCurrentLaneItemBackground();
             }
         } catch (e) {}
     }
@@ -307,7 +314,7 @@ export class LaneSpawner extends ObserverComponent {
         try {
             const landItem = this.laneContent.children[landIndex];
             if (landItem) {
-                const landItemComponent = landItem.getComponent(LandItem);
+                const landItemComponent = landItem.getComponent(LaneItem);
                 if (landItemComponent) {
                     landItemComponent.barrierNode.active = true;
                 }
@@ -315,19 +322,29 @@ export class LaneSpawner extends ObserverComponent {
         } catch (error) {}
     }
 
-    updateLandItemBackground() {
-        const currentLandItem = this.laneContent.children[this.currentLaneIndex];
+    updateCurrentLaneItemBackground() {
+        const previousLandItem = this.laneContent.children[this.currentLaneIndex];
+        if (previousLandItem) {
+            const landItemComponent = previousLandItem.getComponent(LaneItem);
+            if (landItemComponent) {
+                landItemComponent.toggleCurrentMultiplierBackground(false);
+            }
+        }
+    }
 
+    updateCurrentAndNextLaneItemBackground() {
+        const currentLandItem = this.laneContent.children[this.currentLaneIndex];
         if (currentLandItem) {
-            const landItemComponent = currentLandItem.getComponent(LandItem);
+            const landItemComponent = currentLandItem.getComponent(LaneItem);
             if (landItemComponent) {
                 landItemComponent.multiplierBg.spriteFrame = landItemComponent.currentStepMultiplierBgFrame;
+                landItemComponent.toggleCurrentMultiplierBackground();
             }
         }
 
         const nextLandItem = this.laneContent.children[this.currentLaneIndex + 1];
         if (nextLandItem) {
-            const landItemComponent = nextLandItem.getComponent(LandItem);
+            const landItemComponent = nextLandItem.getComponent(LaneItem);
             if (landItemComponent) {
                 landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
             }
@@ -381,8 +398,9 @@ export class LaneSpawner extends ObserverComponent {
         const landItems = this.laneContent.children;
         for (let index = 0; index < landItems.length; index++) {
             const landItem = landItems[index];
-            const landItemComponent = landItem.getComponent(LandItem);
+            const landItemComponent = landItem.getComponent(LaneItem);
             landItemComponent.barrierNode.active = false;
+            landItemComponent.toggleCurrentMultiplierBackground(false);
             if (index === 0) {
                 landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
             } else {
