@@ -35,7 +35,7 @@ export default class BetLevelsContainer extends ObserverComponent {
             this.content.addChild(node);
 
             const itemComp = node.getComponent(BetLevelItem);
-            itemComp.setData(value);
+            itemComp.setData(value, index === betLevels.length - 1);
         });
     }
 

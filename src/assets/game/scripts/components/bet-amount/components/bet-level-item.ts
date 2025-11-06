@@ -26,9 +26,13 @@ export default class BetLevelItem extends ObserverComponent {
         return +this.currentBetLevel;
     }
 
-    setData(betLevel: number) {
+    setData(betLevel: number, isLastItem = false) {
         this.currentBetLevel = betLevel;
-        this.lblBet.string = FormatUtils.nFormatter(betLevel);
+        if (isLastItem) {
+            this.lblBet.string = "MAX";
+        } else {
+            this.lblBet.string = FormatUtils.nFormatter(betLevel);
+        }
     }
 
     setSelectedNode(isSelected: boolean) {

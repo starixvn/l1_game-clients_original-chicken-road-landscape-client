@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, EditBox, instantiate, Label, Node, Prefab } from "cc";
+import { _decorator, EditBox, instantiate, Label, Node, Prefab, sys } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig } from "../../../../game-configs/instant-win-config-store";
@@ -51,6 +51,15 @@ export default class AutoPlay extends ObserverComponent {
 
     onLoad() {
         super.onLoad();
+        this.numberOfLanesEditBox.inputMode = EditBox.InputMode.NUMERIC;
+        this.numberOfLanesEditBox.inputFlag = EditBox.InputFlag.DEFAULT;
+
+        this.numberOfLanesEditBox.node.on(EditBox.EventType.EDITING_DID_BEGAN, () => {
+            if (sys.isMobile) {
+                this.numberOfLanesEditBox.focus();
+            }
+        });
+
         this.numberOfLanesEditBox.node.on(EditBox.EventType.EDITING_DID_ENDED, this.onEditEndNumberOfLanes, this);
         this.getCurrentMultiplierConfig();
     }

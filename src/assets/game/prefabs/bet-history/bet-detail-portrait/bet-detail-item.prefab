@@ -687,7 +687,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 63.89,
+      "x": 61.452,
       "y": 0,
       "z": 0
     },
@@ -737,7 +737,7 @@
       "a": 255
     },
     "_string": "203,956.77",
-    "_horizontalAlign": 0,
+    "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
     "_fontSize": 28,
