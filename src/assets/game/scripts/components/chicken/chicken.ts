@@ -1,6 +1,6 @@
 import gc from "@sg/game-client-base";
 
-import { _decorator, Node, sp, v3, Vec3 } from "cc";
+import { _decorator, Node, sp, Sprite, SpriteFrame, tween, v3, Vec3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
@@ -24,6 +24,14 @@ export class ChickenController extends ObserverComponent {
 
     @property(Node)
     vehicleStartPoint: Node = null;
+
+    @property(Node)
+    vehicleEndPoint: Node = null;
+
+    @property(SpriteFrame)
+    vehicles: SpriteFrame[] = [];
+
+    currentVehicleSpriteFrame: SpriteFrame = null;
 
     onLoad() {
         this.initMix();
@@ -80,13 +88,19 @@ export class ChickenController extends ObserverComponent {
         this.playIdle();
     }
 
-    async playStepSuccess() {
+    async playStepSuccess(hasVehicle = false) {
         await this.playAnim({ animName: "moving" });
         this.barrierSpine.node.active = true;
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
-        await this.playAnim({ animName: "win" });
+        if (hasVehicle) {
+            this.playVehicle();
+            await this.playAnim({ animName: "win" });
+        }
         this.barrierSpine.node.active = false;
         this.playIdle();
+        if (hasVehicle) {
+            this.resetVehicle();
+        }
     }
 
     async playStepFail() {
@@ -121,5 +135,24 @@ export class ChickenController extends ObserverComponent {
     @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
     playSound(id: string) {
         return id;
+    }
+
+    randomVehicle() {
+        this.currentVehicleSpriteFrame = this.vehicles[Math.floor(Math.random() * this.vehicles.length)];
+        return this.currentVehicleSpriteFrame;
+    }
+
+    playVehicle() {
+        this.vehicleNode.getComponent(Sprite).spriteFrame = this.currentVehicleSpriteFrame;
+        this.vehicleNode.active = true;
+        const vehicleEndPointPos = this.vehicleEndPoint.position;
+        tween(this.vehicleNode)
+            .to(0.5, { position: v3(vehicleEndPointPos.x, vehicleEndPointPos.y, 0) })
+            .start();
+    }
+
+    resetVehicle() {
+        this.vehicleNode.setPosition(this.vehicleStartPoint.position);
+        this.vehicleNode.active = false;
     }
 }

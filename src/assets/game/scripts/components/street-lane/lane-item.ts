@@ -21,6 +21,10 @@ export default class LaneItem extends Component {
 
     @property(Node)
     barrierNode: Node = null;
+
+    @property(Node)
+    vehicleNode: Node = null;
+
     @property(Label)
     lblCurrentMultiplier: Label = null;
 
@@ -30,6 +34,7 @@ export default class LaneItem extends Component {
     onLoad(): void {
         this.currentStepMultiplierBg.active = false;
         this.barrierNode.active = false;
+        this.vehicleNode.active = false;
     }
 
     toggleCurrentMultiplierBackground(isCurrentStep = true) {
@@ -42,5 +47,10 @@ export default class LaneItem extends Component {
         const multiplierString = `${multiplier.toFixed(2)}x`;
         this.lblMultiplier.string = multiplierString;
         this.lblCurrentMultiplier.string = multiplierString;
+    }
+
+    showVehicle(vehicleSpriteFrame: SpriteFrame) {
+        this.vehicleNode.active = true;
+        this.vehicleNode.getComponent(Sprite).spriteFrame = vehicleSpriteFrame;
     }
 }
