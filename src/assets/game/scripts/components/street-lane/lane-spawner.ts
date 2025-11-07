@@ -1,4 +1,4 @@
-import { _decorator, instantiate, Node, Prefab, ScrollView, SpriteFrame, tween, UITransform, v3 } from "cc";
+import { _decorator, instantiate, Node, Prefab, ScrollView, tween, UITransform, v3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils/utils";
 import Observer from "observer";
@@ -262,12 +262,9 @@ export class LaneSpawner extends ObserverComponent {
                 this.updateCurrentLaneItemBackground();
 
                 if (isStepNext) {
-                    let vehicleSpriteFrame: SpriteFrame;
                     const hasVehicle = Math.random() < 0.5;
-                    if (hasVehicle) {
-                        vehicleSpriteFrame = this.chickenCtrl.randomVehicle();
-                    }
                     this.moveChicken();
+                    this.showBarrier(nextLane, hasVehicle);
                     AnimationUtils.delayTime(settings.durations.stepAnimation).then(() => {
                         this.updateCurrentAndNextLaneItemBackground();
                     });
@@ -276,7 +273,6 @@ export class LaneSpawner extends ObserverComponent {
                         if (this.isAutoPlay) {
                             this.checkPlaceBetNextRound();
                         }
-                        this.showBarrier(nextLane, vehicleSpriteFrame);
                     });
                 } else {
                     this.moveChicken(true);
@@ -297,17 +293,12 @@ export class LaneSpawner extends ObserverComponent {
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
     checkPlaceBetNextRound() {}
 
-    async showBarrier(landIndex: number, vehicleSpriteFrame: SpriteFrame) {
+    showBarrier(landIndex: number, hasVehicle = false) {
         try {
             const landItem = this.laneContent.children[landIndex];
             if (landItem) {
                 const landItemComponent = landItem.getComponent(LaneItem);
-                if (landItemComponent) {
-                    landItemComponent.barrierNode.active = true;
-                    if (vehicleSpriteFrame) {
-                        landItemComponent.showVehicle(vehicleSpriteFrame);
-                    }
-                }
+                landItemComponent?.playStepSuccess(hasVehicle);
             }
         } catch (error) {}
     }
@@ -380,7 +371,6 @@ export class LaneSpawner extends ObserverComponent {
         const startPos = this.getStartPosition();
         this.chickenNode.setPosition(startPos);
         this.chickenCtrl.playIdle();
-        this.chickenCtrl.hideBarrier();
     }
 
     private resetLandItemsBackground() {
@@ -388,9 +378,8 @@ export class LaneSpawner extends ObserverComponent {
         for (let index = 0; index < landItems.length; index++) {
             const landItem = landItems[index];
             const landItemComponent = landItem.getComponent(LaneItem);
-            landItemComponent.barrierNode.active = false;
             landItemComponent.toggleCurrentMultiplierBackground(false);
-            landItemComponent.vehicleNode.active = false;
+            landItemComponent.resetLaneItem();
             if (index === 0) {
                 landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
             } else {
