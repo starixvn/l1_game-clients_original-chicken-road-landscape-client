@@ -45,27 +45,26 @@ export class ChickenController extends ObserverComponent {
         this.playAnim({ animName: "idle", loop: true });
     }
 
-    playStep() {
-        this.playAnim({ animName: "moving" });
-    }
-
-    playCrash() {
-        this.playAnim({ animName: "crash" });
+    async playStep() {
+        await this.playAnim({ animName: "moving" });
     }
 
     async playStepSuccessAtLastLane() {
-        await this.playAnim({ animName: "moving" });
+        await this.playStep();
         await this.playAnim({ animName: "final" });
         this.playIdle();
     }
 
     async playStepSuccess(hasVehicle = false) {
-        await this.playAnim({ animName: "moving" });
+        await this.playStep();
 
         if (hasVehicle) {
             this.playAnim({ animName: "win" });
             AnimationUtils.delayTime(settings.durations.winAnimation).then(() => {
-                this.playIdle();
+                const isNotPlayMovingAnim = !AnimationUtils.isAnimationPlaying(this.spineChicken, "moving");
+                if (isNotPlayMovingAnim) {
+                    this.playIdle();
+                }
             });
         } else {
             this.playIdle();
@@ -73,7 +72,7 @@ export class ChickenController extends ObserverComponent {
     }
 
     async playStepFail() {
-        await this.playAnim({ animName: "moving" });
+        await this.playStep();
         await this.playAnim({ animName: "crash" });
     }
 
