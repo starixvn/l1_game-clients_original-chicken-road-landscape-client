@@ -549,7 +549,7 @@ export const languages = {
         "start_in": "Masa pertaruhan: {time}s",
         "cancel_bet": "(Batal Pertaruhan)",
         "cashed": "Tunai Keluar",
-        "cashout": "Cashout",
+        "cashout": "Cash out",
         "message_bet_is_accepted": "Pertaruhan diterima",
         "message_total_cashout_reach_max": "Jumlah pengeluaran tunai mencapai kemenangan maksima",
         "my_bets": "Pertaruhan Saya",
@@ -616,7 +616,9 @@ export const languages = {
         "balance": "BALANCE",
         "num_of_auto_play": "Bilangan Auto-Main:",
         "big_wins": "Big Wins",
-        "turn_based_pf_settings_para_1": "Keputusan akhir ditentukan oleh gabungan Server Seed dan Client Seed."
+        "turn_based_pf_settings_para_1": "Keputusan akhir ditentukan oleh gabungan Server Seed dan Client Seed.",
+        "cancel_promotion_message": "Promosi telah tamat. Sila hubungi Khidmat Pelanggan untuk maklumat lanjut. (%{errorCode})",
+        "title_total_multiplier": "Jumlah Pengganda"
     },
     "CoinMining": {
         "header_mining_attempts": "Percubaan Perlombongan",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "Sukar",
         "difficulty_hardcore": "Tegar",
         "difficulty_medium": "Sederhana",
-        "num_of_lanes": "Bilangan Lorong"
+        "num_of_lanes": "Langkah-langkah untuk mengeluarkan tunai"
     }
 };
 

@@ -303,7 +303,7 @@ export const languages = {
         "hot_key_double_bet": "雙倍下注金額",
         "hot_key_half_bet": "下注金額減半",
         "hot_key_min_bet": "最小投注",
-        "pop_over_on_win_reset": "贏了之後回到您的起始賭注。",
+        "pop_over_on_win_reset": "贏了後，恢復到你的初始投注額。",
         "pop_over_on_win_increase_by": "獲勝時，按設定的百分比提高您的賭注。",
         "pop_over_on_win_example": "（範例：設定 +20% → 從 10 美元開始 → 贏 → 下次投注 12 美元）",
         "pop_over_on_loss_reset": "輸了之後回到您的起始賭注。",
@@ -316,7 +316,9 @@ export const languages = {
         "balance": "餘額",
         "num_of_auto_play": "數量 自動遊戲:",
         "big_wins": "大贏",
-        "turn_based_pf_settings_para_1": "最終結果由伺服器種子和客戶端種子的組合決定。"
+        "turn_based_pf_settings_para_1": "最終結果由伺服器種子和客戶端種子的組合決定。",
+        "cancel_promotion_message": "促銷已結束。請聯絡客服了解更多資訊。(%{errorCode})",
+        "title_total_multiplier": "總乘數"
     },
     "CoinMining": {
         "auto_cash_out_in": "自動提現",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "困難",
         "difficulty_hardcore": "Hardcore",
         "difficulty_medium": "中等",
-        "num_of_lanes": "賽道數量"
+        "num_of_lanes": "提款步驟"
     }
 };
 

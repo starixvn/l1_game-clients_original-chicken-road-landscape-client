@@ -249,7 +249,7 @@ export const languages = {
         "start_in": "Betting time: {time}s",
         "cancel_bet": "(Cancel Bet)",
         "cashed": "Cashed",
-        "cashout": "Cashout",
+        "cashout": "Cash out",
         "message_bet_is_accepted": "Bet is accepted",
         "message_total_cashout_reach_max": "Total cashout amounts reach the max win",
         "my_bets": "My Bets",
@@ -316,7 +316,9 @@ export const languages = {
         "balance": "Balance",
         "num_of_auto_play": "Number of Auto-Play",
         "big_wins": "Big Wins",
-        "turn_based_pf_settings_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed."
+        "turn_based_pf_settings_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed.",
+        "cancel_promotion_message": "The Promotion has ended. Please contact Customer Service for more information. (%{errorCode}) ",
+        "title_total_multiplier": "Total Multiplier"
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto cash out in",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "Hard",
         "difficulty_hardcore": "Hardcore",
         "difficulty_medium": "Medium",
-        "num_of_lanes": "Number Of Lanes"
+        "num_of_lanes": "Steps to cash out"
     }
 };
 

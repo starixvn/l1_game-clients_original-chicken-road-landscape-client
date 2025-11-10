@@ -316,7 +316,9 @@ export const languages = {
         "balance": "SALDO",
         "num_of_auto_play": "Número de giros automáticos:",
         "big_wins": "Gana la Grande",
-        "turn_based_pf_settings_para_1": "El resultado final se determina por una combinación de la Semilla del Servidor y la Semilla del Cliente."
+        "turn_based_pf_settings_para_1": "El resultado final se determina por una combinación de la Semilla del Servidor y la Semilla del Cliente.",
+        "cancel_promotion_message": "La promoción ha finalizado. Por favor, contacte con el Servicio de Atención al Cliente para más información. (%{errorCode})",
+        "title_total_multiplier": "MULTIPLICADOR TOTAL"
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto retiro en",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "Difícil",
         "difficulty_hardcore": "Hardcore",
         "difficulty_medium": "Medio",
-        "num_of_lanes": "Número de carriles"
+        "num_of_lanes": "Pasos para retirar"
     }
 };
 

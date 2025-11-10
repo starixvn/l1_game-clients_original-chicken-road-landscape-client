@@ -249,7 +249,7 @@ export const languages = {
         "start_in": "Waktu taruhan: {time}s",
         "cancel_bet": "(Batalkan Taruhan)",
         "cashed": "Dicairkan",
-        "cashout": "Cashout",
+        "cashout": "Tarik Dana",
         "message_bet_is_accepted": "Taruhan diterima",
         "message_total_cashout_reach_max": "Total jumlah pembayaran Raih kemenangan maksimal",
         "my_bets": "Taruhan Saya",
@@ -316,7 +316,9 @@ export const languages = {
         "balance": "saldo ",
         "num_of_auto_play": "Jumlah Auto-Play:",
         "big_wins": "Kemenangan Besar",
-        "turn_based_pf_settings_para_1": "Hasil akhir ditentukan oleh kombinasi Server Seed dan Client Seed."
+        "turn_based_pf_settings_para_1": "Hasil akhir ditentukan oleh kombinasi Server Seed dan Client Seed.",
+        "cancel_promotion_message": "Promosi telah berakhir. Silakan hubungi Layanan Pelanggan untuk informasi lebih lanjut. (%{errorCode})",
+        "title_total_multiplier": "PENGGANDA TOTAL"
     },
     "CoinMining": {
         "auto_cash_out_in": "Pencairan otomatis masuk",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "Sulit",
         "difficulty_hardcore": "Hardcore",
         "difficulty_medium": "Sedang",
-        "num_of_lanes": "Jumlah Lajur"
+        "num_of_lanes": "Langkah-langkah untuk menarik uang"
     }
 };
 

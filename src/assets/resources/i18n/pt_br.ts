@@ -616,7 +616,9 @@ export const languages = {
         "balance": "SALDO",
         "num_of_auto_play": "Número de Jogadas Automáticas:",
         "big_wins": "Grandes vitórias",
-        "turn_based_pf_settings_para_1": "O resultado final é determinado por uma combinação da Semente do Servidor e da Semente do Cliente."
+        "turn_based_pf_settings_para_1": "O resultado final é determinado por uma combinação da Semente do Servidor e da Semente do Cliente.",
+        "cancel_promotion_message": "A promoção terminou. Entre em contato com o Serviço de Atendimento ao Cliente para obter mais informações. (%{errorCode})",
+        "title_total_multiplier": "MULTIPLICADOR TOTAL"
     },
     "CoinMining": {
         "header_mining_attempts": "Tentativas de Mineração",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "Difícil",
         "difficulty_hardcore": "Radical",
         "difficulty_medium": "Médio",
-        "num_of_lanes": "Número de Pistas"
+        "num_of_lanes": "Passos para sacar"
     }
 };
 

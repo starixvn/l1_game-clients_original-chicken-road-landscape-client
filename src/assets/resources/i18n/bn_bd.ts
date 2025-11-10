@@ -549,7 +549,7 @@ export const languages = {
         "start_in": "বাজির সময়: {time}s",
         "cancel_bet": "(বাজি বাতিল করুন)",
         "cashed": "ক্যাশ করা হয়েছে",
-        "cashout": "Cashout",
+        "cashout": "ক্যাশআউট",
         "message_bet_is_accepted": "বাজি গ্রহণ করা হয়েছে",
         "message_total_cashout_reach_max": "মোট ক্যাশআউটের পরিমাণ সর্বোচ্চ উইনে পৌঁছেছে",
         "my_bets": "আমার বাজি",
@@ -616,7 +616,9 @@ export const languages = {
         "balance": "ব্যালেন্স",
         "num_of_auto_play": "অটো-প্লে সংখ্যা:",
         "big_wins": "Big Wins",
-        "turn_based_pf_settings_para_1": "চূড়ান্ত ফলাফল সার্ভার Seed এবং ক্লায়েন্ট Seed এর সংমিশ্রণে নির্ধারিত হয়।"
+        "turn_based_pf_settings_para_1": "চূড়ান্ত ফলাফল সার্ভার Seed এবং ক্লায়েন্ট Seed এর সংমিশ্রণে নির্ধারিত হয়।",
+        "cancel_promotion_message": "প্রচারটি শেষ হয়ে গেছে। আরও তথ্যের জন্য গ্রাহক পরিষেবার সাথে যোগাযোগ করুন। (%{errorCode})",
+        "title_total_multiplier": "মোট গুণক"
     },
     "CoinMining": {
         "header_mining_attempts": "খনন প্রচেষ্টা",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "কঠিন",
         "difficulty_hardcore": "হার্ডকোর",
         "difficulty_medium": "মাঝারি",
-        "num_of_lanes": "লেনের সংখ্যা"
+        "num_of_lanes": "ক্যাশ আউট করার ধাপ"
     }
 };
 

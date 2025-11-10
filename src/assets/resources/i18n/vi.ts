@@ -316,7 +316,9 @@ export const languages = {
         "balance": "Số Dư",
         "num_of_auto_play": "Chọn Số Lượt Chơi",
         "big_wins": "Thắng Lớn",
-        "turn_based_pf_settings_para_1": "Kết quả cuối cùng được xác định dựa trên sự kết hợp giữa Server Seed và Client Seed."
+        "turn_based_pf_settings_para_1": "Kết quả cuối cùng được xác định dựa trên sự kết hợp giữa Server Seed và Client Seed.",
+        "cancel_promotion_message": "Chương trình khuyến mãi đã kết thúc. Vui lòng liên hệ bộ phận Chăm sóc khách hàng để biết thêm thông tin. (%{errorCode})",
+        "title_total_multiplier": "Tổng Số Nhân"
     },
     "CoinMining": {
         "auto_cash_out_in": "Tự động rút tiền sau",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "Khó",
         "difficulty_hardcore": "Mạo Hiểm",
         "difficulty_medium": "Trung Bình",
-        "num_of_lanes": "Số Làn Đường"
+        "num_of_lanes": "Số bước để rút thưởng"
     }
 };
 

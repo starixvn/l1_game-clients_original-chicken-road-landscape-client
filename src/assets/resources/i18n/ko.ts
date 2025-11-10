@@ -616,7 +616,9 @@ export const languages = {
         "balance": "잔액",
         "num_of_auto_play": "자동 플레이 횟수:",
         "big_wins": "빅 승",
-        "turn_based_pf_settings_para_1": "최종 결과는 서버 시드와 클라이언트 시드의 조합으로 결정됩니다."
+        "turn_based_pf_settings_para_1": "최종 결과는 서버 시드와 클라이언트 시드의 조합으로 결정됩니다.",
+        "cancel_promotion_message": "프로모션이 종료되었습니다. 자세한 내용은 고객 서비스에 문의하십시오. (%{errorCode})",
+        "title_total_multiplier": "총 배율"
     },
     "CoinMining": {
         "header_mining_attempts": "채굴 시도",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "어려움",
         "difficulty_hardcore": "하드코어",
         "difficulty_medium": "중간",
-        "num_of_lanes": "레인 수"
+        "num_of_lanes": "출금 방법"
     }
 };
 

@@ -303,7 +303,7 @@ export const languages = {
         "hot_key_double_bet": "双倍下注金额",
         "hot_key_half_bet": "下注金额减半",
         "hot_key_min_bet": "最小投注",
-        "pop_over_on_win_reset": "赢了之后回到您的起始赌注。",
+        "pop_over_on_win_reset": "赢了后，恢复到你的初始投注额。",
         "pop_over_on_win_increase_by": "获胜时，按设定的百分比提高您的赌注。",
         "pop_over_on_win_example": "（示例：设置 +20% → 以 10 美元开始 → 赢 → 下一个赌注 12 美元）",
         "pop_over_on_loss_reset": "输了之后回到您的起始赌注。",
@@ -316,7 +316,9 @@ export const languages = {
         "balance": "余额",
         "num_of_auto_play": "数量 自动游戏:",
         "big_wins": "大赢",
-        "turn_based_pf_settings_para_1": "最终结果由服务器种子和客户端种子的组合决定。"
+        "turn_based_pf_settings_para_1": "最终结果由服务器种子和客户端种子的组合决定。",
+        "cancel_promotion_message": "促销已结束。请联系客服了解更多信息。(%{errorCode})",
+        "title_total_multiplier": "总乘数"
     },
     "CoinMining": {
         "auto_cash_out_in": "自动提现",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "困难",
         "difficulty_hardcore": "Hardcore",
         "difficulty_medium": "中等",
-        "num_of_lanes": "赛道数量"
+        "num_of_lanes": "提现步骤"
     }
 };
 

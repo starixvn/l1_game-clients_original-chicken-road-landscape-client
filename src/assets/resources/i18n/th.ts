@@ -310,13 +310,15 @@ export const languages = {
         "pop_over_on_loss_increase_by": "เพิ่มเงินเดิมพันของคุณตามเปอร์เซ็นต์ที่กำหนดเมื่อคุณแพ้",
         "pop_over_on_loss_example": "(ตัวอย่าง: ตั้งค่า +50% → เริ่มต้นด้วย $10 → แพ้ → เดิมพันครั้งต่อไป $15)",
         "auto_bet_warning": "เมื่อเปิดใช้งาน เดิมพันอัตโนมัติ ผู้เล่นยอมรับความรับผิดชอบอย่างเต็มที่สำหรับการใช้งาน และผู้ให้บริการเกมจะไม่รับผิดชอบต่อผลลัพธ์ใดๆ",
-        "hot_key_enable": "เปิดใช้งาน ปุ่มลัด",
+        "hot_key_enable": "เปิดใช้งานปุ่มลัดแล้ว",
         "pop_over_demo_mode": "เดิมพัน 0 จะเปิดใช้งานโหมดทดลองเล่น",
         "hot_key_disable": "ปิดใช้งานปุ่มลัด",
         "balance": "ยอดคงเหลือ",
         "num_of_auto_play": "จำนวนการ เล่นอัตโนมัติ:",
         "big_wins": "ชนะรางวัลใหญ่",
-        "turn_based_pf_settings_para_1": "ผลลัพธ์สุดท้ายจะถูกกำหนดโดยการรวมกันของ Server Seed และ Client Seed"
+        "turn_based_pf_settings_para_1": "ผลลัพธ์สุดท้ายจะถูกกำหนดโดยการรวมกันของ Server Seed และ Client Seed",
+        "cancel_promotion_message": "โปรโมชั่นสิ้นสุดแล้ว กรุณาติดต่อฝ่ายบริการลูกค้าสำหรับข้อมูลเพิ่มเติม (%{errorCode})",
+        "title_total_multiplier": "ตัวคูณทั้งหมด"
     },
     "CoinMining": {
         "auto_cash_out_in": "ถอนเงินอัตโนมัติใน",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "ยาก",
         "difficulty_hardcore": "โหดสุด",
         "difficulty_medium": "ปานกลาง",
-        "num_of_lanes": "จำนวนช่อง"
+        "num_of_lanes": "ขั้นตอนการถอนเงิน"
     }
 };
 

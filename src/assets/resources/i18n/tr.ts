@@ -616,7 +616,9 @@ export const languages = {
         "balance": "BAKİYE",
         "num_of_auto_play": "Otomatik Oynatma Sayısı:",
         "big_wins": "Büyük Kazanır",
-        "turn_based_pf_settings_para_1": "Nihai sonuç, Sunucu Tohumu ve İstemci Tohumu kombinasyonuyla belirlenir."
+        "turn_based_pf_settings_para_1": "Nihai sonuç, Sunucu Tohumu ve İstemci Tohumu kombinasyonuyla belirlenir.",
+        "cancel_promotion_message": "Promosyon sona erdi. Daha fazla bilgi için lütfen Müşteri Hizmetleri ile iletişime geçin. (%{errorCode})",
+        "title_total_multiplier": "TOPLAM ÇARPAN"
     },
     "CoinMining": {
         "header_mining_attempts": "Madencilik Denemeleri",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "Zor",
         "difficulty_hardcore": "Hardcore",
         "difficulty_medium": "Orta",
-        "num_of_lanes": "Şerit Sayısı"
+        "num_of_lanes": "Nakit çekme adımları"
     }
 };
 

@@ -316,7 +316,9 @@ export const languages = {
         "balance": "残高",
         "num_of_auto_play": "オートプレイ回数:",
         "big_wins": "大が勝ち",
-        "turn_based_pf_settings_para_1": "最終結果は、サーバーシードとクライアントシードの組み合わせによって決定されます。"
+        "turn_based_pf_settings_para_1": "最終結果は、サーバーシードとクライアントシードの組み合わせによって決定されます。",
+        "cancel_promotion_message": "プロモーションは終了しました。詳細については、カスタマーサービスにお問い合わせください。（%{errorCode}）",
+        "title_total_multiplier": "総合マルチプライヤー"
     },
     "CoinMining": {
         "auto_cash_out_in": "オートキャッシュアウト倍率",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "難しい",
         "difficulty_hardcore": "Hardcore",
         "difficulty_medium": "中",
-        "num_of_lanes": "レーン数"
+        "num_of_lanes": "キャッシュアウトの手順"
     }
 };
 

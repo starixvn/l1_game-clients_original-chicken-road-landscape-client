@@ -549,7 +549,7 @@ export const languages = {
         "start_in": "Betting time: {time}s\n",
         "cancel_bet": "(Alisin ang Taya)",
         "cashed": "NAKUHA",
-        "cashout": "Cashout",
+        "cashout": "Cash out",
         "message_bet_is_accepted": "Tinanggap ang pusta.",
         "message_total_cashout_reach_max": "Ang kabuuang halaga ng cashout ay umabot sa pinakamataas na panalo.",
         "my_bets": "Ang Aking Mga Taya",
@@ -616,7 +616,9 @@ export const languages = {
         "balance": "BALANCE",
         "num_of_auto_play": "Bilang ng Auto-Play:",
         "big_wins": "Big Wins",
-        "turn_based_pf_settings_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed.\n"
+        "turn_based_pf_settings_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed.\n",
+        "cancel_promotion_message": "Tapos na ang Promosyon. Mangyaring makipag-ugnayan sa Customer Service para sa karagdagang impormasyon. (%{errorCode})",
+        "title_total_multiplier": "TOTAL MULTIPLIER"
     },
     "CoinMining": {
         "header_mining_attempts": "Mining Attempts",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "Hard",
         "difficulty_hardcore": "Hardcore",
         "difficulty_medium": "Medium",
-        "num_of_lanes": "Bilang ng mga Linya"
+        "num_of_lanes": "Mga Hakbang para mag-cash out"
     }
 };
 

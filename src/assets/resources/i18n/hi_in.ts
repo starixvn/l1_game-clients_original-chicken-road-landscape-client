@@ -616,7 +616,9 @@ export const languages = {
         "balance": "बैलेंस",
         "num_of_auto_play": "ऑटो-प्ले की संख्या:",
         "big_wins": "Big Wins",
-        "turn_based_pf_settings_para_1": "अंतिम परिणाम सर्वर Seed और क्लाइंट Seed के संयोजन द्वारा निर्धारित किया जाता है।"
+        "turn_based_pf_settings_para_1": "अंतिम परिणाम सर्वर Seed और क्लाइंट Seed के संयोजन द्वारा निर्धारित किया जाता है।",
+        "cancel_promotion_message": "यह प्रमोशन समाप्त हो गया है। अधिक जानकारी के लिए कृपया ग्राहक सेवा से संपर्क करें। (%{errorCode})",
+        "title_total_multiplier": "कुल गुणक"
     },
     "CoinMining": {
         "header_mining_attempts": "माइनिंग के प्रयास",
@@ -648,7 +650,7 @@ export const languages = {
         "difficulty_hard": "कठिन",
         "difficulty_hardcore": "कट्टर",
         "difficulty_medium": "मध्यम",
-        "num_of_lanes": "लेन की संख्या"
+        "num_of_lanes": "कैश आउट करने के चरण"
     }
 };
 
