@@ -1,27 +1,22 @@
-import gc from "@sg/game-client-base";
-
-import { _decorator, sp } from "cc";
-import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
+import { _decorator, Component, sp } from "cc";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { AnimationUtils } from "db://shared-components/shared/utils";
-import Observer from "observer";
 import { AudioIds } from "../../../audios/AudioIds";
 import { settings } from "../../game-settings";
 const { ccclass, property } = _decorator;
-const { render, handle } = Observer;
 
-@ccclass("ChickenController")
-export class ChickenController extends ObserverComponent {
+@ccclass("Chicken")
+export class Chicken extends Component {
     @property(sp.Skeleton)
     spineChicken: sp.Skeleton = null;
 
     onLoad() {
         this.initMix();
-        super.onLoad();
     }
 
     initMix() {
         if (!this.spineChicken) {
-            console.error("SpineChicken or barrier is not assigned");
+            console.error("SpineChicken is not assigned");
             return;
         }
 
@@ -59,32 +54,29 @@ export class ChickenController extends ObserverComponent {
         await this.playStep();
 
         if (hasVehicle) {
-            this.playAnim({ animName: "win" });
-            AnimationUtils.delayTime(settings.durations.winAnimation).then(() => {
-                const isNotPlayMovingAnim = !AnimationUtils.isAnimationPlaying(this.spineChicken, "moving");
-                if (isNotPlayMovingAnim) {
-                    this.playIdle();
-                }
+            this.playAnim({ animName: "win" }).then(() => {
+                this.checkPlayIdle();
             });
         } else {
             this.playIdle();
         }
     }
 
+    private checkPlayIdle() {
+        const isNotPlayMovingAnim = !AnimationUtils.isAnimationPlaying(this.spineChicken, "moving");
+        if (isNotPlayMovingAnim) {
+            this.playIdle();
+        }
+    }
+
     async playStepFail() {
         await this.playStep();
-        await this.playAnim({ animName: "crash" });
+        this.playAnim({ animName: "crash" });
     }
 
-    /** Gọi khi crash → anim + move vào giữa scene + reset */
-    async playCrashAtCenter() {
-        this.playSound(AudioIds.CAR_HIT);
+    async playCrash() {
+        AudioUtils.playSFX(AudioIds.CAR_HIT);
         this.playStepFail();
         await AnimationUtils.delayTime(settings.durations.crashAnimation);
-    }
-
-    @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
-    playSound(id: string) {
-        return id;
     }
 }

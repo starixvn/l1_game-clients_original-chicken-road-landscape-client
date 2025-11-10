@@ -1,6 +1,7 @@
-import { _decorator, Component, Label, Node, sp, Sprite, SpriteFrame, tween, v3 } from "cc";
+import { _decorator, Component, Label, Node, sp, Sprite, SpriteFrame } from "cc";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import { settings } from "../../game-settings";
+import { Vehicle } from "../vehicles/vehicle";
 
 const { ccclass, property } = _decorator;
 
@@ -21,9 +22,6 @@ export default class LaneItem extends Component {
     @property(SpriteFrame)
     nextStepMultiplierBgFrame: SpriteFrame = null;
 
-    @property(Node)
-    barrierNode: Node = null;
-
     @property(sp.Skeleton)
     barrierSpine: sp.Skeleton = null;
 
@@ -36,22 +34,11 @@ export default class LaneItem extends Component {
     @property(Node)
     currentStepMultiplierBg: Node = null;
 
-    @property(Node)
-    vehicleStartPoint: Node = null;
-
-    @property(Node)
-    vehicleEndPoint: Node = null;
-
-    @property(SpriteFrame)
-    vehicles: SpriteFrame[] = [];
-
-    currentVehicleSpriteFrame: SpriteFrame = null;
+    private vehicle: Vehicle = null;
 
     onLoad(): void {
         this.currentStepMultiplierBg.active = false;
-        this.barrierNode.active = false;
-        this.vehicleNode.active = false;
-        this.vehicleNode.setPosition(this.vehicleStartPoint.position);
+        this.vehicle = this.vehicleNode.getComponent(Vehicle);
         this.initBarrier();
     }
 
@@ -69,18 +56,8 @@ export default class LaneItem extends Component {
         this.barrierSpine.node.active = true;
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
         if (hasVehicle) {
-            this.playVehicle();
+            this.vehicle.playVehicleStopAtBarrier();
         }
-    }
-
-    private playVehicle() {
-        const randomVehicle = this.vehicles[Math.floor(Math.random() * this.vehicles.length)];
-        this.vehicleNode.getComponent(Sprite).spriteFrame = randomVehicle;
-        this.vehicleNode.active = true;
-        const vehicleEndPointPos = this.vehicleEndPoint.position;
-        tween(this.vehicleNode)
-            .to(0.5, { position: v3(vehicleEndPointPos.x, vehicleEndPointPos.y, 0) })
-            .start();
     }
 
     toggleCurrentMultiplierBackground(isCurrentStep = true) {
@@ -97,7 +74,24 @@ export default class LaneItem extends Component {
 
     resetLaneItem() {
         this.barrierSpine.node.active = false;
-        this.vehicleNode.active = false;
-        this.vehicleNode.setPosition(this.vehicleStartPoint.position);
+        this.vehicle.resetVehicle();
+    }
+
+    async waitAndStopSpawningVehicle() {
+        if (this.vehicle.isPLayingAnimation) {
+            const remainingTime = this.vehicle.getRemainingTime();
+            await AnimationUtils.delayTime(remainingTime);
+        }
+        this.vehicle.stopSpawnVehicle();
+    }
+
+    startRandomSpawning() {
+        if (!this.vehicle.isSpawning) {
+            this.vehicle.startRandomSpawning();
+        }
+    }
+
+    playCrashVehicle() {
+        this.vehicle.playCrashVehicle();
     }
 }

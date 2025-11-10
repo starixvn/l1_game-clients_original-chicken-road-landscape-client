@@ -3,7 +3,7 @@ import { _decorator, Animation, Button, EventKeyboard, input, Input, KeyCode, La
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { AudioIds } from "../../../../audios/AudioIds";
-import { ChickenController } from "../../chicken/chicken";
+import { Chicken } from "../../chicken/chicken";
 import { AutoPlayHandler, AutoPlayStore } from "../../play-mode/auto-play";
 import { BetHandler } from "../bet-handler";
 import { BetStore, BetUIState } from "../bet-store";
@@ -31,8 +31,8 @@ export default class PlaceBetButton extends ObserverComponent {
     @property(Node)
     debugNode: Node = null;
 
-    @property(ChickenController)
-    chickenCtrl: ChickenController = null;
+    @property(Chicken)
+    chickenCtrl: Chicken = null;
 
     @property(Node)
     playModeNode: Node = null;
