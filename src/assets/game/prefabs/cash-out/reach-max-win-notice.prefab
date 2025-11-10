@@ -175,8 +175,8 @@
     "_string": "You have reached the maximum cashout limit",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 28,
-    "_fontSize": 28,
+    "_actualFontSize": 32,
+    "_fontSize": 32,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
     "_overflow": 3,
@@ -270,6 +270,8 @@
       "__id__": 0
     },
     "fileId": "afCEFbfS1GLJqanvMmj6mP",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
