@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, EditBox, instantiate, Label, Node, Prefab, sys } from "cc";
+import { _decorator, EditBox, instantiate, Label, Node, Prefab } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig } from "../../../../game-configs/instant-win-config-store";
