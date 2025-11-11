@@ -38,13 +38,9 @@ export default class BetControls extends ObserverComponent {
     @property(Node)
     disabledDoubleBet: Node = null;
 
-    @property(Node)
-    nodeBetAmountValue: Node = null;
-
     @property(EditBox)
     inputBetAmount: EditBox = null;
 
-    private betAmount = 0;
     private betLevels = [];
 
     onLoad() {
@@ -107,7 +103,6 @@ export default class BetControls extends ObserverComponent {
 
     setBetAmount(betAmount: number) {
         this.lblBetLevelDefault.string = FormatUtils.numberWithCommas(betAmount, 2);
-        this.betAmount = betAmount;
         this.inputBetAmount.string = betAmount.toString();
     }
 
@@ -153,10 +148,6 @@ export default class BetControls extends ObserverComponent {
         return {
             multiplier: 2,
         };
-    }
-
-    findIndexBetLevel(): number {
-        return this.betLevels.findIndex((amount) => amount === this.betAmount);
     }
 
     onClickOverlayBg() {
