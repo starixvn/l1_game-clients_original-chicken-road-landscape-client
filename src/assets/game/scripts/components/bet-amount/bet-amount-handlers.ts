@@ -12,7 +12,7 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
     @inject(InstantWinConfigStore) private readonly gameConfig: InstantWinConfigStore;
     @inject(gc.Player.MainPlayerStore) private readonly mainPlayerStore: gc.Player.MainPlayerStore;
 
-    private lastKey: string = "";
+    private lastKey = "";
     handle() { }
 
     get maxBetAvailable() {
