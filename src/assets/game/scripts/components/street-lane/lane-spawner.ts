@@ -346,12 +346,6 @@ export class LaneSpawner extends ObserverComponent {
             this.currentLaneIndex = -1;
             this.reset();
         }
-
-        if (uiState === BetUIState.Animating) {
-            this.scrollView.enabled = false;
-        } else {
-            this.scrollView.enabled = true;
-        }
     }
 
     @render(BetStore, (store) => store.settleStatus, { fireImmediately: false })
