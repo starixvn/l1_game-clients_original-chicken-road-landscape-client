@@ -7,15 +7,13 @@ import { AudioIds } from "db://assets/game/audios/AudioIds";
 import { InstantWinConfigStore } from "../../../game-configs/instant-win-config-store";
 import { BetAmountHandlers } from "../bet-amount-handlers";
 import { BetAmountStore } from "../bet-amount-store";
-import BetLevelsContainer from "./bet-levels-container";
-import { BetValueItem } from "./bet-value-item";
 
 const { FormatUtils } = gc;
 const { ccclass, property } = _decorator;
 const { observer, render, handle } = Observer;
 
 @ccclass
-export default class BetAmount extends ObserverComponent {
+export default class BetControls extends ObserverComponent {
     @property(Label)
     lblBetLevelDefault: Label = null;
 
@@ -24,9 +22,6 @@ export default class BetAmount extends ObserverComponent {
 
     @property(Node)
     nodeDisabledInscrease: Node = null;
-
-    @property(Node)
-    nodeOverlayBg: Node = null;
 
     @property(Node)
     nodeDisabledBetAmount: Node = null;
@@ -57,7 +52,6 @@ export default class BetAmount extends ObserverComponent {
         this.inputBetAmount.node.on(EditBox.EventType.EDITING_DID_BEGAN, this.onEditBegin, this);
 
         super.onLoad();
-        this.nodeOverlayBg.active = false;
     }
 
     onEditBegin(editBox: EditBox) {
@@ -119,13 +113,10 @@ export default class BetAmount extends ObserverComponent {
 
     @render(BetAmountStore, (store) => store.betLevels)
     assignBetLevel(betLevels: number[]) {
-        if (!betLevels) {
+        if (!betLevels || betLevels.length === 0) {
             return;
         }
         this.betLevels = betLevels;
-        const betLevelsContainer = this.nodeBetAmountValue.getComponent(BetLevelsContainer);
-        betLevelsContainer.setBetLevels(betLevels);
-        console.log("betLevels", betLevels);
     }
 
     @handle(BetAmountHandlers, (handle, isOpen: boolean) => handle.updateStatusBetAmountPopup(isOpen))
@@ -196,14 +187,5 @@ export default class BetAmount extends ObserverComponent {
 
     setActiveDoubleBet(active: boolean) {
         this.btnDoubleBet.interactable = active;
-    }
-
-    renderBetValue(betValue: number[]) {
-        this.nodeBetAmountValue.children.forEach((child, index) => {
-            const item = child.getComponent(BetValueItem);
-            if (index < betValue.length) {
-                item.setValue(betValue[index]);
-            }
-        });
     }
 }

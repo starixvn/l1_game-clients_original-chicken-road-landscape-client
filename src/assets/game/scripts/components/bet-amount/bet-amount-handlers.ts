@@ -10,7 +10,31 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
     @inject(BetAmountStore) protected readonly betAmountStore: BetAmountStore;
     @inject(gc.Bet.BetStore) private readonly betStore: gc.Bet.BetStore;
     @inject(InstantWinConfigStore) private readonly gameConfig: InstantWinConfigStore;
-    handle() {}
+    @inject(gc.Player.MainPlayerStore) private readonly mainPlayerStore: gc.Player.MainPlayerStore;
+
+    private lastKey: string = "";
+    handle() { }
+
+    get maxBetAvailable() {
+        return Math.min(this.gameConfig.maxBet, this.mainPlayerStore.balance)
+    }
+
+    clickBetLevel(key: string) {
+        const isChangeKey = this.lastKey !== key && this.lastKey !== "";
+
+        this.lastKey = key;
+        if (key === "max") {
+            this.updateBetAmount(this.maxBetAvailable);
+        } else {
+            const amount = +key;
+            if (isChangeKey) {
+                this.updateBetAmount(amount)
+            } else {
+                const newAmount = this.betStore.amount + amount;
+                this.updateBetAmount(Math.min(newAmount, this.maxBetAvailable))
+            }
+        }
+    }
 
     updateBetAmount(betAmount: number) {
         this.betStore.amount = betAmount;
@@ -26,6 +50,7 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
         const change = this.getChangeDescreaseBetAmount(current);
         this.betStore.amount = this.calculateNewBetAmount(current, change);
     }
+
     increaseAmount() {
         const current = this.betStore.amount;
         const change = this.getChangeInscreaseBetAmount(current);

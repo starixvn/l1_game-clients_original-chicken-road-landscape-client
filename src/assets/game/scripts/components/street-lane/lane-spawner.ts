@@ -290,14 +290,14 @@ export class LaneSpawner extends ObserverComponent {
             } else {
                 this.updateCurrentLaneItemBackground();
             }
-        } catch (e) {}
+        } catch (e) { }
     }
 
     @handle(BetHandler, (handler) => handler.setUIMiningState())
-    setUIMiningState() {}
+    setUIMiningState() { }
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
-    checkPlaceBetNextRound() {}
+    checkPlaceBetNextRound() { }
 
     showBarrier(landIndex: number, hasVehicle = false) {
         try {
@@ -306,7 +306,7 @@ export class LaneSpawner extends ObserverComponent {
                 const landItemComponent = landItem.getComponent(LaneItem);
                 landItemComponent?.playStepSuccess(hasVehicle);
             }
-        } catch (error) {}
+        } catch (error) { }
     }
 
     updateCurrentLaneItemBackground() {
@@ -365,7 +365,7 @@ export class LaneSpawner extends ObserverComponent {
 
                 await this.chickenCtrl.playCrash();
             }
-        } catch (e) {}
+        } catch (e) { }
     }
 
     private reset() {

@@ -18,13 +18,10 @@ export class BetAmountStore {
         mobx.makeAutoObservable(this);
     }
 
-    inputValues: number[] = [];
-    selectedInputIndex: { [betKey: number]: number } = {};
-
     isOpenBetAmountPopup = false;
 
     get betLevels() {
-        return this.gameConfig.betLevels;
+        return this.gameConfig.betLevels.slice(0, 3);
     }
 
     get disabledBetAmount() {

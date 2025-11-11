@@ -19,27 +19,19 @@ export default class BetLevelItem extends ObserverComponent {
     @property(Node)
     nodeDisabledLayer: Node = null;
 
-    private currentBetLevel = 0;
+    private key = "";
 
-    @handle(BetAmountHandlers, (handler, amount: number) => handler.updateBetAmount(amount))
+    @handle(BetAmountHandlers, (handler, key: string) => handler.clickBetLevel(key))
     onClickBetItem() {
-        return +this.currentBetLevel;
+        return this.key;
     }
 
-    setData(betLevel: number, isLastItem = false) {
-        this.currentBetLevel = betLevel;
-        if (isLastItem) {
-            this.lblBet.string = "MAX";
+    setData(betLevel: number | string, isMax: boolean) {
+        this.key = betLevel.toString();
+        if (isMax) {
+            this.lblBet.string = this.key.toUpperCase();
         } else {
             this.lblBet.string = FormatUtils.nFormatter(betLevel);
         }
-    }
-
-    setSelectedNode(isSelected: boolean) {
-        this.nodeSelectedBg.active = isSelected;
-    }
-
-    setDisabledNode(isDisabled: boolean) {
-        this.nodeDisabledLayer.active = isDisabled;
     }
 }
