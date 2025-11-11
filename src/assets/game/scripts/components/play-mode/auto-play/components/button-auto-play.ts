@@ -1,5 +1,5 @@
-import gc from "@sg/game-client-base";
 import { _decorator, Node } from "cc";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { AutoPlayHandler } from "../auto-play-handler";
@@ -20,11 +20,6 @@ export default class ButtonAutoPlay extends ObserverComponent {
 
     @handle(AutoPlayHandler, (handle) => handle.clickAutoPlay())
     onClickAutoPlay() {
-        this.playSoundClick();
-    }
-
-    @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
-    playSoundClick() {
-        return gc.Audios.AudioIds.CLICK;
+        AudioUtils.playClick();
     }
 }

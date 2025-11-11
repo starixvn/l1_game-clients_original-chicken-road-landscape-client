@@ -16,10 +16,19 @@ export class AutoPlayStore {
     public triggerBet = null;
 
     isAutoplay = false;
-    noOfLanes = 0;
+    noOfLanes = 1;
     currentMultiplierConfig: FixedStepsMultiplierConfig = null;
 
-    get isTurnOnAutoPlay() {
-        return this.isOpenAutoplayPopup || this.isAutoplay;
+    get canIncreaseNoOfLanes() {
+        return this.noOfLanes < this.currentMultiplierConfig.multiplierSteps.length;
+    }
+
+    get canDecreaseNoOfLanes() {
+        return this.noOfLanes > 1;
+    }
+
+    resetAutoSelection() {
+        this.noOfLanes = 1;
+        this.selectedRoundOnPopup = this.roundsList[0];
     }
 }

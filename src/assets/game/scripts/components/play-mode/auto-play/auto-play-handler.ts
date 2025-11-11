@@ -33,14 +33,17 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
                     }
                 }
             );
+            mobx.reaction(
+                () => this.instantWinConfigStore.currentMultiplierConfig,
+                (currentMultiplierConfig) => {
+                    this.autoPlayStore.currentMultiplierConfig = currentMultiplierConfig;
+                    this.autoPlayStore.resetAutoSelection();
+                }
+            );
         }, 0);
     }
 
-    handle() {}
-
-    getCurrentMultiplierConfig() {
-        this.autoPlayStore.currentMultiplierConfig = this.instantWinConfigStore.currentMultiplierConfig;
-    }
+    handle() { }
 
     handleEnable(enable: boolean) {
         this.autoPlayStore.isAutoplay = enable;
@@ -48,6 +51,20 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
 
     handleNoOfLanes(noOfLanes: number) {
         this.autoPlayStore.noOfLanes = noOfLanes;
+    }
+
+    increaseNoOfLanes() {
+        if (this.autoPlayStore.noOfLanes >= this.autoPlayStore.currentMultiplierConfig.multiplierSteps.length) {
+            return;
+        }
+        this.autoPlayStore.noOfLanes++;
+    }
+
+    decreaseNoOfLanes() {
+        if (this.autoPlayStore.noOfLanes <= 1) {
+            return;
+        }
+        this.autoPlayStore.noOfLanes--;
     }
 
     async handleAutoPlaceBet() {
@@ -66,7 +83,6 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
 
     openAutoPlayPopup() {
         this.autoPlayStore.isOpenAutoplayPopup = true;
-        this.autoPlayStore.selectedRoundOnPopup = this.autoPlayStore.roundsList[0];
     }
 
     clickAutoPlay() {

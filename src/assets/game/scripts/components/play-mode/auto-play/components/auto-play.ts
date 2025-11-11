@@ -1,5 +1,6 @@
 import gc from "@sg/game-client-base";
-import { _decorator, EditBox, instantiate, Label, Node, Prefab } from "cc";
+import { _decorator, Button, EditBox, instantiate, Node, Prefab, sys } from "cc";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig } from "../../../../game-configs/instant-win-config-store";
@@ -19,20 +20,11 @@ export default class AutoPlay extends ObserverComponent {
     @property(Node)
     bg: Node = null;
 
-    @property(Node)
-    btnMinus: Node = null;
+    @property(Button)
+    btnMinus: Button = null;
 
-    @property(Node)
-    btnDisableMinus: Node = null;
-
-    @property(Node)
-    btnPlus: Node = null;
-
-    @property(Node)
-    btnDisablePlus: Node = null;
-
-    @property(Node)
-    btnCountdown: Node = null;
+    @property(Button)
+    btnPlus: Button = null;
 
     @property(EditBox)
     numberOfLanesEditBox: EditBox = null;
@@ -40,13 +32,9 @@ export default class AutoPlay extends ObserverComponent {
     @property(Node)
     noOfAutoPlayItemContainer: Node = null;
 
-    @property(Label)
-    lblCountdown: Label = null;
-
     @property(Prefab)
     prfAutoPlayItem: Prefab = null;
 
-    private currentConfig: FixedStepsMultiplierConfig = null;
     private maxNumberOfLanes = 0;
 
     onLoad() {
@@ -54,13 +42,18 @@ export default class AutoPlay extends ObserverComponent {
         this.numberOfLanesEditBox.inputMode = EditBox.InputMode.NUMERIC;
         this.numberOfLanesEditBox.inputFlag = EditBox.InputFlag.DEFAULT;
 
+        this.numberOfLanesEditBox.node.on(EditBox.EventType.EDITING_DID_BEGAN, () => {
+            if (sys.isMobile) {
+                this.numberOfLanesEditBox.focus();
+            }
+        });
+
         this.numberOfLanesEditBox.node.on(EditBox.EventType.EDITING_DID_ENDED, this.onEditEndNumberOfLanes, this);
-        this.numberOfLanesEditBox.node.on(EditBox.EventType.EDITING_DID_BEGAN, this.onEditBegin, this);
-        this.getCurrentMultiplierConfig();
     }
 
-    @handle(AutoPlayHandler, (handler) => handler.getCurrentMultiplierConfig())
-    getCurrentMultiplierConfig() {}
+    private getInputNumberOfLanes() {
+        return parseInt(this.numberOfLanesEditBox.string || "0");
+    }
 
     private onEditEndNumberOfLanes() {
         let numberOfLanes = this.getInputNumberOfLanes();
@@ -70,18 +63,7 @@ export default class AutoPlay extends ObserverComponent {
         if (numberOfLanes > this.maxNumberOfLanes) {
             numberOfLanes = this.maxNumberOfLanes;
         }
-
-        if (!/^\d+$/.test(this.numberOfLanesEditBox.string)) {
-            this.numberOfLanesEditBox.string = numberOfLanes.toString();
-        }
         this.updateNumberOfLanes(numberOfLanes);
-    }
-
-    private onEditBegin(editBox: EditBox) {
-        const text = editBox.string;
-        const cleanText = text.replace(/,/g, "").replace(/x/g, "");
-        const numValue = Number(cleanText);
-        editBox.string = isNaN(numValue) ? "" : numValue.toString();
     }
 
     @render(AutoPlayStore, (store) => store.currentMultiplierConfig)
@@ -89,10 +71,7 @@ export default class AutoPlay extends ObserverComponent {
         if (!currentMultiplierConfig) {
             return;
         }
-        this.currentConfig = currentMultiplierConfig;
-        this.maxNumberOfLanes = this.currentConfig.multiplierSteps.length;
-        this.numberOfLanesEditBox.string = "1";
-        this.updateNumberOfLanes(1);
+        this.maxNumberOfLanes = currentMultiplierConfig.multiplierSteps.length;
     }
 
     @render(AutoPlayStore, (store) => store.roundsList)
@@ -114,41 +93,34 @@ export default class AutoPlay extends ObserverComponent {
         });
     }
 
+    @render(AutoPlayStore, (store) => store.noOfLanes)
+    renderNoOfLanes(noOfLanes: number) {
+        this.numberOfLanesEditBox.string = noOfLanes.toString();
+    }
+
     @handle(AutoPlayHandler, (handler, numberOfLanes: number) => handler.handleNoOfLanes(numberOfLanes))
     private updateNumberOfLanes(numberOfLanes: number) {
-        this.numberOfLanesEditBox.string = numberOfLanes.toString();
-        this.updateDisableButtons();
         return numberOfLanes;
     }
 
+    @handle(AutoPlayHandler, (handler) => handler.decreaseNoOfLanes())
     onClickMinusButton() {
-        this.playSoundClick();
-        const updatedNumberOfLanes = this.getInputNumberOfLanes() - 1;
-        this.updateNumberOfLanes(updatedNumberOfLanes);
+        AudioUtils.playClick();
     }
 
+    @handle(AutoPlayHandler, (handler) => handler.increaseNoOfLanes())
     onClickPlusButton() {
-        this.playSoundClick();
-        const updatedNumberOfLanes = this.getInputNumberOfLanes() + 1;
-        this.updateNumberOfLanes(updatedNumberOfLanes);
+        AudioUtils.playClick();
     }
 
-    private updateDisableButtons() {
-        if (this.getInputNumberOfLanes() === 1) {
-            this.btnDisableMinus.active = true;
-        } else {
-            this.btnDisableMinus.active = false;
-        }
-
-        if (this.getInputNumberOfLanes() === this.maxNumberOfLanes) {
-            this.btnDisablePlus.active = true;
-        } else {
-            this.btnDisablePlus.active = false;
-        }
+    @render(AutoPlayStore, (store) => store.canIncreaseNoOfLanes)
+    renderInteractableBtnIncrease(canIncreaseNoOfLanes: boolean) {
+        this.btnPlus.interactable = canIncreaseNoOfLanes;
     }
 
-    private getInputNumberOfLanes() {
-        return parseInt(this.numberOfLanesEditBox.string || "0");
+    @render(AutoPlayStore, (store) => store.canDecreaseNoOfLanes)
+    renderInteractableBtnDecrease(canDecreaseNoOfLanes: boolean) {
+        this.btnMinus.interactable = canDecreaseNoOfLanes;
     }
 
     @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
@@ -168,11 +140,7 @@ export default class AutoPlay extends ObserverComponent {
     }
 
     @handle(AutoPlayHandler, (handler) => handler.closeAutoPlayPopup())
-    private closePopup() {
-        this.toggleAutoPlayPopup(false);
-    }
-
-    private openPopup() {
-        this.toggleAutoPlayPopup(true);
+    closePopup() {
+        AudioUtils.playClick();
     }
 }
