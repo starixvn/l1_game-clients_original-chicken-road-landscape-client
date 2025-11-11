@@ -130,7 +130,7 @@ export class LaneSpawner extends ObserverComponent {
         for (let index = 0; index < this.currentConfig.multiplierSteps.length; index++) {
             const multiplier = this.currentConfig.multiplierSteps[index];
             const landItem = this.laneContent.children[index]?.getComponent(LaneItem);
-            
+
             if (!landItem) {
                 continue;
             }
@@ -138,6 +138,7 @@ export class LaneSpawner extends ObserverComponent {
             landItem.setMultiplier(multiplier);
             if (index === 0) {
                 landItem.multiplierBg.spriteFrame = landItem.nextStepMultiplierBgFrame;
+                landItem.isClickable = true;
             } else {
                 landItem.startRandomSpawning();
             }
@@ -325,6 +326,7 @@ export class LaneSpawner extends ObserverComponent {
             if (landItemComponent) {
                 landItemComponent.multiplierBg.spriteFrame = landItemComponent.currentStepMultiplierBgFrame;
                 landItemComponent.toggleCurrentMultiplierBackground();
+                landItemComponent.isClickable = false;
             }
         }
 
@@ -333,6 +335,7 @@ export class LaneSpawner extends ObserverComponent {
             const landItemComponent = nextLandItem.getComponent(LaneItem);
             if (landItemComponent) {
                 landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
+                landItemComponent.isClickable = true;
             }
         }
     }
@@ -342,6 +345,12 @@ export class LaneSpawner extends ObserverComponent {
         if (uiState === BetUIState.Start) {
             this.currentLaneIndex = -1;
             this.reset();
+        }
+
+        if (uiState === BetUIState.Animating) {
+            this.scrollView.enabled = false;
+        } else {
+            this.scrollView.enabled = true;
         }
     }
 
@@ -392,6 +401,7 @@ export class LaneSpawner extends ObserverComponent {
             landItemComponent.resetLaneItem();
             if (index === 0) {
                 landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
+                landItemComponent.isClickable = true;
             } else {
                 landItemComponent.multiplierBg.spriteFrame = landItemComponent.defaultMultiplierBgFrame;
                 landItemComponent.startRandomSpawning();

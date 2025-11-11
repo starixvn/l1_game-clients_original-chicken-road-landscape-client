@@ -37,8 +37,6 @@ export default class PlaceBetButton extends ObserverComponent {
     @property(Node)
     playModeNode: Node = null;
 
-    private isStateBet = false;
-
     private isAutoPlay = false;
     private roundsAutoPlay = 0;
 
@@ -71,7 +69,7 @@ export default class PlaceBetButton extends ObserverComponent {
         }
         if (this.uiState === BetUIState.Start) {
             this.onClickStartBet();
-        } else if (this.canBet) {
+        } else if (this.uiState === BetUIState.Mining) {
             this.onClickBetButton();
         }
     }
@@ -119,7 +117,7 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     onClickBetButton() {
-        if (this.canBet) {
+        if (this.uiState === BetUIState.Mining) {
             this.onBet();
             this.setUIAnimatingState();
         }
@@ -127,10 +125,6 @@ export default class PlaceBetButton extends ObserverComponent {
 
     @handle(BetHandler, (handler) => handler.setUIAnimatingState())
     setUIAnimatingState() {}
-
-    get canBet() {
-        return this.isStateBet;
-    }
 
     getBetUIStateString(uiState: BetUIState) {
         switch (uiState) {
@@ -149,7 +143,6 @@ export default class PlaceBetButton extends ObserverComponent {
     updateUIState(uiState: BetUIState) {
         const currentUIState = this.uiState;
         this.uiState = uiState;
-        this.isStateBet = uiState === BetUIState.Mining;
         this.updateButtonInteractable(uiState);
 
         if (this.isAutoPlay) {
@@ -192,7 +185,7 @@ export default class PlaceBetButton extends ObserverComponent {
         this.playModeNode.active = uiState === BetUIState.Start;
         this.hitStoneButton.active = uiState > BetUIState.Start;
         this.cashOutButton.active = uiState > BetUIState.Start;
-        this.setActiveBetButtons(this.isStateBet);
+        this.setActiveBetButtons(uiState === BetUIState.Mining);
     }
 
     @handle(AutoPlayHandler, (handle) => handle.countDownRoundAutoPlay())

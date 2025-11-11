@@ -1,12 +1,19 @@
-import { _decorator, Component, Label, Node, sp, Sprite, SpriteFrame } from "cc";
+import { _decorator, Label, Node, sp, Sprite, SpriteFrame } from "cc";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
+import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
+import Observer from "observer";
+import { AudioIds } from "../../../audios/AudioIds";
 import { settings } from "../../game-settings";
+import { BetHandler } from "../bets/bet-handler";
+import { BetStore, BetUIState } from "../bets/bet-store";
+import { AutoPlayStore } from "../play-mode/auto-play/auto-play-store";
 import { Vehicle } from "../vehicles/vehicle";
 
 const { ccclass, property } = _decorator;
-
+const { handle, render } = Observer;
 @ccclass
-export default class LaneItem extends Component {
+export default class LaneItem extends ObserverComponent {
     @property(Label)
     lblMultiplier: Label = null;
 
@@ -35,20 +42,24 @@ export default class LaneItem extends Component {
     currentStepMultiplierBg: Node = null;
 
     private vehicle: Vehicle = null;
+    private uiState: BetUIState = BetUIState.Start;
+    private isAutoPlay = false;
+    public isClickable = false;
 
     onLoad(): void {
-        this.currentStepMultiplierBg.active = false;
-        this.vehicle = this.vehicleNode.getComponent(Vehicle);
-        this.initBarrier();
+        super.onLoad();
+        this.init();
     }
 
-    private initBarrier() {
+    private init() {
         if (!this.barrierSpine) {
             console.error("Barrier spine is not assigned");
 
             return;
         }
         this.barrierSpine.node.active = false;
+        this.currentStepMultiplierBg.active = false;
+        this.vehicle = this.vehicleNode.getComponent(Vehicle);
     }
 
     async playStepSuccess(hasVehicle = false) {
@@ -75,6 +86,7 @@ export default class LaneItem extends Component {
     resetLaneItem() {
         this.barrierSpine.node.active = false;
         this.vehicle.resetVehicle();
+        this.isClickable = false;
     }
 
     async waitAndStopSpawningVehicle() {
@@ -93,5 +105,49 @@ export default class LaneItem extends Component {
 
     playCrashVehicle() {
         this.vehicle.playCrashVehicle();
+    }
+
+    private onClickBet() {
+        if (this.isAutoPlay || !this.isClickable) {
+            return;
+        }
+
+        if (this.uiState === BetUIState.Animating || this.uiState === BetUIState.Settle) {
+            return;
+        }
+        if (this.uiState === BetUIState.Start) {
+            this.onClickStartBet();
+        } else if (this.uiState === BetUIState.Mining) {
+            this.onClickBetButton();
+        }
+    }
+
+    @handle(BetHandler, (handler) => handler.handle())
+    private onClickStartBet() {
+        AudioUtils.playSFX(AudioIds.BTN_START);
+        this.setUIAnimatingState();
+    }
+
+    private onClickBetButton() {
+        if (this.uiState === BetUIState.Mining) {
+            this.onBet();
+            this.setUIAnimatingState();
+        }
+    }
+
+    @handle(BetHandler, (handler) => handler.setUIAnimatingState())
+    private setUIAnimatingState() {}
+
+    @handle(BetHandler, (handler) => handler.handle())
+    private onBet() {}
+
+    @render(BetStore, (store) => store.uiState, { fireImmediately: false })
+    private updateUIState(uiState: BetUIState) {
+        this.uiState = uiState;
+    }
+
+    @render(AutoPlayStore, (store) => store.isAutoplay)
+    private setIsAutoPlay(isAutoPlay: boolean) {
+        this.isAutoPlay = isAutoPlay;
     }
 }
