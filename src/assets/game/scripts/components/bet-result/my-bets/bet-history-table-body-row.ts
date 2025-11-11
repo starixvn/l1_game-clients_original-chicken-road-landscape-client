@@ -174,10 +174,6 @@ export default class BetHistoryTableBodyRow extends ObserverComponent {
         };
     }
 
-    onLoad() {
-        super.onLoad();
-    }
-
     private setupEventListeners() {
         this.betWinCell.on(Node.EventType.MOUSE_ENTER, this.triggerHoverMaxReachCallback, this);
         this.betWinCell.on(Node.EventType.MOUSE_LEAVE, this.triggerExitHoverMaxReachCallback, this);

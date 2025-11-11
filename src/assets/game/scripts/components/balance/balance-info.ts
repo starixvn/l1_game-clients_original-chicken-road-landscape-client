@@ -15,10 +15,6 @@ export class BalanceInfo extends MainPlayerProfile {
     private readonly minWidth = 180;
     private readonly maxWidth = 200;
 
-    onLoad() {
-        super.onLoad();
-    }
-
     @render(MainPlayerStore, (store) => store.balance)
     setUIBalance(balance: number) {
         if (balance.toString().length > 9) {

@@ -16,10 +16,6 @@ export class PlayerCounter extends ObserverComponent {
 
     private playerCount = 0;
 
-    onLoad() {
-        super.onLoad();
-    }
-
     @render(BetStore, (store) => store.roundId)
     renderlblRound(roundId: number) {
         this.lblRoundId && roundId !== 0 && (this.lblRoundId.string = `#${roundId}`);

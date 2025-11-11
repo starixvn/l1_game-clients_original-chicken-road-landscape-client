@@ -29,24 +29,20 @@ export class TopWinnersContainer extends ObserverComponent {
 
     items: Node[] = [];
 
-    onLoad() {
-        super.onLoad();
-    }
-
     @render(gc.Player.MainPlayerStore, (store) => store.name)
     renderPlayerName(name: string) {
-    this.playerName = name;
+        this.playerName = name;
 
-    if (this.items?.length) {
-        this.items.forEach((node) => {
-            const item = node.getComponent(TopWinnerItem);
-            if (!item || !item.winnerData) { return; }
+        if (this.items?.length) {
+            this.items.forEach((node) => {
+                const item = node.getComponent(TopWinnerItem);
+                if (!item || !item.winnerData) { return; }
 
-            const isMainPlayer = item.winnerData.name === this.playerName;
-            item.setHighlight(isMainPlayer);
-        });
+                const isMainPlayer = item.winnerData.name === this.playerName;
+                item.setHighlight(isMainPlayer);
+            });
+        }
     }
-}
 
     @render(TopWinnersStore, (store) => store.winners)
     renderWinners(winners: TopWinner[]) {

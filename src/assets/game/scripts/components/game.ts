@@ -48,10 +48,6 @@ export default class Game extends GameComponent {
     private multiplier = 0;
     private _currentMultiplierConfig: FixedStepsMultiplierConfig = null;
 
-    onLoad() {
-        super.onLoad();
-    }
-
     @render(BetStore, (store) => store.roundId)
     renderlblRound(roundId: number) {
         this.lblRoundId && roundId !== 0 && (this.lblRoundId.string = `#${roundId}`);
@@ -119,10 +115,10 @@ export default class Game extends GameComponent {
     }
 
     @handle(BetHandler, (handler) => handler.completeSettle())
-    completeSettle() {}
+    completeSettle() { }
 
     @handle(gc.Auth.AuthHandlers.GetBalance)
-    getBalance() {}
+    getBalance() { }
 
     @handle(BalanceEffectHandlers.MainPlayerIncreaseBalance)
     mainPlayerIncreaseBalance(balance: number) {
@@ -135,7 +131,7 @@ export default class Game extends GameComponent {
     }
 
     @handle(CashOutHistoryHandlers, (handler) => handler.addCashOutHistory())
-    addCashOutHistory() {}
+    addCashOutHistory() { }
 
     shake(node: Node, duration = 1, strength = 10) {
         const originalPosition = new Vec3(node.position);

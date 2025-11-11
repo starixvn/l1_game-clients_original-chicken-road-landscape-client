@@ -13,10 +13,6 @@ export default class ButtonAutoPlay extends ObserverComponent {
     @property(Node)
     btnAutoPlay: Node = null;
 
-    onLoad() {
-        super.onLoad();
-    }
-
     @render(AutoPlayStore, (store) => store.isAutoplay)
     renderButton(enable: boolean) {
         this.btnAutoPlay.active = !enable;

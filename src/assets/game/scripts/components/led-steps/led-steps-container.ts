@@ -18,10 +18,6 @@ export class LedStepsContainer extends ObserverComponent {
 
     private currentConfig: FixedStepsMultiplierConfig;
 
-    onLoad() {
-        super.onLoad();
-    }
-
     @render(InstantWinConfigStore, (store) => store.currentMultiplierConfig, { fireImmediately: false })
     setMultiplierConfig(currentMultiplierConfig: FixedStepsMultiplierConfig) {
         this.currentConfig = currentMultiplierConfig;
