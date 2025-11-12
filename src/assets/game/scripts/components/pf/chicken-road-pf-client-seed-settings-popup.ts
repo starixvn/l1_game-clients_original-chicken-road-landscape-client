@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, EditBox, UIOpacity } from "cc";
+import { _decorator, EditBox, UIOpacity, BlockInputEvents } from "cc";
 import { ClientSeedSettingsPopup as ClientSeedSettingsPopupRoundBase } from "db://shared-components/provably-fair/round-base/scripts/client-seed-settings-popup";
 import Observer from "observer";
 import { AutoPlayStore } from "../play-mode/auto-play";
@@ -32,6 +32,12 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
         const opacity = enabled ? this.OPACITY_ENABLED : this.OPACITY_DISABLED;
         this.inputManualSeed.enabled = enabled && !this.isAutoPlay;
         this.inputManualSeed.node.getComponent(UIOpacity).opacity = opacity;
+
+        let blocker = this.inputManualSeed.node.getComponent(BlockInputEvents);
+        if (!blocker) {
+            blocker = this.inputManualSeed.node.addComponent(BlockInputEvents);
+        }
+        blocker.enabled = !enabled;
     }
 
     private updateRandomLabelOpacity(enabled: boolean) {
@@ -41,12 +47,14 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
     clickManualOption() {
         const randomCS = this.lblRandomClientSeed.string;
         this.inputManualSeed.string = randomCS;
+        this.updateInputOpacity(true);
         this.updateValueManualMode(randomCS);
         this.clickManualMode();
     }
 
     clickAutoOption() {
         this.inputManualSeed.string = "";
+        this.updateInputOpacity(false);
         this.clickRandomMode();
     }
 
@@ -84,7 +92,12 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
 
     updateRandomMode(randomClientSeedEnabled: boolean) {
         super.updateRandomMode(randomClientSeedEnabled);
-        this.updateInputOpacity(!randomClientSeedEnabled);
+        const manualEnabled = !randomClientSeedEnabled && !this.isAutoPlay;
+
+        this.updateInputOpacity(manualEnabled);
+        this.scheduleOnce(() => {
+            this.updateInputOpacity(manualEnabled);
+        }, 0);
     }
 
     setDisplayComponents(notAllowChangeClientSeed: boolean) {
