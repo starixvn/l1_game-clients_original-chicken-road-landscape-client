@@ -1,10 +1,11 @@
 import gc from "@sg/game-client-base";
+import { log } from "cc";
 import inversify from "inversify";
 import mobx from "mobx";
 import { InstantWinConfigStore } from "../../../game-configs/instant-win-config-store";
 import { BetAmountStore } from "../../bet-amount/bet-amount-store";
 import { BetHandler } from "../../bets/bet-handler";
-import { BetStore } from "../../bets/bet-store";
+import { BetStore, BetUIState } from "../../bets/bet-store";
 import { AutoPlayStore } from "./auto-play-store";
 
 const { injectable, inject } = inversify;
@@ -78,7 +79,10 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     autoPlaceBet() {
-        this.autoPlayStore.triggerBet = {};
+        if (this.betStore.uiState === BetUIState.Start) {
+            this.countDownRoundAutoPlay();
+        }
+        this.betHandler.handle();
     }
 
     openAutoPlayPopup() {
@@ -132,10 +136,8 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     confirmRoundAndStart() {
-        console.log(
-            `confirmRoundAndStart rounds: ${this.autoPlayStore.selectedRoundOnPopup}, 
-            at step: ${this.autoPlayStore.noOfLanes}`
-        );
+        log(`confirmRoundAndStart rounds: ${this.autoPlayStore.selectedRoundOnPopup}, 
+            at step: ${this.autoPlayStore.noOfLanes}`);
         this.autoPlayStore.roundsAutoplay = this.autoPlayStore.selectedRoundOnPopup;
         this.autoPlayStore.isOpenAutoplayPopup = false;
         this.autoPlayStore.isAutoplay = true;
@@ -159,11 +161,12 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     checkAutoBetNextRound() {
-        if (!this.autoPlayStore.isAutoplay) {
+        log("checkAutoBetNextRound");
+        if (!this.autoPlayStore.isAutoplay || this.betStore.settleStatus) {
             return;
         }
 
-        if (this.isCurrentStepCashOut()) {
+        if (this.checkAutoCashOut()) {
             // cash out
             this.betHandler.handleCashOut();
             return;
@@ -172,7 +175,7 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
         this.handleAutoPlaceBet();
     }
 
-    isCurrentStepCashOut() {
+    checkAutoCashOut() {
         const cashOutLand = this.autoPlayStore.noOfLanes;
         const cashOutMultiplier = this.autoPlayStore.currentMultiplierConfig.multiplierSteps[cashOutLand - 1];
         return this.betStore.multiplier === cashOutMultiplier;

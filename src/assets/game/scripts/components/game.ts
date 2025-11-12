@@ -17,6 +17,7 @@ import { BetHandler } from "./bets/bet-handler";
 import { BetStore, SettleStatus } from "./bets/bet-store";
 import { CashOutHistoryHandlers } from "./cash-out-history/cash-out-history-handlers";
 import { GameWinNotice } from "./game-win-notice";
+import { AutoPlayHandler } from "./play-mode/auto-play/auto-play-handler";
 
 startGame(settings.name, containerOptions, siteConfigs, settings.namespaces);
 
@@ -129,6 +130,7 @@ export default class Game extends GameComponent {
         this.multiplier = multiplier;
     }
 
+    @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
     @handle(BetHandler, (handler) => handler.completeSettle())
     completeSettle() { }
 

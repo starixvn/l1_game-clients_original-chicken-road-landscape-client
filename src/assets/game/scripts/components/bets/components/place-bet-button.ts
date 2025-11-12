@@ -42,11 +42,6 @@ export default class PlaceBetButton extends ObserverComponent {
 
     private uiState: BetUIState = BetUIState.Start;
 
-    @render(AutoPlayStore, (store) => store.isAutoplay)
-    setIsAutoPlay(isAutoPlay: boolean) {
-        this.isAutoPlay = isAutoPlay;
-    }
-
     @render(AutoPlayStore, (store) => store.roundsAutoplay)
     setRoundsAutoPlay(rounds: number) {
         this.roundsAutoPlay = rounds;
@@ -91,13 +86,6 @@ export default class PlaceBetButton extends ObserverComponent {
         this.playSound(AudioIds.BTN_CASHOUT);
     }
 
-    @render(AutoPlayStore, (store) => store.triggerBet)
-    renderTriggerBet(triggerBet: boolean) {
-        if (triggerBet) {
-            this.onClickSpace();
-        }
-    }
-
     @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
     playSound(id: string) {
         return id;
@@ -134,25 +122,7 @@ export default class PlaceBetButton extends ObserverComponent {
         const currentUIState = this.uiState;
         this.uiState = uiState;
         this.updateButtonInteractable(uiState);
-
-        if (this.isAutoPlay) {
-            this.handleAutoPlay(currentUIState, uiState);
-            return;
-        }
-
-        this.updateButtonState(uiState);
-    }
-
-    private handleAutoPlay(previousUIState: BetUIState, uiState: BetUIState) {
-        if (previousUIState === BetUIState.Start) {
-            this.countDownRoundAutoPlay();
-        }
-
-        if (uiState === BetUIState.Start) {
-            const handle = this.roundsAutoPlay > 0 ? this.checkAutoBetNextRound : this.cancelAutoPlay;
-            this.scheduleOnce(() => handle(), 0.1);
-        }
-        this.startBetButton.active = false;
+        this.updateButtonState();
     }
 
     @handle(AutoPlayHandler, (handle) => handle.cancelAutoPlay())
@@ -164,19 +134,19 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     @render(AutoPlayStore, (store) => store.isAutoplay)
-    updateButtonStateByAutoPlay(isAutoPlay: boolean) {
-        if (isAutoPlay) {
-            return;
-        }
-
-        this.updateButtonState(this.uiState);
+    renderAutoPlay(isAutoPlay: boolean) {
+        this.isAutoPlay = isAutoPlay;
+        this.updateButtonState();
     }
 
-    private updateButtonState(uiState: BetUIState) {
-        this.startBetButton.active = uiState === BetUIState.Start;
-        this.playModeNode.active = uiState === BetUIState.Start;
-        this.hitStoneButton.active = uiState > BetUIState.Start;
-        this.cashOutButton.active = uiState > BetUIState.Start;
+    private updateButtonState() {
+        const uiState = this.uiState;
+        const isAutoPlay = this.isAutoPlay;
+        this.startBetButton.active = uiState === BetUIState.Start && !isAutoPlay;
+        this.hitStoneButton.active = uiState > BetUIState.Start && !isAutoPlay;
+        this.cashOutButton.active = uiState > BetUIState.Start && !isAutoPlay;
+
+        this.playModeNode.active = uiState === BetUIState.Start || isAutoPlay;
     }
 
     @handle(AutoPlayHandler, (handle) => handle.countDownRoundAutoPlay())

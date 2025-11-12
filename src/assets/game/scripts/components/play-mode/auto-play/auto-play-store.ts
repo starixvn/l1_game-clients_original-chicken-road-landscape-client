@@ -13,7 +13,6 @@ export class AutoPlayStore {
     public isOpenAutoplayPopup = false;
     public selectedRoundOnPopup = this.roundsList[0];
     public roundsAutoplay = 0;
-    public triggerBet = null;
 
     isAutoplay = false;
     noOfLanes = 1;

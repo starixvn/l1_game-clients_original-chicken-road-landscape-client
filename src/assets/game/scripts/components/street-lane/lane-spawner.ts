@@ -6,7 +6,6 @@ import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { Chicken } from "../chicken/chicken";
 import { AutoPlayHandler } from "../play-mode/auto-play/auto-play-handler";
-import { AutoPlayStore } from "../play-mode/auto-play/auto-play-store";
 import LaneItem from "./lane-item";
 
 const { ccclass, property } = _decorator;
@@ -43,11 +42,9 @@ export class LaneSpawner extends ObserverComponent {
     private currentLaneIndex = -1;
     private currentConfig: FixedStepsMultiplierConfig;
 
-    private isAutoPlay = false;
-
     onLoad() {
-        super.onLoad();
         this.laneContent.removeAllChildren();
+        super.onLoad();
     }
 
     @render(InstantWinConfigStore, (store) => store.currentMultiplierConfig, { fireImmediately: false })
@@ -57,11 +54,6 @@ export class LaneSpawner extends ObserverComponent {
         if (this.currentConfig) {
             this.renderLane(previousConfig);
         }
-    }
-
-    @render(AutoPlayStore, (store) => store.isAutoplay)
-    setIsAutoPlay(isAutoPlay: boolean) {
-        this.isAutoPlay = isAutoPlay;
     }
 
     renderLane(previousConfig: FixedStepsMultiplierConfig) {
@@ -279,9 +271,7 @@ export class LaneSpawner extends ObserverComponent {
             this.updateCurrentAndNextLaneItemBackground();
 
             this.setUIMiningState();
-            if (this.isAutoPlay) {
-                this.checkPlaceBetNextRound();
-            }
+            this.checkPlaceBetNextRound();
         } catch (e) { }
     }
 
