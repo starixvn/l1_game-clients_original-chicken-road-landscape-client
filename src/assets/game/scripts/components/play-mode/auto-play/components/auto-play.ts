@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Button, EditBox, instantiate, Node, Prefab } from "cc";
+import { _decorator, Button, EditBox, instantiate, Label, Node, Prefab } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
@@ -35,7 +35,11 @@ export default class AutoPlay extends ObserverComponent {
     @property(Prefab)
     prfAutoPlayItem: Prefab = null;
 
+    @property(Label)
+    lblMultiplier: Label = null;
+
     private maxNumberOfLanes = 0;
+    private currentMultiplierConfig: FixedStepsMultiplierConfig | null = null;
 
     onLoad() {
         super.onLoad();
@@ -69,6 +73,7 @@ export default class AutoPlay extends ObserverComponent {
             this.numberOfLanesEditBox.string = numberOfLanes.toString();
         }
         this.updateNumberOfLanes(numberOfLanes);
+        this.updateMultiplierLabel(numberOfLanes);
     }
 
     @render(AutoPlayStore, (store) => store.currentMultiplierConfig)
@@ -76,7 +81,13 @@ export default class AutoPlay extends ObserverComponent {
         if (!currentMultiplierConfig) {
             return;
         }
+        this.currentMultiplierConfig = currentMultiplierConfig;
         this.maxNumberOfLanes = currentMultiplierConfig.multiplierSteps.length;
+
+        const initialLanes = this.getInputNumberOfLanes();
+        if (initialLanes > 0) {
+            this.updateMultiplierLabel(initialLanes);
+        }
     }
 
     @render(AutoPlayStore, (store) => store.roundsList)
@@ -101,6 +112,7 @@ export default class AutoPlay extends ObserverComponent {
     @render(AutoPlayStore, (store) => store.noOfLanes)
     renderNoOfLanes(noOfLanes: number) {
         this.numberOfLanesEditBox.string = noOfLanes.toString();
+        this.updateMultiplierLabel(noOfLanes);
     }
 
     @handle(AutoPlayHandler, (handler, numberOfLanes: number) => handler.handleNoOfLanes(numberOfLanes))
@@ -111,11 +123,15 @@ export default class AutoPlay extends ObserverComponent {
     @handle(AutoPlayHandler, (handler) => handler.decreaseNoOfLanes())
     onClickMinusButton() {
         AudioUtils.playClick();
+        const currentLanes = this.getInputNumberOfLanes() - 1;
+        this.updateMultiplierLabel(currentLanes);
     }
 
     @handle(AutoPlayHandler, (handler) => handler.increaseNoOfLanes())
     onClickPlusButton() {
         AudioUtils.playClick();
+        const currentLanes = this.getInputNumberOfLanes() + 1;
+        this.updateMultiplierLabel(currentLanes);
     }
 
     @render(AutoPlayStore, (store) => store.canIncreaseNoOfLanes)
@@ -147,5 +163,22 @@ export default class AutoPlay extends ObserverComponent {
     @handle(AutoPlayHandler, (handler) => handler.closeAutoPlayPopup())
     closePopup() {
         AudioUtils.playClick();
+    }
+
+    private updateMultiplierLabel(noOfLanes: number) {
+        if (!this.currentMultiplierConfig || noOfLanes < 1) {
+            this.lblMultiplier.string = "---";
+            return;
+        }
+        const multiplierIndex = noOfLanes - 1;
+
+        if (multiplierIndex >= 0 && multiplierIndex < this.currentMultiplierConfig.multiplierSteps.length) {
+            const multiplierValue = this.currentMultiplierConfig.multiplierSteps[multiplierIndex];
+
+
+            this.lblMultiplier.string = `${multiplierValue.toFixed(2)}x`;
+        } else {
+            this.lblMultiplier.string = "N/A";
+        }
     }
 }

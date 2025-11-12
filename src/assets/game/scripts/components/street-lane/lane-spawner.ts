@@ -191,7 +191,7 @@ export class LaneSpawner extends ObserverComponent {
         this.streetFullView.getComponent(UITransform).width = newWidth;
 
         if (this.rightCurbStatic) {
-            const rightCurbXPos = leftCurbWidth + totalLanesWidth;
+            const rightCurbXPos = leftCurbWidth + totalLanesWidth - 14;
 
             this.rightCurbStatic.setPosition(v3(rightCurbXPos, this.rightCurbStatic.position.y, 0));
         }

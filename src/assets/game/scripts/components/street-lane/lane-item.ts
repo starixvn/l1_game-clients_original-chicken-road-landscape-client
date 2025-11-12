@@ -184,7 +184,6 @@ export default class LaneItem extends ObserverComponent {
                 widget.isAlignRight = true;
                 widget.right = 0;
                 widget.isAlignLeft = false;
-                this.streetLineNode.active = false;
             }
             widget.updateAlignment();
         }
