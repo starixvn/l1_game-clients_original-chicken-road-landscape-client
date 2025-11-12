@@ -648,6 +648,9 @@
     "lblBet": {
       "__id__": 11
     },
+    "nodeDisabledLayer": {
+      "__id__": 16
+    },
     "_id": ""
   },
   {
