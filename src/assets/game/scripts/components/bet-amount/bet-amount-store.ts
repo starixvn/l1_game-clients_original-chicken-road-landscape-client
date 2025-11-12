@@ -16,9 +16,22 @@ export class BetAmountStore {
 
     constructor() {
         mobx.makeAutoObservable(this);
+        setTimeout(() => {
+            mobx.reaction(() => this.betBaseStore.amount, (amount) => {
+                this.syncAmount(amount);
+            });
+        }, 100);
     }
 
     isOpenBetAmountPopup = false;
+
+    amount = {}
+
+    syncAmount(amount: number) {
+        this.amount = {
+            value: amount,
+        };
+    }
 
     get betLevels() {
         return this.gameConfig.betLevels.slice(0, 3);

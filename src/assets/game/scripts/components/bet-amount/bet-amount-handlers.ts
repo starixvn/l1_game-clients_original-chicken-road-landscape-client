@@ -19,6 +19,10 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
         return Math.min(this.gameConfig.maxBet, this.mainPlayerStore.balance)
     }
 
+    validAmount(amount: number) {
+        return Math.min(amount, this.maxBetAvailable);
+    }
+
     clickBetLevel(key: string) {
         const isChangeKey = this.lastKey !== key && this.lastKey !== "";
 
@@ -31,13 +35,18 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
                 this.updateBetAmount(amount)
             } else {
                 const newAmount = this.betStore.amount + amount;
-                this.updateBetAmount(Math.min(newAmount, this.maxBetAvailable))
+                this.updateBetAmount(newAmount);
             }
         }
     }
 
     updateBetAmount(betAmount: number) {
-        this.betStore.amount = betAmount;
+        const validAmount = this.validAmount(betAmount);
+        if (validAmount !== this.betStore.amount) {
+            this.betStore.amount = validAmount;
+        } else {
+            this.betAmountStore.syncAmount(validAmount);
+        }
         this.updateStatusBetAmountPopup(false);
     }
 

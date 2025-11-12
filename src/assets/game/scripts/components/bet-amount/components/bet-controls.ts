@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Button, EditBox, Label, Node, warn } from "cc";
+import { _decorator, Button, EditBox, Node, warn } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 
@@ -14,9 +14,6 @@ const { observer, render, handle } = Observer;
 
 @ccclass
 export default class BetControls extends ObserverComponent {
-    @property(Label)
-    lblBetLevelDefault: Label = null;
-
     @property(Node)
     nodeDisabledDescrease: Node = null;
 
@@ -60,11 +57,8 @@ export default class BetControls extends ObserverComponent {
 
     onEditEndBetAmount(editBox: EditBox) {
         const validValue = this.onEditEnd(editBox, false);
-        let validAmount = Math.min(validValue, this.betLevels.at(-1));
-        validAmount = Math.max(validAmount, this.betLevels.at(0));
-
+        const validAmount = Math.max(validValue, this.betLevels.at(0));
         this.updateBetAmount(Number(validAmount));
-        this.setBetAmount(Number(validAmount));
     }
 
     onEditEnd(editBox: EditBox, noZero: boolean) {
@@ -96,14 +90,15 @@ export default class BetControls extends ObserverComponent {
         return amount;
     }
 
-    @render(gc.Bet.BetStore, (store) => store.amount)
-    renderBetAmount(betAmount: number) {
-        this.setBetAmount(betAmount);
+    @render(BetAmountStore, (store) => store.amount)
+    renderBetAmount(amount: any) {
+        if (amount?.value) {
+            this.setBetAmount(amount.value);
+        }
     }
 
     setBetAmount(betAmount: number) {
-        this.lblBetLevelDefault.string = FormatUtils.numberWithCommas(betAmount, 2);
-        this.inputBetAmount.string = betAmount.toString();
+        this.inputBetAmount.string = FormatUtils.numberWithCommas(betAmount, 2);
     }
 
     @render(BetAmountStore, (store) => store.betLevels)
