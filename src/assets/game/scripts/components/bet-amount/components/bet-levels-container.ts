@@ -22,7 +22,6 @@ export default class BetLevelsContainer extends ObserverComponent {
             return;
         }
         this.setBetLevels(betLevels);
-        console.log("betLevels", betLevels);
     }
 
     setBetLevels(betLevels: number[]) {
@@ -34,6 +33,7 @@ export default class BetLevelsContainer extends ObserverComponent {
     }
 
     initBetLevelItems(betLevels: number[]) {
+        this.content.destroyAllChildren();
         for (let index = 0; index <= betLevels.length; index++) {
             const isMax = index >= betLevels.length;
             const value = isMax ? "max" : betLevels[index];

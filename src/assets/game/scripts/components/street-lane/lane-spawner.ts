@@ -46,6 +46,7 @@ export class LaneSpawner extends ObserverComponent {
     private laneWidth = 0;
     private currentLaneIndex = -1;
     private currentConfig: FixedStepsMultiplierConfig;
+    private interrupted = false;
 
     private decor1Index = -1;
     private decor2Index = -1;
@@ -301,13 +302,14 @@ export class LaneSpawner extends ObserverComponent {
             return;
         }
         try {
+
             const minMultiplier = this.currentConfig.multiplierSteps[0];
 
+            this.interrupted = false;
             if (multiplier < minMultiplier) {
                 this.updateCurrentLaneItemBackground();
                 return;
             }
-
             this.setUIAnimatingState();
             const nextLane = this.currentLaneIndex + 1;
             const isFinalLane = nextLane === this.currentConfig.multiplierSteps.length - 1;
@@ -324,8 +326,25 @@ export class LaneSpawner extends ObserverComponent {
             this.updateCurrentAndNextLaneItemBackground();
 
             this.setUIMiningState();
-            this.checkPlaceBetNextRound();
+
+            if (this.interrupted) {
+                this.completeSettle();
+            } else {
+                this.checkPlaceBetNextRound();
+            }
+            this.interrupted = false;
         } catch (e) { }
+    }
+
+    @handle(AutoPlayHandler, (handler) => handler.completeSettle())
+    completeSettle() { }
+
+    @render(AutoPlayHandler, handler => handler.interrupted, { fireImmediately: false })
+    renderInterrupted(interrupted: any) {
+        if (interrupted) {
+            this.interrupted = true;
+            console.log("render interrupted", interrupted);
+        }
     }
 
     @handle(BetHandler, (handler) => handler.setUIMiningState())

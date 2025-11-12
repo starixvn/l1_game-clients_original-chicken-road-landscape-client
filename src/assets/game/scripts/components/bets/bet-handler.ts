@@ -24,7 +24,6 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     @inject(HashHandlers) protected readonly hashHandlers: HashHandlers;
     @inject(InstantWinConfigStore) protected readonly instantWinConfigStore: InstantWinConfigStore;
     @inject(AutoPlayStore) protected readonly autoPlayStore: AutoPlayStore;
-    @inject(gc.Connection.ConnectionHandlers.InGameHandler) protected readonly inGameHandler: gc.Connection.ConnectionHandlers.InGameHandler;
 
     private readonly BIG_WIN_MULTIPLIER = 2.0;
     private autoCashOutTimeOut = null;
@@ -33,18 +32,12 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         this.betsStore.uiState = BetUIState.Bet;
         const betData: any = this.createCommonBetData();
         betData.action = this.betsStore.betCount === 0 ? BetAction.Bet : BetAction.Mine;
+        console.log("betCount", this.betsStore.betCount);
+        console.log("bet action", betData.action);
         betData.clientSeed = this.pfStore.clientSeed;
         betData.multiplierMode = this.instantWinConfigStore.currentMultiplierConfig.mode;
         this.betsStore.betCount++;
         this.handleBetData(betData);
-    }
-
-    async handleInterruption() {
-        await FunctionUtils.waitUntil(() => this.connectionStore.signedIn, 100, 10000);
-        if (!this.connectionStore.signedIn) {
-            return;
-        }
-        this.inGameHandler.requestInGame();
     }
 
     handleBetData(data: any) {
@@ -101,6 +94,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     resetBet() {
         this.betsStore.betCount = 0;
         this.betsStore.uiState = BetUIState.Start;
+        console.log("resetBet", this.betsStore.uiState);
         this.betsStore.reachMaxWin = false;
         this.betsStore.settleStatus = null;
         this.betsStore.winAmount = 0;
@@ -120,6 +114,11 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     handleCashOut() {
         this.clearAutoCashOut();
         this.connectionStore.send("cashOut", {});
+    }
+
+    async awaitConnectionReady() {
+        await FunctionUtils.waitUntil(() => this.connectionStore.signedIn, 100, 10000);
+        return this.connectionStore.signedIn;
     }
 
     handleEndBet(endBet: number) {

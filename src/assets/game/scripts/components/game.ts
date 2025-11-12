@@ -13,7 +13,6 @@ import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../game-confi
 import { settings } from "../game-settings";
 import { InterruptionHandlers } from "../interruption-handlers";
 import "./../../../resources/i18n";
-import { BetHandler } from "./bets/bet-handler";
 import { BetStore, SettleStatus } from "./bets/bet-store";
 import { CashOutHistoryHandlers } from "./cash-out-history/cash-out-history-handlers";
 import { GameWinNotice } from "./game-win-notice";
@@ -130,8 +129,7 @@ export default class Game extends GameComponent {
         this.multiplier = multiplier;
     }
 
-    @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
-    @handle(BetHandler, (handler) => handler.completeSettle())
+    @handle(AutoPlayHandler, (handler) => handler.completeSettle())
     completeSettle() { }
 
     @handle(gc.Auth.AuthHandlers.GetBalance)

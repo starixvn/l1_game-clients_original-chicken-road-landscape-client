@@ -20,8 +20,10 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     @inject(gc.Rounds.RoundStore) private readonly roundStore: gc.Rounds.RoundStore;
     @inject(InstantWinConfigStore) private readonly instantWinConfigStore: InstantWinConfigStore;
     @inject(AutoPlayStore) readonly autoPlayStore: AutoPlayStore;
-
     @inject(BetHandler) private readonly betHandler: BetHandler;
+    @inject(gc.Connection.ConnectionHandlers.InGameHandler) protected readonly inGameHandler: gc.Connection.ConnectionHandlers.InGameHandler;
+
+    interrupted = {};
 
     constructor() {
         mobx.makeAutoObservable(this);
@@ -170,12 +172,27 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
         }
 
         if (this.checkAutoCashOut()) {
-            // cash out
             this.betHandler.handleCashOut();
             return;
         }
 
         this.handleAutoPlaceBet();
+    }
+
+    async handleInterruption() {
+        const ready = await this.betHandler.awaitConnectionReady();
+        if (!ready) {
+            return;
+        }
+
+        this.inGameHandler.requestInGame();
+    }
+
+    completeSettle() {
+        this.betHandler.completeSettle();
+        setTimeout(() => {
+            this.checkAutoBetNextRound();
+        }, 500);
     }
 
     checkAutoCashOut() {
