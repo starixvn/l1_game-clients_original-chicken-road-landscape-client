@@ -11,6 +11,8 @@ import LaneItem from "./lane-item";
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
+const CURB_WIDTH = 238;
+
 @ccclass("LaneSpawner")
 export class LaneSpawner extends ObserverComponent {
     @property(Prefab)
@@ -37,10 +39,16 @@ export class LaneSpawner extends ObserverComponent {
     @property(Node)
     centerNode: Node = null;
 
+    @property(Node)
+    rightCurbStatic: Node = null;
+
     private chickenCtrl: Chicken = null;
     private laneWidth = 0;
     private currentLaneIndex = -1;
     private currentConfig: FixedStepsMultiplierConfig;
+
+    private decor1Index: number = -1;
+    private decor2Index: number = -1;
 
     onLoad() {
         this.laneContent.removeAllChildren();
@@ -76,6 +84,8 @@ export class LaneSpawner extends ObserverComponent {
         } else {
             this.adjustLaneCount(previousLength);
         }
+
+        this.generateRandomDecorIndices(this.currentConfig.multiplierSteps.length);
 
         this.laneWidth = this.lanePrefab.data.getComponent(UITransform).width;
         this.configureLanes();
@@ -125,6 +135,15 @@ export class LaneSpawner extends ObserverComponent {
                 continue;
             }
 
+            const isFirst = index === 0;
+            const isLast = index === this.currentConfig.multiplierSteps.length - 1;
+
+            landItem.configGrate(isFirst, isLast);
+
+            const showDecor1 = index === this.decor1Index;
+            const showDecor2 = index === this.decor2Index;
+            landItem.configDecors(showDecor1, showDecor2);
+
             landItem.setMultiplier(multiplier);
             if (index === 0) {
                 landItem.multiplierBg.spriteFrame = landItem.nextStepMultiplierBgFrame;
@@ -135,11 +154,43 @@ export class LaneSpawner extends ObserverComponent {
         }
     }
 
+    private generateRandomDecorIndices(totalLanes: number) {
+        this.decor1Index = -1;
+        this.decor2Index = -1;
+
+        if (totalLanes < 2) return;
+
+        const availableIndices = Array.from({ length: totalLanes }, (_, i) => i);
+
+        const randomIndex1 = Math.floor(Math.random() * availableIndices.length);
+        this.decor1Index = availableIndices[randomIndex1];
+
+        availableIndices.splice(randomIndex1, 1);
+
+        const randomIndex2 = Math.floor(Math.random() * availableIndices.length);
+        this.decor2Index = availableIndices[randomIndex2];
+    }
+
     updateStreetFullViewWidth() {
-        if (this.streetFullView && this.laneContent && this.currentConfig) {
-            const laneContentWidth = this.lanePrefab.data.getComponent(UITransform).width * (this.currentConfig.multiplierSteps.length + 1);
-            const newWidth = laneContentWidth + 162;
-            this.streetFullView.getComponent(UITransform).width = newWidth;
+        if (!this.streetFullView || !this.currentConfig || !this.lanePrefab.data) {
+            return;
+        }
+
+        const laneCount = this.currentConfig.multiplierSteps.length;
+        const laneTransform = this.lanePrefab.data.getComponent(UITransform);
+        const singleLaneWidth = laneTransform ? laneTransform.width : 0;
+
+        const totalLanesWidth = singleLaneWidth * laneCount;
+        const leftCurbWidth = CURB_WIDTH;
+        const rightCurbWidth = CURB_WIDTH;
+
+        const newWidth = totalLanesWidth + leftCurbWidth + rightCurbWidth;
+        this.streetFullView.getComponent(UITransform)!.width = newWidth;
+
+        if (this.rightCurbStatic) {
+            const rightCurbXPos = leftCurbWidth + totalLanesWidth;
+
+            this.rightCurbStatic.setPosition(v3(rightCurbXPos, this.rightCurbStatic.position.y, 0));
         }
     }
 
