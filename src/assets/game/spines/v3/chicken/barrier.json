@@ -1,19 +1,15 @@
 {
-"skeleton": { "hash": "o51NyeqoRtK2MUSg6SK/5nVkV6s", "spine": "3.8.99", "images": "./ga/", "audio": "D:/MYWORKFOLDER/design/Chicken-crash/animation/ga" },
+"skeleton": { "hash": "8xRNKoismQNygC309hEAdVjf/TM", "spine": "3.8.99", "images": "./ga/", "audio": "D:/MYWORKFOLDER/design/Chicken-crash/animation/ga" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "barrel", "parent": "root", "y": -0.99 },
 	{ "name": "effect", "parent": "root" },
 	{ "name": "shadow mid", "parent": "effect", "y": -2.29 },
-	{ "name": "shadow side", "parent": "effect", "x": -82.26, "y": -2.29 },
-	{ "name": "smoke R", "parent": "effect", "y": -69.03 },
-	{ "name": "smoke L", "parent": "effect", "y": -69.03 },
-	{ "name": "shadow side2", "parent": "effect", "x": 82.74, "y": -2.29, "scaleX": -1 }
+	{ "name": "smoke R", "parent": "effect", "y": -56.11 },
+	{ "name": "smoke L", "parent": "effect", "y": -56.11 }
 ],
 "slots": [
 	{ "name": "ga/shadow mid", "bone": "shadow mid" },
-	{ "name": "ga/shadow side", "bone": "shadow side" },
-	{ "name": "ga/shadow side2", "bone": "shadow side2" },
 	{ "name": "ga/barrel", "bone": "barrel" },
 	{ "name": "ga/smoke R", "bone": "smoke R" },
 	{ "name": "ga/smoke L", "bone": "smoke L" }
@@ -23,16 +19,10 @@
 		"name": "default",
 		"attachments": {
 			"ga/barrel": {
-				"barrel": { "y": 39.9, "width": 247, "height": 121 }
+				"barrel": { "y": 39.9, "width": 182, "height": 121 }
 			},
 			"ga/shadow mid": {
-				"shadow mid": { "width": 81, "height": 37 }
-			},
-			"ga/shadow side": {
-				"shadow side": { "width": 83, "height": 37 }
-			},
-			"ga/shadow side2": {
-				"shadow side": { "width": 83, "height": 37 }
+				"shadow mid": { "width": 191, "height": 37 }
 			},
 			"ga/smoke L": {
 				"smoke L": { "y": 40, "width": 194, "height": 90 }
@@ -64,24 +54,6 @@
 					{ "name": "shadow mid" }
 				]
 			},
-			"ga/shadow side": {
-				"color": [
-					{ "color": "ffffff00" },
-					{ "time": 0.1667, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "name": "shadow side" }
-				]
-			},
-			"ga/shadow side2": {
-				"color": [
-					{ "color": "ffffff00" },
-					{ "time": 0.1667, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "name": "shadow side" }
-				]
-			},
 			"ga/smoke L": {
 				"color": [
 					{ "time": 0.2333, "color": "ffffffff" },
@@ -105,7 +77,7 @@
 			"barrel": {
 				"translate": [
 					{ "time": 0.0333, "y": 337.12 },
-					{ "time": 0.2 }
+					{ "time": 0.2, "y": 13.92 }
 				],
 				"scale": [
 					{ "time": 0.2 },
@@ -115,18 +87,6 @@
 				]
 			},
 			"shadow mid": {
-				"scale": [
-					{ "x": 0.8, "y": 0.8 },
-					{ "time": 0.1667 }
-				]
-			},
-			"shadow side": {
-				"scale": [
-					{ "x": 0.8, "y": 0.8 },
-					{ "time": 0.1667 }
-				]
-			},
-			"shadow side2": {
 				"scale": [
 					{ "x": 0.8, "y": 0.8 },
 					{ "time": 0.1667 }
