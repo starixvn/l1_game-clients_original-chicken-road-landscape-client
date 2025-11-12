@@ -38,14 +38,8 @@ export default class PlaceBetButton extends ObserverComponent {
     playModeNode: Node = null;
 
     private isAutoPlay = false;
-    private roundsAutoPlay = 0;
 
     private uiState: BetUIState = BetUIState.Start;
-
-    @render(AutoPlayStore, (store) => store.roundsAutoplay)
-    setRoundsAutoPlay(rounds: number) {
-        this.roundsAutoPlay = rounds;
-    }
 
     onLoad() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -119,7 +113,6 @@ export default class PlaceBetButton extends ObserverComponent {
     @render(BetStore, (store) => store.uiState, { fireImmediately: false })
     updateUIState(uiState: BetUIState) {
         log("updateUIState ", uiState);
-        const currentUIState = this.uiState;
         this.uiState = uiState;
         this.updateButtonInteractable(uiState);
         this.updateButtonState();
