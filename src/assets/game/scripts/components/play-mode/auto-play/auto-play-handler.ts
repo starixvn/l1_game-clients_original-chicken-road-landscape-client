@@ -157,7 +157,9 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     private checkFinishedAutoPlay() {
-        return this.autoPlayStore.isAutoplay && this.autoPlayStore.roundsAutoplay < 0;
+        return this.autoPlayStore.isAutoplay &&
+            this.autoPlayStore.roundsAutoplay <= 0 &&
+            this.betStore.uiState === BetUIState.Start;
     }
 
     checkAutoBetNextRound() {
