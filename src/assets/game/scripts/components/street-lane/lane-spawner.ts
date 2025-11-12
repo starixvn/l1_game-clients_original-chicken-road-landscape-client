@@ -47,8 +47,8 @@ export class LaneSpawner extends ObserverComponent {
     private currentLaneIndex = -1;
     private currentConfig: FixedStepsMultiplierConfig;
 
-    private decor1Index: number = -1;
-    private decor2Index: number = -1;
+    private decor1Index = -1;
+    private decor2Index = -1;
 
     onLoad() {
         this.laneContent.removeAllChildren();
@@ -158,16 +158,18 @@ export class LaneSpawner extends ObserverComponent {
         this.decor1Index = -1;
         this.decor2Index = -1;
 
-        if (totalLanes < 2) return;
+        if (totalLanes < 2) {
+            return;
+        }
 
         const availableIndices = Array.from({ length: totalLanes }, (_, i) => i);
 
-        const randomIndex1 = Math.floor(Math.random() * availableIndices.length);
+        const randomIndex1 = Math.floor(Math.random() * availableIndices.length); //NOSONAR
         this.decor1Index = availableIndices[randomIndex1];
 
         availableIndices.splice(randomIndex1, 1);
 
-        const randomIndex2 = Math.floor(Math.random() * availableIndices.length);
+        const randomIndex2 = Math.floor(Math.random() * availableIndices.length); //NOSONAR
         this.decor2Index = availableIndices[randomIndex2];
     }
 
@@ -185,7 +187,7 @@ export class LaneSpawner extends ObserverComponent {
         const rightCurbWidth = CURB_WIDTH;
 
         const newWidth = totalLanesWidth + leftCurbWidth + rightCurbWidth;
-        this.streetFullView.getComponent(UITransform)!.width = newWidth;
+        this.streetFullView.getComponent(UITransform).width = newWidth;
 
         if (this.rightCurbStatic) {
             const rightCurbXPos = leftCurbWidth + totalLanesWidth;
