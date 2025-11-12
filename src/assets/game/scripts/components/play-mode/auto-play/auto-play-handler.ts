@@ -69,9 +69,12 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     async handleAutoPlaceBet() {
-        if (this.checkFinishedAutoPlay() || !this.isValidBet()) {
-            this.autoPlayStore.isAutoplay = false;
-            this.autoPlayStore.isOpenAutoplayPopup = true;
+        if (this.betStore.uiState === BetUIState.Start) {
+            const isValidBet = this.isValidBet();
+            if (this.checkFinishedAutoPlay() || !isValidBet) {
+                this.cancelAutoPlay();
+                this.autoPlayStore.isOpenAutoplayPopup = isValidBet;
+            }
             return;
         }
 
@@ -157,9 +160,7 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     private checkFinishedAutoPlay() {
-        return this.autoPlayStore.isAutoplay &&
-            this.autoPlayStore.roundsAutoplay <= 0 &&
-            this.betStore.uiState === BetUIState.Start;
+        return this.autoPlayStore.isAutoplay && this.autoPlayStore.roundsAutoplay <= 0;
     }
 
     checkAutoBetNextRound() {
