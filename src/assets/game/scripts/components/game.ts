@@ -11,6 +11,7 @@ import { AudioIds } from "../../audios/AudioIds";
 import { containerOptions } from "../containerOptions";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../game-configs/instant-win-config-store";
 import { settings } from "../game-settings";
+import { InterruptionHandlers } from "../interruption-handlers";
 import "./../../../resources/i18n";
 import { BetHandler } from "./bets/bet-handler";
 import { BetStore, SettleStatus } from "./bets/bet-store";
@@ -43,7 +44,6 @@ export default class Game extends GameComponent {
     centerNode: Node = null;
 
     override namespace = settings.name;
-    protected override enableEventShowHideGame = false;
     override containerOptions = containerOptions;
     private multiplier = 0;
     private _currentMultiplierConfig: FixedStepsMultiplierConfig = null;
@@ -56,6 +56,21 @@ export default class Game extends GameComponent {
     override renderRoundId(roundId: number) {
         // override to not use round id from round store
     }
+
+
+    override onShowGame() {
+        this.handleGameShow();
+    }
+
+    override onHideGame() {
+        this.handleGameHide();
+    }
+
+    @handle(InterruptionHandlers, (handler) => handler.onGameHide())
+    handleGameHide() { }
+
+    @handle(InterruptionHandlers, (handler) => handler.onGameShow())
+    handleGameShow() { }
 
     @render(BetStore, (store) => store.settleStatus)
     async renderSettleStatus(settleStatus: SettleStatus) {

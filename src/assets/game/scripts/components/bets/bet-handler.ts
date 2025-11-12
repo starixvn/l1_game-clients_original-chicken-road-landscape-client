@@ -1,4 +1,5 @@
 import gc from "@sg/game-client-base";
+import { FunctionUtils } from "db://shared-components/shared/utils/function-utils";
 import inversify from "inversify";
 import { InstantWinConfigStore } from "../../game-configs";
 import { GameServiceMessage } from "../../game-message";
@@ -22,6 +23,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     @inject(HashHandlers) protected readonly hashHandlers: HashHandlers;
     @inject(InstantWinConfigStore) protected readonly instantWinConfigStore: InstantWinConfigStore;
     @inject(AutoPlayStore) protected readonly autoPlayStore: AutoPlayStore;
+    @inject(gc.Connection.ConnectionHandlers.InGameHandler) protected readonly inGameHandler: gc.Connection.ConnectionHandlers.InGameHandler;
 
     private readonly BIG_WIN_MULTIPLIER = 2.0;
     private autoCashOutTimeOut = null;
@@ -33,6 +35,14 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         betData.multiplierMode = this.instantWinConfigStore.currentMultiplierConfig.mode;
         this.betsStore.betCount++;
         this.handleBetData(betData);
+    }
+
+    async handleInterruption() {
+        await FunctionUtils.waitUntil(() => this.connectionStore.signedIn, 100, 10000);
+        if (!this.connectionStore.signedIn) {
+            return;
+        }
+        this.inGameHandler.requestInGame();
     }
 
     handleBetData(data: any) {

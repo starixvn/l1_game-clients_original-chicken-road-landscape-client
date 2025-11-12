@@ -4,5 +4,6 @@ export * as AutoPlay from "./components/play-mode/auto-play";
 export * as Room from "./components/room";
 export * from "./components/top-winners/top-winners-handler";
 export * as InstantWinConfigFeature from "./game-configs";
+export * from "./interruption-handlers";
 
 export const FEATURE_NAME = "crash-turn-based";
