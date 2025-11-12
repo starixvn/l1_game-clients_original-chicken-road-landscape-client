@@ -42,13 +42,15 @@ export default class AutoPlay extends ObserverComponent {
         this.numberOfLanesEditBox.inputMode = EditBox.InputMode.NUMERIC;
         this.numberOfLanesEditBox.inputFlag = EditBox.InputFlag.DEFAULT;
 
-        this.numberOfLanesEditBox.node.on(EditBox.EventType.EDITING_DID_BEGAN, () => {
-            if (sys.isMobile) {
-                this.numberOfLanesEditBox.focus();
-            }
-        });
-
+        this.numberOfLanesEditBox.node.on(EditBox.EventType.EDITING_DID_BEGAN, this.onEditBegin, this);
         this.numberOfLanesEditBox.node.on(EditBox.EventType.EDITING_DID_ENDED, this.onEditEndNumberOfLanes, this);
+    }
+
+    private onEditBegin(editBox: EditBox) {
+        const text = editBox.string;
+        const cleanText = text.replace(/,/g, "").replace(/x/g, "");
+        const numValue = Number(cleanText);
+        editBox.string = isNaN(numValue) ? "" : numValue.toString();
     }
 
     private getInputNumberOfLanes() {
@@ -62,6 +64,9 @@ export default class AutoPlay extends ObserverComponent {
         }
         if (numberOfLanes > this.maxNumberOfLanes) {
             numberOfLanes = this.maxNumberOfLanes;
+        }
+        if (!/^\d+$/.test(this.numberOfLanesEditBox.string)) {
+            this.numberOfLanesEditBox.string = numberOfLanes.toString();
         }
         this.updateNumberOfLanes(numberOfLanes);
     }
