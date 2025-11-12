@@ -1,4 +1,4 @@
-import { _decorator, Label, Node, sp, Sprite, SpriteFrame } from "cc";
+import { _decorator, Label, Node, sp, Sprite, SpriteFrame, Widget } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
@@ -41,6 +41,18 @@ export default class LaneItem extends ObserverComponent {
     @property(Node)
     currentStepMultiplierBg: Node = null;
 
+    @property(Node)
+    decorGrate: Node = null;
+
+    @property(Node)
+    decor1Node: Node = null;
+
+    @property(Node)
+    decor2Node: Node = null;
+
+    @property(Node)
+    streetLineNode: Node = null;
+
     private vehicle: Vehicle = null;
     private uiState: BetUIState = BetUIState.Start;
     private isAutoPlay = false;
@@ -59,6 +71,9 @@ export default class LaneItem extends ObserverComponent {
         }
         this.barrierSpine.node.active = false;
         this.currentStepMultiplierBg.active = false;
+        this.decorGrate.active = false;
+        this.decor1Node.active = false;
+        this.decor2Node.active = false;
         this.vehicle = this.vehicleNode.getComponent(Vehicle);
     }
 
@@ -144,5 +159,43 @@ export default class LaneItem extends ObserverComponent {
     @render(AutoPlayStore, (store) => store.isAutoplay)
     private setIsAutoPlay(isAutoPlay: boolean) {
         this.isAutoPlay = isAutoPlay;
+    }
+
+    public configGrate(isFirst: boolean, isLast: boolean) {
+        if (!this.decorGrate) {
+            return;
+        }
+
+        const shouldActive = isFirst || isLast;
+        this.decorGrate.active = shouldActive;
+
+        if (shouldActive) {
+            const widget = this.decorGrate.getComponent(Widget);
+            if (!widget) {
+                console.warn("decorGrate needs a Widget component for positioning.");
+                return;
+            }
+
+            if (isFirst) {
+                widget.isAlignLeft = true;
+                widget.left = 0;
+                widget.isAlignRight = false;
+            } else if (isLast) {
+                widget.isAlignRight = true;
+                widget.right = 0;
+                widget.isAlignLeft = false;
+                this.streetLineNode.active = false;
+            }
+            widget.updateAlignment();
+        }
+    }
+
+    public configDecors(showDecor1: boolean, showDecor2: boolean) {
+        if (this.decor1Node) {
+            this.decor1Node.active = showDecor1;
+        }
+        if (this.decor2Node) {
+            this.decor2Node.active = showDecor2;
+        }
     }
 }
