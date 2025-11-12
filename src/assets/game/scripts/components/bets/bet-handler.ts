@@ -29,6 +29,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     private autoCashOutTimeOut = null;
 
     handle() {
+        this.betsStore.uiState = BetUIState.Bet;
         const betData: any = this.createCommonBetData();
         betData.action = this.betsStore.betCount === 0 ? BetAction.Bet : BetAction.Mine;
         betData.clientSeed = this.pfStore.clientSeed;

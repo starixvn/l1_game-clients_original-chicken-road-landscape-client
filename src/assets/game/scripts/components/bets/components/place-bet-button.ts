@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Animation, Button, EventKeyboard, input, Input, KeyCode, Label, Node, sp, v3 } from "cc";
+import { _decorator, Animation, Button, EventKeyboard, input, Input, KeyCode, Label, log, Node, sp, v3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { AudioIds } from "../../../../audios/AudioIds";
@@ -79,19 +79,11 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     @handle(BetHandler, (handler) => handler.handle())
-    onBet() {
-        this.setActiveBetButtons(false);
-    }
+    onBet() { }
 
-    @handle(BetHandler, (handler) => handler.handle())
     onClickStartBet() {
         this.playSound(AudioIds.BTN_START);
-        this.setUIAnimatingState();
-    }
-
-    private setActiveBetButtons(active: boolean) {
-        this.setActiveButton(this.cashOutButton, active);
-        this.setActiveButton(this.hitStoneButton, active);
+        this.onBet();
     }
 
     @handle(BetHandler, (handler) => handler.handleCashOut())
@@ -119,12 +111,8 @@ export default class PlaceBetButton extends ObserverComponent {
     onClickBetButton() {
         if (this.uiState === BetUIState.Mining) {
             this.onBet();
-            this.setUIAnimatingState();
         }
     }
-
-    @handle(BetHandler, (handler) => handler.setUIAnimatingState())
-    setUIAnimatingState() {}
 
     getBetUIStateString(uiState: BetUIState) {
         switch (uiState) {
@@ -139,8 +127,10 @@ export default class PlaceBetButton extends ObserverComponent {
         }
         return "Unknown";
     }
+
     @render(BetStore, (store) => store.uiState, { fireImmediately: false })
     updateUIState(uiState: BetUIState) {
+        log("updateUIState ", uiState);
         const currentUIState = this.uiState;
         this.uiState = uiState;
         this.updateButtonInteractable(uiState);
@@ -166,10 +156,12 @@ export default class PlaceBetButton extends ObserverComponent {
     }
 
     @handle(AutoPlayHandler, (handle) => handle.cancelAutoPlay())
-    cancelAutoPlay() {}
+    cancelAutoPlay() { }
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
-    checkAutoBetNextRound() {}
+    checkAutoBetNextRound() {
+        log("start auto play ");
+    }
 
     @render(AutoPlayStore, (store) => store.isAutoplay)
     updateButtonStateByAutoPlay(isAutoPlay: boolean) {
@@ -185,11 +177,10 @@ export default class PlaceBetButton extends ObserverComponent {
         this.playModeNode.active = uiState === BetUIState.Start;
         this.hitStoneButton.active = uiState > BetUIState.Start;
         this.cashOutButton.active = uiState > BetUIState.Start;
-        this.setActiveBetButtons(uiState === BetUIState.Mining);
     }
 
     @handle(AutoPlayHandler, (handle) => handle.countDownRoundAutoPlay())
-    countDownRoundAutoPlay() {}
+    countDownRoundAutoPlay() { }
 
     updateButtonInteractable(uiState: BetUIState) {
         const buttonCashOut = this.cashOutButton.getComponent(Button);

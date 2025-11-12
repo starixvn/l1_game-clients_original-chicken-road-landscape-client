@@ -1,9 +1,7 @@
-import { _decorator, instantiate, Node, Prefab, ScrollView, tween, UITransform, v3 } from "cc";
+import { _decorator, instantiate, log, Node, Prefab, ScrollView, tween, UITransform, v3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
-import { AnimationUtils } from "db://shared-components/shared/utils/utils";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
-import { settings } from "../../game-settings";
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { Chicken } from "../chicken/chicken";
@@ -260,35 +258,29 @@ export class LaneSpawner extends ObserverComponent {
         try {
             const minMultiplier = this.currentConfig.multiplierSteps[0];
 
-            if (multiplier >= minMultiplier) {
-                const nextLane = this.currentLaneIndex + 1;
-                const isStepNext = nextLane < this.currentConfig.multiplierSteps.length - 1;
+            if (multiplier < minMultiplier) {
                 this.updateCurrentLaneItemBackground();
+                return;
+            }
 
-                if (isStepNext) {
-                    const hasVehicle = Math.random() < 0.5;
-                    this.moveChicken();
-                    this.showBarrier(nextLane, hasVehicle);
-                    AnimationUtils.delayTime(settings.durations.stepAnimation).then(() => {
-                        this.updateCurrentAndNextLaneItemBackground();
-                    });
-                    this.chickenCtrl.playStepSuccess(hasVehicle).then(() => {
-                        this.setUIMiningState();
-                        if (this.isAutoPlay) {
-                            this.checkPlaceBetNextRound();
-                        }
-                    });
-                } else {
-                    this.moveChicken();
-                    this.showBarrier(nextLane);
+            this.setUIAnimatingState();
+            const nextLane = this.currentLaneIndex + 1;
+            const isFinalLane = nextLane === this.currentConfig.multiplierSteps.length - 1;
+            this.updateCurrentLaneItemBackground();
 
-                    AnimationUtils.delayTime(settings.durations.stepAnimation).then(() => {
-                        this.updateCurrentAndNextLaneItemBackground();
-                    });
-                    this.chickenCtrl.playStepSuccessAtLastLane();
-                }
+            const hasVehicle = Math.random() < 0.5;
+            this.moveChicken();
+            this.showBarrier(nextLane, hasVehicle && !isFinalLane);
+            if (isFinalLane) {
+                await this.chickenCtrl.playStepSuccessAtLastLane();
             } else {
-                this.updateCurrentLaneItemBackground();
+                await this.chickenCtrl.playStepSuccess(hasVehicle)
+            }
+            this.updateCurrentAndNextLaneItemBackground();
+
+            this.setUIMiningState();
+            if (this.isAutoPlay) {
+                this.checkPlaceBetNextRound();
             }
         } catch (e) { }
     }
@@ -296,8 +288,13 @@ export class LaneSpawner extends ObserverComponent {
     @handle(BetHandler, (handler) => handler.setUIMiningState())
     setUIMiningState() { }
 
+    @handle(BetHandler, (handler) => handler.setUIAnimatingState())
+    setUIAnimatingState() { }
+
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
-    checkPlaceBetNextRound() { }
+    checkPlaceBetNextRound() {
+        log("checkPlaceBetNextRound");
+    }
 
     showBarrier(landIndex: number, hasVehicle = false) {
         try {

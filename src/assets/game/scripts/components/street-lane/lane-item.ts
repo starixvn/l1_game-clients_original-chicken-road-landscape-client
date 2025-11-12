@@ -122,24 +122,19 @@ export default class LaneItem extends ObserverComponent {
         }
     }
 
-    @handle(BetHandler, (handler) => handler.handle())
     private onClickStartBet() {
         AudioUtils.playSFX(AudioIds.BTN_START);
-        this.setUIAnimatingState();
+        this.onBet();
     }
 
     private onClickBetButton() {
         if (this.uiState === BetUIState.Mining) {
             this.onBet();
-            this.setUIAnimatingState();
         }
     }
 
-    @handle(BetHandler, (handler) => handler.setUIAnimatingState())
-    private setUIAnimatingState() {}
-
     @handle(BetHandler, (handler) => handler.handle())
-    private onBet() {}
+    private onBet() { }
 
     @render(BetStore, (store) => store.uiState, { fireImmediately: false })
     private updateUIState(uiState: BetUIState) {

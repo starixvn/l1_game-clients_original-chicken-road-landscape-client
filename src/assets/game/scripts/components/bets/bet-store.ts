@@ -6,9 +6,10 @@ const { injectable, inject } = inversify;
 
 export enum BetUIState {
     Start = 0,
+    Bet,
+    Animating,
     Mining,
     Settle,
-    Animating,
 }
 
 export interface SettleStatus {
