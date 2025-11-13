@@ -1,5 +1,6 @@
 import gc from "@sg/game-client-base";
 import { _decorator, Color, Component, Label } from "cc";
+import { CrashUtils } from "../../../crash-utils";
 import { TopWinner } from "../top-winners-store";
 const { ccclass, property } = _decorator;
 
@@ -37,13 +38,16 @@ export class TopWinnerItem extends Component {
         this.lblName.string = this.formatName(data.name, isMain);
         this.lblName.color = this.getColor(isMain);
 
-        this.lblWin.string = FormatUtils.numberWithCommas(data.winningAmount, 2);
+        this.lblWin.string = isNaN(data.winningAmount) ? "-" : FormatUtils.numberWithCommas(data.winningAmount, 2);
         this.lblBet.string = FormatUtils.numberWithCommas(data.amount, 2);
-        this.lblMultiplier.string = FormatUtils.numberWithCommas(data.multiplier, 2);
+        this.lblMultiplier.string = isNaN(data.winningAmount) ? "-" : FormatUtils.numberWithCommas(data.multiplier, 2);
+        this.lblMultiplier.color = CrashUtils.getMultiplierColor(data.multiplier);
     }
 
     setHighlight(isMain: boolean) {
-        if (!this.winnerData || this.isMainPlayer === isMain) { return; }
+        if (!this.winnerData || this.isMainPlayer === isMain) {
+            return;
+        }
         this.isMainPlayer = isMain;
         this.lblName.string = this.formatName(this.winnerData.name, isMain);
         this.lblName.color = this.getColor(isMain);

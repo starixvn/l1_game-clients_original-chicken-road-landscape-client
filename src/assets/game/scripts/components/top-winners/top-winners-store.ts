@@ -3,6 +3,7 @@ import mobx from "mobx";
 const { injectable, inject } = inversify;
 
 export interface TopWinner {
+    roundId: number;
     name: string;
     amount: number;
     multiplier: number;

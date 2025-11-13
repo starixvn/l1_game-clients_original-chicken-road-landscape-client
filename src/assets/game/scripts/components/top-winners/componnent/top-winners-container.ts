@@ -29,6 +29,8 @@ export class TopWinnersContainer extends ObserverComponent {
 
     items: Node[] = [];
 
+    private winners: TopWinner[] = [];
+
     @render(gc.Player.MainPlayerStore, (store) => store.name)
     renderPlayerName(name: string) {
         this.playerName = name;
@@ -36,12 +38,17 @@ export class TopWinnersContainer extends ObserverComponent {
         if (this.items?.length) {
             this.items.forEach((node) => {
                 const item = node.getComponent(TopWinnerItem);
-                if (!item || !item.winnerData) { return; }
+                if (!item || !item.winnerData) {
+                    return;
+                }
 
-                const isMainPlayer = item.winnerData.name === this.playerName;
-                item.setHighlight(isMainPlayer);
+                item.setHighlight(this.isMainPlayer(item.winnerData.name));
             });
         }
+    }
+
+    private isMainPlayer(name: string) {
+        return name === this.playerName;
     }
 
     @render(TopWinnersStore, (store) => store.winners)
@@ -49,34 +56,48 @@ export class TopWinnersContainer extends ObserverComponent {
         this.container.removeAllChildren();
         this.items = [];
         winners.forEach((winner) => this.addItem(winner, false));
+        this.winners.push(...winners);
         this.layoutItems();
     }
 
     @render(TopWinnersStore, (store) => store.newTopWinner)
-    renderNewTopWinner(newTopWinner: TopWinner | TopWinner[]) {
+    renderNewTopWinner(newTopWinner: TopWinner) {
         if (!newTopWinner) {
             return;
         }
 
-        const newList = Array.isArray(newTopWinner)
-            ? newTopWinner
-            : [newTopWinner];
+        const existingWinner = this.winners.find((w) => w.roundId === newTopWinner.roundId);
+        if (!existingWinner) {
+            this.winners.shift();
+            this.winners.push(newTopWinner);
+            const newList = [newTopWinner];
 
-        newList.forEach((winner) => this.addItem(winner, false));
+            newList.forEach((winner) => this.addItem(winner, false));
 
-        newList.forEach((_, index) => {
-            const node = this.items[index];
-            AnimationUtils.setOpacityNode(node, 0);
-            AnimationUtils.fadeIn(node, 0.3);
-        });
+            newList.forEach((_, index) => {
+                const node = this.items[index];
+                AnimationUtils.setOpacityNode(node, 0);
+                AnimationUtils.fadeIn(node, 0.3);
+            });
 
-        this.pushDownOldItems(newList.length);
+            this.pushDownOldItems(newList.length);
+        } else {
+            if (this.items?.length) {
+                this.items.forEach((node) => {
+                    const item = node.getComponent(TopWinnerItem);
+                    if (!item || item.winnerData?.roundId !== newTopWinner.roundId) {
+                        return;
+                    }
+                    item.setData(newTopWinner, this.isMainPlayer(item.winnerData.name));
+                });
+            }
+        }
     }
 
     private addItem(winner: TopWinner, isNew: boolean) {
         const winnerNode = instantiate(this.topWinnerPrefab);
         const topWinnerItem = winnerNode.getComponent(TopWinnerItem);
-        const isMainPlayer = winner.name === this.playerName;
+        const isMainPlayer = this.isMainPlayer(winner.name);
 
         topWinnerItem.setData(winner, isMainPlayer);
 

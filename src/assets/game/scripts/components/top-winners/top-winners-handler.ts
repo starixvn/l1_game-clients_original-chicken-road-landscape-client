@@ -13,7 +13,7 @@ export class TopWinnersHandlers {
 
     @inject(gc.GameConfigs.GameConfigStore) private readonly gameConfigStore: gc.GameConfigs.GameConfigStore;
 
-    addSingleTopWinner(winner: TopWinner) {
+    addOrUpdateTopWinner(winner: TopWinner) {
         if (!this.gameConfigStore.initialized) {
             return;
         }
@@ -23,7 +23,16 @@ export class TopWinnersHandlers {
         winner.winningAmount = amount;
 
         this.store.newTopWinner = winner;
-        this.store.winners.push(winner);
+
+        const existingWinner = this.store.winners.find((w) => w.roundId === winner.roundId);
+        if (existingWinner) {
+            const amount = gc.NumberUtils.getValueByCurrency(winner.winningAmount, this.mainPlayerStore.rate, winner.rate);
+            existingWinner.winningAmount = amount;
+            existingWinner.multiplier = winner.multiplier;
+        } else {
+            this.store.winners.shift();
+            this.store.winners.push(winner);
+        }
     }
 
     createTopWinners(winners: TopWinner[]) {
@@ -39,7 +48,7 @@ export class TopWinnersHandlers {
     eventHandleList = [
         {
             name: "recentBet",
-            handle: this.addSingleTopWinner,
+            handle: this.addOrUpdateTopWinner,
         },
         {
             name: "recentBets",
