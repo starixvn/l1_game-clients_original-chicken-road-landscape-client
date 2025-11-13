@@ -5,6 +5,7 @@ import Observer from "observer";
 
 import { BalanceEffectHandlers } from "db://shared-components/game/balance-effect/scripts/handlers/balance-effect-handlers";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
+import { FunctionUtils } from "db://shared-components/shared/utils";
 import { AnimationUtils } from "db://shared-components/shared/utils/utils";
 import { siteConfigs } from "../../../scripts/site-configs";
 import { AudioIds } from "../../audios/AudioIds";
@@ -13,7 +14,7 @@ import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../game-confi
 import { settings } from "../game-settings";
 import { InterruptionHandlers } from "../interruption-handlers";
 import "./../../../resources/i18n";
-import { BetStore, SettleStatus } from "./bets/bet-store";
+import { BetStore, BetUIState, SettleStatus } from "./bets/bet-store";
 import { CashOutHistoryHandlers } from "./cash-out-history/cash-out-history-handlers";
 import { GameWinNotice } from "./game-win-notice";
 import { AutoPlayHandler } from "./play-mode/auto-play/auto-play-handler";
@@ -47,6 +48,7 @@ export default class Game extends GameComponent {
     override containerOptions = containerOptions;
     private multiplier = 0;
     private _currentMultiplierConfig: FixedStepsMultiplierConfig = null;
+    private uiState: BetUIState = BetUIState.Start;
 
     @render(BetStore, (store) => store.roundId)
     renderlblRound(roundId: number) {
@@ -72,6 +74,11 @@ export default class Game extends GameComponent {
     @handle(InterruptionHandlers, (handler) => handler.onGameShow())
     handleGameShow() { }
 
+    @render(BetStore, (store) => store.uiState)
+    renderUiState(uiState: BetUIState) {
+        this.uiState = uiState;
+    }
+
     @render(BetStore, (store) => store.settleStatus)
     async renderSettleStatus(settleStatus: SettleStatus) {
         const { bigWinNotice, normalWinNotice, crashAnimation, winAnimation, stepAnimation, winAllStepAnimation } = settings.durations;
@@ -86,7 +93,9 @@ export default class Game extends GameComponent {
 
             return;
         }
-
+        if (this.uiState !== BetUIState.Mining) {
+            await FunctionUtils.waitUntil(() => this.uiState === BetUIState.Mining, 100, 3000);
+        }
         const isBigWin = settleStatus.isBigWin;
 
         const node = this.nodeWinNotice.getChildByName(isBigWin ? "big" : "normal");
