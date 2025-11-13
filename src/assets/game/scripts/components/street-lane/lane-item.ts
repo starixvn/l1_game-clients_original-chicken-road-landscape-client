@@ -1,4 +1,4 @@
-import { _decorator, Label, Node, sp, Sprite, SpriteFrame, Widget } from "cc";
+import { _decorator, Color, Label, Node, sp, Sprite, SpriteFrame, Widget } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
@@ -120,6 +120,10 @@ export default class LaneItem extends ObserverComponent {
 
     playCrashVehicle() {
         this.vehicle.playCrashVehicle();
+    }
+
+    changeMultiplierBgColor(color: Color) {
+        this.multiplierBg.color = color;
     }
 
     private onClickBet() {

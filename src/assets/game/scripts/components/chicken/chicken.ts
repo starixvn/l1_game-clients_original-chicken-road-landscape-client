@@ -24,6 +24,7 @@ export class Chicken extends Component {
         this.spineChicken.setMix("moving", "win", 0.2);
         this.spineChicken.setMix("moving", "crash", 0.2);
         this.spineChicken.setMix("win", "idle", 0.2);
+        this.spineChicken.setMix("celebration", "idle", 0.2);
         this.spineChicken.setMix("crash", "idle", 0.2);
         this.spineChicken.setMix("moving", "idle", 0.2);
         this.spineChicken.setMix("moving", "final", 0.2);
@@ -58,7 +59,9 @@ export class Chicken extends Component {
                 this.checkPlayIdle();
             });
         } else {
-            this.playIdle();
+            this.playAnim({ animName: "celebration" }).then(() => {
+                this.checkPlayIdle();
+            });
         }
     }
 

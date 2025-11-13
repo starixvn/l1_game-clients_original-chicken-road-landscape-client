@@ -6,6 +6,7 @@ export class CrashUtils extends Component {
         thresholds: [2, 5, 10],
         colors: ["01d8ff", "FFD900", "ff010d", "D608FB"],
         colorNames: ["blue", "orange", "red", "purple"],
+        bgMultiplierColor: ["6400d3", "003cff", "f8c100"],
         whiteColor: "E6E5DF",
         tabColors: {
             Active: "ffffff",
@@ -24,6 +25,10 @@ export class CrashUtils extends Component {
     static getMultiplierColor(multiplier: number): Color {
         const index = CrashUtils.getMultiplierIndex(multiplier);
         return new Color().fromHEX(CrashUtils.config.colors[index]);
+    }
+
+    static getBgMultiplierColor(index: number): Color {
+        return new Color().fromHEX(CrashUtils.config.bgMultiplierColor[index]);
     }
 
     static getColorActiveTab(): Color {
