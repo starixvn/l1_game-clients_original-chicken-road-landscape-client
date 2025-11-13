@@ -29,7 +29,7 @@ export class TopWinnersContainer extends ObserverComponent {
 
     items: Node[] = [];
 
-    private winners: TopWinner[] = [];
+    private readonly winners: TopWinner[] = [];
 
     @render(gc.Player.MainPlayerStore, (store) => store.name)
     renderPlayerName(name: string) {

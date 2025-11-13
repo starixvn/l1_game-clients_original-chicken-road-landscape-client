@@ -37,11 +37,13 @@ export class TopWinnerItem extends Component {
 
         this.lblName.string = this.formatName(data.name, isMain);
         this.lblName.color = this.getColor(isMain);
+        const hasWon = !isNaN(data.winningAmount);
 
-        this.lblWin.string = isNaN(data.winningAmount) ? "-" : FormatUtils.numberWithCommas(data.winningAmount, 2);
+        this.lblWin.string = hasWon ? FormatUtils.numberWithCommas(data.winningAmount, 2) : "-";
         this.lblBet.string = FormatUtils.numberWithCommas(data.amount, 2);
-        this.lblMultiplier.string = isNaN(data.winningAmount) ? "-" : FormatUtils.numberWithCommas(data.multiplier, 2);
-        this.lblMultiplier.color = CrashUtils.getMultiplierColor(data.multiplier);
+        this.lblMultiplier.string = hasWon ? `${FormatUtils.numberWithCommas(data.multiplier, 2)}x` : "-";
+        this.lblMultiplier.color =
+            hasWon && data.winningAmount > 0 ? CrashUtils.getMultiplierColor(data.multiplier) : CrashUtils.getWhiteColor();
     }
 
     setHighlight(isMain: boolean) {
