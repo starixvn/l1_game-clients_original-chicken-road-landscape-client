@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, SpriteFrame, tween, UITransform, v3 } from "cc";
+import { _decorator, Component, Node, sp, tween, v3 } from "cc";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 const { ccclass, property } = _decorator;
 
@@ -19,8 +19,8 @@ export class Vehicle extends Component {
     @property(Node)
     vehicleHitCrashEndPoint: Node = null;
 
-    @property(SpriteFrame)
-    vehicles: SpriteFrame[] = [];
+    @property(sp.Skeleton)
+    vehicleSkeleton: sp.Skeleton = null;
 
     isPLayingAnimation = false;
     isSpawning = false;
@@ -30,32 +30,43 @@ export class Vehicle extends Component {
     private vehicleAnimationDuration = 0;
     vehicleStartTime = 0;
 
-    currentVehicleSpriteFrame: SpriteFrame = null;
+    private animationNames: string[] = [];
+    private currentAnimName = "";
+
     onLoad() {
+        this.cacheAnimationNames();
         this.resetVehicle();
     }
 
+    private cacheAnimationNames() {
+        if (this.vehicleSkeleton && this.vehicleSkeleton.skeletonData) {
+            const anims = this.vehicleSkeleton.skeletonData.getAnimsEnum();
+            this.animationNames = Object.keys(anims);
+        }
+    }
+
     private randomVehicle() {
-        this.currentVehicleSpriteFrame = this.vehicles[Math.floor(Math.random() * this.vehicles.length)];
-        this.node.getComponent(UITransform).height = this.currentVehicleSpriteFrame.originalSize.height;
-        this.node.getComponent(UITransform).width = this.currentVehicleSpriteFrame.originalSize.width;
-        this.vehicleNode.getComponent(Sprite).spriteFrame = this.currentVehicleSpriteFrame;
+        if (this.animationNames.length === 0) return;
+        const randomIndex = Math.floor(Math.random() * this.animationNames.length);
+        this.currentAnimName = this.animationNames[randomIndex];
+        this.vehicleSkeleton.setAnimation(0, this.currentAnimName, true);
     }
 
     private async spawnVehicle() {
-        const vehicleStartPos = this.vehicleStartPoint.position;
-        this.vehicleNode.setPosition(vehicleStartPos);
+        const startPos = this.vehicleStartPoint.position;
+        this.vehicleNode.setPosition(startPos);
 
         this.isPLayingAnimation = true;
-        this.vehicleStartTime = Date.now(); // Record start time
+        this.vehicleStartTime = Date.now();
         this.randomVehicle();
         this.vehicleNode.active = true;
+
         this.vehicleAnimationDuration = this.getRandomVehicleDuration();
-        // Create a promise to track when the tween finishes
+
         await new Promise<void>((resolve) => {
             tween(this.vehicleNode)
-                .to(this.vehicleAnimationDuration, { position: v3(0, -vehicleStartPos.y, 0) })
-                .call(() => resolve()) // Resolve when tween completes
+                .to(this.vehicleAnimationDuration, { position: v3(0, -startPos.y, 0) })
+                .call(() => resolve())
                 .start();
         });
 
@@ -67,7 +78,6 @@ export class Vehicle extends Component {
         return Math.floor(Math.random() * 2) + 1;
     }
 
-    // Get how much time has elapsed since the vehicle started
     private getElapsedTime(): number {
         if (!this.isPLayingAnimation) {
             return 0;
@@ -75,7 +85,6 @@ export class Vehicle extends Component {
         return (Date.now() - this.vehicleStartTime) / 1000;
     }
 
-    // Get remaining time until vehicle animation completes
     getRemainingTime(): number {
         if (!this.isPLayingAnimation) {
             return 0;
@@ -118,24 +127,28 @@ export class Vehicle extends Component {
     }
 
     playVehicleStopAtBarrier() {
+        const barrierHeight = 200;
         this.vehicleNode.setPosition(this.vehicleStartPoint.position);
         this.randomVehicle();
         this.vehicleNode.active = true;
-        const vehicleEndPointPos = this.vehicleHitBarrierEndPoint.position;
+
+        const barrierEndY = this.vehicleHitBarrierEndPoint.position.y + barrierHeight;
+
         tween(this.vehicleNode)
-            .to(0.5, { position: v3(vehicleEndPointPos.x, vehicleEndPointPos.y, 0) })
+            .to(0.5, { position: v3(0, barrierEndY, 0) })
             .start();
     }
 
     async playCrashVehicle() {
         this.vehicleNode.setPosition(this.vehicleStartPoint.position);
         this.vehicleNode.active = true;
-
         this.randomVehicle();
-        const vehicleStartPos = this.vehicleHitCrashEndPoint.position;
+
+        const crashEndPos = this.vehicleHitCrashEndPoint.position;
         tween(this.vehicleNode)
-            .to(2, { position: v3(0, vehicleStartPos.y, 0) })
+            .to(2, { position: v3(0, crashEndPos.y, 0) })
             .start();
+
         await AnimationUtils.delayTime(2);
         this.resetVehicle();
     }

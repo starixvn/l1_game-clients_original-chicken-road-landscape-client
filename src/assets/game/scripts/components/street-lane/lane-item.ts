@@ -63,7 +63,11 @@ export default class LaneItem extends ObserverComponent {
         this.decorGrate.active = false;
         this.decor1Node.active = false;
         this.decor2Node.active = false;
-        this.vehicle = this.vehicleNode.getComponent(Vehicle);
+        if (this.vehicleNode) {
+            this.vehicle = this.vehicleNode.getComponent(Vehicle);
+        } else {
+            console.error("Vehicle Node is not assigned");
+        }
     }
 
     async playStepSuccess(hasVehicle = false) {
