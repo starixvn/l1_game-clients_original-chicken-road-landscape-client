@@ -225,7 +225,7 @@ export class LaneSpawner extends ObserverComponent {
         tween(this.chickenNode)
             .delay(0.3)
             .call(() => {
-                this.scrollToLane(localPos.x, 0.5);
+                this.scrollToLane(localPos.x, 0.7);
             })
             .to(0.3, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
             .start();
