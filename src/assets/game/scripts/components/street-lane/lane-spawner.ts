@@ -1,4 +1,4 @@
-import { _decorator, instantiate, log, Node, Prefab, ScrollView, tween, UITransform, v3 } from "cc";
+import { _decorator, instantiate, log, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
@@ -222,13 +222,13 @@ export class LaneSpawner extends ObserverComponent {
         const laneWorld = lane.worldPosition;
         const parent = this.chickenNode.parent;
         const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
-
         tween(this.chickenNode)
             .delay(0.3)
+            .call(() => {
+                this.scrollToLane(localPos.x, 0.5);
+            })
             .to(0.3, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
             .start();
-
-        this.scrollToLane(nextLaneIndex);
     }
 
     waitAndStopSpawningVehicle() {
@@ -241,30 +241,8 @@ export class LaneSpawner extends ObserverComponent {
         }
     }
 
-    scrollToLane(laneIndex: number) {
-        if (!this.scrollView) {
-            return;
-        }
-
-        const lane = this.laneContent.children[laneIndex];
-        if (!lane) {
-            return;
-        }
-
-        const content = this.laneContent.getComponent(UITransform);
-        const scroll = this.scrollView;
-        const viewWidth = scroll.node.getComponent(UITransform).width;
-
-        const lanePos = lane.position.x;
-        const halfView = viewWidth / 2;
-        let targetX = lanePos - halfView + this.laneWidth / 2;
-
-        const maxOffset = Math.max(content.width - viewWidth, 0);
-        targetX = Math.min(Math.max(targetX, 0), maxOffset);
-
-        const ratio = maxOffset > 0 ? targetX / maxOffset : 0;
-
-        this.scrollView.scrollToPercentHorizontal(ratio, 1, true);
+    scrollToLane(offset: number, duration: number) {
+        this.scrollView.scrollToOffset(v2(offset - this.laneWidth / 2, 0), duration, true);
     }
 
     @render(BetStore, (store) => store.multiplier)
