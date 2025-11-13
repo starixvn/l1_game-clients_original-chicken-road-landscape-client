@@ -3,15 +3,8 @@
     "localized": {
         "resources": {
             "1": [
-                "txt_cashout",
-                "txt_cashout_disable",
-                "txt_hit",
-                "txt_hit_disable",
-                "text_stake",
-                "txt_mining",
                 "txt_big_win",
-                "txt_total_win",
-                "txt_crashed"
+                "txt_total_win"
             ]
         }
     }

@@ -68,7 +68,7 @@ export class GameWinNotice extends Component {
         this.node.active = true;
         AnimationUtils.setOpacityNode(this.node, 255);
 
-        this.skeleton?.setAnimation(0, this.animationName, false);
+        this.skeleton?.setAnimation(0, this.animationName, true);
         this.floatNumber(winValue, duration);
     }
 }

@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "fCYkpxJDu9Ro9qjJMMCqHbt7TSA", "spine": "3.8.99", "images": "./images/", "audio": "F:/WorkFolder/18 chicken road/bike" },
+"skeleton": { "hash": "TTt2pMI8Ag+WXhCewHztfM7lxEM", "spine": "3.8.99", "images": "./images/", "audio": "F:/WorkFolder/18 chicken road/bike" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "smoke", "parent": "root" },
@@ -355,7 +355,7 @@
 		"bones": {
 			"shadow": {
 				"translate": [
-					{ "x": 0.96, "y": -103.29 }
+					{ "x": 0.96, "y": -101.04 }
 				]
 			},
 			"transport": {
@@ -373,6 +373,9 @@
 					{ "time": 0.8667 },
 					{ "time": 0.9333, "y": 1 },
 					{ "time": 1 }
+				],
+				"scale": [
+					{ "x": 0.9, "y": 0.9 }
 				]
 			},
 			"smoke": {
@@ -848,6 +851,9 @@
 			"shadow": {
 				"translate": [
 					{ "y": -12.43 }
+				],
+				"scale": [
+					{ "x": 0.9, "y": 0.9 }
 				]
 			},
 			"transport": {
@@ -865,6 +871,9 @@
 					{ "time": 0.8667 },
 					{ "time": 0.9333, "y": 1 },
 					{ "time": 1 }
+				],
+				"scale": [
+					{ "x": 0.9, "y": 0.9 }
 				]
 			}
 		}
@@ -931,10 +940,7 @@
 		"bones": {
 			"shadow": {
 				"translate": [
-					{ "x": -4.68, "y": -16.44 }
-				],
-				"scale": [
-					{ "y": 0.95 }
+					{ "x": -6.93, "y": -8.19 }
 				]
 			},
 			"transport": {
@@ -1110,10 +1116,10 @@
 		"bones": {
 			"shadow": {
 				"translate": [
-					{ "x": -6.06, "y": -3.25 }
+					{ "x": -3.06, "y": -3.25 }
 				],
 				"scale": [
-					{ "y": 1.025 }
+					{ "x": 0.9, "y": 0.95 }
 				]
 			},
 			"transport": {
@@ -1131,6 +1137,9 @@
 					{ "time": 0.8667 },
 					{ "time": 0.9333, "y": 1 },
 					{ "time": 1 }
+				],
+				"scale": [
+					{ "x": 0.9, "y": 0.9 }
 				]
 			},
 			"smoke": {

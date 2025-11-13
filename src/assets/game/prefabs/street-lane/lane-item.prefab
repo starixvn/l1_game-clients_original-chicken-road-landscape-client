@@ -1925,7 +1925,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 6.683,
+      "x": 0,
       "y": 223.85,
       "z": 0
     },
@@ -2271,20 +2271,6 @@
     "vehicleHitCrashEndPoint": {
       "__id__": 89
     },
-    "vehicles": [
-      {
-        "__uuid__": "dc2bc45e-1523-4969-9cc0-1656264d810f@2b6df",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "dc2bc45e-1523-4969-9cc0-1656264d810f@93372",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "dc2bc45e-1523-4969-9cc0-1656264d810f@cfb9b",
-        "__expectedType__": "cc.SpriteFrame"
-      }
-    ],
     "vehicleSkeleton": {
       "__id__": 97
     },
@@ -3361,6 +3347,7 @@
       "__id__": 0
     },
     "fileId": "be2fNGbk9PvqxUIETt0Ti8",
-    "instance": null
+    "instance": null,
+    "targetOverrides": null
   }
 ]

@@ -104,7 +104,10 @@ export default class Game extends GameComponent {
         if (isWinAllStep) {
             const delayShowWinDuration = winAnimation + stepAnimation;
             showWinNoticeDuration = winAllStepAnimation - delayShowWinDuration;
-            await AnimationUtils.delayTime(delayShowWinDuration);
+            console.log("delayShowWinDuration", delayShowWinDuration);
+            console.log("winAllStepAnimation", winAllStepAnimation);
+            console.log("showWinNoticeDuration", showWinNoticeDuration);
+            await AnimationUtils.delayTime(5);
         }
         winNotice?.show(settleStatus.bet, showWinNoticeDuration);
 
