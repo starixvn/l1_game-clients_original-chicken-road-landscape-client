@@ -88,6 +88,9 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     }
 
     setUIMiningState() {
+        if (this.betsStore.uiState === BetUIState.Settle) {
+            return;
+        }
         this.betsStore.uiState = BetUIState.Mining;
     }
 
