@@ -38,11 +38,11 @@ export class TopWinnersHandlers {
 
     eventHandleList = [
         {
-            name: "recentBigWinningWinner",
+            name: "recentBet",
             handle: this.addSingleTopWinner,
         },
         {
-            name: "recentBigWinningWinners",
+            name: "recentBets",
             handle: this.createTopWinners,
         },
     ];

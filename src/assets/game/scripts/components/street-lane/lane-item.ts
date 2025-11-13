@@ -1,4 +1,4 @@
-import { _decorator, Color, Label, Node, sp, Sprite, SpriteFrame, Widget } from "cc";
+import { _decorator, Color, Label, Node, sp, Sprite, Widget } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
