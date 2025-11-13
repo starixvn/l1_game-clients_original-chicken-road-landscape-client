@@ -16,24 +16,42 @@ export class PlayerCounter extends ObserverComponent {
 
     private playerCount = 0;
 
+    onLoad() {
+        super.onLoad();
+        this.playerCount = 0;
+        this.lblPlayerCount.string = this.playerCount.toString();
+    }
+
     @render(BetStore, (store) => store.roundId)
-    renderlblRound(roundId: number) {
+    renderLblRound(roundId: number) {
         this.lblRoundId && roundId !== 0 && (this.lblRoundId.string = `#${roundId}`);
     }
-    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.aroundTablePlayer)
+
+    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.aroundTablePlayer, { fireImmediately: false })
     renderAroundTablePlayer(aroundTablePlayer: IAroundTablePlayers) {
-        if (aroundTablePlayer) {
-            this.playerCount++;
+        if (!aroundTablePlayer) {
+            return;
         }
+        this.playerCount++;
+        this.lblPlayerCount.string = this.playerCount.toString();
     }
 
-    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.aroundTablePlayers)
+    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.aroundTablePlayers, { fireImmediately: false })
     renderAroundTablePlayers(aroundTablePlayers: gc.GameServiceMessage.AroundTablePlayers) {
-        if (aroundTablePlayers) {
-            const players: IAroundTablePlayers[] = Object.values(aroundTablePlayers);
-            this.playerCount = players.length;
+        if (!aroundTablePlayers) {
+            return;
         }
+        const players: IAroundTablePlayers[] = Object.values(aroundTablePlayers);
+        this.playerCount = players.length + 1;
+        this.lblPlayerCount.string = this.playerCount.toString();
+    }
 
+    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.outGamePlayerId, { fireImmediately: false })
+    handleRemoveAroundTablePlayer(outGamePlayerId: gc.GameServiceMessage.RemoveAroundTablePlayer) {
+        if (!outGamePlayerId) {
+            return;
+        }
+        this.playerCount--;
         this.lblPlayerCount.string = this.playerCount.toString();
     }
 }
