@@ -78,7 +78,7 @@ export default class BetControls extends ObserverComponent {
 
     @render(InstantWinConfigStore, (store) => store.defaultBetLevel)
     showDefaultBetLevel(defaultBetLevel: number) {
-        if (defaultBetLevel !== undefined) {
+        if (defaultBetLevel > 0) {
             this.defaultBetLevel = defaultBetLevel;
             this.updateBetAmount(defaultBetLevel);
         }

@@ -7,11 +7,11 @@ export type FixedStepsMultiplierConfig = {
 };
 
 @injectable()
-export class InstantWinConfigStore  {
-    
+export class InstantWinConfigStore {
+
     private _fixedStepsMultiplierConfigs: FixedStepsMultiplierConfig[] = [];
     private _currentMultiplierConfig: FixedStepsMultiplierConfig = null;
-    private _defaultBetLevel = 1;
+    private _defaultBetLevel = 0;
     private _betLevels = [];
     private _minBet = 0;
     private _maxBet = 0;
