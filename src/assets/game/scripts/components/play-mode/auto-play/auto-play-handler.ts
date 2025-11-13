@@ -43,6 +43,12 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
                     this.autoPlayStore.resetAutoSelection();
                 }
             );
+
+            mobx.reaction(() => this.betHandler.triggerResetBet, (triggerResetBet) => {
+                if (triggerResetBet) {
+                    this.completeSettle();
+                }
+            });
         }, 0);
     }
 
