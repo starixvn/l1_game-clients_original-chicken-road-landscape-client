@@ -20,15 +20,6 @@ export default class LaneItem extends ObserverComponent {
     @property(Sprite)
     multiplierBg: Sprite = null;
 
-    @property(SpriteFrame)
-    defaultMultiplierBgFrame: SpriteFrame = null;
-
-    @property(SpriteFrame)
-    currentStepMultiplierBgFrame: SpriteFrame = null;
-
-    @property(SpriteFrame)
-    nextStepMultiplierBgFrame: SpriteFrame = null;
-
     @property(sp.Skeleton)
     barrierSpine: sp.Skeleton = null;
 

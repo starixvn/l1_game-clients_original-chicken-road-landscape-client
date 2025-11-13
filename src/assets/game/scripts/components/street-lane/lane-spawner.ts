@@ -7,11 +7,18 @@ import { BetStore, BetUIState } from "../bets/bet-store";
 import { Chicken } from "../chicken/chicken";
 import { AutoPlayHandler } from "../play-mode/auto-play/auto-play-handler";
 import LaneItem from "./lane-item";
+import { CrashUtils } from "../../crash-utils";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
 const CURB_WIDTH = 238;
+
+const BG_MULTIPLIER_COLOR_INDEX = {
+    DEFAULT: 0,
+    NEXT_STEP: 1,
+    CURRENT_STEP: 2,
+};
 
 @ccclass("LaneSpawner")
 export class LaneSpawner extends ObserverComponent {
@@ -141,7 +148,7 @@ export class LaneSpawner extends ObserverComponent {
 
             landItem.setMultiplier(multiplier);
             if (index === 0) {
-                landItem.multiplierBg.spriteFrame = landItem.nextStepMultiplierBgFrame;
+                landItem.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
                 landItem.isClickable = true;
             } else {
                 landItem.startRandomSpawning();
@@ -333,7 +340,7 @@ export class LaneSpawner extends ObserverComponent {
         if (currentLandItem) {
             const landItemComponent = currentLandItem.getComponent(LaneItem);
             if (landItemComponent) {
-                landItemComponent.multiplierBg.spriteFrame = landItemComponent.currentStepMultiplierBgFrame;
+                landItemComponent.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.CURRENT_STEP));
                 landItemComponent.toggleCurrentMultiplierBackground();
                 landItemComponent.isClickable = false;
             }
@@ -343,7 +350,7 @@ export class LaneSpawner extends ObserverComponent {
         if (nextLandItem) {
             const landItemComponent = nextLandItem.getComponent(LaneItem);
             if (landItemComponent) {
-                landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
+                landItemComponent.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
                 landItemComponent.isClickable = true;
             }
         }
@@ -403,10 +410,10 @@ export class LaneSpawner extends ObserverComponent {
             landItemComponent.toggleCurrentMultiplierBackground(false);
             landItemComponent.resetLaneItem();
             if (index === 0) {
-                landItemComponent.multiplierBg.spriteFrame = landItemComponent.nextStepMultiplierBgFrame;
+                landItemComponent.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
                 landItemComponent.isClickable = true;
             } else {
-                landItemComponent.multiplierBg.spriteFrame = landItemComponent.defaultMultiplierBgFrame;
+                landItemComponent.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.DEFAULT));
                 landItemComponent.startRandomSpawning();
             }
         }
