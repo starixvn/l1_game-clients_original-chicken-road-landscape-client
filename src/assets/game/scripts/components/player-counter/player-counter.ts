@@ -17,9 +17,8 @@ export class PlayerCounter extends ObserverComponent {
     private playerCount = 0;
 
     onLoad() {
+        this.updatePlayerCountLabel();
         super.onLoad();
-        this.playerCount = 0;
-        this.lblPlayerCount.string = this.playerCount.toString();
     }
 
     @render(BetStore, (store) => store.roundId)
@@ -33,7 +32,7 @@ export class PlayerCounter extends ObserverComponent {
             return;
         }
         this.playerCount++;
-        this.lblPlayerCount.string = this.playerCount.toString();
+        this.updatePlayerCountLabel();
     }
 
     @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.aroundTablePlayers, { fireImmediately: false })
@@ -43,7 +42,7 @@ export class PlayerCounter extends ObserverComponent {
         }
         const players: IAroundTablePlayers[] = Object.values(aroundTablePlayers);
         this.playerCount = players.length + 1;
-        this.lblPlayerCount.string = this.playerCount.toString();
+        this.updatePlayerCountLabel();
     }
 
     @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.outGamePlayerId, { fireImmediately: false })
@@ -52,6 +51,10 @@ export class PlayerCounter extends ObserverComponent {
             return;
         }
         this.playerCount--;
+        this.updatePlayerCountLabel();
+    }
+
+    private updatePlayerCountLabel() {
         this.lblPlayerCount.string = this.playerCount.toString();
     }
 }
