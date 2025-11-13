@@ -229,8 +229,6 @@ export class LaneSpawner extends ObserverComponent {
             .start();
 
         this.scrollToLane(nextLaneIndex);
-
-        this.waitAndStopSpawningVehicle();
     }
 
     waitAndStopSpawningVehicle() {
@@ -241,27 +239,6 @@ export class LaneSpawner extends ObserverComponent {
                 landItemComponent.waitAndStopSpawningVehicle();
             }
         }
-    }
-
-    moveChickenAndVehicle() {
-        const nextLaneIndex = this.currentLaneIndex + 1;
-        if (!this.laneContent.children[nextLaneIndex]) {
-            return;
-        }
-
-        this.currentLaneIndex = nextLaneIndex;
-        const lane = this.laneContent.children[nextLaneIndex];
-
-        const laneWorld = lane.worldPosition;
-        const parent = this.chickenNode.parent;
-        const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
-
-        tween(this.chickenNode)
-            .delay(0.3)
-            .to(0.3, { position: v3(localPos.x, this.chickenNode.position.y, 0) })
-            .start();
-
-        this.scrollToLane(nextLaneIndex);
     }
 
     scrollToLane(laneIndex: number) {
@@ -311,6 +288,7 @@ export class LaneSpawner extends ObserverComponent {
 
             const hasVehicle = Math.random() < 0.5;
             this.moveChicken();
+            this.waitAndStopSpawningVehicle();
             this.showBarrier(nextLane, hasVehicle && !isFinalLane);
             if (isFinalLane) {
                 await this.chickenCtrl.playStepSuccessAtLastLane();
@@ -409,7 +387,7 @@ export class LaneSpawner extends ObserverComponent {
 
         try {
             if (!settleStatus.win) {
-                this.moveChickenAndVehicle();
+                this.moveChicken();
                 const landItem = this.laneContent.children[this.currentLaneIndex];
                 if (landItem) {
                     const landItemComponent = landItem.getComponent(LaneItem);
