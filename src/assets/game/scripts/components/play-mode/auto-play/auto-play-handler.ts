@@ -186,6 +186,9 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
         }
 
         this.inGameHandler.requestInGame();
+        if (this.betStore.uiState === BetUIState.Mining) {
+            this.completeSettle();
+        }
     }
 
     completeSettle() {
