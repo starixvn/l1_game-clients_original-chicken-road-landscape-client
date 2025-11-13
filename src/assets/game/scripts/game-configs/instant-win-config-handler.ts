@@ -16,7 +16,7 @@ export class InstantWinConfigHandler implements gc.Shared.IMultipleHandlers {
         this.instantWinConfigStore.betLevels = gameConfigs.chips
             .map(chip => parseInt(chip.toString()))
             .filter((value) => value >= this.instantWinConfigStore.minBet && value <= this.instantWinConfigStore.maxBet);
-        this.instantWinConfigStore.defaultBetLevel = gameConfigs.defaultBetLevel;
+        this.instantWinConfigStore.defaultBetLevel = gameConfigs.defaultBetLevel ?? this.instantWinConfigStore.minBet;
 
         if (this.instantWinConfigStore.fixedStepsMultiplierConfigs.length === 0) {
             this.instantWinConfigStore.fixedStepsMultiplierConfigs = gameConfigs.fixedStepsMultiplierConfigs;

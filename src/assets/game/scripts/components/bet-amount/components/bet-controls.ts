@@ -38,7 +38,7 @@ export default class BetControls extends ObserverComponent {
     @property(EditBox)
     inputBetAmount: EditBox = null;
 
-    private betLevels = [];
+    private defaultBetLevel = 0;
 
     onLoad() {
         this.inputBetAmount.node.on(EditBox.EventType.EDITING_DID_ENDED, this.onEditEndBetAmount, this);
@@ -57,7 +57,7 @@ export default class BetControls extends ObserverComponent {
 
     onEditEndBetAmount(editBox: EditBox) {
         const validValue = this.onEditEnd(editBox, false);
-        const validAmount = Math.max(validValue, this.betLevels.at(0));
+        const validAmount = Math.max(validValue, this.defaultBetLevel);
         this.updateBetAmount(Number(validAmount));
     }
 
@@ -65,22 +65,21 @@ export default class BetControls extends ObserverComponent {
         try {
             let value = Number(editBox.string);
             if (isNaN(value)) {
-                value = this.betLevels[0];
+                value = this.defaultBetLevel;
             }
             const valueString = gc.FormatUtils.numberWithCommas(value, 2, noZero);
             const validValue = valueString.replace(/,/g, "").replace(/x/g, "");
             return Number(validValue);
         } catch (error) {
             warn("input edit box error ----------------- ", editBox.string);
-            return this.betLevels[0];
+            return this.defaultBetLevel;
         }
     }
 
     @render(InstantWinConfigStore, (store) => store.defaultBetLevel)
     showDefaultBetLevel(defaultBetLevel: number) {
-        if (defaultBetLevel === undefined && this.betLevels.length > 0) {
-            this.updateBetAmount(this.betLevels[0]);
-        } else {
+        if (defaultBetLevel !== undefined) {
+            this.defaultBetLevel = defaultBetLevel;
             this.updateBetAmount(defaultBetLevel);
         }
     }
