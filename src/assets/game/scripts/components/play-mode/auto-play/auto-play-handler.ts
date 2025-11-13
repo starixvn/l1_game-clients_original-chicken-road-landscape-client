@@ -192,13 +192,13 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
         }
 
         this.inGameHandler.requestInGame();
-        if (this.betStore.uiState === BetUIState.Mining) {
+        if (this.betStore.uiState === BetUIState.Mining || this.baseBetStore.isProcessingBet) {
             this.completeSettle();
         }
     }
 
     completeSettle() {
-        this.betHandler.completeSettle();
+        this.betHandler.resetBet();
         setTimeout(() => {
             this.checkAutoBetNextRound();
         }, 500);
