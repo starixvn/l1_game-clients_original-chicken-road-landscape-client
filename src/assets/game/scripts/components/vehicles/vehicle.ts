@@ -46,8 +46,11 @@ export class Vehicle extends Component {
     }
 
     private randomVehicle() {
-        if (this.animationNames.length === 0) return;
-        const randomIndex = Math.floor(Math.random() * this.animationNames.length);
+        if (this.animationNames.length === 0) {
+            console.error("No animation names found");
+            return;
+        }
+        const randomIndex = Math.floor(Math.random() * this.animationNames.length); //NOSONAR
         this.currentAnimName = this.animationNames[randomIndex];
         this.vehicleSkeleton.setAnimation(0, this.currentAnimName, true);
     }
