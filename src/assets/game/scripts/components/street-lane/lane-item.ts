@@ -1,9 +1,7 @@
 import { _decorator, Color, Label, Node, sp, Sprite, Widget } from "cc";
-import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
-import { AudioIds } from "../../../audios/AudioIds";
 import { settings } from "../../game-settings";
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
@@ -122,19 +120,9 @@ export default class LaneItem extends ObserverComponent {
             return;
         }
 
-        if (this.uiState === BetUIState.Animating || this.uiState === BetUIState.Settle) {
-            return;
-        }
-        if (this.uiState === BetUIState.Start) {
-            this.onClickStartBet();
-        } else if (this.uiState === BetUIState.Mining) {
+        if (this.uiState === BetUIState.Mining) {
             this.onClickBetButton();
         }
-    }
-
-    private onClickStartBet() {
-        AudioUtils.playSFX(AudioIds.BTN_START);
-        this.onBet();
     }
 
     private onClickBetButton() {
