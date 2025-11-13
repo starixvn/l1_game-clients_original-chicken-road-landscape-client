@@ -2198,14 +2198,12 @@
     "chickenNode": {
       "__id__": 103
     },
-    "chickenPrefab": null,
     "startPoint": {
       "__id__": 99
     },
     "scrollView": {
       "__id__": 133
     },
-    "centerNode": null,
     "rightCurbStatic": {
       "__id__": 93
     },

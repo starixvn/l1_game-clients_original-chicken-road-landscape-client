@@ -27,17 +27,11 @@ export class LaneSpawner extends ObserverComponent {
     @property(Node)
     chickenNode: Node = null;
 
-    @property(Prefab)
-    chickenPrefab: Prefab = null;
-
     @property(Node)
     startPoint: Node = null;
 
     @property(ScrollView)
     scrollView: ScrollView = null;
-
-    @property(Node)
-    centerNode: Node = null;
 
     @property(Node)
     rightCurbStatic: Node = null;
