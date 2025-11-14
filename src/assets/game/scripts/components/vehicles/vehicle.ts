@@ -1,5 +1,4 @@
 import { _decorator, Component, Node, sp, tween, v3 } from "cc";
-import { AnimationUtils } from "db://shared-components/shared/utils";
 const { ccclass, property } = _decorator;
 
 @ccclass("Vehicle")
@@ -11,9 +10,6 @@ export class Vehicle extends Component {
     vehicleStartPoint: Node = null;
 
     @property(Node)
-    vehicleRandomEndPoint: Node = null;
-
-    @property(Node)
     vehicleHitBarrierEndPoint: Node = null;
 
     @property(Node)
@@ -22,13 +18,10 @@ export class Vehicle extends Component {
     @property(sp.Skeleton)
     vehicleSkeleton: sp.Skeleton = null;
 
-    isPLayingAnimation = false;
+    isMoving = false;
     isSpawning = false;
     minSpawnInterval = 2;
     maxSpawnInterval = 5;
-
-    private vehicleAnimationDuration = 0;
-    vehicleStartTime = 0;
 
     private animationNames: string[] = [];
     private currentAnimName = "";
@@ -55,45 +48,29 @@ export class Vehicle extends Component {
         this.vehicleSkeleton.setAnimation(0, this.currentAnimName, true);
     }
 
-    private async spawnVehicle() {
+    private spawnVehicle() {
         const startPos = this.vehicleStartPoint.position;
         this.vehicleNode.setPosition(startPos);
 
-        this.isPLayingAnimation = true;
-        this.vehicleStartTime = Date.now();
+        this.isMoving = true;
         this.randomVehicle();
         this.vehicleNode.active = true;
+        const movingDuration = this.getRandomVehicleDuration();
 
-        this.vehicleAnimationDuration = this.getRandomVehicleDuration();
-
-        await new Promise<void>((resolve) => {
+        return new Promise<void>((resolve) => {
             tween(this.vehicleNode)
-                .to(this.vehicleAnimationDuration, { position: v3(0, -startPos.y, 0) })
-                .call(() => resolve())
+                .to(movingDuration, { position: v3(0, -startPos.y, 0) })
+                .call(() => {
+                    this.resetVehicle();
+                    this.isMoving = false;
+                    resolve();
+                })
                 .start();
         });
-
-        this.resetVehicle();
-        this.isPLayingAnimation = false;
     }
 
     private getRandomVehicleDuration(): number {
         return Math.floor(Math.random() * 2) + 1; //NOSONAR
-    }
-
-    private getElapsedTime(): number {
-        if (!this.isPLayingAnimation) {
-            return 0;
-        }
-        return (Date.now() - this.vehicleStartTime) / 1000;
-    }
-
-    getRemainingTime(): number {
-        if (!this.isPLayingAnimation) {
-            return 0;
-        }
-        const elapsed = this.getElapsedTime();
-        return Math.max(0, this.vehicleAnimationDuration - elapsed);
     }
 
     resetVehicle() {
@@ -116,17 +93,16 @@ export class Vehicle extends Component {
 
         const randomInterval = Math.random() * (this.maxSpawnInterval - this.minSpawnInterval) + this.minSpawnInterval; //NOSONAR
         this.scheduleOnce(async () => {
-            if (this.isSpawning && !this.isPLayingAnimation) {
+            if (this.isSpawning && !this.isMoving) {
                 await this.spawnVehicle();
             }
             this.scheduleNextSpawn();
         }, randomInterval);
     }
 
-    stopSpawnVehicle() {
+    stopSpawningVehicle() {
         this.isSpawning = false;
         this.unscheduleAllCallbacks();
-        this.resetVehicle();
     }
 
     playVehicleStopAtBarrier() {
@@ -142,7 +118,7 @@ export class Vehicle extends Component {
             .start();
     }
 
-    async playCrashVehicle() {
+    playCrashVehicle() {
         this.vehicleNode.setPosition(this.vehicleStartPoint.position);
         this.vehicleNode.active = true;
         this.randomVehicle();
@@ -151,8 +127,5 @@ export class Vehicle extends Component {
         tween(this.vehicleNode)
             .to(2, { position: v3(0, crashEndPos.y, 0) })
             .start();
-
-        await AnimationUtils.delayTime(2);
-        this.resetVehicle();
     }
 }

@@ -238,12 +238,12 @@ export class LaneSpawner extends ObserverComponent {
             .start();
     }
 
-    waitAndStopSpawningVehicle() {
+    stopSpawningVehicleNextLane() {
         const landItem = this.laneContent.children[this.currentLaneIndex + 1];
         if (landItem) {
             const landItemComponent = landItem.getComponent(LaneItem);
             if (landItemComponent) {
-                landItemComponent.waitAndStopSpawningVehicle();
+                landItemComponent.stopSpawningVehicle();
             }
         }
     }
@@ -273,7 +273,7 @@ export class LaneSpawner extends ObserverComponent {
 
             const hasVehicle = Math.random() < 0.5; //NOSONAR
             this.moveChicken();
-            this.waitAndStopSpawningVehicle();
+            this.stopSpawningVehicleNextLane();
             this.showBarrier(nextLane, hasVehicle && !isFinalLane);
             if (isFinalLane) {
                 await this.chickenCtrl.playStepSuccessAtLastLane();

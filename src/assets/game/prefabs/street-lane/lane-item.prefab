@@ -2262,9 +2262,6 @@
     "vehicleStartPoint": {
       "__id__": 81
     },
-    "vehicleRandomEndPoint": {
-      "__id__": 89
-    },
     "vehicleHitBarrierEndPoint": {
       "__id__": 85
     },
@@ -2310,14 +2307,14 @@
     "defaultAnimation": "car3",
     "_premultipliedAlpha": false,
     "_timeScale": 1,
-    "_preCacheMode": 0,
-    "_cacheMode": 0,
+    "_preCacheMode": 1,
+    "_cacheMode": 1,
     "_sockets": [],
     "_useTint": false,
     "_debugMesh": false,
     "_debugBones": false,
     "_debugSlots": false,
-    "_enableBatch": false,
+    "_enableBatch": true,
     "loop": true,
     "_id": ""
   },
@@ -2865,7 +2862,7 @@
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
-    "defaultAnimation": "loop",
+    "defaultAnimation": "",
     "_premultipliedAlpha": false,
     "_timeScale": 2,
     "_preCacheMode": 0,

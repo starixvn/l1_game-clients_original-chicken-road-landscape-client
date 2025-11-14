@@ -119,18 +119,12 @@ export default class LaneItem extends ObserverComponent {
         this.isClickable = false;
     }
 
-    async waitAndStopSpawningVehicle() {
-        if (this.vehicle.isPLayingAnimation) {
-            const remainingTime = this.vehicle.getRemainingTime();
-            await AnimationUtils.delayTime(remainingTime);
-        }
-        this.vehicle.stopSpawnVehicle();
+    stopSpawningVehicle() {
+        this.vehicle.stopSpawningVehicle();
     }
 
     startRandomSpawning() {
-        if (!this.vehicle.isSpawning) {
-            this.vehicle.startRandomSpawning();
-        }
+        this.vehicle.startRandomSpawning();
     }
 
     playCrashVehicle() {
