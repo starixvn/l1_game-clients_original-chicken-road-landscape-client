@@ -114,7 +114,7 @@ export class Vehicle extends Component {
             return;
         }
 
-        const randomInterval = Math.random() * (this.maxSpawnInterval - this.minSpawnInterval) + this.minSpawnInterval;
+        const randomInterval = Math.random() * (this.maxSpawnInterval - this.minSpawnInterval) + this.minSpawnInterval; //NOSONAR
         this.scheduleOnce(async () => {
             if (this.isSpawning && !this.isPLayingAnimation) {
                 await this.spawnVehicle();
