@@ -43,7 +43,7 @@ export default class AutoPlay extends ObserverComponent {
 
     onLoad() {
         super.onLoad();
-        this.numberOfLanesEditBox.inputMode = EditBox.InputMode.NUMERIC;
+        this.numberOfLanesEditBox.inputMode = EditBox.InputMode.PHONE_NUMBER;
         this.numberOfLanesEditBox.inputFlag = EditBox.InputFlag.DEFAULT;
 
         this.numberOfLanesEditBox.node.on(EditBox.EventType.EDITING_DID_BEGAN, this.onEditBegin, this);
