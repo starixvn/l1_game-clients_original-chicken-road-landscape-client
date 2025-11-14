@@ -78,7 +78,7 @@ export class Vehicle extends Component {
     }
 
     private getRandomVehicleDuration(): number {
-        return Math.floor(Math.random() * 2) + 1;
+        return Math.floor(Math.random() * 2) + 1; //NOSONAR
     }
 
     private getElapsedTime(): number {
