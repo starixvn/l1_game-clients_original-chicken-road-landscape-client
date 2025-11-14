@@ -94,10 +94,11 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     private createAllLanes() {
-        this.currentConfig.multiplierSteps.forEach(() => {
+        for (let index = 0; index < this.currentConfig.multiplierSteps.length; index++) {
             const lane = instantiate(this.lanePrefab);
+            lane.name = `lane-${index}`;
             this.laneContent.addChild(lane);
-        });
+        }
     }
 
     private adjustLaneCount(previousLength: number) {
@@ -120,10 +121,11 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     private addLanes(count: number) {
-        const startIndex = this.laneContent.children.length - 1;
+        const startIndex = this.laneContent.children.length;
         const endIndex = startIndex + count;
         for (let index = startIndex; index < endIndex; index++) {
             const lane = instantiate(this.lanePrefab);
+            lane.name = `lane-${index}`;
             this.laneContent.addChild(lane);
         }
     }
@@ -199,21 +201,7 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     spawnChickenAtStart() {
-        if (this.startPoint) {
-            const localPos = this.getStartPosition();
-
-            this.chickenNode.setPosition(v3(localPos.x, localPos.y, 0));
-        } else {
-            const firstLane = this.laneContent.children[0];
-            if (firstLane) {
-                const laneWorld = firstLane.worldPosition;
-                const parent = this.chickenNode.parent;
-                const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
-                this.chickenNode.setPosition(v3(localPos.x, localPos.y, 0));
-            }
-        }
-
-        this.chickenCtrl?.playIdle();
+        this.resetChicken();
         this.currentLaneIndex = -1;
     }
 
@@ -376,10 +364,13 @@ export class LaneSpawner extends ObserverComponent {
                 const landItem = this.laneContent.children[this.currentLaneIndex];
                 if (landItem) {
                     const landItemComponent = landItem.getComponent(LaneItem);
-                    landItemComponent?.playCrashVehicle();
+                    landItemComponent?.playCrashVehicle(() => {
+                        this.chickenCtrl.playCrash()
+                    });
                 }
+                this.chickenCtrl.playStep();
 
-                await this.chickenCtrl.playCrash();
+
             }
         } catch (e) { }
     }
@@ -399,7 +390,7 @@ export class LaneSpawner extends ObserverComponent {
     private resetChicken() {
         const startPos = this.getStartPosition();
         this.chickenNode.setPosition(startPos);
-        this.chickenCtrl.playIdle();
+        this.chickenCtrl.reset();
     }
 
     private resetLandItemsBackground() {

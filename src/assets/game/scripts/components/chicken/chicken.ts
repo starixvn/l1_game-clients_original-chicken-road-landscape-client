@@ -2,13 +2,22 @@ import { _decorator, Component, sp } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { AnimationUtils } from "db://shared-components/shared/utils";
 import { AudioIds } from "../../../audios/AudioIds";
-import { settings } from "../../game-settings";
 const { ccclass, property } = _decorator;
+
+enum ChickenState {
+    Idle = "idle",
+    Moving = "moving",
+    Win = "win",
+    Crash = "crash",
+    Celebration = "celebration",
+}
 
 @ccclass("Chicken")
 export class Chicken extends Component {
     @property(sp.Skeleton)
     spineChicken: sp.Skeleton = null;
+
+    private state = ChickenState.Idle;
 
     onLoad() {
         this.initMix();
@@ -34,6 +43,7 @@ export class Chicken extends Component {
         if (!this.spineChicken) {
             return;
         }
+        this.state = animName as ChickenState;
         await AnimationUtils.playSpine(this.spineChicken, animName, loop, duration);
     }
 
@@ -55,30 +65,30 @@ export class Chicken extends Component {
 
         if (hasVehicle) {
             this.playAnim({ animName: "win" }).then(() => {
-                this.checkPlayIdle();
+                this.changeToIdle();
             });
         } else {
             this.playAnim({ animName: "celebration" }).then(() => {
-                this.checkPlayIdle();
+                this.changeToIdle();
             });
         }
     }
 
-    private checkPlayIdle() {
-        const isNotPlayMovingAnim = !AnimationUtils.isAnimationPlaying(this.spineChicken, "moving");
-        if (isNotPlayMovingAnim) {
+    private changeToIdle() {
+        const shouldChangeToIdle = this.state !== ChickenState.Idle
+            && this.state !== ChickenState.Crash
+            && this.state !== ChickenState.Moving;
+        if (shouldChangeToIdle) {
             this.playIdle();
         }
     }
 
-    async playStepFail() {
-        await this.playStep();
-        this.playAnim({ animName: "crash" });
+    reset() {
+        this.playIdle();
     }
 
-    async playCrash() {
+    playCrash() {
         AudioUtils.playSFX(AudioIds.CAR_HIT);
-        this.playStepFail();
-        await AnimationUtils.delayTime(settings.durations.crashAnimation);
+        this.playAnim({ animName: "crash" });
     }
 }

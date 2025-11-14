@@ -127,8 +127,8 @@ export default class LaneItem extends ObserverComponent {
         this.vehicle.startRandomSpawning();
     }
 
-    playCrashVehicle() {
-        this.vehicle.playCrashVehicle();
+    playCrashVehicle(onCollision: () => void) {
+        this.vehicle.playCrashVehicle(onCollision);
     }
 
     changeMultiplierBgColor(color: Color) {
