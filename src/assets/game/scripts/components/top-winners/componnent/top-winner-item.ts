@@ -41,6 +41,7 @@ export class TopWinnerItem extends Component {
 
         this.lblWin.string = hasWon ? FormatUtils.numberWithCommas(data.winningAmount, 2) : "-";
         this.lblBet.string = FormatUtils.numberWithCommas(data.amount, 2);
+        data.winningAmount === 0 && (this.lblWin.color = new Color("B3BEC1"));
         this.lblMultiplier.string = hasWon && data.winningAmount > 0 ? `${FormatUtils.numberWithCommas(data.multiplier, 2)}x` : "-";
         this.lblMultiplier.color =
             hasWon && data.winningAmount > 0 ? CrashUtils.getMultiplierColor(data.multiplier) : CrashUtils.getWhiteColor();
