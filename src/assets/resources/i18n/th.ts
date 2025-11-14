@@ -291,7 +291,7 @@ export const languages = {
         "title_multiplier": "ตัวคูณ",
         "crash_start_in": "เริ่มเข้า %{time}",
         "crashed": "ล้มเหลว",
-        "start": "เริ่ม",
+        "start": "เริ่มต้น",
         "max": "สูงสุด",
         "stop_auto_bet": "หยุดการเดิมพันอัตโนมัติ",
         "msg_rotate_to_portrait": "กรุณาหมุนหน้าจอเป็นแนวตั้งเพื่อเล่น",

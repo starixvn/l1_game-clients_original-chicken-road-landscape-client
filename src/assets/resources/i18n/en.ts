@@ -249,7 +249,7 @@ export const languages = {
         "start_in": "Betting time: {time}s",
         "cancel_bet": "(Cancel Bet)",
         "cashed": "Cashed",
-        "cashout": "Cash out",
+        "cashout": "Cashout",
         "message_bet_is_accepted": "Bet is accepted",
         "message_total_cashout_reach_max": "Total cashout amounts reach the max win",
         "my_bets": "My Bets",

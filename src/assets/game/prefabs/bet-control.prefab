@@ -5076,7 +5076,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 249.5390625,
+      "width": 237.7265625,
       "height": 63
     },
     "_anchorPoint": {
@@ -5112,7 +5112,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "CASH OUT",
+    "_string": "CASHOUT",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 48,
@@ -5918,7 +5918,7 @@
     "__prefab": {
       "__id__": 251
     },
-    "key": "ui.start",
+    "key": "Common.start",
     "format": 1,
     "prefix": "",
     "suffix": "",
@@ -6243,7 +6243,7 @@
     "__prefab": {
       "__id__": 267
     },
-    "key": "ui.start",
+    "key": "Common.start",
     "format": 1,
     "prefix": "",
     "suffix": "",

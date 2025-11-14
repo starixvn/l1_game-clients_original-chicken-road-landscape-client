@@ -549,7 +549,7 @@ export const languages = {
         "start_in": "Betting time: {time}s\n",
         "cancel_bet": "(Alisin ang Taya)",
         "cashed": "NAKUHA",
-        "cashout": "Cash out",
+        "cashout": "Cashout",
         "message_bet_is_accepted": "Tinanggap ang pusta.",
         "message_total_cashout_reach_max": "Ang kabuuang halaga ng cashout ay umabot sa pinakamataas na panalo.",
         "my_bets": "Ang Aking Mga Taya",

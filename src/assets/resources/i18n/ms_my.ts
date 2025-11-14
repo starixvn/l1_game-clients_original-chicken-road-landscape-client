@@ -549,7 +549,7 @@ export const languages = {
         "start_in": "Masa pertaruhan: {time}s",
         "cancel_bet": "(Batal Pertaruhan)",
         "cashed": "Tunai Keluar",
-        "cashout": "Cash out",
+        "cashout": "Cashout",
         "message_bet_is_accepted": "Pertaruhan diterima",
         "message_total_cashout_reach_max": "Jumlah pengeluaran tunai mencapai kemenangan maksima",
         "my_bets": "Pertaruhan Saya",
