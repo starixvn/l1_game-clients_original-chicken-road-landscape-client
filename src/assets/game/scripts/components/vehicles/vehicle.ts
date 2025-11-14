@@ -41,7 +41,7 @@ export class Vehicle extends Component {
     private cacheAnimationNames() {
         if (this.vehicleSkeleton && this.vehicleSkeleton.skeletonData) {
             const anims = this.vehicleSkeleton.skeletonData.getAnimsEnum();
-            this.animationNames = Object.keys(anims);
+            this.animationNames = Object.keys(anims).filter((name) => name !== "<None>");
         }
     }
 
