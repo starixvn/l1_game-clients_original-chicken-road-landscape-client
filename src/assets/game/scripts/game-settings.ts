@@ -13,11 +13,10 @@ export const settings = {
         startRound: 1,
 
         stepAnimation: 1,
-        winAnimation: 1,
+        winAnimation: 2,
         bigWinNotice: 5,
         normalWinNotice: 3,
         crashAnimation: 5,
-        winAllStepAnimation: 6,
     },
     numberOfRoundHistory: 11,
     validateBalanceWhenBet: true,

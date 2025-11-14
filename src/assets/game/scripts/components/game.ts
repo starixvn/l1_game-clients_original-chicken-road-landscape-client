@@ -5,8 +5,7 @@ import Observer from "observer";
 
 import { BalanceEffectHandlers } from "db://shared-components/game/balance-effect/scripts/handlers/balance-effect-handlers";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
-import { FunctionUtils } from "db://shared-components/shared/utils";
-import { AnimationUtils } from "db://shared-components/shared/utils/utils";
+import { AnimationUtils, FunctionUtils } from "db://shared-components/shared/utils";
 import { siteConfigs } from "../../../scripts/site-configs";
 import { AudioIds } from "../../audios/AudioIds";
 import { containerOptions } from "../containerOptions";
@@ -81,7 +80,7 @@ export default class Game extends GameComponent {
 
     @render(BetStore, (store) => store.settleStatus)
     async renderSettleStatus(settleStatus: SettleStatus) {
-        const { bigWinNotice, normalWinNotice, crashAnimation, winAnimation, stepAnimation, winAllStepAnimation } = settings.durations;
+        const { bigWinNotice, normalWinNotice, crashAnimation, winAnimation } = settings.durations;
         if (!settleStatus || Object.keys(settleStatus).length === 0) {
             return;
         }
@@ -97,28 +96,17 @@ export default class Game extends GameComponent {
             await FunctionUtils.waitUntil(() => this.uiState === BetUIState.Mining, 100, 3000);
         }
         const isBigWin = settleStatus.isBigWin;
-
         const node = this.nodeWinNotice.getChildByName(isBigWin ? "big" : "normal");
-        let duration = isBigWin ? bigWinNotice : normalWinNotice;
-
+        const winNoticeDuration = isBigWin ? bigWinNotice : normalWinNotice;
         const maxMultiplier = this._currentMultiplierConfig.multiplierSteps.at(-1);
         const isWinAllStep = this.multiplier === maxMultiplier;
         if (isWinAllStep) {
-            duration = winAllStepAnimation;
+            await AnimationUtils.delayTime(winAnimation);
         }
 
         const winNotice = node.getComponentInChildren(GameWinNotice);
         isBigWin ? this.playSound(AudioIds.BIGWIN) : this.playSound(AudioIds.NORMALWIN);
-        let showWinNoticeDuration = duration;
-        if (isWinAllStep) {
-            const delayShowWinDuration = winAnimation + stepAnimation;
-            showWinNoticeDuration = winAllStepAnimation - delayShowWinDuration;
-            console.log("delayShowWinDuration", delayShowWinDuration);
-            console.log("winAllStepAnimation", winAllStepAnimation);
-            console.log("showWinNoticeDuration", showWinNoticeDuration);
-            await AnimationUtils.delayTime(5);
-        }
-        winNotice?.show(settleStatus.bet, showWinNoticeDuration);
+        winNotice?.show(settleStatus.bet, winNoticeDuration);
 
         this.mainPlayerIncreaseBalance(settleStatus.bet);
         this.mainPlayerPlayWinningEffect();
@@ -128,7 +116,7 @@ export default class Game extends GameComponent {
 
         this.scheduleOnce(() => {
             this.completeSettle();
-        }, duration);
+        }, winNoticeDuration);
     }
 
     @render(InstantWinConfigStore, (store) => store.currentMultiplierConfig)

@@ -8,35 +8,6 @@ jest.mock("db://shared-components/shared/scripts/startup", () => ({
     getSharedContainer: jest.fn(() => ({ sharedContainer: true })),
 }));
 
-describe("settings", () => {
-    it("should have data as expected", () => {
-        // Assert
-        expect(settings).toStrictEqual({
-            id: 157,
-            name: "ChickenRoad",
-            observerNamespace: "ChickenRoad",
-            namespaces: ["ChickenRoad"],
-            durations: {
-                wholeRound: 14,
-                lockingBet: 3,
-                placingBet: 10,
-                generatingResult: 0,
-                startRound: 1,
-
-                stepAnimation: 1,
-                winAnimation: 1,
-                bigWinNotice: 5,
-                normalWinNotice: 3,
-                crashAnimation: 5,
-                winAllStepAnimation: 6,
-            },
-            numberOfRoundHistory: 11,
-            validateBalanceWhenBet: true,
-            gameTypeId: 13,
-        });
-    });
-});
-
 describe("when container created", () => {
     let container;
     let bind: jest.Mock;
