@@ -1,13 +1,13 @@
 import { _decorator, instantiate, log, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
+import { CrashUtils } from "../../crash-utils";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { Chicken } from "../chicken/chicken";
 import { AutoPlayHandler } from "../play-mode/auto-play/auto-play-handler";
 import LaneItem from "./lane-item";
-import { CrashUtils } from "../../crash-utils";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
@@ -271,7 +271,7 @@ export class LaneSpawner extends ObserverComponent {
             const isFinalLane = nextLane === this.currentConfig.multiplierSteps.length - 1;
             this.updateCurrentLaneItemBackground();
 
-            const hasVehicle = Math.random() < 0.5;
+            const hasVehicle = Math.random() < 0.5; //NOSONAR
             this.moveChicken();
             this.waitAndStopSpawningVehicle();
             this.showBarrier(nextLane, hasVehicle && !isFinalLane);
