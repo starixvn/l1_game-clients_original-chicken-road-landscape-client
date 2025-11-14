@@ -1,6 +1,6 @@
 import { _decorator, Color, Label, Node, sp, Sprite, Widget } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
-import { AnimationUtils } from "db://shared-components/shared/utils";
+import { AnimationUtils, FunctionUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { settings } from "../../game-settings";
 import { BetHandler } from "../bets/bet-handler";
@@ -25,10 +25,10 @@ export default class LaneItem extends ObserverComponent {
     vehicleNode: Node = null;
 
     @property(Label)
-    lblCurrentMultiplier: Label = null;
+    lblWinMultiplier: Label = null;
 
     @property(Node)
-    currentStepMultiplierBg: Node = null;
+    winMultiplierNode: Node = null;
 
     @property(Node)
     decorGrate: Node = null;
@@ -47,9 +47,11 @@ export default class LaneItem extends ObserverComponent {
     private isAutoPlay = false;
     public isClickable = false;
 
+    private isAnimatingShow = false;
+
     onLoad(): void {
-        super.onLoad();
         this.init();
+        super.onLoad();
     }
 
     private init() {
@@ -59,7 +61,7 @@ export default class LaneItem extends ObserverComponent {
             return;
         }
         this.barrierSpine.node.active = false;
-        this.currentStepMultiplierBg.active = false;
+        this.winMultiplierNode.active = false;
         this.decorGrate.active = false;
         this.decor1Node.active = false;
         this.decor2Node.active = false;
@@ -80,15 +82,35 @@ export default class LaneItem extends ObserverComponent {
     }
 
     toggleCurrentMultiplierBackground(isCurrentStep = true) {
-        this.currentStepMultiplierBg.active = isCurrentStep;
+        this.showWinMultiplier(isCurrentStep);
         this.lblMultiplier.node.active = !isCurrentStep;
-        this.lblCurrentMultiplier.node.active = isCurrentStep;
+    }
+
+    async showWinMultiplier(isShow: boolean) {
+        const spine = this.winMultiplierNode.getComponent(sp.Skeleton);
+        if (isShow) {
+            this.lblWinMultiplier.node.active = true;
+            this.winMultiplierNode.active = true;
+            this.isAnimatingShow = true;
+            AnimationUtils.playSpine(spine, "show").then(() => {
+                this.isAnimatingShow = false;
+                AnimationUtils.playSpine(spine, "loop", true);
+            });
+        } else {
+            try {
+                await FunctionUtils.waitUntil(() => !this.isAnimatingShow, 100, 3000);
+                AnimationUtils.playSpine(spine, "hide").then(() => {
+                    this.winMultiplierNode.active = false;
+                    this.lblWinMultiplier.node.active = false;
+                });
+            } catch (e) { }
+        }
     }
 
     setMultiplier(multiplier: number) {
         const multiplierString = `${multiplier.toFixed(2)}x`;
         this.lblMultiplier.string = multiplierString;
-        this.lblCurrentMultiplier.string = multiplierString;
+        this.lblWinMultiplier.string = multiplierString;
     }
 
     resetLaneItem() {

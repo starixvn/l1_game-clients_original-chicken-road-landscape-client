@@ -1,0 +1,48 @@
+
+popup-multi.webp
+size: 250,151
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bag
+  rotate: false
+  xy: 92, 28
+  size: 69, 52
+  orig: 69, 52
+  offset: 0, 0
+  index: -1
+board
+  rotate: false
+  xy: 0, 82
+  size: 212, 69
+  orig: 212, 69
+  offset: 0, 0
+  index: -1
+board mid
+  rotate: false
+  xy: 221, 11
+  size: 22, 69
+  orig: 22, 69
+  offset: 0, 0
+  index: -1
+board side
+  rotate: false
+  xy: 214, 82
+  size: 36, 69
+  orig: 36, 69
+  offset: 0, 0
+  index: -1
+corn
+  rotate: false
+  xy: 0, 0
+  size: 90, 80
+  orig: 98, 110
+  offset: 0, 13
+  index: -1
+star
+  rotate: false
+  xy: 163, 24
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1

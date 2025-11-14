@@ -47,8 +47,7 @@ export class Chicken extends Component {
 
     async playStepSuccessAtLastLane() {
         await this.playStep();
-        await this.playAnim({ animName: "final" });
-        this.playIdle();
+        this.playAnim({ animName: "final" });
     }
 
     async playStepSuccess(hasVehicle = false) {
