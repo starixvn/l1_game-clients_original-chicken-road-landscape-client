@@ -14,6 +14,7 @@ export class AutoPlayStore {
     public selectedRoundOnPopup = this.roundsList[0];
     public roundsAutoplay = 0;
 
+    triggerPlaceBetFailed = null;
     isAutoplay = false;
     noOfLanes = 1;
     currentMultiplierConfig: FixedStepsMultiplierConfig = null;

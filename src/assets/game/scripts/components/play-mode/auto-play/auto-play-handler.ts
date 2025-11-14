@@ -44,7 +44,7 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
                 }
             );
 
-            mobx.reaction(() => this.betHandler.triggerPlaceBetFailed, (triggerPlaceBetFailed) => {
+            mobx.reaction(() => this.autoPlayStore.triggerPlaceBetFailed, (triggerPlaceBetFailed) => {
                 if (triggerPlaceBetFailed) {
                     this.cancelAutoPlay();
                 }

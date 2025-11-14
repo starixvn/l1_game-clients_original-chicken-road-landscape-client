@@ -26,7 +26,6 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
 
     private readonly BIG_WIN_MULTIPLIER = 2.0;
     private autoCashOutTimeOut = null;
-    triggerPlaceBetFailed = null;
 
     handle() {
         this.betsStore.uiState = BetUIState.Bet;
@@ -126,7 +125,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
 
     handleEndBet(endBet: number) {
         if (endBet < 0) {
-            this.triggerPlaceBetFailed = {};
+            this.autoPlayStore.triggerPlaceBetFailed = {};
             this.resetBet();
             return;
         }
