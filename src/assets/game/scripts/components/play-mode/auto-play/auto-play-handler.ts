@@ -44,9 +44,9 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
                 }
             );
 
-            mobx.reaction(() => this.betHandler.triggerResetBet, (triggerResetBet) => {
-                if (triggerResetBet) {
-                    this.completeSettle();
+            mobx.reaction(() => this.betHandler.triggerPlaceBetFailed, (triggerPlaceBetFailed) => {
+                if (triggerPlaceBetFailed) {
+                    this.cancelAutoPlay();
                 }
             });
         }, 0);
