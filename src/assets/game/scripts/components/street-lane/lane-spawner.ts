@@ -94,10 +94,10 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     private createAllLanes() {
-        for (const element of this.currentConfig.multiplierSteps) {
+        this.currentConfig.multiplierSteps.forEach(() => {
             const lane = instantiate(this.lanePrefab);
             this.laneContent.addChild(lane);
-        }
+        });
     }
 
     private adjustLaneCount(previousLength: number) {
