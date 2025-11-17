@@ -1,180 +1,222 @@
 
 chicken.webp
-size: 1872,1184
+size: 1872,1190
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 barrel
   rotate: false
-  xy: 1519, 210
+  xy: 1516, 347
   size: 180, 121
   orig: 182, 121
   offset: 1, 0
   index: -1
 bottom L
   rotate: false
-  xy: 1835, 481
+  xy: 1832, 621
   size: 31, 70
   orig: 31, 70
   offset: 0, 0
   index: -1
 bottom R
   rotate: false
-  xy: 1835, 419
+  xy: 1832, 559
   size: 28, 60
   orig: 28, 60
   offset: 0, 0
   index: -1
 canh
   rotate: false
-  xy: 1794, 232
+  xy: 1516, 12
   size: 77, 72
   orig: 77, 72
   offset: 0, 0
   index: -1
 chanphai
   rotate: false
-  xy: 1591, 116
+  xy: 1696, 171
   size: 67, 92
   orig: 67, 92
   offset: 0, 0
   index: -1
 chantrai
   rotate: false
-  xy: 1519, 33
+  xy: 1624, 171
   size: 70, 96
   orig: 70, 96
   offset: 0, 0
   index: -1
+chicken-shadow
+  rotate: false
+  xy: 1516, 269
+  size: 141, 76
+  orig: 141, 76
+  offset: 0, 0
+  index: -1
 crack
   rotate: false
-  xy: 1127, 463
+  xy: 1124, 470
   size: 600, 720
   orig: 600, 720
   offset: 0, 0
   index: -1
 crash1
   rotate: false
-  xy: 1127, 31
+  xy: 1124, 38
   size: 390, 430
   orig: 390, 430
   offset: 0, 0
   index: -1
 crash2
   rotate: false
-  xy: 1, 1
-  size: 1124, 1182
+  xy: 0, 8
+  size: 1122, 1182
   orig: 1124, 1182
-  offset: 0, 0
+  offset: 2, 0
   index: -1
 crown
   rotate: false
-  xy: 1729, 587
+  xy: 1698, 366
   size: 120, 97
   orig: 120, 97
   offset: 0, 0
   index: -1
 duoi
   rotate: false
-  xy: 1729, 424
+  xy: 1726, 564
   size: 104, 127
   orig: 104, 127
   offset: 0, 0
   index: -1
 eye L
   rotate: false
-  xy: 1851, 664
+  xy: 1429, 16
   size: 19, 20
   orig: 19, 20
   offset: 0, 0
   index: -1
 eye R
   rotate: false
-  xy: 1851, 642
+  xy: 1450, 16
   size: 17, 20
   orig: 17, 20
   offset: 0, 0
   index: -1
 glasses
   rotate: false
-  xy: 1729, 553
+  xy: 1311, 4
   size: 116, 32
   orig: 116, 32
   offset: 0, 0
   index: -1
 head 1
   rotate: false
-  xy: 1729, 686
+  xy: 1726, 693
   size: 130, 158
   orig: 130, 158
   offset: 0, 0
   index: -1
 head 2
   rotate: false
-  xy: 1729, 1015
+  xy: 1726, 1022
   size: 139, 168
   orig: 139, 168
   offset: 0, 0
   index: -1
+hit1
+  rotate: false
+  xy: 1516, 86
+  size: 75, 79
+  orig: 126, 121
+  offset: 26, 23
+  index: -1
+hit2
+  rotate: false
+  xy: 1516, 167
+  size: 106, 100
+  orig: 126, 121
+  offset: 4, 7
+  index: -1
+hit3
+  rotate: false
+  xy: 1726, 465
+  size: 94, 97
+  orig: 126, 121
+  offset: 15, 16
+  index: -1
+leaf1
+  rotate: false
+  xy: 1822, 477
+  size: 50, 14
+  orig: 50, 14
+  offset: 0, 0
+  index: -1
+leaf2
+  rotate: false
+  xy: 1822, 461
+  size: 50, 14
+  orig: 50, 14
+  offset: 0, 0
+  index: -1
 mouth1
   rotate: false
-  xy: 1808, 372
+  xy: 1765, 32
   size: 63, 45
   orig: 63, 45
   offset: 0, 0
   index: -1
 mouth2
   rotate: false
-  xy: 1808, 306
+  xy: 1822, 493
   size: 46, 64
   orig: 46, 64
   offset: 0, 0
   index: -1
 mouth3
   rotate: false
-  xy: 1715, 355
+  xy: 1765, 196
   size: 91, 67
   orig: 91, 67
   offset: 0, 0
   index: -1
 neckle
   rotate: false
-  xy: 1701, 233
+  xy: 1683, 20
   size: 80, 57
   orig: 80, 57
   offset: 0, 0
   index: -1
 neckle shadow
   rotate: false
-  xy: 1706, 292
+  xy: 1595, 16
   size: 86, 61
   orig: 86, 61
   offset: 0, 0
   index: -1
 shadow mid
   rotate: false
-  xy: 1519, 333
+  xy: 1124, 0
   size: 185, 36
   orig: 191, 37
   offset: 2, 0
   index: -1
 smoke L
   rotate: false
-  xy: 1519, 371
+  xy: 1624, 79
   size: 194, 90
   orig: 194, 90
   offset: 0, 0
   index: -1
 smoke R
   rotate: false
-  xy: 1701, 131
+  xy: 1698, 265
   size: 168, 99
   orig: 168, 99
   offset: 0, 0
   index: -1
 than
   rotate: false
-  xy: 1729, 846
+  xy: 1726, 853
   size: 139, 167
   orig: 139, 167
   offset: 0, 0

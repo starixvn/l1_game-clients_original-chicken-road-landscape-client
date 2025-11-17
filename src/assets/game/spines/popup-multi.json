@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "JIMmYHOepnznYc0TVDXPXpnE2Bo",
+	"hash": "LxLp443H7185jzOvwds7zcUvUR8",
 	"spine": "3.8.99",
 	"x": -145,
 	"y": -42,
@@ -13,7 +13,7 @@
 	{ "name": "root" },
 	{ "name": "side", "parent": "root" },
 	{ "name": "board side", "parent": "side", "x": 72.44 },
-	{ "name": "board mid", "parent": "root", "scaleX": 7.8 },
+	{ "name": "board mid", "parent": "root" },
 	{ "name": "bag", "parent": "board side", "x": 35.03, "y": -11.78 },
 	{ "name": "corn", "parent": "board side", "x": 11.88, "y": -5.11 },
 	{ "name": "star", "parent": "board side", "x": 39.93, "y": 9.54 },
@@ -31,9 +31,7 @@
 "slots": [
 	{ "name": "corn", "bone": "corn", "attachment": "corn" },
 	{ "name": "corn2", "bone": "corn2", "attachment": "corn" },
-	{ "name": "board mid", "bone": "board mid", "attachment": "board mid" },
-	{ "name": "board side", "bone": "board side", "attachment": "board side" },
-	{ "name": "board side2", "bone": "board side2", "attachment": "board side" },
+	{ "name": "board mid", "bone": "board mid", "attachment": "board-normal" },
 	{ "name": "hightlight", "bone": "clip", "attachment": "hightlight" },
 	{ "name": "board", "bone": "hightlight", "color": "ffffff6f" },
 	{ "name": "bag", "bone": "bag", "attachment": "bag" },
@@ -58,13 +56,7 @@
 				"board": { "y": -0.5, "width": 212, "height": 69 }
 			},
 			"board mid": {
-				"board mid": { "y": -0.5, "width": 22, "height": 69 }
-			},
-			"board side": {
-				"board side": { "x": 15.38, "y": -0.5, "width": 36, "height": 69 }
-			},
-			"board side2": {
-				"board side": { "x": 15.38, "y": -0.5, "width": 36, "height": 69 }
+				"board-normal": { "y": -0.5, "width": 210, "height": 67 }
 			},
 			"corn": {
 				"corn": { "x": 11.68, "y": 18.11, "width": 98, "height": 110 }
@@ -102,7 +94,7 @@
 			"bag": {
 				"color": [
 					{ "color": "ffffffff" },
-					{ "time": 0.5, "color": "ffffff00" }
+					{ "time": 0.3333, "color": "ffffff00" }
 				],
 				"attachment": [
 					{ "time": 0.5, "name": null }
@@ -111,31 +103,13 @@
 			"bag2": {
 				"color": [
 					{ "color": "ffffffff" },
-					{ "time": 0.5, "color": "ffffff00" }
+					{ "time": 0.3333, "color": "ffffff00" }
 				],
 				"attachment": [
 					{ "time": 0.5, "name": null }
 				]
 			},
 			"board mid": {
-				"attachment": [
-					{ "time": 0.5, "name": null }
-				]
-			},
-			"board side": {
-				"color": [
-					{ "time": 0.3333, "color": "ffffffff" },
-					{ "time": 0.5, "color": "ffffff00" }
-				],
-				"attachment": [
-					{ "time": 0.5, "name": null }
-				]
-			},
-			"board side2": {
-				"color": [
-					{ "time": 0.3333, "color": "ffffffff" },
-					{ "time": 0.5, "color": "ffffff00" }
-				],
 				"attachment": [
 					{ "time": 0.5, "name": null }
 				]
@@ -303,26 +277,6 @@
 				"attachment": [
 					{ "name": null },
 					{ "time": 0.1, "name": "bag" }
-				]
-			},
-			"board side": {
-				"color": [
-					{ "color": "ffffff00" },
-					{ "time": 0.1, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "name": null },
-					{ "time": 0.0333, "name": "board side" }
-				]
-			},
-			"board side2": {
-				"color": [
-					{ "color": "ffffff00" },
-					{ "time": 0.1, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "name": null },
-					{ "time": 0.0333, "name": "board side" }
 				]
 			},
 			"corn": {
