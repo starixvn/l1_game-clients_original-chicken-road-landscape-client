@@ -64,7 +64,7 @@ export class Vehicle extends Component {
     private spawnVehicle() {
         if (this.state === VehicleState.Stopped_At_Barrier || this.state === VehicleState.Stopped_At_Crash) {
             console.log("spawnVehicle ERRRRRRRRRRRR", this.node.parent.name);
-            return;
+            return Promise.resolve();
         }
         const startPos = this.vehicleStartPoint.position;
         const endPos = this.vehicleEndPoint.position;
