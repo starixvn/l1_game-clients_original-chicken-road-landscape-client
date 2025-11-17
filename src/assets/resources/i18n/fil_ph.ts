@@ -447,7 +447,7 @@ export const languages = {
         "pf_verification_para_3": "Convert to Decimal",
         "pf_verification_para_4": "Calculate Final Result",
         "pf_client_seed_tooltip_para_2": "Merge Client Seed of the first five betting players of the round in sequential order from Player 1 to Player 5.",
-        "pf_combined_sha512_hash_tooltip_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed of the first five betting players of the round, subsequently converted into a SHA512 hash.",
+        "pf_combined_sha512_hash_tooltip_para_1": "The Combined SHA512 hash is determined by a combination of the Server Seed and the Client seed, then converted into a SHA512 hash.",
         "pf_fairness": "Fairness",
         "pf_copy_successfully ": "Copy Successful!",
         "pf_copy_unsucessful": "Copy function is temporarily unavailable",
@@ -581,7 +581,6 @@ export const languages = {
         "live_stats": "Mga Live na Estadistika",
         "profit": "Kita",
         "wins": "Panalo sa Round",
-        "waggred": "Waggred",
         "losses": "Mga Pagkatalo sa Round",
         "all_bets": "Lahat ng Taya\n\n\n",
         "crash_glossary_refund": "Bumalik",
@@ -618,7 +617,8 @@ export const languages = {
         "big_wins": "Big Wins",
         "turn_based_pf_settings_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed.\n",
         "cancel_promotion_message": "Tapos na ang Promosyon. Mangyaring makipag-ugnayan sa Customer Service para sa karagdagang impormasyon. (%{errorCode})",
-        "title_total_multiplier": "TOTAL MULTIPLIER"
+        "title_total_multiplier": "TOTAL MULTIPLIER",
+        "wagered": "Waggred"
     },
     "CoinMining": {
         "header_mining_attempts": "Mining Attempts",

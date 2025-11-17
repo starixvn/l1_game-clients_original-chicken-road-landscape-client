@@ -447,7 +447,7 @@ export const languages = {
         "pf_verification_para_3": "Ondalık sayıya dönüştür",
         "pf_verification_para_4": "Nihai Sonucu Hesapla",
         "pf_client_seed_tooltip_para_2": "Turun ilk beş bahis yapan oyuncusunun Müşteri Tohumu, Oyuncu 1'den Oyuncu 5'e kadar sıralı olarak birleştirilir.",
-        "pf_combined_sha512_hash_tooltip_para_1": "Nihai sonuç, turdaki ilk beş bahis yapan oyuncunun Sunucu Tohumu ve Müşteri Tohumu'nun birleşimiyle belirlenir ve daha sonra bir SHA512 hash'ine dönüştürülür.",
+        "pf_combined_sha512_hash_tooltip_para_1": "Birleşik SHA512 karması, Sunucu Tohumu ve İstemci Tohumu kombinasyonuyla belirlenir, daha sonra bir SHA512 karmasına dönüştürülür.",
         "pf_fairness": "Adillik",
         "pf_copy_successfully ": "Kopyalama başarılı!",
         "pf_copy_unsucessful": "Kopyalama özelliği geçici olarak kullanılamıyor",
@@ -581,7 +581,6 @@ export const languages = {
         "live_stats": "Canlı İstatistikler",
         "profit": "Kâr",
         "wins": "Tur Kazançları",
-        "waggred": "Waggred",
         "losses": "Kaybedilen Turlar",
         "all_bets": "Tüm Bahisler",
         "crash_glossary_refund": "Geri Ödeme",
@@ -618,7 +617,8 @@ export const languages = {
         "big_wins": "Büyük Kazanır",
         "turn_based_pf_settings_para_1": "Nihai sonuç, Sunucu Tohumu ve İstemci Tohumu kombinasyonuyla belirlenir.",
         "cancel_promotion_message": "Promosyon sona erdi. Daha fazla bilgi için lütfen Müşteri Hizmetleri ile iletişime geçin. (%{errorCode})",
-        "title_total_multiplier": "TOPLAM ÇARPAN"
+        "title_total_multiplier": "TOPLAM ÇARPAN",
+        "wagered": "Waggred"
     },
     "CoinMining": {
         "header_mining_attempts": "Madencilik Denemeleri",

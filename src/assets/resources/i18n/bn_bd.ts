@@ -447,7 +447,7 @@ export const languages = {
         "pf_verification_para_3": "দশমিকে রূপান্তর করুন",
         "pf_verification_para_4": "চূড়ান্ত ফলাফল গণনা করুন",
         "pf_client_seed_tooltip_para_2": "রাউন্ডের প্রথম পাঁচটি বাজি ধরা খেলোয়াড়ের Client Seed একের পর এক Player 1 থেকে Player 5 পর্যন্ত একত্রিত করুন।",
-        "pf_combined_sha512_hash_tooltip_para_1": "চূড়ান্ত ফলাফল সার্ভার বীজ এবং রাউন্ডের প্রথম পাঁচটি বাজি ধরা খেলোয়াড়ের ক্লায়েন্ট বীজের সংমিশ্রণ দ্বারা নির্ধারিত হয়, পরবর্তীতে একটি SHA512 হ্যাশে রূপান্তরিত হয়।",
+        "pf_combined_sha512_hash_tooltip_para_1": "সম্মিলিত SHA512 হ্যাশ সার্ভার Seed এবং ক্লায়েন্ট Seed এর সংমিশ্রণে নির্ধারিত হয়, তারপর একটি SHA512 হ্যাশে রূপান্তরিত হয়।",
         "pf_fairness": "Fairness",
         "pf_copy_successfully ": "কপি সফল হয়েছে!",
         "pf_copy_unsucessful": "কপি ফাংশন সাময়িকভাবে উপলব্ধ নেই",
@@ -581,7 +581,6 @@ export const languages = {
         "live_stats": "সরাসরি পরিসংখ্যান",
         "profit": "লাভ",
         "wins": "রাউন্ড জয়",
-        "waggred": "Waggred",
         "losses": "রাউন্ডের ক্ষয়ক্ষতি",
         "all_bets": "সমস্ত বেট",
         "crash_glossary_refund": "রিফান্ড",
@@ -618,7 +617,8 @@ export const languages = {
         "big_wins": "Big Wins",
         "turn_based_pf_settings_para_1": "চূড়ান্ত ফলাফল সার্ভার Seed এবং ক্লায়েন্ট Seed এর সংমিশ্রণে নির্ধারিত হয়।",
         "cancel_promotion_message": "প্রচারটি শেষ হয়ে গেছে। আরও তথ্যের জন্য গ্রাহক পরিষেবার সাথে যোগাযোগ করুন। (%{errorCode})",
-        "title_total_multiplier": "মোট গুণক"
+        "title_total_multiplier": "মোট গুণক",
+        "wagered": "বাজি ধরা হয়েছে"
     },
     "CoinMining": {
         "header_mining_attempts": "খনন প্রচেষ্টা",

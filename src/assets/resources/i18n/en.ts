@@ -166,7 +166,7 @@ export const languages = {
         "pf_client_seed_tooltip": "Client Seed is generated from Player’s side.\nMerge Client Seed of the first five betting players of the round in sequential order from Player 1 to Player 5.",
         "pf_client_seed_tooltip_para_1": "Client Seed is generated from Player’s side.",
         "pf_client_seed_tooltip_para_2": "Merge Client Seed of the first five betting players of the round in sequential order from Player 1 to Player 5.",
-        "pf_combined_sha512_hash_tooltip_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed of the first five betting players of the round, subsequently converted into a SHA512 hash.",
+        "pf_combined_sha512_hash_tooltip_para_1": "The Combined SHA512 hash is determined by a combination of the Server Seed and the Client Seed, then converted into a SHA512 hash.",
         "pf_copy_successfully ": "Copy Successful!",
         "pf_copy_unsucessful": "Copy function is temporarily unavailable",
         "pf_fairness": "Fairness",
@@ -280,9 +280,8 @@ export const languages = {
         "auto": "Auto",
         "live_stats": "Live Stats",
         "profit": "Profit",
-        "wins": "Round Wins",
-        "waggred": "Waggred",
-        "losses": "Round Losses",
+        "wins": "No. Wins",
+        "losses": "No. Losses",
         "all_bets": "All Bets",
         "crash_glossary_refund": "Refund",
         "glossary_bet": "Bet",
@@ -318,7 +317,8 @@ export const languages = {
         "big_wins": "Big Wins",
         "turn_based_pf_settings_para_1": "The final result is determined by a combination of the Server Seed and the Client Seed.",
         "cancel_promotion_message": "The Promotion has ended. Please contact Customer Service for more information. (%{errorCode}) ",
-        "title_total_multiplier": "Total Multiplier"
+        "title_total_multiplier": "Total Multiplier",
+        "wagered": "Wagered"
     },
     "CoinMining": {
         "auto_cash_out_in": "Auto cash out in",

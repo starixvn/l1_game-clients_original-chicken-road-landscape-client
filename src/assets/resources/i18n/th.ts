@@ -163,7 +163,7 @@ export const languages = {
         "pf_client_seed_tooltip": "Client Seed ถูกสร้างขึ้นจากฝั่งผู้เล่น\nผสาน client seed ของผู้เล่นเดิมพันห้าคนแรกของรอบตามลำดับจากผู้เล่นที่ 1 ถึงผู้เล่นที่ 5",
         "pf_client_seed_tooltip_para_1": " Client Seed ถูกสร้างขึ้นจากฝั่งผู้เล่น",
         "pf_client_seed_tooltip_para_2": "ผสาน client seed ของผู้เล่นเดิมพันห้าคนแรกของรอบตามลำดับจากผู้เล่นที่ 1 ถึงผู้เล่นที่ 5",
-        "pf_combined_sha512_hash_tooltip_para_1": "ผลลัพธ์สุดท้ายจะถูกกำหนดโดยการรวมกันของ Server seed และ Client seed ของผู้เล่นเดิมพันห้าคนแรกของรอบ จากนั้นจะถูกแปลงเป็น SHA512 hash",
+        "pf_combined_sha512_hash_tooltip_para_1": "แฮช SHA512 แบบรวมจะถูกกำหนดโดยการผสมผสานระหว่าง Server Seed และ Client Seed จากนั้นจึงแปลงเป็นแฮช SHA512",
         "pf_copy_successfully ": "คัดลอกสำเร็จ!",
         "pf_copy_unsucessful": "ฟังก์ชันคัดลอกใช้งานไม่ได้ชั่วคราว",
         "pf_fairness": "ยุติธรรม",
@@ -280,9 +280,8 @@ export const languages = {
         "auto": "อัตโนมัติ",
         "live_stats": "สถิติสด",
         "profit": "กำไร",
-        "wins": "ชนะในรอบ",
-        "waggred": "Waggred",
-        "losses": "รอบที่แพ้",
+        "wins": "ครั้งชนะ",
+        "losses": "จำนวนแพ้",
         "all_bets": "การเดิมพันทั้งหมด",
         "crash_glossary_refund": "คืนเงิน",
         "glossary_bet": "เดิมพัน",
@@ -318,7 +317,8 @@ export const languages = {
         "big_wins": "ชนะรางวัลใหญ่",
         "turn_based_pf_settings_para_1": "ผลลัพธ์สุดท้ายจะถูกกำหนดโดยการรวมกันของ Server Seed และ Client Seed",
         "cancel_promotion_message": "โปรโมชั่นสิ้นสุดแล้ว กรุณาติดต่อฝ่ายบริการลูกค้าสำหรับข้อมูลเพิ่มเติม (%{errorCode})",
-        "title_total_multiplier": "ตัวคูณทั้งหมด"
+        "title_total_multiplier": "ตัวคูณทั้งหมด",
+        "wagered": "เดิมพัน"
     },
     "CoinMining": {
         "auto_cash_out_in": "ถอนเงินอัตโนมัติใน",

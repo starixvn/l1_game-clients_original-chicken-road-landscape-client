@@ -447,7 +447,7 @@ export const languages = {
         "pf_verification_para_3": "दशमलव में बदलें",
         "pf_verification_para_4": "अंतिम परिणाम की गणना करें",
         "pf_client_seed_tooltip_para_2": "राउंड के पहले पाँच बेटिंग खिलाड़ियों के Client Seed को Player 1 से Player 5 तक क्रमबद्ध क्रम में मर्ज करें।",
-        "pf_combined_sha512_hash_tooltip_para_1": "अंतिम परिणाम सर्वर सीड और राउंड के पहले पाँच बेटिंग खिलाड़ियों के Client Seed के संयोजन द्वारा निर्धारित किया जाता है, जिसे बाद में SHA512 हैश में परिवर्तित किया जाता है।",
+        "pf_combined_sha512_hash_tooltip_para_1": "संयुक्त SHA512 हैश सर्वर Seed और क्लाइंट seed के संयोजन द्वारा निर्धारित किया जाता है, फिर इसे SHA512 हैश में परिवर्तित किया जाता है।",
         "pf_fairness": "Fairness",
         "pf_copy_successfully ": "कॉपी सफल! ",
         "pf_copy_unsucessful": "कॉपी फ़ंक्शन अस्थायी रूप से अनुपलब्ध है",
@@ -581,7 +581,6 @@ export const languages = {
         "live_stats": "लाइव आँकड़े",
         "profit": "मुनाफ़ा",
         "wins": "राउंड जीत",
-        "waggred": "Waggred",
         "losses": "राउंड में हार",
         "all_bets": "सभी बेट्स",
         "crash_glossary_refund": "रिफंड",
@@ -618,7 +617,8 @@ export const languages = {
         "big_wins": "Big Wins",
         "turn_based_pf_settings_para_1": "अंतिम परिणाम सर्वर Seed और क्लाइंट Seed के संयोजन द्वारा निर्धारित किया जाता है।",
         "cancel_promotion_message": "यह प्रमोशन समाप्त हो गया है। अधिक जानकारी के लिए कृपया ग्राहक सेवा से संपर्क करें। (%{errorCode})",
-        "title_total_multiplier": "कुल गुणक"
+        "title_total_multiplier": "कुल गुणक",
+        "wagered": "Waggred"
     },
     "CoinMining": {
         "header_mining_attempts": "माइनिंग के प्रयास",

@@ -447,7 +447,7 @@ export const languages = {
         "pf_verification_para_3": "십진수로 변환",
         "pf_verification_para_4": "최종 결과 계산",
         "pf_client_seed_tooltip_para_2": "해당 라운드의 첫 5명 베팅 플레이어의 클라이언트 시드를 플레이어 1부터 플레이어 5까지 순서대로 병합합니다.",
-        "pf_combined_sha512_hash_tooltip_para_1": "최종 결과는 해당 라운드의 첫 5명 베팅 플레이어의 서버 시드와 클라이언트 시드 조합에 의해 결정되며, 이후 SHA512 해시로 변환됩니다.",
+        "pf_combined_sha512_hash_tooltip_para_1": "결합된 SHA512 해시는 서버 시드와 클라이언트 시드의 조합으로 결정된 다음, SHA512 해시로 변환됩니다.",
         "pf_fairness": "공정성",
         "pf_copy_successfully ": "복사 완료!",
         "pf_copy_unsucessful": "복사 기능이 일시적으로 이용할 수 없습니다",
@@ -580,9 +580,8 @@ export const languages = {
         "auto": "자동",
         "live_stats": "라이브 통계",
         "profit": "수익",
-        "wins": "라운드 승리",
-        "waggred": "Waggred",
-        "losses": "라운드 패배",
+        "wins": "승수",
+        "losses": "패배 수",
         "all_bets": "모든 베팅",
         "crash_glossary_refund": "환불",
         "glossary_bet": "베팅",
@@ -618,7 +617,8 @@ export const languages = {
         "big_wins": "빅 승",
         "turn_based_pf_settings_para_1": "최종 결과는 서버 시드와 클라이언트 시드의 조합으로 결정됩니다.",
         "cancel_promotion_message": "프로모션이 종료되었습니다. 자세한 내용은 고객 서비스에 문의하십시오. (%{errorCode})",
-        "title_total_multiplier": "총 배율"
+        "title_total_multiplier": "총 배율",
+        "wagered": "베팅 금액"
     },
     "CoinMining": {
         "header_mining_attempts": "채굴 시도",

@@ -166,7 +166,7 @@ export const languages = {
         "pf_client_seed_tooltip": "クライアントシードはプレイヤー側で生成されます。\nラウンドにおける最初の5人のプレイヤーのクライアントシードを、プレイヤー1からプレイヤー5の順に結合します。",
         "pf_client_seed_tooltip_para_1": "クライアントシードはプレイヤー側で生成されます。",
         "pf_client_seed_tooltip_para_2": "ラウンドの最初の5人のプレイヤーのクライアントシードを、プレイヤー1からプレイヤー5の順に結合します。",
-        "pf_combined_sha512_hash_tooltip_para_1": "最終的な結果は、サーバーシードと、ラウンドの最初の5人のプレイヤーのクライアントシードの組み合わせによって決定され、その後SHA512ハッシュに変換されます。",
+        "pf_combined_sha512_hash_tooltip_para_1": "結合されたSHA512ハッシュは、サーバーシードとクライアントシードの組み合わせによって決定され、その後SHA512ハッシュに変換されます。",
         "pf_copy_successfully ": "コピー成功！",
         "pf_copy_unsucessful": "コピー機能は一時的に利用できません",
         "pf_fairness": "公平性",
@@ -280,9 +280,8 @@ export const languages = {
         "auto": "自動",
         "live_stats": "ライブ統計",
         "profit": "利益",
-        "wins": "ラウンド勝利",
-        "waggred": "Waggred",
-        "losses": "ラウンド損失",
+        "wins": "勝数",
+        "losses": "敗北数",
         "all_bets": "全ベット",
         "crash_glossary_refund": "払い戻し",
         "glossary_bet": "ベット",
@@ -318,7 +317,8 @@ export const languages = {
         "big_wins": "大が勝ち",
         "turn_based_pf_settings_para_1": "最終結果は、サーバーシードとクライアントシードの組み合わせによって決定されます。",
         "cancel_promotion_message": "プロモーションは終了しました。詳細については、カスタマーサービスにお問い合わせください。（%{errorCode}）",
-        "title_total_multiplier": "総合マルチプライヤー"
+        "title_total_multiplier": "総合マルチプライヤー",
+        "wagered": "賭け金"
     },
     "CoinMining": {
         "auto_cash_out_in": "オートキャッシュアウト倍率",

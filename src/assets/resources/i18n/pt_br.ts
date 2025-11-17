@@ -447,7 +447,7 @@ export const languages = {
         "pf_verification_para_3": "Converter para Decimal",
         "pf_verification_para_4": "Calcular Resultado Final",
         "pf_client_seed_tooltip_para_2": "Combine a Semente do Cliente dos primeiros cinco jogadores apostadores da rodada em ordem sequencial do Jogador 1 ao Jogador 5.",
-        "pf_combined_sha512_hash_tooltip_para_1": "O resultado final é determinado por uma combinação da Semente do Servidor e da Semente do Cliente dos primeiros cinco jogadores apostadores da rodada, posteriormente convertida em um hash SHA512.",
+        "pf_combined_sha512_hash_tooltip_para_1": "O hash SHA512 combinado é determinado por uma combinação da Seed do Servidor e da Seed do Cliente, sendo então convertido em um hash SHA512.",
         "pf_fairness": "Justeza",
         "pf_copy_successfully ": "Cópia bem-sucedida!",
         "pf_copy_unsucessful": "A função de copiar está temporariamente indisponível",
@@ -581,7 +581,6 @@ export const languages = {
         "live_stats": "Estatísticas ao vivo",
         "profit": "Lucro",
         "wins": "Vitórias da rodada",
-        "waggred": "Waggred",
         "losses": "Rodadas Perdidas",
         "all_bets": "Todas as Apostas",
         "crash_glossary_refund": "Reembolso",
@@ -618,7 +617,8 @@ export const languages = {
         "big_wins": "Grandes vitórias",
         "turn_based_pf_settings_para_1": "O resultado final é determinado por uma combinação da Semente do Servidor e da Semente do Cliente.",
         "cancel_promotion_message": "A promoção terminou. Entre em contato com o Serviço de Atendimento ao Cliente para obter mais informações. (%{errorCode})",
-        "title_total_multiplier": "MULTIPLICADOR TOTAL"
+        "title_total_multiplier": "MULTIPLICADOR TOTAL",
+        "wagered": "Waggred"
     },
     "CoinMining": {
         "header_mining_attempts": "Tentativas de Mineração",

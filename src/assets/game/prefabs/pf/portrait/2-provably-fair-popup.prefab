@@ -11074,7 +11074,8 @@
     "fileId": "c9V/iuAkpFAK2kIjI7FH/z",
     "instance": {
       "__id__": 510
-    }
+    },
+    "targetOverrides": null
   },
   {
     "__type__": "cc.PrefabInstance",
@@ -11733,7 +11734,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "cc.TargetInfo",
@@ -16722,7 +16723,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 786,
+      "width": 785.9999999999999,
       "height": 1269
     },
     "_anchorPoint": {

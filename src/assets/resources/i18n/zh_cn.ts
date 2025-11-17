@@ -146,7 +146,7 @@ export const languages = {
         "pf_client_seed_tooltip": "客户种子是从玩家端生成的。\n合并本轮前五名下注玩家的客户种子，按玩家 1 至玩家 5 的顺序排列",
         "pf_client_seed_tooltip_para_1": "客户种子是从玩家端生成的。",
         "pf_client_seed_tooltip_para_2": "合并本轮前五名下注玩家的客户种子，按玩家 1 至玩家 5 的顺序排列",
-        "pf_combined_sha512_hash_tooltip_para_1": "最终结果由本轮前五名投注玩家的服务器种子和客户种子的组合确定，随后转换为 SHA512 哈希。",
+        "pf_combined_sha512_hash_tooltip_para_1": "组合 SHA512 hash由服务器种子和客户端种子的组合决定，然后转换为 SHA512 hash。",
         "pf_copy_successfully ": "复制成功！",
         "pf_copy_unsucessful": "复印功能暂时不能用。",
         "pf_fairness": "公平",
@@ -280,9 +280,8 @@ export const languages = {
         "auto": "自动",
         "live_stats": "实时统计",
         "profit": "盈利",
-        "wins": "回合获胜",
-        "waggred": "Waggred",
-        "losses": "回合损失",
+        "wins": "胜次数",
+        "losses": "败场数",
         "all_bets": "全部投注",
         "crash_glossary_refund": "退款",
         "glossary_bet": "赌注",
@@ -318,7 +317,8 @@ export const languages = {
         "big_wins": "大赢",
         "turn_based_pf_settings_para_1": "最终结果由服务器种子和客户端种子的组合决定。",
         "cancel_promotion_message": "促销已结束。请联系客服了解更多信息。(%{errorCode})",
-        "title_total_multiplier": "总乘数"
+        "title_total_multiplier": "总乘数",
+        "wagered": "已投注"
     },
     "CoinMining": {
         "auto_cash_out_in": "自动提现",

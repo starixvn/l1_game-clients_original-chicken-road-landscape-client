@@ -163,7 +163,7 @@ export const languages = {
         "pf_client_seed_tooltip": "Client Seed được tạo ra từ phía người chơi.\nChuỗi \"Kết hợp Client Seed\" được tạo thành bằng sự kết hợp Client Seed của 5 người chơi theo thứ tự từ Người Chơi 1 đến Người Chơi 5.",
         "pf_client_seed_tooltip_para_1": "Client Seed được tạo ra từ phía người chơi.",
         "pf_client_seed_tooltip_para_2": "Chuỗi \"Kết hợp Client Seed\" được tạo thành bằng sự kết hợp Client Seed của 5 người chơi theo thứ tự từ Người Chơi 1 đến Người Chơi 5.",
-        "pf_combined_sha512_hash_tooltip_para_1": "Kết quả cuối cùng được xác định dựa trên sự kết hợp giữa Server Seed và Client Seed của 5 người chơi đặt cược đầu tiên và được mã hóa dưới dạng SHA512 hash.",
+        "pf_combined_sha512_hash_tooltip_para_1": "Chuỗi SHA512 hash được xác định dựa trên sự kết hợp giữa Server Seed và Client Seed, sau đó được mã hóa bằng SHA512 hash.",
         "pf_copy_successfully ": "Copy thành công!",
         "pf_copy_unsucessful": "Chức năng Copy tạm thời không hoạt động.",
         "pf_fairness": "Minh Bạch",
@@ -281,7 +281,6 @@ export const languages = {
         "live_stats": "Thống Kê Trực Tiếp",
         "profit": "Lợi Nhuận",
         "wins": "Phiên Thắng",
-        "waggred": "Đã cược",
         "losses": "Phiên Thua",
         "all_bets": "Tất Cả Cược",
         "crash_glossary_refund": "Hoàn Tiền",
@@ -318,7 +317,8 @@ export const languages = {
         "big_wins": "Thắng Lớn",
         "turn_based_pf_settings_para_1": "Kết quả cuối cùng được xác định dựa trên sự kết hợp giữa Server Seed và Client Seed.",
         "cancel_promotion_message": "Chương trình khuyến mãi đã kết thúc. Vui lòng liên hệ bộ phận Chăm sóc khách hàng để biết thêm thông tin. (%{errorCode})",
-        "title_total_multiplier": "Tổng Số Nhân"
+        "title_total_multiplier": "Tổng Số Nhân",
+        "wagered": "Tổng Cược"
     },
     "CoinMining": {
         "auto_cash_out_in": "Tự động rút tiền sau",
