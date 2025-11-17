@@ -65,11 +65,11 @@ export default class AutoPlay extends ObserverComponent {
         let numberOfLanes = this.getInputNumberOfLanes();
         if (numberOfLanes < 1) {
             numberOfLanes = 1;
+            this.numberOfLanesEditBox.string = numberOfLanes.toString();
         }
-        if (numberOfLanes > this.maxNumberOfLanes) {
+
+        if (!/^\d+$/.test(this.numberOfLanesEditBox.string) || numberOfLanes > this.maxNumberOfLanes) {
             numberOfLanes = this.maxNumberOfLanes;
-        }
-        if (!/^\d+$/.test(this.numberOfLanesEditBox.string)) {
             this.numberOfLanesEditBox.string = numberOfLanes.toString();
         }
         this.updateNumberOfLanes(numberOfLanes);
@@ -174,7 +174,6 @@ export default class AutoPlay extends ObserverComponent {
 
         if (multiplierIndex >= 0 && multiplierIndex < this.currentMultiplierConfig.multiplierSteps.length) {
             const multiplierValue = this.currentMultiplierConfig.multiplierSteps[multiplierIndex];
-
 
             this.lblMultiplier.string = `${multiplierValue.toFixed(2)}x`;
         } else {
