@@ -31,8 +31,6 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         this.betsStore.uiState = BetUIState.Bet;
         const betData: any = this.createCommonBetData();
         betData.action = this.betsStore.betCount === 0 ? BetAction.Bet : BetAction.Mine;
-        console.log("betCount", this.betsStore.betCount);
-        console.log("bet action", betData.action);
         betData.clientSeed = this.pfStore.clientSeed;
         betData.multiplierMode = this.instantWinConfigStore.currentMultiplierConfig.mode;
         this.betsStore.betCount++;
@@ -86,8 +84,12 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         this.betsStore.uiState = BetUIState.Animating;
     }
 
+    isReachMaxMultiplier() {
+        return this.betsStore.multiplier === this.instantWinConfigStore.currentMultiplierConfig.multiplierSteps.at(-1);
+    }
+
     setUIMiningState() {
-        if (this.betsStore.uiState === BetUIState.Settle) {
+        if (this.betsStore.uiState === BetUIState.Settle || this.isReachMaxMultiplier()) {
             return;
         }
         this.betsStore.uiState = BetUIState.Mining;
