@@ -3,6 +3,7 @@ import { ObserverComponent } from "db://shared-components/shared/common-componen
 import Observer from "observer";
 import { CrashUtils } from "../../crash-utils";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
+import { settings } from "../../game-settings";
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { Chicken } from "../chicken/chicken";
@@ -262,12 +263,12 @@ export class LaneSpawner extends ObserverComponent {
             const hasVehicle = Math.random() < 0.8; //NOSONAR
             this.moveChicken();
             this.stopSpawningVehicleNextLane();
+            this.scheduleOnce(() => this.showBarrier(nextLane, hasVehicle && !isFinalLane), settings.durations.stepAnimation);
             if (isFinalLane) {
                 await this.chickenCtrl.playStepSuccessAtLastLane();
             } else {
                 await this.chickenCtrl.playStepSuccess(hasVehicle)
             }
-            this.showBarrier(nextLane, hasVehicle && !isFinalLane);
             this.updateCurrentAndNextLaneItemBackground();
 
             this.setUIMiningState();

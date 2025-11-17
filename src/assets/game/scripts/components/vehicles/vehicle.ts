@@ -41,6 +41,7 @@ export class Vehicle extends Component {
         this.state = VehicleState.None;
         this.resetPosition();
         this.isSpawning = false;
+        Tween.stopAllByTarget(this.vehicleNode);
     }
 
     private cacheAnimationNames() {
@@ -61,6 +62,10 @@ export class Vehicle extends Component {
     }
 
     private spawnVehicle() {
+        if (this.state === VehicleState.Stopped_At_Barrier || this.state === VehicleState.Stopped_At_Crash) {
+            console.log("spawnVehicle ERRRRRRRRRRRR", this.node.parent.name);
+            return;
+        }
         const startPos = this.vehicleStartPoint.position;
         this.vehicleNode.setPosition(v3(startPos));
 
@@ -119,7 +124,7 @@ export class Vehicle extends Component {
 
     playVehicleStopAtBarrier() {
         if (this.state === VehicleState.Normal_Moving) {
-            console.log("playVehicleStopAtBarrier ERRRRRRRRRRRR");
+            console.log("playVehicleStopAtBarrier ERRRRRRRRRRRR", this.node.parent.name);
             Tween.stopAllByTarget(this.vehicleNode);
         }
         this.state = VehicleState.Stopped_At_Barrier;
@@ -136,7 +141,7 @@ export class Vehicle extends Component {
 
     playCrashVehicle(onCollision: () => void) {
         if (this.state === VehicleState.Normal_Moving) {
-            console.log("playCrashVehicle ERRRRRRRRRRRR");
+            console.log("playCrashVehicle ERRRRRRRRRRRR", this.node.parent.name);
             Tween.stopAllByTarget(this.vehicleNode);
         }
         this.state = VehicleState.Stopped_At_Crash;
