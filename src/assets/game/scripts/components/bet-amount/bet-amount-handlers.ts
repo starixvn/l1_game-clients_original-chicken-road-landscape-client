@@ -26,7 +26,7 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
     }
 
     clickBetLevel(key: string) {
-        const isChangeKey = this.inputAmountKey !== key && this.inputAmountKey !== "";
+        const isChangeKey = this.inputAmountKey !== key;
 
         this.inputAmountKey = key;
         if (key === "max") {
