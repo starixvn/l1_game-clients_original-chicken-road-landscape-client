@@ -2,7 +2,6 @@ import { _decorator, Color, Label, Node, sp, Sprite, Widget } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils, FunctionUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
-import { settings } from "../../game-settings";
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { AutoPlayStore } from "../play-mode/auto-play/auto-play-store";
@@ -73,7 +72,6 @@ export default class LaneItem extends ObserverComponent {
     }
 
     async playStepSuccess(hasVehicle = false) {
-        await AnimationUtils.delayTime(settings.durations.stepAnimation);
         this.barrierSpine.node.active = true;
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
         if (hasVehicle) {
@@ -115,7 +113,7 @@ export default class LaneItem extends ObserverComponent {
 
     resetLaneItem() {
         this.barrierSpine.node.active = false;
-        this.vehicle.resetVehicle();
+        this.vehicle.reset();
         this.isClickable = false;
     }
 

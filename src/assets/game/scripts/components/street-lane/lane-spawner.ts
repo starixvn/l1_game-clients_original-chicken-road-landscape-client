@@ -1,4 +1,4 @@
-import { _decorator, instantiate, log, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
+import { _decorator, instantiate, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { CrashUtils } from "../../crash-utils";
@@ -259,15 +259,15 @@ export class LaneSpawner extends ObserverComponent {
             const isFinalLane = nextLane === this.currentConfig.multiplierSteps.length - 1;
             this.updateCurrentLaneItemBackground();
 
-            const hasVehicle = Math.random() < 0.5; //NOSONAR
+            const hasVehicle = Math.random() < 0.8; //NOSONAR
             this.moveChicken();
             this.stopSpawningVehicleNextLane();
-            this.showBarrier(nextLane, hasVehicle && !isFinalLane);
             if (isFinalLane) {
                 await this.chickenCtrl.playStepSuccessAtLastLane();
             } else {
                 await this.chickenCtrl.playStepSuccess(hasVehicle)
             }
+            this.showBarrier(nextLane, hasVehicle && !isFinalLane);
             this.updateCurrentAndNextLaneItemBackground();
 
             this.setUIMiningState();
@@ -288,7 +288,6 @@ export class LaneSpawner extends ObserverComponent {
     renderInterrupted(interrupted: any) {
         if (interrupted) {
             this.interrupted = true;
-            console.log("render interrupted", interrupted);
         }
     }
 
@@ -299,9 +298,7 @@ export class LaneSpawner extends ObserverComponent {
     setUIAnimatingState() { }
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
-    checkPlaceBetNextRound() {
-        log("checkPlaceBetNextRound");
-    }
+    checkPlaceBetNextRound() { }
 
     showBarrier(landIndex: number, hasVehicle = false) {
         try {
