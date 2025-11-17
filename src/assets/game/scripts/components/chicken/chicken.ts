@@ -65,6 +65,7 @@ export class Chicken extends Component {
 
     async playStepSuccessAtLastLane() {
         await this.playStep();
+        AudioUtils.playSFX(AudioIds.CHICKEN_DANCE);
         this.playAnim({ animName: "final" });
     }
 
@@ -76,6 +77,7 @@ export class Chicken extends Component {
                 this.changeToIdle();
             });
         } else {
+            AudioUtils.playSFX(AudioIds.CHICKEN_DANCE);
             this.playAnim({ animName: "celebration" }).then(() => {
                 this.changeToIdle();
             });

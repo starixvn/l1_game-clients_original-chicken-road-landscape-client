@@ -76,6 +76,7 @@ export default class LaneItem extends ObserverComponent {
     async playStepSuccess(hasVehicle = false) {
         this.barrierSpine.node.active = true;
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
+        AudioUtils.playSFX(AudioIds.BARRIER);
         if (hasVehicle) {
             this.vehicle.playVehicleStopAtBarrier();
             AudioUtils.playSFX(AudioIds.CAR_STOP);
