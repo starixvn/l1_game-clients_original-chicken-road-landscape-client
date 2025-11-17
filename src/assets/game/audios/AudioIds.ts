@@ -9,4 +9,10 @@ export enum AudioIds {
     COUNTDOWN_CASHOUT = "countdown_cashout",
     CRASHED = "crashed",
     CAR_HIT = "car-hit",
+    CAR_STOP = "car-stop",
+    CHICKEN_IDLE = "chicken-idle",
+    CHICKEN_SCREAM = "chicken-scream",
+    JUMP = "jump",
+    BARRIER = "barrier",
+    CHICKEN_DANCE = "chicken-dance",
 }

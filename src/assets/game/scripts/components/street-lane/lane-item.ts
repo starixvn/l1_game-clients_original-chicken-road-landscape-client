@@ -6,6 +6,8 @@ import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { AutoPlayStore } from "../play-mode/auto-play/auto-play-store";
 import { Vehicle } from "../vehicles/vehicle";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
+import { AudioIds } from "../../../audios/AudioIds";
 
 const { ccclass, property } = _decorator;
 const { handle, render } = Observer;
@@ -76,6 +78,8 @@ export default class LaneItem extends ObserverComponent {
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
         if (hasVehicle) {
             this.vehicle.playVehicleStopAtBarrier();
+            AudioUtils.playSFX(AudioIds.CAR_STOP);
+            AudioUtils.playSFX(AudioIds.CHICKEN_SCREAM);
         }
     }
 

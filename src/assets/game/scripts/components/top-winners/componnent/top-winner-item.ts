@@ -24,7 +24,7 @@ export class TopWinnerItem extends Component {
     private isMainPlayer = false;
 
     private getColor(isMain: boolean) {
-        return new Color(isMain ? "#36DCFF" : "#B3BEC1");
+        return new Color(isMain ? "#00c950" : "#B3BEC1");
     }
 
     private formatName(name: string, isMain: boolean) {

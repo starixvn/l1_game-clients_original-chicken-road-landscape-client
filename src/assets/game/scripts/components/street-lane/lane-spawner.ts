@@ -9,6 +9,8 @@ import { BetStore, BetUIState } from "../bets/bet-store";
 import { Chicken } from "../chicken/chicken";
 import { AutoPlayHandler } from "../play-mode/auto-play/auto-play-handler";
 import LaneItem from "./lane-item";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
+import { AudioIds } from "../../../audios/AudioIds";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
@@ -218,6 +220,7 @@ export class LaneSpawner extends ObserverComponent {
         const laneWorld = lane.worldPosition;
         const parent = this.chickenNode.parent;
         const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
+        AudioUtils.playSFX(AudioIds.JUMP);
         tween(this.chickenNode)
             .delay(0.3)
             .call(() => {

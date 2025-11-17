@@ -42,5 +42,30 @@
     "car-hit": {
         "bundle": "resources",
         "path": "car-hit"
+    },
+    "car-stop": {
+        "bundle": "resources",
+        "path": "car-stop"
+    },
+    "chicken-idle": {
+        "bundle": "resources",
+        "path": "chicken-idle",
+        "loop": true
+    },
+    "chicken-scream": {
+        "bundle": "resources",
+        "path": "chicken-scream"
+    },
+    "jump": {
+        "bundle": "resources",
+        "path": "jump"
+    },
+    "barrier": {
+        "bundle": "resources",
+        "path": "barrier"
+    },
+    "chicken-dance": {
+        "bundle": "resources",
+        "path": "chicken-dance"
     }
 }

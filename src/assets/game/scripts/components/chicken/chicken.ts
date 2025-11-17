@@ -48,6 +48,7 @@ export class Chicken extends Component {
     }
 
     playIdle() {
+        AudioUtils.playStoppableSFX(AudioIds.CHICKEN_IDLE, true);
         this.playAnim({ animName: "idle", loop: true });
     }
 
