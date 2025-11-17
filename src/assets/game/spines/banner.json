@@ -1,0 +1,77 @@
+{
+"skeleton": {
+	"hash": "/BIMiaFIR3XU5kXqClFGz2Hs908",
+	"spine": "3.8.99",
+	"x": -133,
+	"y": -61,
+	"width": 210,
+	"height": 258,
+	"images": "./images/",
+	"audio": "F:/WorkFolder/18 chicken road/banner"
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root" }
+],
+"slots": [
+	{ "name": "banner", "bone": "bone", "attachment": "banner" },
+	{ "name": "light banner", "bone": "bone", "attachment": "light banner" },
+	{ "name": "light ground", "bone": "bone", "attachment": "light ground" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"banner": {
+				"banner": { "x": 1, "y": 90.5, "width": 152, "height": 213 }
+			},
+			"light banner": {
+				"light banner": { "x": -2.5, "y": 100, "width": 117, "height": 176 }
+			},
+			"light ground": {
+				"light ground": { "x": -39, "y": -27.5, "width": 188, "height": 67 }
+			}
+		}
+	}
+],
+"animations": {
+	"show": {
+		"slots": {
+			"light banner": {
+				"color": [
+					{ "color": "ffffffdf" },
+					{ "time": 0.1667, "color": "ffffff41" },
+					{ "time": 0.3333, "color": "ffffffbf" },
+					{ "time": 0.5, "color": "ffffff22" },
+					{ "time": 0.6667, "color": "ffffff55" },
+					{ "time": 0.8333, "color": "ffffff22" },
+					{ "time": 1, "color": "ffffff55" },
+					{ "time": 1.1667, "color": "ffffff22" },
+					{ "time": 1.3333, "color": "ffffff55" },
+					{ "time": 1.8333, "color": "ffffff25" },
+					{ "time": 2.5, "color": "ffffffdf" },
+					{ "time": 3.1667, "color": "ffffff25" },
+					{ "time": 3.3333, "color": "ffffffdf" }
+				]
+			},
+			"light ground": {
+				"color": [
+					{ "color": "ffffff52" },
+					{ "time": 0.1667, "color": "ffffff41" },
+					{ "time": 0.3333, "color": "ffffff64" },
+					{ "time": 0.5, "color": "ffffff37" },
+					{ "time": 0.6667, "color": "ffffff54" },
+					{ "time": 0.8333, "color": "ffffff37" },
+					{ "time": 1, "color": "ffffff55" },
+					{ "time": 1.1667, "color": "ffffff37" },
+					{ "time": 1.3333, "color": "ffffff55" },
+					{ "time": 1.8333, "color": "ffffff37" },
+					{ "time": 2.5, "color": "ffffff74" },
+					{ "time": 3.1667, "color": "ffffff37" },
+					{ "time": 3.3333, "color": "ffffff52" }
+				]
+			}
+		}
+	}
+}
+}

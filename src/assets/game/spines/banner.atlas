@@ -1,0 +1,27 @@
+
+banner.webp
+size: 271,282
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+banner
+  rotate: false
+  xy: 0, 69
+  size: 152, 213
+  orig: 152, 213
+  offset: 0, 0
+  index: -1
+light banner
+  rotate: false
+  xy: 154, 106
+  size: 117, 176
+  orig: 117, 176
+  offset: 0, 0
+  index: -1
+light ground
+  rotate: false
+  xy: 0, 0
+  size: 188, 67
+  orig: 188, 67
+  offset: 0, 0
+  index: -1
