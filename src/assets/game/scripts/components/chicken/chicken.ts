@@ -21,6 +21,7 @@ export class Chicken extends Component {
 
     onLoad() {
         this.initMix();
+        this.playIdle();
     }
 
     initMix() {
@@ -45,6 +46,12 @@ export class Chicken extends Component {
         }
         this.state = animName as ChickenState;
         await AnimationUtils.playSpine(this.spineChicken, animName, loop, duration);
+    }
+
+    checkToPlaySoundIdle() {
+        if (this.state === ChickenState.Idle) {
+            AudioUtils.playStoppableSFX(AudioIds.CHICKEN_IDLE, true);
+        }
     }
 
     playIdle() {

@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Label, Node, Tween, tween, Vec3 } from "cc";
+import { _decorator, Label, Node } from "cc";
 import { startGame } from "db://shared-components/shared/scripts/startup";
 import Observer from "observer";
 
@@ -147,22 +147,4 @@ export default class Game extends GameComponent {
 
     @handle(CashOutHistoryHandlers, (handler) => handler.addCashOutHistory())
     addCashOutHistory() { }
-
-    shake(node: Node, duration = 1, strength = 10) {
-        const originalPosition = new Vec3(node.position);
-        const shakes: Tween<any>[] = [];
-        const steps = Math.floor(duration / 0.02);
-
-        for (let i = 0; i < steps; i++) {
-            const offsetX = (Math.random() - 0.5) * strength * 2;
-            const offsetY = (Math.random() - 0.5) * strength * 2;
-            shakes.push(tween(node).to(0.02, { position: new Vec3(offsetX, offsetY, 0).add(originalPosition) }));
-        }
-
-        shakes.push(tween(node).to(0.02, { position: originalPosition }));
-
-        tween(node)
-            .sequence(...shakes)
-            .start();
-    }
 }

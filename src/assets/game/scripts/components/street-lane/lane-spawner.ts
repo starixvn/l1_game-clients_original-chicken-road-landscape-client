@@ -1,6 +1,9 @@
+import gc from "@sg/game-client-base";
 import { _decorator, instantiate, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
+import { AudioIds } from "../../../audios/AudioIds";
 import { CrashUtils } from "../../crash-utils";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
 import { settings } from "../../game-settings";
@@ -9,8 +12,6 @@ import { BetStore, BetUIState } from "../bets/bet-store";
 import { Chicken } from "../chicken/chicken";
 import { AutoPlayHandler } from "../play-mode/auto-play/auto-play-handler";
 import LaneItem from "./lane-item";
-import { AudioUtils } from "db://shared-components/game/audios/utils";
-import { AudioIds } from "../../../audios/AudioIds";
 
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
@@ -408,6 +409,13 @@ export class LaneSpawner extends ObserverComponent {
                 landItemComponent.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.DEFAULT));
                 landItemComponent.startRandomSpawning();
             }
+        }
+    }
+
+    @render(gc.App.AppStore, (store) => store.isTouchedScreen || store.isUserGesture)
+    setUserGesture(isTouchedScreen: boolean): void {
+        if (isTouchedScreen) {
+            this.chickenCtrl.checkToPlaySoundIdle();
         }
     }
 }
