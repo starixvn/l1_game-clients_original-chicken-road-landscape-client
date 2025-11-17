@@ -19,7 +19,7 @@ export class Vehicle extends Component {
     vehicleHitBarrierEndPoint: Node = null;
 
     @property(Node)
-    vehicleHitCrashEndPoint: Node = null;
+    vehicleEndPoint: Node = null;
 
     @property(sp.Skeleton)
     vehicleSkeleton: sp.Skeleton = null;
@@ -67,6 +67,7 @@ export class Vehicle extends Component {
             return;
         }
         const startPos = this.vehicleStartPoint.position;
+        const endPos = this.vehicleEndPoint.position;
         this.vehicleNode.setPosition(v3(startPos));
 
         this.state = VehicleState.Normal_Moving;
@@ -75,7 +76,7 @@ export class Vehicle extends Component {
         const movingDuration = this.getRandomVehicleDuration();
         return new Promise<void>((resolve) => {
             tween(this.vehicleNode)
-                .to(movingDuration, { position: v3(0, -startPos.y, 0) })
+                .to(movingDuration, { position: v3(0, endPos.y, 0) })
                 .call(() => {
                     if (this.state !== VehicleState.Stopped_At_Barrier && this.state !== VehicleState.Stopped_At_Crash) {
                         this.resetPosition();
@@ -128,11 +129,10 @@ export class Vehicle extends Component {
             Tween.stopAllByTarget(this.vehicleNode);
         }
         this.state = VehicleState.Stopped_At_Barrier;
-        const barrierHeight = 200;
         this.vehicleNode.setPosition(v3(this.vehicleStartPoint.position));
         this.randomVehicle();
         this.vehicleNode.active = true;
-        const barrierEndY = this.vehicleHitBarrierEndPoint.position.y + barrierHeight;
+        const barrierEndY = this.vehicleHitBarrierEndPoint.position.y;
         const duration = 0.4;
         tween(this.vehicleNode)
             .to(duration, { position: v3(0, barrierEndY, 0) })
@@ -149,13 +149,13 @@ export class Vehicle extends Component {
         this.vehicleNode.active = true;
         this.randomVehicle();
 
-        const crashEndPos = this.vehicleHitCrashEndPoint.position;
+        const endPos = this.vehicleEndPoint.position;
         const duration = 1;
         let isCollision = false;
         tween(this.vehicleNode)
-            .to(duration, { position: v3(0, crashEndPos.y, 0) }, {
+            .to(duration, { position: v3(0, endPos.y, 0) }, {
                 onUpdate(target, ratio) {
-                    if (ratio > 0.5 && !isCollision) {
+                    if (ratio > 0.2 && !isCollision) {
                         isCollision = true;
                         onCollision();
                     }
