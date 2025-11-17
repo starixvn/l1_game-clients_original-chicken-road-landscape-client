@@ -59,6 +59,12 @@ export default class BetControls extends ObserverComponent {
         const validValue = this.onEditEnd(editBox, false);
         const validAmount = Math.max(validValue, this.defaultBetLevel);
         this.updateBetAmount(Number(validAmount));
+        this.setInputAmountKey("editBox");
+    }
+
+    @handle(BetAmountHandlers, (handle, key: string) => handle.setInputAmountKey(key))
+    setInputAmountKey(key: string) {
+        return key;
     }
 
     onEditEnd(editBox: EditBox, noZero: boolean) {

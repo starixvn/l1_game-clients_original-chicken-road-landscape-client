@@ -12,7 +12,7 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
     @inject(InstantWinConfigStore) private readonly gameConfig: InstantWinConfigStore;
     @inject(gc.Player.MainPlayerStore) private readonly mainPlayerStore: gc.Player.MainPlayerStore;
 
-    private lastKey = "";
+    private inputAmountKey = "";
     handle() { }
 
     get maxBetAvailable() {
@@ -26,9 +26,9 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
     }
 
     clickBetLevel(key: string) {
-        const isChangeKey = this.lastKey !== key && this.lastKey !== "";
+        const isChangeKey = this.inputAmountKey !== key && this.inputAmountKey !== "";
 
-        this.lastKey = key;
+        this.inputAmountKey = key;
         if (key === "max") {
             this.updateBetAmount(this.maxBetAvailable, false);
         } else {
@@ -40,6 +40,10 @@ export class BetAmountHandlers implements gc.Shared.IHandler<gc.GameServiceMessa
                 this.updateBetAmount(newAmount);
             }
         }
+    }
+
+    setInputAmountKey(key: string) {
+        this.inputAmountKey = key;
     }
 
     updateBetAmount(betAmount: number, validate = true) {
