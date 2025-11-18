@@ -32,9 +32,6 @@ export class LaneSpawner extends ObserverComponent {
     laneContent: Node = null;
 
     @property(Node)
-    streetFullView: Node = null;
-
-    @property(Node)
     chickenNode: Node = null;
 
     @property(Node)
@@ -42,9 +39,6 @@ export class LaneSpawner extends ObserverComponent {
 
     @property(ScrollView)
     scrollView: ScrollView = null;
-
-    @property(Node)
-    rightCurbStatic: Node = null;
 
     private chickenCtrl: Chicken = null;
     private laneWidth = 0;

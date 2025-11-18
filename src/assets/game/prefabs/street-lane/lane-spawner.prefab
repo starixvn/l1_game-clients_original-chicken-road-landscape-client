@@ -2452,9 +2452,6 @@
     "laneContent": {
       "__id__": 11
     },
-    "streetFullView": {
-      "__id__": 3
-    },
     "chickenNode": {
       "__id__": 110
     },
@@ -2463,9 +2460,6 @@
     },
     "scrollView": {
       "__id__": 146
-    },
-    "rightCurbStatic": {
-      "__id__": 82
     },
     "_id": ""
   },
