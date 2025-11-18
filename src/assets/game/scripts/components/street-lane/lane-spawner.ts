@@ -16,7 +16,6 @@ import LaneItem from "./lane-item";
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
-const CURB_WIDTH = 238;
 
 const BG_MULTIPLIER_COLOR_INDEX = {
     DEFAULT: 0,
@@ -72,7 +71,6 @@ export class LaneSpawner extends ObserverComponent {
 
     renderLane(previousConfig: FixedStepsMultiplierConfig) {
         this.spawnLanes(previousConfig?.multiplierSteps?.length ?? 0);
-        this.updateStreetFullViewWidth();
 
         if (this.chickenNode) {
             this.chickenCtrl = this.chickenNode.getComponent(Chicken);
@@ -179,29 +177,6 @@ export class LaneSpawner extends ObserverComponent {
 
         const randomIndex2 = Math.floor(Math.random() * availableIndices.length); //NOSONAR
         this.decor2Index = availableIndices[randomIndex2];
-    }
-
-    updateStreetFullViewWidth() {
-        if (!this.streetFullView || !this.currentConfig || !this.lanePrefab.data) {
-            return;
-        }
-
-        const laneCount = this.currentConfig.multiplierSteps.length;
-        const laneTransform = this.lanePrefab.data.getComponent(UITransform);
-        const singleLaneWidth = laneTransform ? laneTransform.width : 0;
-
-        const totalLanesWidth = singleLaneWidth * laneCount;
-        const leftCurbWidth = CURB_WIDTH;
-        const rightCurbWidth = CURB_WIDTH;
-
-        const newWidth = totalLanesWidth + leftCurbWidth + rightCurbWidth;
-        this.streetFullView.getComponent(UITransform).width = newWidth;
-
-        if (this.rightCurbStatic) {
-            const rightCurbXPos = leftCurbWidth + totalLanesWidth - 14;
-
-            this.rightCurbStatic.setPosition(v3(rightCurbXPos, this.rightCurbStatic.position.y, 0));
-        }
     }
 
     spawnChickenAtStart() {
