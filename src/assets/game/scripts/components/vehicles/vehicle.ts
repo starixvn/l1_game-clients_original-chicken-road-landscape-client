@@ -66,6 +66,9 @@ export class Vehicle extends Component {
             console.log("spawnVehicle ERRRRRRRRRRRR", this.node.parent.name);
             return Promise.resolve();
         }
+        if (this.state !== VehicleState.None) {
+            debugger;
+        }
         const startPos = this.vehicleStartPoint.position;
         const endPos = this.vehicleEndPoint.position;
         this.vehicleNode.setPosition(v3(startPos));
@@ -81,6 +84,7 @@ export class Vehicle extends Component {
                     if (this.state !== VehicleState.Stopped_At_Barrier && this.state !== VehicleState.Stopped_At_Crash) {
                         this.resetPosition();
                     }
+                    this.state = VehicleState.None;
                     resolve();
                 })
                 .start();
@@ -110,6 +114,7 @@ export class Vehicle extends Component {
         }
 
         const randomInterval = Math.random() * (this.maxSpawnInterval - this.minSpawnInterval) + this.minSpawnInterval; //NOSONAR
+        this.unscheduleAllCallbacks();
         this.scheduleOnce(async () => {
             if (this.isSpawning) {
                 await this.spawnVehicle();

@@ -100,7 +100,7 @@ export class LaneSpawner extends ObserverComponent {
     private createAllLanes() {
         for (let index = 0; index < this.currentConfig.multiplierSteps.length; index++) {
             const lane = instantiate(this.lanePrefab);
-            lane.name = `lane-${index}`;
+            lane.name = `lane-${index.toString().padStart(2, "0")}`;
             this.laneContent.addChild(lane);
         }
     }
@@ -129,7 +129,7 @@ export class LaneSpawner extends ObserverComponent {
         const endIndex = startIndex + count;
         for (let index = startIndex; index < endIndex; index++) {
             const lane = instantiate(this.lanePrefab);
-            lane.name = `lane-${index}`;
+            lane.name = `lane-${index.toString().padStart(2, "0")}`;
             this.laneContent.addChild(lane);
         }
     }

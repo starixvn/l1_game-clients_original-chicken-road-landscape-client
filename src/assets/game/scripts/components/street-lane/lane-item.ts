@@ -1,13 +1,13 @@
 import { _decorator, Color, Label, Node, sp, Sprite, Widget } from "cc";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { AnimationUtils, FunctionUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
+import { AudioIds } from "../../../audios/AudioIds";
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { AutoPlayStore } from "../play-mode/auto-play/auto-play-store";
 import { Vehicle } from "../vehicles/vehicle";
-import { AudioUtils } from "db://shared-components/game/audios/utils";
-import { AudioIds } from "../../../audios/AudioIds";
 
 const { ccclass, property } = _decorator;
 const { handle, render } = Observer;
