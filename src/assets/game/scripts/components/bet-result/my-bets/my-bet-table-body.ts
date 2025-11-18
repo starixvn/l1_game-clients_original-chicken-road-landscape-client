@@ -1,7 +1,8 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Button, instantiate, Node, Prefab, ScrollView, UITransform, Vec3 } from "cc";
+import { _decorator, Button, find, instantiate, Node, Prefab, ScrollView, UITransform, Vec3 } from "cc";
 import Observer from "observer";
 
+import { NestedScrollManager } from "db://shared-components/shared/common-components/nested-scroll-manager/nested-scroll-manager";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import { BetHistoryLog, MyBetModel, MyBetStore } from "../../../handlers/crash-v2/bet/crash-bet-history-store";
 import { BetHistoryHandlers, HistoryConstants } from "../../../handlers/crash-v2/handlers/bet-history-handlers";
@@ -33,6 +34,7 @@ export class MyBetTableBody extends ObserverComponent {
     private isNodataToFetch = false;
     private lastScrollTopTime = 0;
     private readonly scrollTopThreshold: number = 1000; // 1 second threshold
+    private scrollView: ScrollView = null;
 
     private getHistoryItemComponent(node: Node): BetHistoryTableBodyRow {
         return node.getComponent(BetHistoryTableBodyRow);
@@ -92,14 +94,14 @@ export class MyBetTableBody extends ObserverComponent {
 
     @render(MyBetStore, (store) => store.settleStatus, { fireImmediately: false })
     private showSettleStatus(settleStatus: { win: boolean; bet: number }): void {
-        if (this.node.getComponent(ScrollView)?.getScrollOffset().y <= 0) {
+        if (this.scrollView?.getScrollOffset().y <= 0) {
             this.fetchDataFirstPage();
         }
     }
 
     private renderData(myBetModel: MyBetModel): void {
         myBetModel.betLogs.forEach((betLogItem, rowIndex) => {
-           this.processBetHistory(betLogItem, rowIndex);
+            this.processBetHistory(betLogItem, rowIndex);
         });
 
         this.updateUIAfterRender(myBetModel);
@@ -146,9 +148,18 @@ export class MyBetTableBody extends ObserverComponent {
     onLoad() {
         this.itemHeight = this.itemPrefab?.data.getComponent(UITransform).height || 0;
         this.startYPosition = -this.itemHeight / 2;
+        this.initScrollView();
+        this.setupScrollListener();
         super.onLoad();
         this.fetchData();
-        this.setupScrollListener();
+    }
+
+    private initScrollView() {
+        this.scrollView = this.node.getComponent(ScrollView);
+        const nestedScrollManager = find("Canvas").getComponentInChildren(NestedScrollManager);
+        if (nestedScrollManager) {
+            nestedScrollManager.addChildScrollViews([this.scrollView]);
+        }
     }
 
     private setupScrollListener() {
