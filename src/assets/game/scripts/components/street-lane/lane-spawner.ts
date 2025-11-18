@@ -16,7 +16,6 @@ import LaneItem from "./lane-item";
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
-
 const BG_MULTIPLIER_COLOR_INDEX = {
     DEFAULT: 0,
     NEXT_STEP: 1,
@@ -220,7 +219,6 @@ export class LaneSpawner extends ObserverComponent {
             return;
         }
         try {
-
             const minMultiplier = this.currentConfig.multiplierSteps[0];
 
             this.interrupted = false;
@@ -239,8 +237,9 @@ export class LaneSpawner extends ObserverComponent {
             this.scheduleOnce(() => this.showBarrier(nextLane, hasVehicle && !isFinalLane), settings.durations.stepAnimation);
             if (isFinalLane) {
                 await this.chickenCtrl.playStepSuccessAtLastLane();
+                this.setSettleState();
             } else {
-                await this.chickenCtrl.playStepSuccess(hasVehicle)
+                await this.chickenCtrl.playStepSuccess(hasVehicle);
             }
             this.updateCurrentAndNextLaneItemBackground();
 
@@ -252,13 +251,13 @@ export class LaneSpawner extends ObserverComponent {
                 this.checkPlaceBetNextRound();
             }
             this.interrupted = false;
-        } catch (e) { }
+        } catch (e) {}
     }
 
     @handle(AutoPlayHandler, (handler) => handler.completeSettle())
-    completeSettle() { }
+    completeSettle() {}
 
-    @render(AutoPlayHandler, handler => handler.interrupted, { fireImmediately: false })
+    @render(AutoPlayHandler, (handler) => handler.interrupted, { fireImmediately: false })
     renderInterrupted(interrupted: any) {
         if (interrupted) {
             this.interrupted = true;
@@ -266,13 +265,16 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     @handle(BetHandler, (handler) => handler.setUIMiningState())
-    setUIMiningState() { }
+    setUIMiningState() {}
+
+    @handle(BetHandler, (handler) => handler.setSettleState())
+    setSettleState() {}
 
     @handle(BetHandler, (handler) => handler.setUIAnimatingState())
-    setUIAnimatingState() { }
+    setUIAnimatingState() {}
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
-    checkPlaceBetNextRound() { }
+    checkPlaceBetNextRound() {}
 
     showBarrier(landIndex: number, hasVehicle = false) {
         try {
@@ -281,7 +283,7 @@ export class LaneSpawner extends ObserverComponent {
                 const landItemComponent = landItem.getComponent(LaneItem);
                 landItemComponent?.playStepSuccess(hasVehicle);
             }
-        } catch (error) { }
+        } catch (error) {}
     }
 
     updateCurrentLaneItemBackground() {
@@ -336,14 +338,12 @@ export class LaneSpawner extends ObserverComponent {
                 if (landItem) {
                     const landItemComponent = landItem.getComponent(LaneItem);
                     landItemComponent?.playCrashVehicle(() => {
-                        this.chickenCtrl.playCrash()
+                        this.chickenCtrl.playCrash();
                     });
                 }
                 this.chickenCtrl.playStep();
-
-
             }
-        } catch (e) { }
+        } catch (e) {}
     }
 
     private reset() {

@@ -88,6 +88,10 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         return this.betsStore.multiplier === this.instantWinConfigStore.currentMultiplierConfig.multiplierSteps.at(-1);
     }
 
+    setSettleState() {
+        this.betsStore.uiState = BetUIState.Settle;
+    }
+
     setUIMiningState() {
         if (this.betsStore.uiState === BetUIState.Settle || this.isReachMaxMultiplier()) {
             return;
@@ -116,6 +120,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     }
 
     handleCashOut() {
+        this.setSettleState();
         this.clearAutoCashOut();
         this.connectionStore.send("cashOut", {});
     }
@@ -192,6 +197,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     handleReachMaxWin(reachMaxWin: boolean) {
         this.betsStore.reachMaxWin = reachMaxWin;
     }
+
     handleWinAmount(winAmount: number) {
         this.betsStore.winAmount = winAmount;
     }

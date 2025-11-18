@@ -58,7 +58,6 @@ export default class Game extends GameComponent {
         // override to not use round id from round store
     }
 
-
     override onShowGame() {
         this.handleGameShow();
     }
@@ -68,10 +67,10 @@ export default class Game extends GameComponent {
     }
 
     @handle(InterruptionHandlers, (handler) => handler.onGameHide())
-    handleGameHide() { }
+    handleGameHide() {}
 
     @handle(InterruptionHandlers, (handler) => handler.onGameShow())
-    handleGameShow() { }
+    handleGameShow() {}
 
     @render(BetStore, (store) => store.uiState)
     renderUiState(uiState: BetUIState) {
@@ -92,7 +91,8 @@ export default class Game extends GameComponent {
 
             return;
         }
-        if (this.uiState !== BetUIState.Mining) {
+
+        if (this.uiState !== BetUIState.Mining && this.uiState !== BetUIState.Settle) {
             await FunctionUtils.waitUntil(() => this.uiState === BetUIState.Mining, 100, 3000);
         }
         const isBigWin = settleStatus.isBigWin;
