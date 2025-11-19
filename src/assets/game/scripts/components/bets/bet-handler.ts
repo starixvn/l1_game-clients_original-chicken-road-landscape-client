@@ -88,9 +88,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         return this.betsStore.multiplier === this.instantWinConfigStore.currentMultiplierConfig.multiplierSteps.at(-1);
     }
 
-    setSettleState() {
-        this.betsStore.uiState = BetUIState.Settle;
-    }
+    setSettleState() { }
 
     setUIMiningState() {
         if (this.betsStore.uiState === BetUIState.Settle || this.isReachMaxMultiplier()) {
