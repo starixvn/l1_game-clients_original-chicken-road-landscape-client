@@ -98,10 +98,10 @@ export class Chicken extends Component {
         this.playIdle();
     }
 
-    playCrash(offset: number) {
+    playCrash() {
         const center = ComponentUtils.convertPosition(this.spineChicken.node, find("Canvas"));
         tween(this.spineChicken.node)
-            .to(0.3, { position: v3(0, 0, 0) })
+            .to(0.3, { position: v3(center.x, 0, 0) })
             .start();
         AudioUtils.playSFX(AudioIds.CAR_HIT);
         this.playAnim({ animName: "crash" });

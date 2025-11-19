@@ -2,7 +2,6 @@ import gc from "@sg/game-client-base";
 import { _decorator, instantiate, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
-import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { AudioIds } from "../../../audios/AudioIds";
 import { CrashUtils } from "../../crash-utils";
@@ -340,18 +339,12 @@ export class LaneSpawner extends ObserverComponent {
                 if (landItem) {
                     const landItemComponent = landItem.getComponent(LaneItem);
                     landItemComponent?.playCrashVehicle(() => {
-                        const offset = this.moveChickenToCenter();
-                        this.chickenCtrl.playCrash(offset);
+                        this.chickenCtrl.playCrash();
                     });
                 }
                 this.chickenCtrl.playStep();
             }
         } catch (e) { }
-    }
-
-    moveChickenToCenter() {
-        const center = ComponentUtils.convertPosition(this.scrollView.content, this.node);
-        return center.x - this.chickenNode.position.x;
     }
 
     private reset() {
