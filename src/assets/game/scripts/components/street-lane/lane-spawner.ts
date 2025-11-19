@@ -200,6 +200,13 @@ export class LaneSpawner extends ObserverComponent {
             .start();
     }
 
+    moveChickenToPavement() {
+        tween(this.chickenNode)
+            .delay(0.3)
+            .by(0.3, { position: v3(this.laneWidth, 0, 0) })
+            .start();
+    }
+
     stopSpawningVehicleNextLane() {
         const landItem = this.laneContent.children[this.currentLaneIndex + 1];
         if (landItem) {
@@ -237,7 +244,10 @@ export class LaneSpawner extends ObserverComponent {
             this.stopSpawningVehicleNextLane();
             this.scheduleOnce(() => this.showBarrier(nextLane, hasVehicle && !isFinalLane), settings.durations.stepAnimation);
             if (isFinalLane) {
-                await this.chickenCtrl.playStepSuccessAtLastLane();
+                await this.chickenCtrl.playStep();
+                this.moveChickenToPavement();
+                this.chickenCtrl.playStepSuccessAtLastLane();
+
                 this.setSettleState();
             } else {
                 await this.chickenCtrl.playStepSuccess(hasVehicle);

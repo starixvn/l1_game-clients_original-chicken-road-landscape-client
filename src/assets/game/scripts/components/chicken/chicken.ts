@@ -62,8 +62,13 @@ export class Chicken extends Component {
         await this.playAnim({ animName: "moving" });
     }
 
-    async playStepSuccessAtLastLane() {
-        await this.playStep();
+    playStepSuccessAtLastLane() {
+        this.playStep().then(() => {
+            this.playAnimDance();
+        });
+    }
+
+    private playAnimDance() {
         AudioUtils.playSFX(AudioIds.CHICKEN_DANCE);
         this.playAnim({ animName: "final" });
     }
