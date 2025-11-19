@@ -2,6 +2,7 @@ import gc from "@sg/game-client-base";
 import { _decorator, instantiate, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
+import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { AudioIds } from "../../../audios/AudioIds";
 import { CrashUtils } from "../../crash-utils";
@@ -190,6 +191,7 @@ export class LaneSpawner extends ObserverComponent {
         const parent = this.chickenNode.parent;
         const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
         AudioUtils.playSFX(AudioIds.JUMP);
+        console.log("chicken move");
         tween(this.chickenNode)
             .delay(0.3)
             .call(() => {
@@ -251,11 +253,11 @@ export class LaneSpawner extends ObserverComponent {
                 this.checkPlaceBetNextRound();
             }
             this.interrupted = false;
-        } catch (e) {}
+        } catch (e) { }
     }
 
     @handle(AutoPlayHandler, (handler) => handler.completeSettle())
-    completeSettle() {}
+    completeSettle() { }
 
     @render(AutoPlayHandler, (handler) => handler.interrupted, { fireImmediately: false })
     renderInterrupted(interrupted: any) {
@@ -265,16 +267,16 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     @handle(BetHandler, (handler) => handler.setUIMiningState())
-    setUIMiningState() {}
+    setUIMiningState() { }
 
     @handle(BetHandler, (handler) => handler.setSettleState())
-    setSettleState() {}
+    setSettleState() { }
 
     @handle(BetHandler, (handler) => handler.setUIAnimatingState())
-    setUIAnimatingState() {}
+    setUIAnimatingState() { }
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
-    checkPlaceBetNextRound() {}
+    checkPlaceBetNextRound() { }
 
     showBarrier(landIndex: number, hasVehicle = false) {
         try {
@@ -283,7 +285,7 @@ export class LaneSpawner extends ObserverComponent {
                 const landItemComponent = landItem.getComponent(LaneItem);
                 landItemComponent?.playStepSuccess(hasVehicle);
             }
-        } catch (error) {}
+        } catch (error) { }
     }
 
     updateCurrentLaneItemBackground() {
@@ -338,12 +340,18 @@ export class LaneSpawner extends ObserverComponent {
                 if (landItem) {
                     const landItemComponent = landItem.getComponent(LaneItem);
                     landItemComponent?.playCrashVehicle(() => {
-                        this.chickenCtrl.playCrash();
+                        const offset = this.moveChickenToCenter();
+                        this.chickenCtrl.playCrash(offset);
                     });
                 }
                 this.chickenCtrl.playStep();
             }
-        } catch (e) {}
+        } catch (e) { }
+    }
+
+    moveChickenToCenter() {
+        const center = ComponentUtils.convertPosition(this.scrollView.content, this.node);
+        return center.x - this.chickenNode.position.x;
     }
 
     private reset() {
