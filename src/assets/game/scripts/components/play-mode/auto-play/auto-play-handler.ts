@@ -186,6 +186,7 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     async handleInterruption() {
+        this.betHandler.clearAutoCashOut();
         const ready = await this.betHandler.awaitConnectionReady();
         if (!ready) {
             return;
