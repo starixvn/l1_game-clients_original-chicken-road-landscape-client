@@ -1,4 +1,4 @@
-import { _decorator, Component, find, sp, tween, v3 } from "cc";
+import { _decorator, Component, Node, sp, tween, v3 } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { AnimationUtils, ComponentUtils } from "db://shared-components/shared/utils";
 import { AudioIds } from "../../../audios/AudioIds";
@@ -96,10 +96,15 @@ export class Chicken extends Component {
         this.playIdle();
     }
 
-    playCrash() {
-        const center = ComponentUtils.convertPosition(this.spineChicken.node, find("Canvas"));
+    playCrash(parentNode: Node) {
         tween(this.spineChicken.node)
-            .to(0.3, { position: v3(center.x, 0, 0) })
+            .delay(0.3)
+            .call(() => {
+                const center = ComponentUtils.convertPosition(this.spineChicken.node.parent, parentNode);
+                tween(this.spineChicken.node)
+                    .to(0.3, { position: v3(center.x, 0, 0) })
+                    .start();
+            })
             .start();
         AudioUtils.playSFX(AudioIds.CAR_HIT);
         this.playAnim({ animName: "crash" });

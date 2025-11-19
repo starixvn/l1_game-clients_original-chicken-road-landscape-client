@@ -1,6 +1,7 @@
 import { _decorator, Color, instantiate, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
+import { ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { AudioIds } from "../../../audios/AudioIds";
 import { CrashUtils } from "../../crash-utils";
@@ -338,7 +339,7 @@ export class LaneSpawner extends ObserverComponent {
                 if (landItem) {
                     const landItemComponent = landItem.getComponent(LaneItem);
                     landItemComponent?.playCrashVehicle(() => {
-                        this.chickenCtrl.playCrash();
+                        this.chickenCtrl.playCrash(this.scrollView.content.parent);
                     });
                 }
                 this.chickenCtrl.playStep();
@@ -352,15 +353,9 @@ export class LaneSpawner extends ObserverComponent {
         this.scrollView.scrollToLeft(0.2);
     }
 
-    private getStartPosition() {
-        const startWorld = this.startPoint.worldPosition;
-        const parent = this.chickenNode.parent;
-        return parent.getComponent(UITransform).convertToNodeSpaceAR(startWorld);
-    }
-
     private resetChicken() {
-        const startPos = this.getStartPosition();
-        this.chickenNode.setPosition(startPos);
+        ComponentUtils.moveToOtherNode(this.chickenNode, this.scrollView.content);
+        this.chickenNode.worldPosition = this.startPoint.worldPosition;
         this.chickenCtrl.reset();
     }
 
