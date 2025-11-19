@@ -74,6 +74,7 @@ export default class BetHistoryTableBodyRow extends ObserverComponent {
         this.lblDate.string = CrashUtils.formatDate(betHistoryLog.time);
         this.lblTime.string = CrashUtils.formatTime(betHistoryLog.time);
         this.lblRound.string = betHistoryLog.roundId.toString();
+        this.node.name = betHistoryLog.roundId.toString();
 
         const totalAmount = betHistoryLog.totalAmount;
         this.lblTotalStake.string = FormatUtils.numberWithCommas(totalAmount, 2);

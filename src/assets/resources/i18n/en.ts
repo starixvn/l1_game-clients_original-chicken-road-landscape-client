@@ -239,7 +239,7 @@ export const languages = {
         "players": "Players",
         "original_tagline": "Play Fresh, Win Best",
         "auto_cashout": "Auto Cashout",
-        "auto_play": "Auto Play",
+        "auto_play": "Auto-Play",
         "bet_accepted": "Bet\nAccepted",
         "chip_value": "Chip Value",
         "total_bet": "Total Bet",
