@@ -1,40 +1,26 @@
 
 popup-multi.webp
-size: 339,138
+size: 480,67
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-bag
-  rotate: false
-  xy: 212, 4
-  size: 69, 52
-  orig: 69, 52
-  offset: 0, 0
-  index: -1
 board
-  rotate: false
-  xy: 0, 69
-  size: 212, 69
-  orig: 212, 69
-  offset: 0, 0
-  index: -1
-board-normal
   rotate: false
   xy: 0, 0
   size: 210, 67
   orig: 210, 67
   offset: 0, 0
   index: -1
-corn
+board-normal
   rotate: false
-  xy: 214, 58
-  size: 90, 80
-  orig: 98, 110
-  offset: 0, 13
+  xy: 212, 0
+  size: 210, 67
+  orig: 210, 67
+  offset: 0, 0
   index: -1
 star
   rotate: false
-  xy: 283, 0
+  xy: 424, 11
   size: 56, 56
   orig: 56, 56
   offset: 0, 0

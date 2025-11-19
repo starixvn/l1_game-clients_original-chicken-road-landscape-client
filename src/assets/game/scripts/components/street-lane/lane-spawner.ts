@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, instantiate, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
+import { _decorator, Color, instantiate, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
@@ -145,7 +145,7 @@ export class LaneSpawner extends ObserverComponent {
 
             landItem.setMultiplier(multiplier);
             if (index === 0) {
-                landItem.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
+                landItem.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
                 landItem.isClickable = true;
             } else {
                 landItem.startRandomSpawning();
@@ -302,7 +302,7 @@ export class LaneSpawner extends ObserverComponent {
         if (currentLandItem) {
             const landItemComponent = currentLandItem.getComponent(LaneItem);
             if (landItemComponent) {
-                landItemComponent.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.CURRENT_STEP));
+                landItemComponent.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.CURRENT_STEP));
                 landItemComponent.toggleCurrentMultiplierBackground();
                 landItemComponent.isClickable = false;
             }
@@ -312,7 +312,7 @@ export class LaneSpawner extends ObserverComponent {
         if (nextLandItem) {
             const landItemComponent = nextLandItem.getComponent(LaneItem);
             if (landItemComponent) {
-                landItemComponent.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
+                landItemComponent.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
                 landItemComponent.isClickable = true;
             }
         }
@@ -373,19 +373,19 @@ export class LaneSpawner extends ObserverComponent {
             landItemComponent.toggleCurrentMultiplierBackground(false);
             landItemComponent.resetLaneItem();
             if (index === 0) {
-                landItemComponent.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
+                landItemComponent.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
                 landItemComponent.isClickable = true;
             } else {
-                landItemComponent.changeMultiplierBgColor(CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.DEFAULT));
+                landItemComponent.setMultiplierStyle(LaneItem.DEFAULT_TEXT_COLOR, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.DEFAULT));
                 landItemComponent.startRandomSpawning();
             }
         }
     }
 
-    @render(gc.App.AppStore, (store) => store.isTouchedScreen || store.isUserGesture)
-    setUserGesture(isTouchedScreen: boolean): void {
-        if (isTouchedScreen) {
-            this.chickenCtrl.checkToPlaySoundIdle();
-        }
-    }
+    // @render(gc.App.AppStore, (store) => store.isTouchedScreen || store.isUserGesture)
+    // setUserGesture(isTouchedScreen: boolean): void {
+    //     if (isTouchedScreen) {
+    //         this.chickenCtrl.checkToPlaySoundIdle();
+    //     }
+    // }
 }

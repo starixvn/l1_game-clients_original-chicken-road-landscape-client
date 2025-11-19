@@ -49,6 +49,7 @@ export default class LaneItem extends ObserverComponent {
     public isClickable = false;
 
     private isAnimatingShow = false;
+    public static readonly DEFAULT_TEXT_COLOR = new Color(152, 152, 152);
 
     onLoad(): void {
         this.init();
@@ -134,8 +135,9 @@ export default class LaneItem extends ObserverComponent {
         this.vehicle.playCrashVehicle(onCollision);
     }
 
-    changeMultiplierBgColor(color: Color) {
-        this.multiplierBg.color = color;
+    setMultiplierStyle(textColor: Color, bgColor: Color) {
+        this.lblMultiplier.color = textColor;
+        this.multiplierBg.color = bgColor;
     }
 
     private onClickBet() {

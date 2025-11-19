@@ -1,11 +1,11 @@
 {
 "skeleton": {
-	"hash": "LxLp443H7185jzOvwds7zcUvUR8",
+	"hash": "X5qP3SWDZtlApD2bFPmIEPydQ3w",
 	"spine": "3.8.99",
-	"x": -145,
-	"y": -42,
-	"width": 290,
-	"height": 110,
+	"x": -140.24,
+	"y": -34,
+	"width": 245.24,
+	"height": 71.85,
 	"images": "./images/",
 	"audio": "F:/WorkFolder/18 chicken road/popup multi"
 },
@@ -14,13 +14,9 @@
 	{ "name": "side", "parent": "root" },
 	{ "name": "board side", "parent": "side", "x": 72.44 },
 	{ "name": "board mid", "parent": "root" },
-	{ "name": "bag", "parent": "board side", "x": 35.03, "y": -11.78 },
-	{ "name": "corn", "parent": "board side", "x": 11.88, "y": -5.11 },
 	{ "name": "star", "parent": "board side", "x": 39.93, "y": 9.54 },
 	{ "name": "side2", "parent": "root", "scaleX": -1 },
 	{ "name": "board side2", "parent": "side2", "x": 72.44 },
-	{ "name": "bag2", "parent": "board side2", "x": 35.03, "y": -11.78 },
-	{ "name": "corn2", "parent": "board side2", "x": 11.88, "y": -5.11 },
 	{ "name": "star2", "parent": "board side2", "x": 39.78, "y": 8.68 },
 	{ "name": "star3", "parent": "board side", "x": 39.93, "y": 9.54 },
 	{ "name": "star4", "parent": "board side2", "x": 39.78, "y": 8.68 },
@@ -29,13 +25,9 @@
 	{ "name": "number", "parent": "root" }
 ],
 "slots": [
-	{ "name": "corn", "bone": "corn", "attachment": "corn" },
-	{ "name": "corn2", "bone": "corn2", "attachment": "corn" },
 	{ "name": "board mid", "bone": "board mid", "attachment": "board-normal" },
 	{ "name": "hightlight", "bone": "clip", "attachment": "hightlight" },
 	{ "name": "board", "bone": "hightlight", "color": "ffffff6f" },
-	{ "name": "bag", "bone": "bag", "attachment": "bag" },
-	{ "name": "bag2", "bone": "bag2", "attachment": "bag" },
 	{ "name": "star", "bone": "star", "attachment": "star" },
 	{ "name": "star3", "bone": "star3", "attachment": "star" },
 	{ "name": "star2", "bone": "star2", "attachment": "star" },
@@ -46,23 +38,11 @@
 	{
 		"name": "default",
 		"attachments": {
-			"bag": {
-				"bag": { "x": -4.97, "y": 8.78, "width": 69, "height": 52 }
-			},
-			"bag2": {
-				"bag": { "x": -4.97, "y": 8.78, "width": 69, "height": 52 }
-			},
 			"board": {
-				"board": { "y": -0.5, "width": 212, "height": 69 }
+				"board": { "y": -0.5, "width": 210, "height": 67 }
 			},
 			"board mid": {
 				"board-normal": { "y": -0.5, "width": 210, "height": 67 }
-			},
-			"corn": {
-				"corn": { "x": 11.68, "y": 18.11, "width": 98, "height": 110 }
-			},
-			"corn2": {
-				"corn": { "x": 11.68, "y": 18.11, "width": 98, "height": 110 }
 			},
 			"hightlight": {
 				"hightlight": {
@@ -91,43 +71,7 @@
 "animations": {
 	"hide": {
 		"slots": {
-			"bag": {
-				"color": [
-					{ "color": "ffffffff" },
-					{ "time": 0.3333, "color": "ffffff00" }
-				],
-				"attachment": [
-					{ "time": 0.5, "name": null }
-				]
-			},
-			"bag2": {
-				"color": [
-					{ "color": "ffffffff" },
-					{ "time": 0.3333, "color": "ffffff00" }
-				],
-				"attachment": [
-					{ "time": 0.5, "name": null }
-				]
-			},
 			"board mid": {
-				"attachment": [
-					{ "time": 0.5, "name": null }
-				]
-			},
-			"corn": {
-				"color": [
-					{ "color": "ffffffff" },
-					{ "time": 0.5, "color": "ffffff00" }
-				],
-				"attachment": [
-					{ "time": 0.5, "name": null }
-				]
-			},
-			"corn2": {
-				"color": [
-					{ "color": "ffffffff" },
-					{ "time": 0.5, "color": "ffffff00" }
-				],
 				"attachment": [
 					{ "time": 0.5, "name": null }
 				]
@@ -212,7 +156,8 @@
 					{ "x": 0, "y": 0, "curve": "stepped" },
 					{ "time": 4.4, "x": 0, "y": 0 },
 					{ "time": 4.7333 },
-					{ "time": 5.0667, "x": 0, "y": 0 }
+					{ "time": 5.0667, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 8, "x": 0, "y": 0 }
 				]
 			},
 			"star4": {
@@ -224,32 +169,6 @@
 					{ "time": 4, "x": 0, "y": 0 },
 					{ "time": 4.3333 },
 					{ "time": 4.6667, "x": 0, "y": 0 }
-				]
-			},
-			"bag2": {
-				"scale": [
-					{},
-					{ "time": 1, "x": 1.02, "y": 0.98 },
-					{ "time": 2 },
-					{ "time": 3, "x": 1.02, "y": 0.98 },
-					{ "time": 4 },
-					{ "time": 5, "x": 1.02, "y": 0.98 },
-					{ "time": 6 },
-					{ "time": 7, "x": 1.02, "y": 0.98 },
-					{ "time": 8 }
-				]
-			},
-			"bag": {
-				"scale": [
-					{ "x": 1.02, "y": 0.98 },
-					{ "time": 1 },
-					{ "time": 2, "x": 1.02, "y": 0.98 },
-					{ "time": 3 },
-					{ "time": 4, "x": 1.02, "y": 0.98 },
-					{ "time": 5 },
-					{ "time": 6, "x": 1.02, "y": 0.98 },
-					{ "time": 7 },
-					{ "time": 8, "x": 1.02, "y": 0.98 }
 				]
 			},
 			"clip": {
@@ -267,40 +186,14 @@
 	},
 	"show": {
 		"slots": {
-			"bag": {
+			"board": {
 				"attachment": [
-					{ "name": null },
-					{ "time": 0.1, "name": "bag" }
-				]
-			},
-			"bag2": {
-				"attachment": [
-					{ "name": null },
-					{ "time": 0.1, "name": "bag" }
-				]
-			},
-			"corn": {
-				"color": [
-					{ "time": 0.1667, "color": "ffffff00" },
-					{ "time": 0.3333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "name": null },
-					{ "time": 0.1667, "name": "corn" }
-				]
-			},
-			"corn2": {
-				"color": [
-					{ "time": 0.1667, "color": "ffffff00" },
-					{ "time": 0.3333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "name": null },
-					{ "time": 0.1667, "name": "corn" }
+					{ "time": 0.4333, "name": "board" }
 				]
 			},
 			"number": {
 				"color": [
+					{ "color": "ffffff00", "curve": "stepped" },
 					{ "time": 0.2333, "color": "ffffff00" },
 					{ "time": 0.5, "color": "ffffffff" }
 				]
@@ -327,30 +220,6 @@
 			}
 		},
 		"bones": {
-			"corn": {
-				"scale": [
-					{ "time": 0.1667, "x": 0.5, "y": 0.5 },
-					{ "time": 0.3333, "x": 1.1, "y": 1.1 },
-					{ "time": 0.5 }
-				]
-			},
-			"bag": {
-				"rotate": [
-					{ "time": 0.1, "angle": -11.07 },
-					{ "time": 0.2333 }
-				],
-				"translate": [
-					{ "time": 0.1, "x": -9.06, "y": -2.68 },
-					{ "time": 0.2333, "x": -1.84, "y": 11.27 },
-					{ "time": 0.3 }
-				],
-				"scale": [
-					{ "time": 0.1, "x": 0.5, "y": 0.5 },
-					{ "time": 0.2667, "x": 0.99, "y": 1.05 },
-					{ "time": 0.3333, "x": 1.05, "y": 0.98 },
-					{ "time": 0.4 }
-				]
-			},
 			"board mid": {
 				"scale": [
 					{ "x": 0, "curve": 0.374, "c2": 0.49, "c3": 0.75 },
@@ -361,30 +230,6 @@
 				"translate": [
 					{ "x": -75.97, "curve": 0.307, "c2": 0.4, "c3": 0.75 },
 					{ "time": 0.3333 }
-				]
-			},
-			"bag2": {
-				"rotate": [
-					{ "time": 0.1, "angle": -11.07 },
-					{ "time": 0.2333 }
-				],
-				"translate": [
-					{ "time": 0.1, "x": -9.06, "y": -2.68 },
-					{ "time": 0.2333, "x": -1.84, "y": 11.27 },
-					{ "time": 0.3 }
-				],
-				"scale": [
-					{ "time": 0.1, "x": 0.5, "y": 0.5 },
-					{ "time": 0.2667, "x": 0.99, "y": 1.05 },
-					{ "time": 0.3333, "x": 1.05, "y": 0.98 },
-					{ "time": 0.4 }
-				]
-			},
-			"corn2": {
-				"scale": [
-					{ "time": 0.1667, "x": 0.5, "y": 0.5 },
-					{ "time": 0.3333, "x": 1.1, "y": 1.1 },
-					{ "time": 0.5 }
 				]
 			},
 			"board side2": {

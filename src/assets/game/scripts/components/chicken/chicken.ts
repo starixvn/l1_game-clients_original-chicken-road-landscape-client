@@ -55,7 +55,6 @@ export class Chicken extends Component {
     }
 
     playIdle() {
-        AudioUtils.playStoppableSFX(AudioIds.CHICKEN_IDLE, true);
         this.playAnim({ animName: "idle", loop: true });
     }
 
@@ -77,7 +76,6 @@ export class Chicken extends Component {
                 this.changeToIdle();
             });
         } else {
-            AudioUtils.playSFX(AudioIds.CHICKEN_DANCE);
             this.playAnim({ animName: "celebration" }).then(() => {
                 this.changeToIdle();
             });
