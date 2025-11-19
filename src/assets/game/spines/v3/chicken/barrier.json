@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "8xRNKoismQNygC309hEAdVjf/TM", "spine": "3.8.99", "images": "./ga/", "audio": "D:/MYWORKFOLDER/design/Chicken-crash/animation/ga" },
+"skeleton": { "hash": "T9ydx/W5VzMVFfWZa1xkO2i+m70", "spine": "3.8.99", "images": "./ga/", "audio": "D:/MYWORKFOLDER/design/Chicken-crash/animation/ga" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "barrel", "parent": "root", "y": -0.99 },
@@ -19,10 +19,10 @@
 		"name": "default",
 		"attachments": {
 			"ga/barrel": {
-				"barrel": { "y": 39.9, "width": 182, "height": 121 }
+				"barrel": { "y": 39.9, "width": 230, "height": 119 }
 			},
 			"ga/shadow mid": {
-				"shadow mid": { "width": 191, "height": 37 }
+				"shadow mid": { "width": 235, "height": 34 }
 			},
 			"ga/smoke L": {
 				"smoke L": { "y": 40, "width": 194, "height": 90 }
@@ -94,8 +94,8 @@
 			},
 			"smoke L": {
 				"translate": [
-					{ "y": 48.08, "curve": 0.345, "c2": 0.5, "c3": 0.75 },
-					{ "time": 1, "x": -88.83, "y": 48.08 }
+					{ "x": -24.79, "y": 44.34, "curve": 0.369, "c2": 0.55, "c3": 0.745 },
+					{ "time": 1, "x": -41.83, "y": 44.34 }
 				],
 				"scale": [
 					{ "x": 0.8, "y": 0.8 },
@@ -104,8 +104,8 @@
 			},
 			"smoke R": {
 				"translate": [
-					{ "y": 48.08, "curve": 0.345, "c2": 0.6, "c3": 0.75 },
-					{ "time": 1, "x": 94.54, "y": 48.08 }
+					{ "x": 26.86, "y": 51.26, "curve": 0.369, "c2": 0.62, "c3": 0.745 },
+					{ "time": 1, "x": 48.78, "y": 48.08 }
 				],
 				"scale": [
 					{ "x": 0.8, "y": 0.8 },

@@ -1,6 +1,6 @@
 
 popup-multi.webp
-size: 480,67
+size: 422,67
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -16,12 +16,5 @@ board-normal
   xy: 212, 0
   size: 210, 67
   orig: 210, 67
-  offset: 0, 0
-  index: -1
-star
-  rotate: false
-  xy: 424, 11
-  size: 56, 56
-  orig: 56, 56
   offset: 0, 0
   index: -1

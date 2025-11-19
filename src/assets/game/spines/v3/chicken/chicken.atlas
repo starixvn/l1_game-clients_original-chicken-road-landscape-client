@@ -1,194 +1,229 @@
 
 chicken.webp
-size: 1872,1190
+size: 1905,1188
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 barrel
   rotate: false
-  xy: 1516, 347
-  size: 180, 121
-  orig: 182, 121
-  offset: 1, 0
+  xy: 1516, 95
+  size: 230, 119
+  orig: 230, 119
+  offset: 0, 0
   index: -1
 bottom L
   rotate: false
-  xy: 1832, 621
+  xy: 1867, 1118
   size: 31, 70
   orig: 31, 70
   offset: 0, 0
   index: -1
 bottom R
   rotate: false
-  xy: 1832, 559
+  xy: 1867, 993
   size: 28, 60
   orig: 28, 60
   offset: 0, 0
   index: -1
 canh
   rotate: false
-  xy: 1516, 12
+  xy: 1679, 216
   size: 77, 72
   orig: 77, 72
   offset: 0, 0
   index: -1
 chanphai
   rotate: false
-  xy: 1696, 171
+  xy: 1832, 398
   size: 67, 92
   orig: 67, 92
   offset: 0, 0
   index: -1
 chantrai
   rotate: false
-  xy: 1624, 171
+  xy: 1832, 492
   size: 70, 96
   orig: 70, 96
   offset: 0, 0
   index: -1
 chicken-shadow
   rotate: false
-  xy: 1516, 269
+  xy: 1748, 134
   size: 141, 76
   orig: 141, 76
   offset: 0, 0
   index: -1
 crack
   rotate: false
-  xy: 1124, 470
+  xy: 1124, 468
   size: 600, 720
   orig: 600, 720
   offset: 0, 0
   index: -1
 crash1
   rotate: false
-  xy: 1124, 38
+  xy: 1124, 36
   size: 390, 430
   orig: 390, 430
   offset: 0, 0
   index: -1
 crash2
   rotate: false
-  xy: 0, 8
+  xy: 0, 6
   size: 1122, 1182
   orig: 1124, 1182
   offset: 2, 0
   index: -1
 crown
   rotate: false
-  xy: 1698, 366
+  xy: 1583, 369
   size: 120, 97
   orig: 120, 97
   offset: 0, 0
   index: -1
 duoi
   rotate: false
-  xy: 1726, 564
+  xy: 1726, 461
   size: 104, 127
   orig: 104, 127
   offset: 0, 0
   index: -1
+effect line 1
+  rotate: false
+  xy: 1867, 973
+  size: 34, 18
+  orig: 34, 18
+  offset: 0, 0
+  index: -1
+effect line 2
+  rotate: false
+  xy: 1479, 17
+  size: 59, 17
+  orig: 59, 17
+  offset: 0, 0
+  index: -1
+effect thunder
+  rotate: false
+  xy: 1516, 401
+  size: 52, 18
+  orig: 52, 18
+  offset: 0, 0
+  index: -1
 eye L
   rotate: false
-  xy: 1429, 16
+  xy: 1867, 951
   size: 19, 20
   orig: 19, 20
   offset: 0, 0
   index: -1
 eye R
   rotate: false
-  xy: 1450, 16
+  xy: 1888, 951
   size: 17, 20
   orig: 17, 20
   offset: 0, 0
   index: -1
 glasses
   rotate: false
-  xy: 1311, 4
+  xy: 1361, 2
   size: 116, 32
   orig: 116, 32
   offset: 0, 0
   index: -1
 head 1
   rotate: false
-  xy: 1726, 693
+  xy: 1726, 691
   size: 130, 158
   orig: 130, 158
   offset: 0, 0
   index: -1
 head 2
   rotate: false
-  xy: 1726, 1022
+  xy: 1726, 1020
   size: 139, 168
   orig: 139, 168
   offset: 0, 0
   index: -1
+head 3
+  rotate: false
+  xy: 1813, 293
+  size: 88, 103
+  orig: 88, 103
+  offset: 0, 0
+  index: -1
 hit1
   rotate: false
-  xy: 1516, 86
+  xy: 1772, 212
   size: 75, 79
   orig: 126, 121
   offset: 26, 23
   index: -1
 hit2
   rotate: false
-  xy: 1516, 167
+  xy: 1705, 359
   size: 106, 100
   orig: 126, 121
   offset: 4, 7
   index: -1
 hit3
   rotate: false
-  xy: 1726, 465
+  xy: 1583, 270
   size: 94, 97
   orig: 126, 121
   offset: 15, 16
   index: -1
 leaf1
   rotate: false
-  xy: 1822, 477
+  xy: 1479, 1
   size: 50, 14
   orig: 50, 14
   offset: 0, 0
   index: -1
 leaf2
   rotate: false
-  xy: 1822, 461
+  xy: 1531, 1
   size: 50, 14
   orig: 50, 14
   offset: 0, 0
   index: -1
 mouth1
   rotate: false
-  xy: 1765, 32
+  xy: 1516, 421
   size: 63, 45
   orig: 63, 45
   offset: 0, 0
   index: -1
 mouth2
   rotate: false
-  xy: 1822, 493
+  xy: 1858, 785
   size: 46, 64
   orig: 46, 64
   offset: 0, 0
   index: -1
 mouth3
   rotate: false
-  xy: 1765, 196
+  xy: 1679, 290
   size: 91, 67
   orig: 91, 67
   offset: 0, 0
   index: -1
+mouth4
+  rotate: false
+  xy: 1867, 1055
+  size: 31, 61
+  orig: 31, 61
+  offset: 0, 0
+  index: -1
 neckle
   rotate: false
-  xy: 1683, 20
+  xy: 1779, 12
   size: 80, 57
   orig: 80, 57
   offset: 0, 0
   index: -1
 neckle shadow
   rotate: false
-  xy: 1595, 16
+  xy: 1779, 71
   size: 86, 61
   orig: 86, 61
   offset: 0, 0
@@ -196,27 +231,27 @@ neckle shadow
 shadow mid
   rotate: false
   xy: 1124, 0
-  size: 185, 36
-  orig: 191, 37
-  offset: 2, 0
+  size: 235, 34
+  orig: 235, 34
+  offset: 0, 0
   index: -1
 smoke L
   rotate: false
-  xy: 1624, 79
+  xy: 1583, 3
   size: 194, 90
   orig: 194, 90
   offset: 0, 0
   index: -1
 smoke R
   rotate: false
-  xy: 1698, 265
+  xy: 1726, 590
   size: 168, 99
   orig: 168, 99
   offset: 0, 0
   index: -1
 than
   rotate: false
-  xy: 1726, 853
+  xy: 1726, 851
   size: 139, 167
   orig: 139, 167
   offset: 0, 0
