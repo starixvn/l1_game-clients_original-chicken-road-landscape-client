@@ -4568,7 +4568,7 @@
     },
     "component": "",
     "_componentId": "ff9c8OMp01Ht4gj5Cg/gZbQ",
-    "handler": "toggleModeDialog",
+    "handler": "onOpenModeDialog",
     "customEventData": ""
   },
   {

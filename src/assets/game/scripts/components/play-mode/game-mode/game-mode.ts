@@ -1,5 +1,6 @@
 import gc from "@sg/game-client-base";
 import { _decorator, Label, Node } from "cc";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { FixedStepsMultiplierConfig, InstantWinConfigHandler, InstantWinConfigStore } from "../../../game-configs";
@@ -13,8 +14,7 @@ const { render, handle } = Observer;
 export class GameMode extends ObserverComponent {
     @property(Node)
     modeDialog: Node = null;
-    
-    
+
     @property(Node)
     disableNode: Node = null;
 
@@ -82,6 +82,7 @@ export class GameMode extends ObserverComponent {
 
     @handle(InstantWinConfigHandler, (handler, mode: number) => handler.setCurrentMultiplierConfig(mode))
     private setCurrentMultiplierMode(event: any, mode: string) {
+        AudioUtils.playClick();
         this.toggleModeDialog(false);
         return +mode;
     }
@@ -92,7 +93,13 @@ export class GameMode extends ObserverComponent {
     }
 
     private closeModeDialog() {
+        AudioUtils.playClick();
         this.toggleModeDialog(false);
+    }
+
+    private onOpenModeDialog() {
+        AudioUtils.playClick();
+        this.toggleModeDialog(true);
     }
 
     @render(AutoPlayStore, (store) => store.isOpenAutoplayPopup)
@@ -105,10 +112,5 @@ export class GameMode extends ObserverComponent {
     @render(AutoPlayStore, (store) => store.isAutoplay)
     renderDisableNode(isAutoplay: boolean) {
         this.disableNode.active = isAutoplay;
-    }
-
-    @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
-    playSoundClick() {
-        return gc.Audios.AudioIds.CLICK;
     }
 }
