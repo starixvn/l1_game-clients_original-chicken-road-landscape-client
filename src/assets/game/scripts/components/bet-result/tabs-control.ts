@@ -78,6 +78,8 @@ export class TabsControl extends ObserverComponent {
             const instance = instantiate(this.prefabContents[index]);
             this.prefabInstances.set(index, instance);
             this.tabContents[index].addChild(instance);
+        } else {
+            this.prefabInstances.get(index).active = true;
         }
         this.extendShowTab(index);
     }
@@ -86,8 +88,7 @@ export class TabsControl extends ObserverComponent {
 
     private hideTab(index: number) {
         if (this.prefabInstances.has(index)) {
-            this.tabContents[index].removeAllChildren();
-            this.prefabInstances.delete(index);
+            this.prefabInstances.get(index).active = false;
         }
         this.extendHideTab(index);
     }
@@ -100,7 +101,7 @@ export class TabsControl extends ObserverComponent {
         }
 
         const toggles = this.toggleGroup.getComponentsInChildren(Toggle);
-        toggles.forEach(toggle => {
+        toggles.forEach((toggle) => {
             toggle.node.off(Toggle.EventType.CLICK);
         });
     }
