@@ -12,23 +12,23 @@
     },
     "bigwin": {
         "bundle": "resources",
-        "path": "bigwin"
+        "path": "bigwin",
+        "isLazyLoad": true
     },
     "normalwin": {
         "bundle": "resources",
-        "path": "normalwin"
+        "path": "normalwin",
+        "isLazyLoad": true
     },
     "btn-cashout": {
         "bundle": "resources",
-        "path": "btn-cashout"
+        "path": "btn-cashout",
+        "isLazyLoad": true
     },
     "btn-start": {
         "bundle": "resources",
-        "path": "btn-start"
-    },
-    "change-axe": {
-        "bundle": "resources",
-        "path": "change-axe"
+        "path": "btn-start",
+        "isLazyLoad": true
     },
     "countdown_cashout": {
         "bundle": "resources",
@@ -37,15 +37,18 @@
     },
     "crashed": {
         "bundle": "resources",
-        "path": "crashed"
+        "path": "crashed",
+        "isLazyLoad": true
     },
     "car-hit": {
         "bundle": "resources",
-        "path": "car-hit"
+        "path": "car-hit",
+        "isLazyLoad": true
     },
     "car-stop": {
         "bundle": "resources",
-        "path": "car-stop"
+        "path": "car-stop",
+        "isLazyLoad": true
     },
     "chicken-idle": {
         "bundle": "resources",
@@ -54,18 +57,22 @@
     },
     "chicken-scream": {
         "bundle": "resources",
-        "path": "chicken-scream"
+        "path": "chicken-scream",
+        "isLazyLoad": true
     },
     "jump": {
         "bundle": "resources",
-        "path": "jump"
+        "path": "jump",
+        "isLazyLoad": true
     },
     "barrier": {
         "bundle": "resources",
-        "path": "barrier"
+        "path": "barrier",
+        "isLazyLoad": true
     },
     "chicken-dance": {
         "bundle": "resources",
-        "path": "chicken-dance"
+        "path": "chicken-dance",
+        "isLazyLoad": true
     }
 }
