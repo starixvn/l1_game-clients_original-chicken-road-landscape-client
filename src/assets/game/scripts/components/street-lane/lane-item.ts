@@ -145,13 +145,12 @@ export default class LaneItem extends ObserverComponent {
             return;
         }
 
-        if (this.uiState === BetUIState.Mining) {
-            this.onClickBetButton();
-        }
+        this.onClickBetButton();
     }
 
     private onClickBetButton() {
         if (this.uiState === BetUIState.Mining) {
+            AudioUtils.playClick();
             this.onBet();
         }
     }

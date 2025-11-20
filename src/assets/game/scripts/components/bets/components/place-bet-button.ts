@@ -1,5 +1,6 @@
 import gc from "@sg/game-client-base";
 import { _decorator, Animation, Button, EventKeyboard, input, Input, KeyCode, Label, log, Node, sp, v3 } from "cc";
+import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { AudioIds } from "../../../../audios/AudioIds";
@@ -56,13 +57,7 @@ export default class PlaceBetButton extends ObserverComponent {
         if (this.uiState === BetUIState.Animating || this.uiState === BetUIState.Settle) {
             return;
         }
-        if (this.uiState === BetUIState.Mining) {
-            this.onClickBetButton();
-        }
-    }
-
-    onDestroy(): void {
-        super.onDestroy();
+        this.onClickBetButton();
     }
 
     @handle(BetHandler, (handler) => handler.handle())
@@ -90,6 +85,7 @@ export default class PlaceBetButton extends ObserverComponent {
 
     onClickBetButton() {
         if (this.uiState === BetUIState.Mining) {
+            AudioUtils.playClick();
             this.onBet();
         }
     }

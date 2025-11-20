@@ -106,14 +106,6 @@ export default class BetControls extends ObserverComponent {
         this.inputBetAmount.string = FormatUtils.numberWithCommas(betAmount, 2);
     }
 
-    @render(BetAmountStore, (store) => store.betLevels)
-    assignBetLevel(betLevels: number[]) {
-        if (!betLevels || betLevels.length === 0) {
-            return;
-        }
-        this.betLevels = betLevels;
-    }
-
     @handle(BetAmountHandlers, (handle, isOpen: boolean) => handle.updateStatusBetAmountPopup(isOpen))
     openBetAmountPopup(isOpen: boolean) {
         return isOpen;
