@@ -244,13 +244,14 @@ export class LaneSpawner extends ObserverComponent {
             }
             if (isFinalLane) {
                 await this.chickenCtrl.playStep();
+                this.updateCurrentAndNextLaneItemBackground();
                 this.getLaneItem(nextLane)?.playLastLane();
                 this.moveChickenToPavement();
                 await this.chickenCtrl.playStepSuccessAtLastLane();
             } else {
                 await this.chickenCtrl.playStepSuccess(hasVehicle);
+                this.updateCurrentAndNextLaneItemBackground();
             }
-            this.updateCurrentAndNextLaneItemBackground();
 
             this.setUIMiningState();
             this.checkIfSettled();
@@ -331,6 +332,7 @@ export class LaneSpawner extends ObserverComponent {
         try {
             if (!settleStatus.win) {
                 this.moveChicken();
+                await this.chickenCtrl.playStep();
                 const laneItem = this.getLaneItem(this.currentLaneIndex);
                 laneItem?.playCrashVehicle(() => {
                     this.chickenCtrl.playCrash(this.scrollView.content.parent).then(() => {
@@ -338,7 +340,6 @@ export class LaneSpawner extends ObserverComponent {
                     });
 
                 });
-                this.chickenCtrl.playStep();
             }
         } catch (e) { }
     }
