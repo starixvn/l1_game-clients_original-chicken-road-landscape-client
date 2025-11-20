@@ -85,7 +85,7 @@ export default class PlaceBetButton extends ObserverComponent {
 
     onClickBetButton() {
         if (this.uiState === BetUIState.Mining) {
-            AudioUtils.playClick();
+            AudioUtils.playSFX(AudioIds.BTN_START);
             this.onBet();
         }
     }

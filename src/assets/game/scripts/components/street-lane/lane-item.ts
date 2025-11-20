@@ -154,7 +154,7 @@ export default class LaneItem extends ObserverComponent {
 
     private onClickBetButton() {
         if (this.uiState === BetUIState.Mining) {
-            AudioUtils.playClick();
+            AudioUtils.playSFX(AudioIds.BTN_START);
             this.onBet();
         }
     }
