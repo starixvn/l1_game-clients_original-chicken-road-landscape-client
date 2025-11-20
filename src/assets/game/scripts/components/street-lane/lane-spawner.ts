@@ -128,7 +128,7 @@ export class LaneSpawner extends ObserverComponent {
     private configureLanes() {
         for (let index = 0; index < this.currentConfig.multiplierSteps.length; index++) {
             const multiplier = this.currentConfig.multiplierSteps[index];
-            const landItem = this.laneContent.children[index]?.getComponent(LaneItem);
+            const landItem = this.getLaneItem(index);
 
             if (!landItem) {
                 continue;
@@ -207,13 +207,8 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     stopSpawningVehicleNextLane() {
-        const landItem = this.laneContent.children[this.currentLaneIndex + 1];
-        if (landItem) {
-            const landItemComponent = landItem.getComponent(LaneItem);
-            if (landItemComponent) {
-                landItemComponent.stopSpawningVehicle();
-            }
-        }
+        const landItem = this.getLaneItem(this.currentLaneIndex + 1);
+        landItem?.stopSpawningVehicle();
     }
 
     scrollToLane(offset: number, duration: number) {
@@ -241,9 +236,12 @@ export class LaneSpawner extends ObserverComponent {
             const hasVehicle = Math.random() < 0.8; //NOSONAR
             this.moveChicken();
             this.stopSpawningVehicleNextLane();
-            this.scheduleOnce(() => this.showBarrier(nextLane, hasVehicle && !isFinalLane), settings.durations.stepAnimation);
+            if (!isFinalLane) {
+                this.scheduleOnce(() => this.showBarrier(nextLane, hasVehicle), settings.durations.stepAnimation);
+            }
             if (isFinalLane) {
                 await this.chickenCtrl.playStep();
+                this.getLaneItem(nextLane)?.playLastLane();
                 this.moveChickenToPavement();
                 await this.chickenCtrl.playStepSuccessAtLastLane();
             } else {
@@ -260,6 +258,10 @@ export class LaneSpawner extends ObserverComponent {
             }
             this.interrupted = false;
         } catch (e) { }
+    }
+
+    getLaneItem(index: number) {
+        return this.laneContent.children[index]?.getComponent(LaneItem);
     }
 
     @handle(BetHandler, (handler) => handler.checkIfSettled())
@@ -286,42 +288,26 @@ export class LaneSpawner extends ObserverComponent {
 
     showBarrier(landIndex: number, hasVehicle = false) {
         try {
-            const landItem = this.laneContent.children[landIndex];
-            if (landItem) {
-                const landItemComponent = landItem.getComponent(LaneItem);
-                landItemComponent?.playStepSuccess(hasVehicle);
-            }
+            this.getLaneItem(landIndex)?.playStepSuccess(hasVehicle);
         } catch (error) { }
     }
 
     updateCurrentLaneItemBackground() {
-        const previousLandItem = this.laneContent.children[this.currentLaneIndex];
-        if (previousLandItem) {
-            const landItemComponent = previousLandItem.getComponent(LaneItem);
-            if (landItemComponent) {
-                landItemComponent.toggleCurrentMultiplierBackground(false);
-            }
-        }
+        this.getLaneItem(this.currentLaneIndex)?.toggleCurrentMultiplierBackground(false);
     }
 
     updateCurrentAndNextLaneItemBackground() {
-        const currentLandItem = this.laneContent.children[this.currentLaneIndex];
-        if (currentLandItem) {
-            const landItemComponent = currentLandItem.getComponent(LaneItem);
-            if (landItemComponent) {
-                landItemComponent.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.CURRENT_STEP));
-                landItemComponent.toggleCurrentMultiplierBackground();
-                landItemComponent.isClickable = false;
-            }
+        const currentLaneItem = this.getLaneItem(this.currentLaneIndex);
+        if (currentLaneItem) {
+            currentLaneItem.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.CURRENT_STEP));
+            currentLaneItem.toggleCurrentMultiplierBackground();
+            currentLaneItem.isClickable = false;
         }
 
-        const nextLandItem = this.laneContent.children[this.currentLaneIndex + 1];
+        const nextLandItem = this.getLaneItem(this.currentLaneIndex + 1);
         if (nextLandItem) {
-            const landItemComponent = nextLandItem.getComponent(LaneItem);
-            if (landItemComponent) {
-                landItemComponent.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
-                landItemComponent.isClickable = true;
-            }
+            nextLandItem.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
+            nextLandItem.isClickable = true;
         }
     }
 
@@ -342,16 +328,13 @@ export class LaneSpawner extends ObserverComponent {
         try {
             if (!settleStatus.win) {
                 this.moveChicken();
-                const landItem = this.laneContent.children[this.currentLaneIndex];
-                if (landItem) {
-                    const landItemComponent = landItem.getComponent(LaneItem);
-                    landItemComponent?.playCrashVehicle(() => {
-                        this.chickenCtrl.playCrash(this.scrollView.content.parent).then(() => {
-                            this.triggerSettleStatus();
-                        });
-
+                const laneItem = this.getLaneItem(this.currentLaneIndex);
+                laneItem?.playCrashVehicle(() => {
+                    this.chickenCtrl.playCrash(this.scrollView.content.parent).then(() => {
+                        this.triggerSettleStatus();
                     });
-                }
+
+                });
                 this.chickenCtrl.playStep();
             }
         } catch (e) { }
@@ -375,16 +358,15 @@ export class LaneSpawner extends ObserverComponent {
     private resetLandItemsBackground() {
         const landItems = this.laneContent.children;
         for (let index = 0; index < landItems.length; index++) {
-            const landItem = landItems[index];
-            const landItemComponent = landItem.getComponent(LaneItem);
-            landItemComponent.toggleCurrentMultiplierBackground(false);
-            landItemComponent.resetLaneItem();
+            const laneItem = this.getLaneItem(index);
+            laneItem.toggleCurrentMultiplierBackground(false);
+            laneItem.resetLaneItem();
             if (index === 0) {
-                landItemComponent.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
-                landItemComponent.isClickable = true;
+                laneItem.setMultiplierStyle(Color.WHITE, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.NEXT_STEP));
+                laneItem.isClickable = true;
             } else {
-                landItemComponent.setMultiplierStyle(LaneItem.DEFAULT_TEXT_COLOR, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.DEFAULT));
-                landItemComponent.startRandomSpawning();
+                laneItem.setMultiplierStyle(LaneItem.DEFAULT_TEXT_COLOR, CrashUtils.getBgMultiplierColor(BG_MULTIPLIER_COLOR_INDEX.DEFAULT));
+                laneItem.startRandomSpawning();
             }
         }
     }

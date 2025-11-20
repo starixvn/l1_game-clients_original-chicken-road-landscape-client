@@ -1,10 +1,11 @@
-import { _decorator, Component, Node, sp, Tween, tween, v3 } from "cc";
+import { _decorator, Component, log, Node, sp, Tween, tween, v3 } from "cc";
 const { ccclass, property } = _decorator;
 enum VehicleState {
     None = "none",
     Normal_Moving = "moving",
     Stopped_At_Barrier = "stopped_at_barrier",
     Stopped_At_Crash = "stopped_at_crash",
+    Moving_Last_Step = "moving_last_step",
 }
 
 @ccclass("Vehicle")
@@ -53,7 +54,7 @@ export class Vehicle extends Component {
 
     private randomVehicle() {
         if (this.animationNames.length === 0) {
-            console.error("No animation names found");
+            log("No animation names found for vehicle");
             return;
         }
         const randomIndex = Math.floor(Math.random() * this.animationNames.length); //NOSONAR
@@ -63,11 +64,8 @@ export class Vehicle extends Component {
 
     private spawnVehicle() {
         if (this.state === VehicleState.Stopped_At_Barrier || this.state === VehicleState.Stopped_At_Crash) {
-            console.log("spawnVehicle ERRRRRRRRRRRR", this.node.parent.name);
+            log("spawnVehicle ERRRRRRRRRRRR", this.node.parent.name);
             return Promise.resolve();
-        }
-        if (this.state !== VehicleState.None) {
-            debugger;
         }
         const startPos = this.vehicleStartPoint.position;
         const endPos = this.vehicleEndPoint.position;
@@ -130,7 +128,7 @@ export class Vehicle extends Component {
 
     playVehicleStopAtBarrier() {
         if (this.state === VehicleState.Normal_Moving) {
-            console.log("playVehicleStopAtBarrier ERRRRRRRRRRRR", this.node.parent.name);
+            log("playVehicleStopAtBarrier ERRRRRRRRRRRR", this.node.parent.name);
             Tween.stopAllByTarget(this.vehicleNode);
         }
         this.state = VehicleState.Stopped_At_Barrier;
@@ -144,9 +142,25 @@ export class Vehicle extends Component {
             .start();
     }
 
+    playLastLane() {
+        if (this.state === VehicleState.Normal_Moving) {
+            log("playCrashVehicle ERRRRRRRRRRRR", this.node.parent.name);
+            Tween.stopAllByTarget(this.vehicleNode);
+        }
+        this.state = VehicleState.Moving_Last_Step;
+        this.vehicleNode.setPosition(v3(this.vehicleStartPoint.position));
+        this.vehicleNode.active = true;
+        this.randomVehicle();
+
+        const endPos = this.vehicleEndPoint.position;
+        const duration = 1;
+        tween(this.vehicleNode)
+            .to(duration, { position: v3(0, endPos.y, 0) })
+            .start();
+    }
+
     playCrashVehicle(onCollision: () => void) {
         if (this.state === VehicleState.Normal_Moving) {
-            console.log("playCrashVehicle ERRRRRRRRRRRR", this.node.parent.name);
             Tween.stopAllByTarget(this.vehicleNode);
         }
         this.state = VehicleState.Stopped_At_Crash;

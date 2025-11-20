@@ -135,6 +135,10 @@ export default class LaneItem extends ObserverComponent {
         this.vehicle.playCrashVehicle(onCollision);
     }
 
+    playLastLane() {
+        this.vehicle.playLastLane();
+    }
+
     setMultiplierStyle(textColor: Color, bgColor: Color) {
         this.lblMultiplier.color = textColor;
         this.multiplierBg.color = bgColor;
