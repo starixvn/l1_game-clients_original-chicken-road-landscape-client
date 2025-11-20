@@ -256,13 +256,14 @@ export class LaneSpawner extends ObserverComponent {
                 await this.chickenCtrl.playStepSuccess(hasVehicle);
                 this.updateCurrentAndNextLaneItemBackground();
             }
-            this.setUIMiningState();
-            this.checkIfSettled();
             if (this.interrupted) {
                 this.completeSettle();
-            } else {
-                this.checkPlaceBetNextRound();
+                return;
             }
+            this.setUIMiningState();
+            this.checkIfSettled();
+            this.checkPlaceBetNextRound();
+
             this.interrupted = false;
         } catch (e) { }
     }
