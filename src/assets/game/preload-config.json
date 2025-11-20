@@ -1,16 +1,10 @@
 {
-    "others": { "resources": [
-        "audios/chicken-idle",
-        "audios/chicken-scream",
-        "audios/jump",
-        "audios/car-hit",
-         "audios/car-stop"
-        ]
-        },
-        "localized": {
-            "resources": [
-                "txt_big_win",
-                "txt_total_win"
-            ]
+    "others": {
+        "resources": ["audios/chicken-idle", "audios/chicken-scream", "audios/jump", "audios/car-hit", "audios/car-stop"]
+    },
+    "localized": {
+        "resources": {
+            "1": ["txt_big_win", "txt_total_win"]
         }
     }
+}
