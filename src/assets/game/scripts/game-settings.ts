@@ -13,9 +13,11 @@ export const settings = {
         startRound: 1,
 
         stepAnimation: 1,
-        winAnimation: 2,
         bigWinNotice: 5,
         normalWinNotice: 3,
+
+        //unused
+        winAnimation: 2,
         crashAnimation: 5,
     },
     numberOfRoundHistory: 11,

@@ -79,7 +79,7 @@ export default class Game extends GameComponent {
     @render(BetStore, (store) => store.eventSettleStatus, { fireImmediately: false })
     async renderSettleStatus(eventSettleStatus: { settleStatus: SettleStatus }) {
         const { settleStatus } = eventSettleStatus;
-        const { bigWinNotice, normalWinNotice, crashAnimation, winAnimation } = settings.durations;
+        const { bigWinNotice, normalWinNotice } = settings.durations;
         if (!settleStatus || Object.keys(settleStatus).length === 0) {
             return;
         }
