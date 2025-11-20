@@ -99,6 +99,13 @@ export class MyBetTableBody extends ObserverComponent {
         }
     }
 
+    @render(gc.Connection.ConnectionStore, (store) => store.signedIn, { fireImmediately: false })
+    private renderSignedIn(signedIn: boolean): void {
+        if (signedIn) {
+            this.fetchDataFirstPage();
+        }
+    }
+
     private renderData(myBetModel: MyBetModel): void {
         myBetModel.betLogs.forEach((betLogItem, rowIndex) => {
             this.processBetHistory(betLogItem, rowIndex);
