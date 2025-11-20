@@ -40,7 +40,7 @@ export class LaneSpawner extends ObserverComponent {
     scrollView: ScrollView = null;
 
     @property
-    private offsetLane = 0;
+    offsetLane = 0;
 
     private chickenCtrl: Chicken = null;
     private laneWidth = 0;
