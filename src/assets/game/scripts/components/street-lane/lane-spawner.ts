@@ -39,6 +39,9 @@ export class LaneSpawner extends ObserverComponent {
     @property(ScrollView)
     scrollView: ScrollView = null;
 
+    @property
+    private offsetLane = 0;
+
     private chickenCtrl: Chicken = null;
     private laneWidth = 0;
     private currentLaneIndex = -1;
@@ -212,7 +215,7 @@ export class LaneSpawner extends ObserverComponent {
     }
 
     scrollToLane(offset: number, duration: number) {
-        this.scrollView.scrollToOffset(v2(offset - this.laneWidth / 2, 0), duration, true);
+        this.scrollView.scrollToOffset(v2(offset - this.laneWidth * (this.offsetLane + 0.5), 0), duration, true);
     }
 
     @render(BetStore, (store) => store.multiplier)
