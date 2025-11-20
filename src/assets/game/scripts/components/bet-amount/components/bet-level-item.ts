@@ -33,6 +33,7 @@ export default class BetLevelItem extends ObserverComponent {
 
     setData(betLevel: number | string, isMax: boolean) {
         this.key = betLevel.toString();
+        this.node.name = this.key;
         if (isMax) {
             this.lblBet.string = this.key.toUpperCase();
         } else {

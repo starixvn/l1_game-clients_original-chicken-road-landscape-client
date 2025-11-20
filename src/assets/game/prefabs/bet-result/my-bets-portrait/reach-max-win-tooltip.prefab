@@ -252,6 +252,8 @@
       "__id__": 0
     },
     "fileId": "97lDdxGCFPi5i8S+OGARfn",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -304,10 +306,7 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": {
-      "__uuid__": "cbfa37b0-1f73-4971-947b-01282ea94fca@435dd",
-      "__expectedType__": "cc.SpriteFrame"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_fillType": 0,
     "_sizeMode": 0,
@@ -432,6 +431,7 @@
       "__id__": 0
     },
     "fileId": "a6GHtJO8xOZoNLypa+W0S0",
-    "instance": null
+    "instance": null,
+    "targetOverrides": null
   }
 ]

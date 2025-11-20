@@ -413,9 +413,7 @@
     "lblBet": {
       "__id__": 5
     },
-    "nodeSelectedBg": {
-      "__id__": 1
-    },
+    "nodeDisabledLayer": null,
     "_id": ""
   },
   {

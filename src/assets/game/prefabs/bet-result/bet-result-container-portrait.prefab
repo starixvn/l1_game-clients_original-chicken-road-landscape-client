@@ -109,7 +109,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 608,
+      "y": 565,
       "z": 0
     },
     "_lrot": {
@@ -1073,7 +1073,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 0,
+    "_top": 43,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -1137,7 +1137,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 543,
+      "y": 508,
       "z": 0
     },
     "_lrot": {
@@ -1461,7 +1461,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 106,
+    "_top": 141,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -1531,7 +1531,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -433,
+      "y": -657,
       "z": 0
     },
     "_lrot": {
@@ -1892,7 +1892,7 @@
       "a": 255
     },
     "_normalSprite": {
-      "__uuid__": "633480e4-5419-4fba-8e2d-8d22327e7088@866b5",
+      "__uuid__": "bd769873-bebd-49ab-81f8-f23dd6c9c61f@e62c9",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_hoverSprite": {
@@ -2210,10 +2210,7 @@
       "__expectedType__": "cc.TTFFont"
     },
     "_cacheMode": 0,
-    "_imageAtlas": {
-      "__uuid__": "633480e4-5419-4fba-8e2d-8d22327e7088",
-      "__expectedType__": "cc.SpriteAtlas"
-    },
+    "_imageAtlas": null,
     "_handleTouchEvent": true,
     "_id": ""
   },
@@ -2267,7 +2264,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 358.10984802246094,
+      "width": 129.640625,
       "height": 70
     },
     "_anchorPoint": {
