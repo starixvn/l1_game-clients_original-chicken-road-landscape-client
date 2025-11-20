@@ -190,7 +190,6 @@ export class LaneSpawner extends ObserverComponent {
         const parent = this.chickenNode.parent;
         const localPos = parent.getComponent(UITransform).convertToNodeSpaceAR(laneWorld);
         AudioUtils.playSFX(AudioIds.JUMP);
-        console.log("chicken move");
         tween(this.chickenNode)
             .delay(0.3)
             .call(() => {
@@ -247,8 +246,6 @@ export class LaneSpawner extends ObserverComponent {
                 await this.chickenCtrl.playStep();
                 this.moveChickenToPavement();
                 await this.chickenCtrl.playStepSuccessAtLastLane();
-
-                this.setSettleState();
             } else {
                 await this.chickenCtrl.playStepSuccess(hasVehicle);
             }
@@ -280,9 +277,6 @@ export class LaneSpawner extends ObserverComponent {
 
     @handle(BetHandler, (handler) => handler.setUIMiningState())
     setUIMiningState() { }
-
-    @handle(BetHandler, (handler) => handler.setSettleState())
-    setSettleState() { }
 
     @handle(BetHandler, (handler) => handler.setUIAnimatingState())
     setUIAnimatingState() { }

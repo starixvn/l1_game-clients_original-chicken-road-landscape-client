@@ -88,8 +88,6 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         return this.betsStore.multiplier === this.instantWinConfigStore.currentMultiplierConfig.multiplierSteps.at(-1);
     }
 
-    setSettleState() { }
-
     setUIMiningState() {
         if (this.betsStore.uiState === BetUIState.Settle || this.isReachMaxMultiplier()) {
             return;
@@ -112,7 +110,6 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     resetBet() {
         this.betsStore.betCount = 0;
         this.betsStore.uiState = BetUIState.Start;
-        console.log("resetBet", this.betsStore.uiState);
         this.betsStore.reachMaxWin = false;
         this.betsStore.settleStatus = null;
         this.betsStore.winAmount = 0;
@@ -130,7 +127,6 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     }
 
     handleCashOut() {
-        this.setSettleState();
         this.clearAutoCashOut();
         this.connectionStore.send("cashOut", {});
     }
@@ -195,9 +191,14 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     }
 
     handleEventCashOut(status: GameServiceMessage.Status) {
+        const isMining = this.betsStore.uiState === BetUIState.Mining;
+        this.betsStore.uiState = BetUIState.Settle;
         this.clearAutoCashOut();
         this.betsStore.reachMaxWin = false;
         this.updateStatusBet(status);
+        if (isMining) {
+            this.triggerSettleStatus();
+        }
     }
 
     handleRoundId(roundId: number) {
