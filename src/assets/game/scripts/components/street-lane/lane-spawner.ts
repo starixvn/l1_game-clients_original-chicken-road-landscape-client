@@ -244,6 +244,10 @@ export class LaneSpawner extends ObserverComponent {
             }
             if (isFinalLane) {
                 await this.chickenCtrl.playStep();
+                if (this.interrupted) {
+                    this.completeSettle();
+                    return;
+                }
                 this.updateCurrentAndNextLaneItemBackground();
                 this.getLaneItem(nextLane)?.playLastLane();
                 this.moveChickenToPavement();
@@ -252,7 +256,6 @@ export class LaneSpawner extends ObserverComponent {
                 await this.chickenCtrl.playStepSuccess(hasVehicle);
                 this.updateCurrentAndNextLaneItemBackground();
             }
-
             this.setUIMiningState();
             this.checkIfSettled();
             if (this.interrupted) {
