@@ -17,6 +17,9 @@ export class Chicken extends Component {
     @property(sp.Skeleton)
     spineChicken: sp.Skeleton = null;
 
+    @property(sp.Skeleton)
+    firework: sp.Skeleton = null;
+
     private state = ChickenState.Idle;
 
     onLoad() {
@@ -68,6 +71,8 @@ export class Chicken extends Component {
     }
 
     private async playAnimDance() {
+        this.firework.node.active = true;
+        this.firework.setAnimation(0, "firework", true);
         AudioUtils.playSFX(AudioIds.CHICKEN_DANCE);
         await this.playAnim({ animName: "final" });
     }
@@ -98,6 +103,7 @@ export class Chicken extends Component {
     reset() {
         this.spineChicken.node.setPosition(v3(0, 0, 0));
         this.playIdle();
+        this.firework.node.active = false;
     }
 
     async playCrash(parentNode: Node) {
