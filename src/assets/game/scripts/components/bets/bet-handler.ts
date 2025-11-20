@@ -97,6 +97,18 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         this.betsStore.uiState = BetUIState.Mining;
     }
 
+    checkIfSettled() {
+        if (this.betsStore.settleStatus) {
+            this.triggerSettleStatus();
+        }
+    }
+
+    triggerSettleStatus() {
+        this.betsStore.eventSettleStatus = {
+            settleStatus: this.betsStore.settleStatus,
+        };
+    }
+
     resetBet() {
         this.betsStore.betCount = 0;
         this.betsStore.uiState = BetUIState.Start;

@@ -5,7 +5,6 @@ import Observer from "observer";
 
 import { BalanceEffectHandlers } from "db://shared-components/game/balance-effect/scripts/handlers/balance-effect-handlers";
 import GameComponent from "db://shared-components/game/scripts/components/game-component";
-import { AnimationUtils, FunctionUtils } from "db://shared-components/shared/utils";
 import { siteConfigs } from "../../../scripts/site-configs";
 import { AudioIds } from "../../audios/AudioIds";
 import { containerOptions } from "../containerOptions";
@@ -77,32 +76,22 @@ export default class Game extends GameComponent {
         this.uiState = uiState;
     }
 
-    @render(BetStore, (store) => store.settleStatus)
-    async renderSettleStatus(settleStatus: SettleStatus) {
+    @render(BetStore, (store) => store.eventSettleStatus, { fireImmediately: false })
+    async renderSettleStatus(eventSettleStatus: { settleStatus: SettleStatus }) {
+        const { settleStatus } = eventSettleStatus;
         const { bigWinNotice, normalWinNotice, crashAnimation, winAnimation } = settings.durations;
         if (!settleStatus || Object.keys(settleStatus).length === 0) {
             return;
         }
 
         if (!settleStatus.win) {
-            this.scheduleOnce(() => {
-                this.completeSettle();
-            }, crashAnimation);
-
+            this.completeSettle();
             return;
         }
 
-        if (this.uiState !== BetUIState.Mining) {
-            await FunctionUtils.waitUntil(() => this.uiState === BetUIState.Mining, 100, 3000);
-        }
         const isBigWin = settleStatus.isBigWin;
         const node = this.nodeWinNotice.getChildByName(isBigWin ? "big" : "normal");
         const winNoticeDuration = isBigWin ? bigWinNotice : normalWinNotice;
-        const maxMultiplier = this._currentMultiplierConfig.multiplierSteps.at(-1);
-        const isWinAllStep = this.multiplier === maxMultiplier;
-        if (isWinAllStep) {
-            await AnimationUtils.delayTime(winAnimation);
-        }
 
         const winNotice = node.getComponentInChildren(GameWinNotice);
         this.playSound(AudioIds.BIGWIN);

@@ -246,7 +246,7 @@ export class LaneSpawner extends ObserverComponent {
             if (isFinalLane) {
                 await this.chickenCtrl.playStep();
                 this.moveChickenToPavement();
-                this.chickenCtrl.playStepSuccessAtLastLane();
+                await this.chickenCtrl.playStepSuccessAtLastLane();
 
                 this.setSettleState();
             } else {
@@ -255,7 +255,7 @@ export class LaneSpawner extends ObserverComponent {
             this.updateCurrentAndNextLaneItemBackground();
 
             this.setUIMiningState();
-
+            this.checkIfSettled();
             if (this.interrupted) {
                 this.completeSettle();
             } else {
@@ -264,6 +264,9 @@ export class LaneSpawner extends ObserverComponent {
             this.interrupted = false;
         } catch (e) { }
     }
+
+    @handle(BetHandler, (handler) => handler.checkIfSettled())
+    checkIfSettled() { }
 
     @handle(AutoPlayHandler, (handler) => handler.completeSettle())
     completeSettle() { }
@@ -349,13 +352,19 @@ export class LaneSpawner extends ObserverComponent {
                 if (landItem) {
                     const landItemComponent = landItem.getComponent(LaneItem);
                     landItemComponent?.playCrashVehicle(() => {
-                        this.chickenCtrl.playCrash(this.scrollView.content.parent);
+                        this.chickenCtrl.playCrash(this.scrollView.content.parent).then(() => {
+                            this.triggerSettleStatus();
+                        });
+
                     });
                 }
                 this.chickenCtrl.playStep();
             }
         } catch (e) { }
     }
+
+    @handle(BetHandler, (handler) => handler.triggerSettleStatus())
+    triggerSettleStatus() { }
 
     private reset() {
         this.resetLandItemsBackground();

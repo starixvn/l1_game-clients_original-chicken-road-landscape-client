@@ -62,15 +62,14 @@ export class Chicken extends Component {
         await this.playAnim({ animName: "moving" });
     }
 
-    playStepSuccessAtLastLane() {
-        this.playStep().then(() => {
-            this.playAnimDance();
-        });
+    async playStepSuccessAtLastLane() {
+        await this.playStep();
+        await this.playAnimDance();
     }
 
-    private playAnimDance() {
+    private async playAnimDance() {
         AudioUtils.playSFX(AudioIds.CHICKEN_DANCE);
-        this.playAnim({ animName: "final" });
+        await this.playAnim({ animName: "final" });
     }
 
     async playStepSuccess(hasVehicle = false) {
@@ -101,7 +100,7 @@ export class Chicken extends Component {
         this.playIdle();
     }
 
-    playCrash(parentNode: Node) {
+    async playCrash(parentNode: Node) {
         tween(this.spineChicken.node)
             .delay(0.3)
             .call(() => {
@@ -112,6 +111,6 @@ export class Chicken extends Component {
             })
             .start();
         AudioUtils.playSFX(AudioIds.CAR_HIT);
-        this.playAnim({ animName: "crash" });
+        await this.playAnim({ animName: "crash" });
     }
 }

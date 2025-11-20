@@ -35,6 +35,7 @@ export class BetStore {
     endBet = 0;
     roundId = 0;
     settleStatus: SettleStatus = null;
+    eventSettleStatus = null;
     uiState = BetUIState.Start;
 
     autoCashOutTimer = AutoCashOutTiming.Start;
