@@ -1,3 +1,4 @@
 {
-    "premultipliedAlpha": false
+    "premultipliedAlpha": false,
+    "useWebp": true
 }
