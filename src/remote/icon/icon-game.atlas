@@ -1,181 +1,342 @@
 
-icon-game.png
-size: 1024,256
+icon-game.webp
+size: 649,523
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-base
-  rotate: false
-  xy: 2, 51
-  size: 202, 203
-  orig: 204, 206
-  offset: 1, 1
-  index: -1
 bg
   rotate: true
-  xy: 364, 119
-  size: 135, 132
-  orig: 149, 145
-  offset: 4, 8
-  index: -1
-fiery-sparks
-  rotate: true
-  xy: 364, 67
-  size: 50, 63
-  orig: 52, 65
+  xy: 2, 325
+  size: 196, 197
+  orig: 196, 197
   offset: 0, 0
   index: -1
-fiery-sparks1
-  rotate: false
-  xy: 2, 2
-  size: 52, 47
-  orig: 52, 65
-  offset: 0, 18
-  index: -1
-glow
-  rotate: false
-  xy: 240, 10
+bg-top
+  rotate: true
+  xy: 424, 194
   size: 195, 53
-  orig: 216, 216
-  offset: 11, 151
+  orig: 195, 75
+  offset: 0, 22
   index: -1
-img/effect/small_light/light_5
+bottom L
   rotate: true
-  xy: 498, 156
-  size: 98, 96
-  orig: 111, 111
-  offset: 5, 5
-  index: -1
-light
-  rotate: true
-  xy: 206, 65
-  size: 189, 156
-  orig: 193, 164
-  offset: 2, 2
-  index: -1
-pickaxe_1
-  rotate: false
-  xy: 535, 75
-  size: 79, 79
-  orig: 79, 79
+  xy: 479, 201
+  size: 31, 70
+  orig: 31, 70
   offset: 0, 0
   index: -1
-ui/coin/mc_coin_215_000
-  rotate: false
-  xy: 168, 13
-  size: 34, 36
-  orig: 44, 46
-  offset: 6, 5
-  index: -1
-ui/coin/mc_coin_215_001
-  rotate: false
-  xy: 94, 13
-  size: 35, 36
-  orig: 44, 46
-  offset: 5, 5
-  index: -1
-ui/coin/mc_coin_215_002
-  rotate: false
-  xy: 56, 13
-  size: 36, 36
-  orig: 44, 46
-  offset: 4, 5
-  index: -1
-ui/coin/mc_coin_215_003
-  rotate: false
-  xy: 131, 13
-  size: 35, 36
-  orig: 44, 46
-  offset: 4, 5
-  index: -1
-ui/coin/mc_coin_215_004
-  rotate: false
-  xy: 204, 13
-  size: 34, 36
-  orig: 44, 46
-  offset: 4, 5
-  index: -1
-ui/coin/mc_coin_215_005
-  rotate: false
-  xy: 429, 82
-  size: 33, 35
-  orig: 44, 46
-  offset: 4, 6
-  index: -1
-ui/coin/mc_coin_215_006
-  rotate: false
-  xy: 464, 82
-  size: 31, 35
-  orig: 44, 46
-  offset: 5, 6
-  index: -1
-ui/coin/mc_coin_215_007
-  rotate: false
-  xy: 437, 28
-  size: 28, 35
-  orig: 44, 46
-  offset: 6, 6
-  index: -1
-ui/coin/mc_coin_215_008
-  rotate: false
-  xy: 467, 44
-  size: 26, 36
-  orig: 44, 46
-  offset: 7, 5
-  index: -1
-ui/coin/mc_coin_215_009
+bottom R
   rotate: true
-  xy: 475, 5
-  size: 22, 36
-  orig: 44, 46
-  offset: 9, 5
+  xy: 390, 4
+  size: 28, 60
+  orig: 28, 60
+  offset: 0, 0
   index: -1
-ui/coin/mc_coin_215_010
+canh
+  rotate: true
+  xy: 493, 122
+  size: 77, 72
+  orig: 77, 72
+  offset: 0, 0
+  index: -1
+chanphai
+  rotate: true
+  xy: 502, 454
+  size: 67, 92
+  orig: 67, 92
+  offset: 0, 0
+  index: -1
+chantrai
+  rotate: true
+  xy: 190, 65
+  size: 70, 96
+  orig: 70, 96
+  offset: 0, 0
+  index: -1
+chicken-shadow
   rotate: false
-  xy: 495, 44
-  size: 18, 36
-  orig: 44, 46
-  offset: 11, 5
+  xy: 190, 137
+  size: 137, 73
+  orig: 141, 76
+  offset: 3, 1
   index: -1
-ui/coin/mc_coin_215_011
+crown
   rotate: true
-  xy: 429, 65
-  size: 15, 36
-  orig: 44, 46
-  offset: 13, 5
+  xy: 2, 74
+  size: 120, 96
+  orig: 120, 97
+  offset: 0, 1
   index: -1
-ui/coin/mc_coin_215_012
-  rotate: true
-  xy: 467, 29
-  size: 13, 36
-  orig: 44, 46
-  offset: 15, 5
+duoi
+  rotate: false
+  xy: 2, 196
+  size: 104, 127
+  orig: 104, 127
+  offset: 0, 0
   index: -1
-ui/coin/mc_coin_215_013
+effect line 1
   rotate: true
-  xy: 505, 29
-  size: 13, 36
-  orig: 44, 46
-  offset: 16, 5
+  xy: 288, 19
+  size: 34, 18
+  orig: 34, 18
+  offset: 0, 0
   index: -1
-ui/coin/mc_coin_215_014
-  rotate: true
-  xy: 497, 102
-  size: 15, 36
-  orig: 44, 46
-  offset: 16, 5
+effect line 2
+  rotate: false
+  xy: 567, 123
+  size: 59, 17
+  orig: 59, 17
+  offset: 0, 0
   index: -1
-ui/coin/mc_coin_215_015
+effect thunder
   rotate: true
-  xy: 513, 9
-  size: 18, 36
-  orig: 44, 46
-  offset: 15, 5
+  xy: 370, 218
+  size: 52, 18
+  orig: 52, 18
+  offset: 0, 0
   index: -1
-ui/coin/mc_coin_215_016
+eye L
+  rotate: false
+  xy: 267, 43
+  size: 19, 20
+  orig: 19, 20
+  offset: 0, 0
+  index: -1
+eye R
+  rotate: false
+  xy: 267, 21
+  size: 17, 20
+  orig: 17, 20
+  offset: 0, 0
+  index: -1
+gold/0
   rotate: true
-  xy: 437, 3
-  size: 23, 36
-  orig: 44, 46
-  offset: 13, 5
+  xy: 411, 115
+  size: 77, 80
+  orig: 100, 100
+  offset: 13, 10
+  index: -1
+gold/1
+  rotate: false
+  xy: 329, 130
+  size: 80, 80
+  orig: 100, 100
+  offset: 10, 10
+  index: -1
+gold/10
+  rotate: true
+  xy: 308, 4
+  size: 43, 80
+  orig: 100, 100
+  offset: 24, 10
+  index: -1
+gold/11
+  rotate: false
+  xy: 288, 55
+  size: 34, 80
+  orig: 100, 100
+  offset: 30, 10
+  index: -1
+gold/12
+  rotate: true
+  xy: 560, 234
+  size: 28, 80
+  orig: 100, 100
+  offset: 35, 10
+  index: -1
+gold/13
+  rotate: true
+  xy: 552, 11
+  size: 29, 80
+  orig: 100, 100
+  offset: 37, 10
+  index: -1
+gold/14
+  rotate: true
+  xy: 342, 354
+  size: 35, 80
+  orig: 100, 100
+  offset: 36, 10
+  index: -1
+gold/15
+  rotate: true
+  xy: 470, 5
+  size: 43, 80
+  orig: 100, 100
+  offset: 33, 10
+  index: -1
+gold/16
+  rotate: false
+  xy: 370, 272
+  size: 52, 80
+  orig: 100, 100
+  offset: 29, 10
+  index: -1
+gold/17
+  rotate: true
+  xy: 502, 393
+  size: 59, 79
+  orig: 100, 100
+  offset: 26, 10
+  index: -1
+gold/18
+  rotate: false
+  xy: 402, 34
+  size: 66, 79
+  orig: 100, 100
+  offset: 22, 10
+  index: -1
+gold/19
+  rotate: true
+  xy: 493, 50
+  size: 70, 79
+  orig: 100, 100
+  offset: 19, 10
+  index: -1
+gold/2
+  rotate: false
+  xy: 100, 54
+  size: 80, 80
+  orig: 100, 100
+  offset: 10, 10
+  index: -1
+gold/20
+  rotate: true
+  xy: 479, 234
+  size: 74, 79
+  orig: 100, 100
+  offset: 16, 10
+  index: -1
+gold/3
+  rotate: false
+  xy: 108, 136
+  size: 80, 82
+  orig: 100, 100
+  offset: 10, 8
+  index: -1
+gold/4
+  rotate: false
+  xy: 324, 49
+  size: 76, 79
+  orig: 100, 100
+  offset: 10, 11
+  index: -1
+gold/5
+  rotate: false
+  xy: 479, 310
+  size: 74, 79
+  orig: 100, 100
+  offset: 10, 11
+  index: -1
+gold/6
+  rotate: true
+  xy: 2, 2
+  size: 70, 79
+  orig: 100, 100
+  offset: 11, 11
+  index: -1
+gold/7
+  rotate: false
+  xy: 574, 42
+  size: 64, 79
+  orig: 100, 100
+  offset: 13, 11
+  index: -1
+gold/8
+  rotate: true
+  xy: 560, 264
+  size: 58, 80
+  orig: 100, 100
+  offset: 16, 10
+  index: -1
+gold/9
+  rotate: true
+  xy: 83, 2
+  size: 50, 80
+  orig: 100, 100
+  offset: 20, 10
+  index: -1
+head 1
+  rotate: true
+  xy: 342, 391
+  size: 130, 158
+  orig: 130, 158
+  offset: 0, 0
+  index: -1
+head 2
+  rotate: false
+  xy: 201, 353
+  size: 139, 168
+  orig: 139, 168
+  offset: 0, 0
+  index: -1
+head 3
+  rotate: false
+  xy: 108, 220
+  size: 88, 103
+  orig: 88, 103
+  offset: 0, 0
+  index: -1
+leaf1
+  rotate: true
+  xy: 390, 220
+  size: 50, 14
+  orig: 50, 14
+  offset: 0, 0
+  index: -1
+leaf2
+  rotate: true
+  xy: 406, 220
+  size: 50, 14
+  orig: 50, 14
+  offset: 0, 0
+  index: -1
+mouth1
+  rotate: true
+  xy: 596, 460
+  size: 61, 43
+  orig: 63, 45
+  offset: 1, 1
+  index: -1
+mouth2
+  rotate: true
+  xy: 583, 406
+  size: 46, 64
+  orig: 46, 64
+  offset: 0, 0
+  index: -1
+mouth3
+  rotate: false
+  xy: 555, 324
+  size: 91, 67
+  orig: 91, 67
+  offset: 0, 0
+  index: -1
+mouth4
+  rotate: true
+  xy: 551, 201
+  size: 31, 61
+  orig: 31, 61
+  offset: 0, 0
+  index: -1
+neckle
+  rotate: false
+  xy: 567, 142
+  size: 80, 57
+  orig: 80, 57
+  offset: 0, 0
+  index: -1
+neckle shadow
+  rotate: false
+  xy: 182, 4
+  size: 83, 59
+  orig: 86, 61
+  offset: 2, 1
+  index: -1
+than
+  rotate: true
+  xy: 201, 212
+  size: 139, 167
+  orig: 139, 167
+  offset: 0, 0
   index: -1
