@@ -80,6 +80,10 @@ export default class PlaceBetButton extends ObserverComponent {
 
     @render(BetStore, (store) => store.winAmount)
     updateCashOutValue(cashOutValue: number) {
+        if (cashOutValue === 0) {
+            //skip update value in crash case
+            return;
+        }
         this.lblMoney.string = gc.FormatUtils.numberWithCommas(cashOutValue, 2, true);
     }
 
