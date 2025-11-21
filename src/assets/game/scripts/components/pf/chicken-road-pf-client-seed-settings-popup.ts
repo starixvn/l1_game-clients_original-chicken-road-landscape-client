@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, EditBox, UIOpacity, BlockInputEvents } from "cc";
+import { _decorator, BlockInputEvents, EditBox, UIOpacity } from "cc";
 import { ClientSeedSettingsPopup as ClientSeedSettingsPopupRoundBase } from "db://shared-components/provably-fair/round-base/scripts/client-seed-settings-popup";
 import Observer from "observer";
 import { AutoPlayStore } from "../play-mode/auto-play";
@@ -13,6 +13,7 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
     private readonly inputManualSeed: EditBox = null;
 
     private isAutoPlay = false;
+    private randomClientSeedEnabled = true;
 
     onLoad() {
         this.setupInputListeners();
@@ -22,13 +23,14 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
     @render(AutoPlayStore, (store) => store.isAutoplay)
     renderIsAutoPlay(isAutoPlay: boolean) {
         this.isAutoPlay = isAutoPlay;
+        this.updateManualInputEditBox();
     }
 
     private setupInputListeners() {
         this.inputManualSeed.node.on(EditBox.EventType.EDITING_DID_ENDED, this.onEditEndManualSeed, this);
     }
 
-    private updateInputOpacity(enabled: boolean) {
+    private setManualInputInterractable(enabled: boolean) {
         const opacity = enabled ? this.OPACITY_ENABLED : this.OPACITY_DISABLED;
         this.inputManualSeed.enabled = enabled && !this.isAutoPlay;
         this.inputManualSeed.node.getComponent(UIOpacity).opacity = opacity;
@@ -47,14 +49,14 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
     clickManualOption() {
         const randomCS = this.lblRandomClientSeed.string;
         this.inputManualSeed.string = randomCS;
-        this.updateInputOpacity(true);
+        this.setManualInputInterractable(true);
         this.updateValueManualMode(randomCS);
         this.clickManualMode();
     }
 
     clickAutoOption() {
         this.inputManualSeed.string = "";
-        this.updateInputOpacity(false);
+        this.setManualInputInterractable(false);
         this.clickRandomMode();
     }
 
@@ -81,7 +83,7 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
         this.inputManualSeed.string = manualClientSeed;
     }
 
-    setDisplayManualClientSeedPopup(showManualClientSeedPopup: boolean) {}
+    setDisplayManualClientSeedPopup(showManualClientSeedPopup: boolean) { }
 
     @render(gc.Bet.BetStore, (store) => store.lastReceivedBet, { fireImmediately: false })
     closeSettingPopup(lastReceivedBet: gc.Bet.ILastReceivedBet) {
@@ -91,38 +93,14 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
     }
 
     updateRandomMode(randomClientSeedEnabled: boolean) {
+        this.randomClientSeedEnabled = randomClientSeedEnabled;
         super.updateRandomMode(randomClientSeedEnabled);
-        const manualEnabled = !randomClientSeedEnabled && !this.isAutoPlay;
-
-        this.updateInputOpacity(manualEnabled);
-        this.scheduleOnce(() => {
-            this.updateInputOpacity(manualEnabled);
-        }, 0);
+        this.updateManualInputEditBox();
     }
 
-    setDisplayComponents(notAllowChangeClientSeed: boolean) {
-        if (notAllowChangeClientSeed) {
-            this.nodeRandomLabelDisabledBg.active = true;
-            this.nodeManualLabelDisabledBg.active = true;
-            this.tglManualClientSeed.node.getComponent(UIOpacity).opacity = this.OPACITY_DISABLED;
-            this.tglRandomClientSeed.node.getComponent(UIOpacity).opacity = this.OPACITY_DISABLED;
-            this.tglManualClientSeed.interactable = false;
-            this.tglRandomClientSeed.interactable = false;
-            this.inputManualSeed.enabled = false;
-            this.nodeWarningText.active = true;
-        } else {
-            if (this.isAutoPlay) {
-                return;
-            }
-            this.nodeRandomLabelDisabledBg.active = false;
-            this.nodeManualLabelDisabledBg.active = false;
-            this.tglManualClientSeed.node.getComponent(UIOpacity).opacity = this.OPACITY_ENABLED;
-            this.tglRandomClientSeed.node.getComponent(UIOpacity).opacity = this.OPACITY_ENABLED;
-            this.tglManualClientSeed.interactable = true;
-            this.tglRandomClientSeed.interactable = true;
-            this.inputManualSeed.enabled = true;
-            this.nodeWarningText.active = false;
-        }
+    updateManualInputEditBox() {
+        const manualEnabled = !this.randomClientSeedEnabled && !this.isAutoPlay;
+        this.setManualInputInterractable(manualEnabled);
     }
 
     setDisplayContentRandomMode(selectedRandomMode: boolean) {
