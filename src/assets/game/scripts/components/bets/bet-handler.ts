@@ -178,6 +178,7 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
             if (this.betsStore.autoCashOutTimer <= 0) {
                 this.handleCashOut();
             } else {
+                this.autoCashOutTimeOut && clearTimeout(this.autoCashOutTimeOut);
                 this.autoCashOutTimeOut = setTimeout(countDown, 1000);
             }
         };
