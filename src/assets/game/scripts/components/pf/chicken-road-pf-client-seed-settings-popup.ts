@@ -3,7 +3,7 @@ import { _decorator, BlockInputEvents, EditBox, UIOpacity } from "cc";
 import { ClientSeedSettingsPopup as ClientSeedSettingsPopupRoundBase } from "db://shared-components/provably-fair/round-base/scripts/client-seed-settings-popup";
 import Observer from "observer";
 import { AutoPlayStore } from "../play-mode/auto-play";
-
+const { RoundBasePF } = gc;
 const { ccclass, property } = _decorator;
 const { render, handle } = Observer;
 
@@ -14,6 +14,7 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
 
     private isAutoPlay = false;
     private randomClientSeedEnabled = true;
+    private notAllowChangeClientSeed = false;
 
     onLoad() {
         this.setupInputListeners();
@@ -98,9 +99,15 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
         this.updateManualInputEditBox();
     }
 
+    setDisplayComponents(notAllowChangeClientSeed: boolean) {
+        this.notAllowChangeClientSeed = notAllowChangeClientSeed || this.isAutoPlay;
+        super.setDisplayComponents(this.notAllowChangeClientSeed);
+        this.updateManualInputEditBox();
+    }
+
     updateManualInputEditBox() {
-        const manualEnabled = !this.randomClientSeedEnabled && !this.isAutoPlay;
-        this.setManualInputInterractable(manualEnabled);
+        const enabled = !this.notAllowChangeClientSeed && !this.randomClientSeedEnabled && !this.isAutoPlay;
+        this.setManualInputInterractable(enabled);
     }
 
     setDisplayContentRandomMode(selectedRandomMode: boolean) {
