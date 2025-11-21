@@ -18,16 +18,15 @@ export class TopWinnersHandlers {
             return;
         }
 
-        const amount = gc.NumberUtils.getValueByCurrency(winner.winningAmount, this.mainPlayerStore.rate, winner.rate);
-
-        winner.winningAmount = amount;
+        winner.winningAmount = this.convertToMainPlayerRate(winner.winningAmount, winner.rate);
+        winner.amount = this.convertToMainPlayerRate(winner.amount, winner.rate);
 
         this.store.newTopWinner = winner;
 
         const existingWinner = this.store.winners.find((w) => w.roundId === winner.roundId);
         if (existingWinner) {
-            const amount = gc.NumberUtils.getValueByCurrency(winner.winningAmount, this.mainPlayerStore.rate, winner.rate);
-            existingWinner.winningAmount = amount;
+            existingWinner.winningAmount = this.convertToMainPlayerRate(winner.winningAmount, winner.rate);
+
             existingWinner.multiplier = winner.multiplier;
         } else {
             this.store.winners.shift();
@@ -38,11 +37,15 @@ export class TopWinnersHandlers {
     createTopWinners(winners: TopWinner[]) {
         const lastTenWinner = winners.slice(-10);
         lastTenWinner.forEach((winner) => {
-            const amount = gc.NumberUtils.getValueByCurrency(winner.winningAmount, this.mainPlayerStore.rate, winner.rate);
-            winner.winningAmount = amount;
+            winner.winningAmount = this.convertToMainPlayerRate(winner.winningAmount, winner.rate);
+            winner.amount = this.convertToMainPlayerRate(winner.amount, winner.rate);
         });
 
         this.store.winners = lastTenWinner;
+    }
+
+    private convertToMainPlayerRate(amount: number, rate: number) {
+        return gc.NumberUtils.getValueByCurrency(amount, this.mainPlayerStore.rate, rate);
     }
 
     eventHandleList = [
