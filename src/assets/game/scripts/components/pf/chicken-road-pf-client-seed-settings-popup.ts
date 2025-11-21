@@ -32,7 +32,7 @@ export class ChickenRoadPFClientSeedSettingsPopup extends ClientSeedSettingsPopu
 
     private setManualInputInterractable(enabled: boolean) {
         const opacity = enabled ? this.OPACITY_ENABLED : this.OPACITY_DISABLED;
-        this.inputManualSeed.enabled = enabled && !this.isAutoPlay;
+        this.inputManualSeed.enabled = enabled;
         this.inputManualSeed.node.getComponent(UIOpacity).opacity = opacity;
 
         let blocker = this.inputManualSeed.node.getComponent(BlockInputEvents);
