@@ -18,6 +18,9 @@ export class Chicken extends Component {
     spineChicken: sp.Skeleton = null;
 
     @property(sp.Skeleton)
+    hitEffect: sp.Skeleton = null;
+
+    @property(sp.Skeleton)
     firework: sp.Skeleton = null;
 
     private state = ChickenState.Idle;
@@ -71,10 +74,14 @@ export class Chicken extends Component {
     }
 
     private async playAnimDance() {
-        this.firework.node.active = true;
-        this.firework.setAnimation(0, "firework", true);
+        this.showFireWork();
         AudioUtils.playSFX(AudioIds.CHICKEN_DANCE);
         await this.playAnim({ animName: "final" });
+    }
+
+    private showFireWork() {
+        this.firework.node.active = true;
+        this.firework.setAnimation(0, "firework", true);
     }
 
     async playStepSuccess(hasVehicle = false) {
@@ -101,6 +108,7 @@ export class Chicken extends Component {
     }
 
     reset() {
+        this.hideHitEffect();
         this.spineChicken.node.setPosition(v3(0, 0, 0));
         this.playIdle();
         this.firework.node.active = false;
@@ -117,6 +125,16 @@ export class Chicken extends Component {
             })
             .start();
         AudioUtils.playSFX(AudioIds.CAR_HIT);
+        this.showHitEffect();
         await this.playAnim({ animName: "crash" });
+    }
+
+    showHitEffect() {
+        this.hitEffect.node.active = true;
+        this.hitEffect.setAnimation(0, "hit", false);
+    }
+
+    hideHitEffect() {
+        this.hitEffect.node.active = false;
     }
 }
