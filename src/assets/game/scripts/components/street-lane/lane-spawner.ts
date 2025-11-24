@@ -50,62 +50,45 @@ export class LaneSpawner extends ObserverComponent {
     private decor1Index = -1;
     private decor2Index = -1;
 
+    private readonly DEFAULT_INIT_LANES = 5;
+
     onLoad() {
-        this.laneContent.removeAllChildren();
+        this.chickenCtrl = this.chickenNode.getComponent(Chicken);
+        this.laneWidth = this.lanePrefab.data.getComponent(UITransform).width;
+
+        this.initLanes();
         super.onLoad();
     }
 
+    initLanes() {
+        this.laneContent.removeAllChildren();
+        this.spawnLanes(this.DEFAULT_INIT_LANES);
+    }
+
     @render(InstantWinConfigStore, (store) => store.currentMultiplierConfig, { fireImmediately: false })
-    setMultiplierConfig(currentMultiplierConfig: FixedStepsMultiplierConfig) {
-        const previousConfig = this.currentConfig;
-        this.currentConfig = currentMultiplierConfig;
-        if (this.currentConfig) {
-            this.renderLane(previousConfig);
-        }
-    }
-
-    renderLane(previousConfig: FixedStepsMultiplierConfig) {
-        this.spawnLanes(previousConfig?.multiplierSteps?.length ?? 0);
-
-        if (this.chickenNode) {
-            this.chickenCtrl = this.chickenNode.getComponent(Chicken);
-            this.spawnChickenAtStart();
-        }
-    }
-
-    spawnLanes(previousLength: number) {
-        if (!this.lanePrefab || !this.laneContent || !this.currentConfig) {
+    renderMultiplierConfig(currentMultiplierConfig: FixedStepsMultiplierConfig) {
+        if (!currentMultiplierConfig) {
             return;
         }
-
-        if (previousLength === 0) {
-            this.createAllLanes();
-        } else {
-            this.adjustLaneCount(previousLength);
-        }
-
+        this.currentConfig = currentMultiplierConfig;
+        this.spawnLanes(this.currentConfig.multiplierSteps?.length ?? 0);
         this.generateRandomDecorIndices(this.currentConfig.multiplierSteps.length);
-
-        this.laneWidth = this.lanePrefab.data.getComponent(UITransform).width;
         this.configureLanes();
+        this.spawnChickenAtStart();
     }
 
-    private createAllLanes() {
-        for (let index = 0; index < this.currentConfig.multiplierSteps.length; index++) {
-            const lane = instantiate(this.lanePrefab);
-            lane.name = `lane-${index.toString().padStart(2, "0")}`;
-            this.laneContent.addChild(lane);
-        }
+    spawnLanes(newLength: number) {
+        this.adjustLaneCount(newLength);
     }
 
-    private adjustLaneCount(previousLength: number) {
-        const currentLength = this.currentConfig.multiplierSteps.length;
-        const lengthDifference = Math.abs(currentLength - previousLength);
+    private adjustLaneCount(newLength: number) {
+        const currentLength = this.laneContent.children.length;
+        const lengthDifference = Math.abs(currentLength - newLength);
 
-        if (previousLength > currentLength) {
-            this.removeLanes(lengthDifference);
-        } else if (previousLength < currentLength) {
+        if (newLength > currentLength) {
             this.addLanes(lengthDifference);
+        } else if (newLength < currentLength) {
+            this.removeLanes(lengthDifference);
         }
     }
 
@@ -235,7 +218,7 @@ export class LaneSpawner extends ObserverComponent {
             const isFinalLane = nextLane === this.currentConfig.multiplierSteps.length - 1;
             this.updateCurrentLaneItemBackground();
 
-            const hasVehicle = Math.random() < 0.8; //NOSONAR
+            const hasVehicle = true;// Math.random() < 0.8; //NOSONAR
             this.moveChicken();
             this.stopSpawningVehicleNextLane();
 

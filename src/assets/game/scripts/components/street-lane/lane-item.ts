@@ -67,6 +67,7 @@ export default class LaneItem extends ObserverComponent {
         this.decorGrate.active = false;
         this.decor1Node.active = false;
         this.decor2Node.active = false;
+        this.lblMultiplier.node.active = false;
         if (this.vehicleNode) {
             this.vehicle = this.vehicleNode.getComponent(Vehicle);
         } else {
@@ -114,6 +115,8 @@ export default class LaneItem extends ObserverComponent {
         const multiplierString = `${multiplier.toFixed(2)}x`;
         this.lblMultiplier.string = multiplierString;
         this.lblWinMultiplier.string = multiplierString;
+
+        this.lblMultiplier.node.active = true;
     }
 
     resetLaneItem() {
