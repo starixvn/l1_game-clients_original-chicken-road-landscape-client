@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Label, Node } from "cc";
+import { _decorator, BlockInputEvents, Label, Node } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
@@ -27,6 +27,7 @@ export class GameMode extends ObserverComponent {
     private currentMultiplierConfig: FixedStepsMultiplierConfig;
 
     onLoad() {
+        this.modeDialog.addComponent(BlockInputEvents);
         this.modeDialog.active = false;
         this.buttonArrowDown.active = false;
         this.disableNode.active = false;
@@ -103,10 +104,13 @@ export class GameMode extends ObserverComponent {
     }
 
     @render(AutoPlayStore, (store) => store.clickEvent, { fireImmediately: false })
-    renderClosePopup(clickEvent: any) {
-        if (clickEvent.name !== 'Game_Mode_Open') {
-            this.toggleModeDialog(false);
-        }
+    renderClickEvent(clickEvent: any) {
+        this.toggleModeDialog(clickEvent.name === 'Game_Mode_Open');
+    }
+
+    @handle(AutoPlayStore, (handler, name: string) => handler.triggerClickEvent(name))
+    triggerClickEvent(name) {
+        return name;
     }
 
     @render(AutoPlayStore, (store) => store.isAutoplay)
