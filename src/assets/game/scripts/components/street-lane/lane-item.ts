@@ -74,19 +74,14 @@ export default class LaneItem extends ObserverComponent {
         }
     }
 
-    async playStepSuccess(hasVehicle = false) {
+    async showBarrier() {
         this.barrierSpine.node.active = true;
         AnimationUtils.playSpine(this.barrierSpine, "barrier");
         AudioUtils.playSFX(AudioIds.BARRIER);
-        if (hasVehicle) {
-            this.vehicle.playVehicleStopAtBarrier();
-            setTimeout(() => {
-                AudioUtils.playSFX(AudioIds.CAR_STOP);
-                setTimeout(() => {
-                    AudioUtils.playSFX(AudioIds.CHICKEN_SCREAM);
-                }, 20);
-            }, 20);
-        }
+    }
+
+    playVehicleStopAtBarrier() {
+        this.vehicle.playVehicleStopAtBarrier();
     }
 
     toggleCurrentMultiplierBackground(isCurrentStep = true) {

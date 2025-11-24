@@ -84,18 +84,14 @@ export class Chicken extends Component {
         this.firework.setAnimation(0, "firework", true);
     }
 
-    async playStepSuccess(hasVehicle = false) {
-        await this.playStep();
-
-        if (hasVehicle) {
-            this.playAnim({ animName: "win" }).then(() => {
-                this.changeToIdle();
-            });
-        } else {
-            this.playAnim({ animName: "celebration" }).then(() => {
-                this.changeToIdle();
-            });
-        }
+    chickenReaction(hasVehicle = false) {
+        this.scheduleOnce(() => {
+            hasVehicle && AudioUtils.playSFX(AudioIds.CHICKEN_SCREAM);
+        }, 0.2);
+        const animName = hasVehicle ? "win" : "celebration";
+        this.playAnim({ animName }).then(() => {
+            this.changeToIdle();
+        });
     }
 
     private changeToIdle() {

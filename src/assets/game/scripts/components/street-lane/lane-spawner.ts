@@ -1,12 +1,11 @@
 import { _decorator, Color, instantiate, Node, Prefab, ScrollView, tween, UITransform, v2, v3 } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
-import { ComponentUtils } from "db://shared-components/shared/utils";
+import { AnimationUtils, ComponentUtils } from "db://shared-components/shared/utils";
 import Observer from "observer";
 import { AudioIds } from "../../../audios/AudioIds";
 import { CrashUtils } from "../../crash-utils";
 import { FixedStepsMultiplierConfig, InstantWinConfigStore } from "../../game-configs";
-import { settings } from "../../game-settings";
 import { BetHandler } from "../bets/bet-handler";
 import { BetStore, BetUIState } from "../bets/bet-store";
 import { Chicken } from "../chicken/chicken";
@@ -239,9 +238,8 @@ export class LaneSpawner extends ObserverComponent {
             const hasVehicle = Math.random() < 0.8; //NOSONAR
             this.moveChicken();
             this.stopSpawningVehicleNextLane();
-            if (!isFinalLane) {
-                this.scheduleOnce(() => this.showBarrier(nextLane, hasVehicle), settings.durations.stepAnimation);
-            }
+
+            const laneItem = this.getLaneItem(nextLane);
             if (isFinalLane) {
                 await this.chickenCtrl.playStep();
                 if (this.interrupted) {
@@ -249,13 +247,19 @@ export class LaneSpawner extends ObserverComponent {
                     return;
                 }
                 this.updateCurrentAndNextLaneItemBackground();
-                this.getLaneItem(nextLane)?.playLastLane();
+                laneItem?.playLastLane();
                 this.moveChickenToPavement();
                 this.adjustMusicVolume(0.1);
                 await this.chickenCtrl.playStepSuccessAtLastLane();
                 this.adjustMusicVolume(1);
             } else {
-                await this.chickenCtrl.playStepSuccess(hasVehicle);
+                await this.chickenCtrl.playStep();
+                if (hasVehicle) {
+                    laneItem?.playVehicleStopAtBarrier();
+                    await AnimationUtils.delayTime(0.3);
+                }
+                laneItem?.showBarrier();
+                this.chickenCtrl.chickenReaction(hasVehicle);
                 this.updateCurrentAndNextLaneItemBackground();
             }
             if (this.interrupted) {
@@ -299,12 +303,6 @@ export class LaneSpawner extends ObserverComponent {
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
     checkPlaceBetNextRound() { }
-
-    showBarrier(landIndex: number, hasVehicle = false) {
-        try {
-            this.getLaneItem(landIndex)?.playStepSuccess(hasVehicle);
-        } catch (error) { }
-    }
 
     updateCurrentLaneItemBackground() {
         this.getLaneItem(this.currentLaneIndex)?.toggleCurrentMultiplierBackground(false);
