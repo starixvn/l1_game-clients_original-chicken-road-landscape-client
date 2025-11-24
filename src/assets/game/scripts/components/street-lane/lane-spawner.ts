@@ -218,7 +218,7 @@ export class LaneSpawner extends ObserverComponent {
             const isFinalLane = nextLane === this.currentConfig.multiplierSteps.length - 1;
             this.updateCurrentLaneItemBackground();
 
-            const hasVehicle = true;// Math.random() < 0.8; //NOSONAR
+            const hasVehicle = Math.random() < 0.8; //NOSONAR
             this.moveChicken();
             this.stopSpawningVehicleNextLane();
 
