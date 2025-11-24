@@ -101,6 +101,7 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     clickAutoPlay() {
+        this.autoPlayStore.triggerClickEvent('AutoPlay');
         if (!this.autoPlayStore.isAutoplay && this.isValidBet()) {
             this.openAutoPlayPopup();
         } else {

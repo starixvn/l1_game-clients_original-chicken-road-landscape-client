@@ -102,9 +102,9 @@ export class GameMode extends ObserverComponent {
         this.toggleModeDialog(true);
     }
 
-    @render(AutoPlayStore, (store) => store.isOpenAutoplayPopup)
-    renderClosePopup(isOpenAutoPlayPopup: boolean) {
-        if (!isOpenAutoPlayPopup) {
+    @render(AutoPlayStore, (store) => store.clickEvent, { fireImmediately: false })
+    renderClosePopup(clickEvent: any) {
+        if (clickEvent.name !== 'Game_Mode_Open') {
             this.toggleModeDialog(false);
         }
     }

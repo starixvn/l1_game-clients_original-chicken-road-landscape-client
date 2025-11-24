@@ -3,6 +3,7 @@ import { _decorator, Label, Node } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
+import { AutoPlayStore } from "../../play-mode/auto-play";
 import { BetAmountHandlers } from "../bet-amount-handlers";
 import { BetAmountStore } from "../bet-amount-store";
 
@@ -20,6 +21,7 @@ export default class BetLevelItem extends ObserverComponent {
 
     private key = "";
 
+    @handle(AutoPlayStore, handler => handler.triggerClickEvent('BetLevelItem'))
     @handle(BetAmountHandlers, (handler, key: string) => handler.clickBetLevel(key))
     onClickBetItem() {
         AudioUtils.playClick();

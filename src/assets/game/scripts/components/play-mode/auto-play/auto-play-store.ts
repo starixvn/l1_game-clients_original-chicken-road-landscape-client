@@ -14,6 +14,8 @@ export class AutoPlayStore {
     public selectedRoundOnPopup = this.roundsList[0];
     public roundsAutoplay = 0;
 
+    clickEvent = {};
+
     triggerPlaceBetFailed = null;
     isAutoplay = false;
     noOfLanes = 1;
@@ -30,5 +32,9 @@ export class AutoPlayStore {
     resetAutoSelection() {
         this.noOfLanes = 1;
         this.selectedRoundOnPopup = this.roundsList[0];
+    }
+
+    triggerClickEvent(name: string) {
+        this.clickEvent = { name };
     }
 }
