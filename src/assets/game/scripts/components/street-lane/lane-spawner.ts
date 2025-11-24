@@ -251,7 +251,9 @@ export class LaneSpawner extends ObserverComponent {
                 this.updateCurrentAndNextLaneItemBackground();
                 this.getLaneItem(nextLane)?.playLastLane();
                 this.moveChickenToPavement();
+                this.adjustMusicVolume(0.1);
                 await this.chickenCtrl.playStepSuccessAtLastLane();
+                this.adjustMusicVolume(1);
             } else {
                 await this.chickenCtrl.playStepSuccess(hasVehicle);
                 this.updateCurrentAndNextLaneItemBackground();
@@ -266,6 +268,10 @@ export class LaneSpawner extends ObserverComponent {
 
             this.interrupted = false;
         } catch (e) { }
+    }
+
+    adjustMusicVolume(volumeScale: number) {
+        AudioUtils.setMusicVolumeScale(volumeScale);
     }
 
     getLaneItem(index: number) {
