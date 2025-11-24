@@ -245,6 +245,7 @@ export class LaneSpawner extends ObserverComponent {
                 this.chickenCtrl.chickenReaction(hasVehicle);
                 this.updateCurrentAndNextLaneItemBackground();
             }
+            this.triggerUpdateWinAmount();
             if (this.interrupted) {
                 this.completeSettle();
                 return;
@@ -256,6 +257,9 @@ export class LaneSpawner extends ObserverComponent {
             this.interrupted = false;
         } catch (e) { }
     }
+
+    @handle(BetHandler, (handler) => handler.triggerUpdateWinAmount())
+    triggerUpdateWinAmount() { }
 
     adjustMusicVolume(volumeScale: number) {
         AudioUtils.setMusicVolumeScale(volumeScale);
@@ -327,6 +331,7 @@ export class LaneSpawner extends ObserverComponent {
                 const laneItem = this.getLaneItem(this.currentLaneIndex);
                 laneItem?.playCrashVehicle(() => {
                     this.chickenCtrl.playCrash(this.scrollView.content.parent).then(() => {
+                        this.triggerUpdateWinAmount();
                         this.triggerSettleStatus();
                     });
 

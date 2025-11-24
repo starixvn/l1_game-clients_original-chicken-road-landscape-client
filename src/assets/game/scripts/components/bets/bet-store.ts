@@ -44,6 +44,7 @@ export class BetStore {
     reachMaxWin = false;
 
     winAmount = 0;
+    eventUpdateWinAmount = { winAmount: 0 };
 
     get autoCashOutTimerVisible() {
         return this.autoCashOutEnable && this.autoCashOutTimer <= AutoCashOutTiming.LastSeconds;

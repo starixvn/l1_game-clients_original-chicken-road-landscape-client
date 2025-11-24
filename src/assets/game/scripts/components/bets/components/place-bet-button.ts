@@ -71,6 +71,7 @@ export default class PlaceBetButton extends ObserverComponent {
     @handle(BetHandler, (handler) => handler.handleCashOut())
     onClickCashOut() {
         this.playSound(AudioIds.BTN_CASHOUT);
+        this.setActiveButton(this.cashOutButton, false);
     }
 
     @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
@@ -78,13 +79,12 @@ export default class PlaceBetButton extends ObserverComponent {
         return id;
     }
 
-    @render(BetStore, (store) => store.winAmount)
-    updateCashOutValue(cashOutValue: number) {
-        if (cashOutValue === 0) {
-            //skip update value in crash case
+    @render(BetStore, (store) => store.eventUpdateWinAmount)
+    updateCashOutValue(eventUpdateWinAmount: { winAmount: number }) {
+        if (!eventUpdateWinAmount) {
             return;
         }
-        this.lblMoney.string = gc.FormatUtils.numberWithCommas(cashOutValue, 2, true);
+        this.lblMoney.string = gc.FormatUtils.numberWithCommas(eventUpdateWinAmount.winAmount, 2, true);
     }
 
     onClickBetButton() {

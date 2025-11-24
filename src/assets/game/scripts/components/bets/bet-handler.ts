@@ -107,12 +107,19 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         };
     }
 
+    triggerUpdateWinAmount() {
+        this.betsStore.eventUpdateWinAmount = {
+            winAmount: this.betsStore.winAmount,
+        };
+    }
+
     resetBet() {
         this.betsStore.betCount = 0;
         this.betsStore.uiState = BetUIState.Start;
         this.betsStore.reachMaxWin = false;
         this.betsStore.settleStatus = null;
         this.betsStore.winAmount = 0;
+        this.triggerUpdateWinAmount();
         this.updateMultiplier(0);
         this.updateEndBet(0);
         this.hashHandlers.handleGenerateRandomClientSeed();
