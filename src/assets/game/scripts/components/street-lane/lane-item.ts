@@ -80,8 +80,12 @@ export default class LaneItem extends ObserverComponent {
         AudioUtils.playSFX(AudioIds.BARRIER);
         if (hasVehicle) {
             this.vehicle.playVehicleStopAtBarrier();
-            AudioUtils.playSFX(AudioIds.CAR_STOP);
-            AudioUtils.playSFX(AudioIds.CHICKEN_SCREAM);
+            setTimeout(() => {
+                AudioUtils.playSFX(AudioIds.CAR_STOP);
+                setTimeout(() => {
+                    AudioUtils.playSFX(AudioIds.CHICKEN_SCREAM);
+                }, 20);
+            }, 20);
         }
     }
 
