@@ -11,6 +11,7 @@ const { Player } = gc;
 const { render } = Observer;
 const { MainPlayerStore } = Player;
 
+const MAX_ITEMS = 10;
 @ccclass
 export class TopWinnersContainer extends ObserverComponent {
     @property(Node)
@@ -29,7 +30,7 @@ export class TopWinnersContainer extends ObserverComponent {
 
     items: Node[] = [];
 
-    private readonly winners: TopWinner[] = [];
+    private winners: TopWinner[] = [];
 
     @render(gc.Player.MainPlayerStore, (store) => store.name)
     renderPlayerName(name: string) {
@@ -56,7 +57,7 @@ export class TopWinnersContainer extends ObserverComponent {
         this.container.removeAllChildren();
         this.items = [];
         winners.forEach((winner) => this.addItem(winner, false));
-        this.winners.push(...winners);
+        this.winners = [...winners];
         this.layoutItems();
     }
 
@@ -113,12 +114,12 @@ export class TopWinnersContainer extends ObserverComponent {
     }
 
     private pushDownOldItems(newCount = 1) {
-        if (this.items.length <= 10) {
+        if (this.items.length <= MAX_ITEMS) {
             this.layoutItemsWithAnimation(newCount);
             return;
         }
 
-        const removed = this.items.splice(10);
+        const removed = this.items.splice(MAX_ITEMS);
         removed.forEach((node) => {
             AnimationUtils.fadeOut(node, 0.3).then(() => node.destroy());
         });
