@@ -95,10 +95,8 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
 
     setUIMiningState() {
         if (this.betsStore.uiState === BetUIState.Settle || this.isReachMaxMultiplier()) {
-            console.log("can not set mining state ", this.betsStore.uiState, this.isReachMaxMultiplier());
             return;
         }
-        console.log("set mining state");
         this.betsStore.uiState = BetUIState.Mining;
     }
 

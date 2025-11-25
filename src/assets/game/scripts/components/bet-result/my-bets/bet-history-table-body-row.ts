@@ -149,7 +149,6 @@ export default class BetHistoryTableBodyRow extends ObserverComponent {
     }
 
     @handle(gc.GameCrash.ProvablyFair.ProvablyFairHandler, (handle, roundId: number) => {
-        console.log("Handler called with roundId:", roundId);
         return handle.openVerificationHistory(roundId);
     })
     onClickVerify() {
@@ -160,7 +159,6 @@ export default class BetHistoryTableBodyRow extends ObserverComponent {
     @handle(BetHistory.BetDetailsHandlers)
     openTicketDetail() {
         this.playSoundClick();
-        console.log("openTicketDetail", this.betHistoryLog);
         return this.betHistoryLog;
     }
 
