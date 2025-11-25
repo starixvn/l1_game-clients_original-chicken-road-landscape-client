@@ -33,9 +33,6 @@ export class MainScrollVertical extends ObserverComponent {
         const boxEdit = node.getComponent(UITransform).getBoundingBoxToWorld();
         const canvas = find("Canvas");
         const boxCanvas = canvas.getComponent(UITransform).getBoundingBoxToWorld();
-        console.log("edit box min Y", boxEdit.yMin);
-        console.log("canvas box min Y", boxCanvas.yMin);
-        console.log("screen.devicePixelRatio ", screen.devicePixelRatio);
         const keyboardHeight = 250 * screen.devicePixelRatio;
         const offset = boxCanvas.yMin + keyboardHeight - boxEdit.yMin;
         if (offset > 0) {
