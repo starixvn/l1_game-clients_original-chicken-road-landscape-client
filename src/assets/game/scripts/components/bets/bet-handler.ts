@@ -86,11 +86,12 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     }
 
     isReachMaxMultiplier() {
-        return this.betsStore.multiplier === this.instantWinConfigStore.currentMultiplierConfig.multiplierSteps.at(-1);
+        return this.betsStore.multiplier === this.instantWinConfigStore?.currentMultiplierConfig?.multiplierSteps.at(-1);
     }
 
     setUIMiningState() {
         if (this.betsStore.uiState === BetUIState.Settle || this.isReachMaxMultiplier()) {
+            console.log("can not set mining state ", this.betsStore.uiState, this.isReachMaxMultiplier());
             return;
         }
         this.betsStore.uiState = BetUIState.Mining;
