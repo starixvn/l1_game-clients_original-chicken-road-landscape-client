@@ -239,10 +239,12 @@ export class LaneSpawner extends ObserverComponent {
                 await this.chickenCtrl.playStep();
                 if (hasVehicle) {
                     laneItem?.playVehicleStopAtBarrier();
-                    await AnimationUtils.delayTime(0.3);
                 }
-                laneItem?.showBarrier();
-                this.chickenCtrl.chickenReaction(hasVehicle);
+                const delayShowBarrier = hasVehicle ? 0.3 : 0;
+                AnimationUtils.delayTime(delayShowBarrier).then(() => {
+                    laneItem?.showBarrier();
+                });
+                this.chickenCtrl.chickenReaction(hasVehicle, delayShowBarrier + 0.1);
                 this.updateCurrentAndNextLaneItemBackground();
             }
             this.triggerUpdateWinAmount();

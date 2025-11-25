@@ -84,10 +84,10 @@ export class Chicken extends Component {
         this.firework.setAnimation(0, "firework", true);
     }
 
-    chickenReaction(hasVehicle = false) {
+    chickenReaction(hasVehicle = false, delayTime: number) {
         this.scheduleOnce(() => {
             hasVehicle && AudioUtils.playSFX(AudioIds.CHICKEN_SCREAM);
-        }, 0.2);
+        }, delayTime);
         const animName = hasVehicle ? "win" : "celebration";
         this.playAnim({ animName }).then(() => {
             this.changeToIdle();
