@@ -72,6 +72,7 @@ export default class PlaceBetButton extends ObserverComponent {
     onClickCashOut() {
         this.playSound(AudioIds.BTN_CASHOUT);
         this.setActiveButton(this.cashOutButton, false);
+        this.setActiveButton(this.hitStoneButton, false);
     }
 
     @handle(gc.Audios.AudioHandler, (handle, id: string) => handle.playSFX(id))
@@ -163,6 +164,5 @@ export default class PlaceBetButton extends ObserverComponent {
 
     setActiveButton(button: Node, active: boolean) {
         button.getComponent(Button).interactable = active;
-        button.getChildByPath("bg/disable").active = !active;
     }
 }
