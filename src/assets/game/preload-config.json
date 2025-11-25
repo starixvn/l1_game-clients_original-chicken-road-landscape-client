@@ -8,7 +8,9 @@
             "audios/barrier",
             "spines/chicken",
             "spines/firework",
-            "spines/barrier"
+            "spines/barrier",
+            "images/chicken-road-altas",
+            "images/chicken-road-altas/spriteFrame"
         ]
     },
     "localized": {
