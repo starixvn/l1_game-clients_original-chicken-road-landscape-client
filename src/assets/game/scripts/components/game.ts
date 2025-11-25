@@ -74,6 +74,7 @@ export default class Game extends GameComponent {
     @render(BetStore, (store) => store.uiState)
     renderUiState(uiState: BetUIState) {
         this.uiState = uiState;
+        console.log("renderUiState ", uiState);
     }
 
     @render(BetStore, (store) => store.eventSettleStatus, { fireImmediately: false })
