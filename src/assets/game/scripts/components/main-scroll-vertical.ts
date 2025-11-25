@@ -1,4 +1,4 @@
-import { _decorator, find, Node, ScrollView, sys, UITransform, v2, view } from "cc";
+import { _decorator, find, Node, screen, ScrollView, sys, UITransform, v2 } from "cc";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
 import { BetStore } from "./bets/bet-store";
@@ -35,8 +35,9 @@ export class MainScrollVertical extends ObserverComponent {
         const boxCanvas = canvas.getComponent(UITransform).getBoundingBoxToWorld();
         console.log("edit box min Y", boxEdit.yMin);
         console.log("canvas box min Y", boxCanvas.yMin);
-        const keyboardHeight = 250;
-        const offset = boxCanvas.yMin + keyboardHeight / view.getScaleY() - boxEdit.yMin;
+        console.log("screen.devicePixelRatio ", screen.devicePixelRatio);
+        const keyboardHeight = 250 * screen.devicePixelRatio;
+        const offset = boxCanvas.yMin + keyboardHeight - boxEdit.yMin;
         if (offset > 0) {
             const currentOffset = Math.abs(this.scrollView.getScrollOffset().y);
             this.scrollView.scrollToOffset(v2(0, currentOffset + offset), 0.3, true);
