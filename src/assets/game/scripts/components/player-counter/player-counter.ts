@@ -26,7 +26,7 @@ export class PlayerCounter extends ObserverComponent {
         this.lblRoundId && roundId !== 0 && (this.lblRoundId.string = `#${roundId}`);
     }
 
-    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.aroundTablePlayer, { fireImmediately: false })
+    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.aroundTablePlayer)
     renderAroundTablePlayer(aroundTablePlayer: IAroundTablePlayers) {
         if (!aroundTablePlayer) {
             return;
@@ -35,7 +35,7 @@ export class PlayerCounter extends ObserverComponent {
         this.updatePlayerCountLabel();
     }
 
-    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.aroundTablePlayers, { fireImmediately: false })
+    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.aroundTablePlayers)
     renderAroundTablePlayers(aroundTablePlayers: gc.GameServiceMessage.AroundTablePlayers) {
         if (!aroundTablePlayers) {
             return;
@@ -45,7 +45,7 @@ export class PlayerCounter extends ObserverComponent {
         this.updatePlayerCountLabel();
     }
 
-    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.outGamePlayerId, { fireImmediately: false })
+    @render(gc.AroundTablePlayers.AroundTablePlayersStore, (store) => store.outGamePlayerId)
     handleRemoveAroundTablePlayer(outGamePlayerId: gc.GameServiceMessage.RemoveAroundTablePlayer) {
         if (!outGamePlayerId) {
             return;
