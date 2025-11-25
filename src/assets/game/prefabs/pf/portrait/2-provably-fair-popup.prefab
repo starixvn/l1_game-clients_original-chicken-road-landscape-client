@@ -46,7 +46,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -37.5,
+      "y": -60,
       "z": 0
     },
     "_lrot": {
@@ -206,7 +206,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 786,
-      "height": 1269
+      "height": 1224
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -616,7 +616,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 8,
-      "height": 1179
+      "height": 1134
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -864,7 +864,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 589.5,
+      "y": 567,
       "z": 0
     },
     "_lrot": {
@@ -905,7 +905,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 786,
-      "height": 1160.46
+      "height": 1115.46
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1460,7 +1460,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 91.041015625,
+      "x": 119.642578125,
       "y": 0,
       "z": 0
     },
@@ -1509,7 +1509,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Round:",
+    "_string": "ラウンド:",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -1572,7 +1572,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 91.041015625,
+      "width": 119.642578125,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -1644,7 +1644,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 96.041015625,
+      "x": 124.642578125,
       "y": 0,
       "z": 0
     },
@@ -1797,7 +1797,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96.041015625,
+      "width": 124.642578125,
       "height": 30
     },
     "_anchorPoint": {
@@ -2030,7 +2030,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Result:",
+    "_string": "結果:",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -2093,7 +2093,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 87.91015625,
+      "width": 63.642578125,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -2318,7 +2318,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 97.91015625,
+      "width": 73.642578125,
       "height": 44
     },
     "_anchorPoint": {
@@ -2669,7 +2669,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 273.21875,
+      "width": 305.744140625,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -2705,7 +2705,7 @@
       "b": 252,
       "a": 255
     },
-    "_string": "Server Seed Sha256",
+    "_string": "サーバーシード Sha256",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -5257,7 +5257,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 163.474609375,
+      "width": 196,
       "height": 37.8
     },
     "_anchorPoint": {
@@ -5293,7 +5293,7 @@
       "b": 252,
       "a": 255
     },
-    "_string": "Server Seed",
+    "_string": "サーバーシード",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -7949,7 +7949,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 152.82421875,
+      "width": 252,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -7985,7 +7985,7 @@
       "b": 252,
       "a": 255
     },
-    "_string": "Client Seed",
+    "_string": "クライアントシード",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -10931,7 +10931,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 316.134765625,
+      "width": 264.60546875,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -10967,7 +10967,7 @@
       "b": 252,
       "a": 255
     },
-    "_string": "Combined Sha512 Hash",
+    "_string": "Sha512ハッシュ結合",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -14463,7 +14463,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 79.720703125,
+      "width": 56,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -14499,7 +14499,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "Verify",
+    "_string": "認証",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -15570,7 +15570,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 786,
-      "height": 1179
+      "height": 1134
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -15708,7 +15708,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 579.5,
+      "y": 557,
       "z": 0
     },
     "_lrot": {
@@ -16231,7 +16231,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 340,
+      "x": 333.738,
       "y": 0,
       "z": 0
     },
@@ -16244,8 +16244,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.8,
-      "y": 0.8,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_mobility": 0,
@@ -16294,8 +16294,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
+      "x": 0.8,
+      "y": 0.8,
       "z": 1
     },
     "_mobility": 0,
@@ -16322,8 +16322,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 45,
+      "height": 45
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -16372,7 +16372,7 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": false,
+    "_isTrimmedMode": true,
     "_useGrayscale": false,
     "_atlas": {
       "__uuid__": "bd769873-bebd-49ab-81f8-f23dd6c9c61f",
@@ -16602,7 +16602,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 786,
-      "height": 1269
+      "height": 1224
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -16727,7 +16727,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 786,
-      "height": 1269
+      "height": 1224
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -16842,7 +16842,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 75,
+    "_top": 120,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,

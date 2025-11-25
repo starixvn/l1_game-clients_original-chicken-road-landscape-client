@@ -49,7 +49,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -37.5,
+      "y": -60,
       "z": 0
     },
     "_lrot": {
@@ -112,7 +112,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 634.5,
+      "y": 612,
       "z": 0
     },
     "_lrot": {
@@ -584,7 +584,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Provably Fair Settings",
+    "_string": "プロバブリーフェア設定",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 37,
@@ -708,8 +708,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 0.8,
-      "y": 0.8,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_mobility": 0,
@@ -786,8 +786,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 70,
-      "height": 70
+      "width": 45,
+      "height": 45
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -836,7 +836,7 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": false,
+    "_isTrimmedMode": true,
     "_useGrayscale": false,
     "_atlas": {
       "__uuid__": "bd769873-bebd-49ab-81f8-f23dd6c9c61f",
@@ -1280,7 +1280,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "The final result is determined by a combination of the Server Seed and the Client Seed.",
+    "_string": "最終結果は、サーバーシードとクライアントシードの組み合わせによって決定されます。",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -1529,7 +1529,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "The Player can change the Client Seed value and check the fairness of game result from Bet history. ",
+    "_string": "プレイヤーはクライアントシード値を変更し、ベット履歴からゲーム結果の公平性を確認できます。",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -1971,7 +1971,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 152.82421875,
+      "width": 252,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -2007,7 +2007,7 @@
       "b": 252,
       "a": 255
     },
-    "_string": "Client Seed",
+    "_string": "クライアントシード",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -2194,7 +2194,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "(Cannot change seed after bet is accepted)",
+    "_string": "（ベット受付後のシード変更はできません）",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -5167,7 +5167,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 107.1328125,
+      "width": 112,
       "height": 45.36
     },
     "_anchorPoint": {
@@ -5203,7 +5203,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "Random",
+    "_string": "ランダム",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -5998,7 +5998,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 167.740234375,
+      "width": 112,
       "height": 45.36
     },
     "_anchorPoint": {
@@ -6034,7 +6034,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "Manual input",
+    "_string": "手動入力",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -6686,7 +6686,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 292.734375,
+      "width": 327.5830078125,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -6722,7 +6722,7 @@
       "b": 252,
       "a": 255
     },
-    "_string": "Server Seed Sha256",
+    "_string": "サーバーシード Sha256",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
@@ -9489,7 +9489,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 786,
-      "height": 1269
+      "height": 1224
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -9566,7 +9566,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 786,
-      "height": 1269
+      "height": 1224
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -9661,7 +9661,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 75,
+    "_top": 120,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,

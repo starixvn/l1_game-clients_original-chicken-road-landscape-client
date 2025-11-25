@@ -103,7 +103,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -85,
       "z": 0
     },
     "_lrot": {
@@ -511,7 +511,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Time",
+    "_string": "時間",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -593,7 +593,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66.74609375,
+      "width": 56,
       "height": 55.44
     },
     "_anchorPoint": {
@@ -692,7 +692,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -60.003,
+      "x": -65.003,
       "y": -12,
       "z": 0
     },
@@ -741,7 +741,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Multiplier ",
+    "_string": "マルチプライヤー",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -823,7 +823,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 132.548828125,
+      "width": 224,
       "height": 55.44
     },
     "_anchorPoint": {
@@ -922,7 +922,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 98.297,
+      "x": 102.297,
       "y": -12,
       "z": 0
     },
@@ -971,7 +971,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Bet",
+    "_string": "ベット",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -1053,7 +1053,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 44.54296875,
+      "width": 84,
       "height": 55.44
     },
     "_anchorPoint": {
@@ -1201,7 +1201,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "Win",
+    "_string": "勝利",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -1283,7 +1283,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 52.3359375,
+      "width": 56,
       "height": 55.44
     },
     "_anchorPoint": {
@@ -2018,7 +2018,7 @@
       "b": 193,
       "a": 255
     },
-    "_string": "Total",
+    "_string": "合計",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -2100,7 +2100,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 65.693359375,
+      "width": 56,
       "height": 55.44
     },
     "_anchorPoint": {
@@ -2948,7 +2948,7 @@
       "b": 193,
       "a": 255
     },
-    "_string": "Win Loss",
+    "_string": "損益",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -3030,7 +3030,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 121.98046875,
+      "width": 56,
       "height": 55.44
     },
     "_anchorPoint": {
@@ -3506,7 +3506,7 @@
       "b": 193,
       "a": 255
     },
-    "_string": "(You Reached The Max Win)",
+    "_string": "(最大勝利額に達しました)",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -3588,7 +3588,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 369.591796875,
+      "width": 327.60546875,
       "height": 55.44
     },
     "_anchorPoint": {
@@ -4198,8 +4198,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -366.866,
-      "y": 53.897,
+      "x": -367,
+      "y": -32,
       "z": 0
     },
     "_lrot": {
@@ -4591,9 +4591,9 @@
     "__prefab": {
       "__id__": 224
     },
-    "_alignFlags": 8,
+    "_alignFlags": 9,
     "_target": null,
-    "_left": 26.134000000000015,
+    "_left": 26,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
