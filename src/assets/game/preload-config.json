@@ -9,8 +9,7 @@
             "spines/chicken",
             "spines/firework",
             "spines/barrier",
-            "images/chicken-road-altas",
-            "images/chicken-road-altas/spriteFrame"
+            "images/chicken-road-altas"
         ]
     },
     "localized": {
