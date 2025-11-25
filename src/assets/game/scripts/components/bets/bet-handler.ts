@@ -1,4 +1,5 @@
 import gc from "@sg/game-client-base";
+import { Node } from "cc";
 import { FunctionUtils } from "db://shared-components/shared/utils/function-utils";
 import inversify from "inversify";
 import { InstantWinConfigStore } from "../../game-configs";
@@ -111,6 +112,10 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
         this.betsStore.eventUpdateWinAmount = {
             winAmount: this.betsStore.winAmount,
         };
+    }
+
+    triggerEditBoxEvent(data: { name: string, node: Node }) {
+        this.betsStore.eventEditBox = data;
     }
 
     resetBet() {

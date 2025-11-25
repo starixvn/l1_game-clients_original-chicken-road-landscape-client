@@ -5,6 +5,7 @@ import Observer from "observer";
 
 import { AudioIds } from "db://assets/game/audios/AudioIds";
 import { InstantWinConfigStore } from "../../../game-configs/instant-win-config-store";
+import { BetHandler } from "../../bets/bet-handler";
 import { AutoPlayStore } from "../../play-mode/auto-play";
 import { BetAmountHandlers } from "../bet-amount-handlers";
 import { BetAmountStore } from "../bet-amount-store";
@@ -49,6 +50,7 @@ export default class BetControls extends ObserverComponent {
     }
 
     onEditBegin(editBox: EditBox) {
+        this.triggerEventEditBox('Begin', editBox.node);
         this.triggerClickEventEditBox();
         const text = editBox.string;
         const cleanText = text.replace(/,/g, "").replace(/x/g, "");
@@ -59,6 +61,11 @@ export default class BetControls extends ObserverComponent {
 
     @handle(AutoPlayStore, handler => handler.triggerClickEvent('EditBox'))
     triggerClickEventEditBox() { }
+
+    @handle(BetHandler, (handler, data: { name: string, node: Node }) => handler.triggerEditBoxEvent(data))
+    triggerEventEditBox(name: string, node: Node) {
+        return { name, node }
+    }
 
     onEditEndBetAmount(editBox: EditBox) {
         const validValue = this.onEditEnd(editBox, false);

@@ -1,5 +1,6 @@
 import inversify from "inversify";
 
+import { Node } from "cc";
 import mobx from "mobx";
 
 const { injectable, inject } = inversify;
@@ -45,6 +46,7 @@ export class BetStore {
 
     winAmount = 0;
     eventUpdateWinAmount = { winAmount: 0 };
+    eventEditBox: { name: string, node: Node } = null;
 
     get autoCashOutTimerVisible() {
         return this.autoCashOutEnable && this.autoCashOutTimer <= AutoCashOutTiming.LastSeconds;
