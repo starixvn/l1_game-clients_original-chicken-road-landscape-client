@@ -338,6 +338,7 @@ export class LaneSpawner extends ObserverComponent {
             if (!settleStatus.win) {
                 this.moveChicken();
                 this.chickenCtrl.playStep();
+                AudioUtils.playSFX(AudioIds.CAR_HIT);
                 this.scheduleOnce(() => {
                     const laneItem = this.getLaneItem(this.currentLaneIndex);
                     laneItem?.playCrashVehicle(() => { });

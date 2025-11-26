@@ -128,7 +128,6 @@ export class Chicken extends Component {
                     .start();
             })
             .start();
-        AudioUtils.playSFX(AudioIds.CAR_HIT);
         this.showHitEffect();
         await this.playAnim({ animName: "crash" });
     }
