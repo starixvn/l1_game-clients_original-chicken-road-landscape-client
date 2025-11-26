@@ -50,6 +50,7 @@ export default class LaneItem extends ObserverComponent {
 
     private isAnimatingShow = false;
     public static readonly DEFAULT_TEXT_COLOR = new Color(152, 152, 152);
+    public static readonly DEFAULT_BG_COLOR = new Color().fromHEX("393939");
 
     onLoad(): void {
         this.init();
@@ -68,6 +69,8 @@ export default class LaneItem extends ObserverComponent {
         this.decor1Node.active = false;
         this.decor2Node.active = false;
         this.lblMultiplier.node.active = false;
+
+        this.setMultiplierStyle(LaneItem.DEFAULT_TEXT_COLOR, LaneItem.DEFAULT_BG_COLOR);
         if (this.vehicleNode) {
             this.vehicle = this.vehicleNode.getComponent(Vehicle);
         } else {
