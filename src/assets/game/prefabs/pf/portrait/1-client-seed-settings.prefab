@@ -112,7 +112,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 612,
+      "y": 612.0000000000001,
       "z": 0
     },
     "_lrot": {
@@ -584,7 +584,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "プロバブリーフェア設定",
+    "_string": "Provably Fair Settings",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 37,
@@ -1280,7 +1280,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "最終結果は、サーバーシードとクライアントシードの組み合わせによって決定されます。",
+    "_string": "The final result is determined by a combination of the Server Seed and the Client Seed.",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -1416,8 +1416,6 @@
       "__id__": 0
     },
     "fileId": "34Mef1DpdI9KMipJ+Vyj9g",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -1529,7 +1527,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "プレイヤーはクライアントシード値を変更し、ベット履歴からゲーム結果の公平性を確認できます。",
+    "_string": "The Player can change the Client Seed value and check the fairness of game result from Bet history. ",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -1971,7 +1969,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 252,
+      "width": 152.82421875,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -2007,7 +2005,7 @@
       "b": 252,
       "a": 255
     },
-    "_string": "クライアントシード",
+    "_string": "Client Seed",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -2194,7 +2192,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "（ベット受付後のシード変更はできません）",
+    "_string": "(Cannot change seed after bet is accepted)",
     "_horizontalAlign": 0,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -2274,8 +2272,6 @@
       "__id__": 0
     },
     "fileId": "bfgWIhhX9PAKfT28vyjk7T",
-    "instance": null,
-    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
@@ -5167,7 +5163,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 107.1328125,
       "height": 45.36
     },
     "_anchorPoint": {
@@ -5203,7 +5199,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "ランダム",
+    "_string": "Random",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -5998,7 +5994,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 112,
+      "width": 167.740234375,
       "height": 45.36
     },
     "_anchorPoint": {
@@ -6034,7 +6030,7 @@
       "b": 223,
       "a": 255
     },
-    "_string": "手動入力",
+    "_string": "Manual input",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 28,
@@ -6686,7 +6682,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 327.5830078125,
+      "width": 292.734375,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -6722,7 +6718,7 @@
       "b": 252,
       "a": 255
     },
-    "_string": "サーバーシード Sha256",
+    "_string": "Server Seed Sha256",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
@@ -9489,7 +9485,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 786,
-      "height": 1224
+      "height": 1224.0000000000002
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -9566,7 +9562,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 786,
-      "height": 1224
+      "height": 1224.0000000000002
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
