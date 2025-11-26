@@ -92,7 +92,6 @@ export class Chicken extends Component {
     }
 
     chickenScare() {
-        AudioUtils.playSFX(AudioIds.CHICKEN_SCREAM);
         this.state = ChickenState.Win;
         this.spineChicken.setAnimation(0, "win", false);
         const trackEntry = this.spineChicken.getCurrent(0);
