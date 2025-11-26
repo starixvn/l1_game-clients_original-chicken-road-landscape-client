@@ -236,15 +236,17 @@ export class LaneSpawner extends ObserverComponent {
                 await this.chickenCtrl.playStepSuccessAtLastLane();
                 this.adjustMusicVolume(1);
             } else {
-                await this.chickenCtrl.playStep();
+                this.scheduleOnce(() => laneItem?.showBarrier(), 0.3);
                 if (hasVehicle) {
-                    laneItem?.playVehicleStopAtBarrier();
+                    this.scheduleOnce(() => laneItem?.playVehicleStopAtBarrier(), 0.4);
+                    this.scheduleOnce(() => this.chickenCtrl.chickenScare(), 0.8);
                 }
-                const delayShowBarrier = hasVehicle ? 0.3 : 0;
-                AnimationUtils.delayTime(delayShowBarrier).then(() => {
-                    laneItem?.showBarrier();
-                });
-                this.chickenCtrl.chickenReaction(hasVehicle, delayShowBarrier + 0.1);
+                await this.chickenCtrl.playStep();
+                if (!hasVehicle) {
+                    this.chickenCtrl.chickenSmile();
+                } else {
+                    await AnimationUtils.delayTime(0.4);
+                }
                 this.updateCurrentAndNextLaneItemBackground();
             }
             this.triggerUpdateWinAmount();

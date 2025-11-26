@@ -138,7 +138,7 @@ export class Vehicle extends Component {
         this.randomVehicle();
         this.vehicleNode.active = true;
         const barrierEndY = this.vehicleHitBarrierEndPoint.position.y;
-        const duration = 0.3;
+        const duration = 0.25;
         AudioUtils.playSFX(AudioIds.CAR_STOP);
         tween(this.vehicleNode)
             .to(duration, { position: v3(0, barrierEndY, 0) })

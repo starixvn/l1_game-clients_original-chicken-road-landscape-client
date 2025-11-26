@@ -1,5 +1,5 @@
 import gc from "@sg/game-client-base";
-import { _decorator, Animation, Button, EventKeyboard, input, Input, KeyCode, Label, log, Node, sp, v3 } from "cc";
+import { _decorator, Animation, Button, EventKeyboard, input, Input, KeyCode, Label, Node, sp, v3 } from "cc";
 import { AudioUtils } from "db://shared-components/game/audios/utils";
 import { ObserverComponent } from "db://shared-components/shared/common-components/observer-component/scripts/observer-component";
 import Observer from "observer";
@@ -111,7 +111,6 @@ export default class PlaceBetButton extends ObserverComponent {
 
     @render(BetStore, (store) => store.uiState, { fireImmediately: false })
     updateUIState(uiState: BetUIState) {
-        log("updateUIState ", uiState);
         this.uiState = uiState;
         this.updateButtonInteractable(uiState);
         this.updateButtonState();
@@ -121,9 +120,7 @@ export default class PlaceBetButton extends ObserverComponent {
     cancelAutoPlay() { }
 
     @handle(AutoPlayHandler, (handle) => handle.checkAutoBetNextRound())
-    checkAutoBetNextRound() {
-        log("start auto play ");
-    }
+    checkAutoBetNextRound() { }
 
     @render(AutoPlayStore, (store) => store.isAutoplay)
     renderAutoPlay(isAutoPlay: boolean) {

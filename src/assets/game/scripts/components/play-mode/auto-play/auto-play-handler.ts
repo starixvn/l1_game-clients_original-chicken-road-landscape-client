@@ -1,5 +1,4 @@
 import gc from "@sg/game-client-base";
-import { log } from "cc";
 import inversify from "inversify";
 import mobx from "mobx";
 import { InstantWinConfigStore } from "../../../game-configs/instant-win-config-store";
@@ -148,8 +147,6 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     confirmRoundAndStart() {
-        log(`confirmRoundAndStart rounds: ${this.autoPlayStore.selectedRoundOnPopup}, 
-            at step: ${this.autoPlayStore.noOfLanes}`);
         this.autoPlayStore.roundsAutoplay = this.autoPlayStore.selectedRoundOnPopup;
         this.autoPlayStore.isOpenAutoplayPopup = false;
         this.autoPlayStore.isAutoplay = true;
@@ -173,7 +170,6 @@ export class AutoPlayHandler implements gc.Shared.IHandler<number> {
     }
 
     checkAutoBetNextRound() {
-        log("checkAutoBetNextRound");
         if (!this.autoPlayStore.isAutoplay || this.betStore.settleStatus) {
             return;
         }
