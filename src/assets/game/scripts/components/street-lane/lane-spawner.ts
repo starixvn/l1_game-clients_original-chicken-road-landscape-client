@@ -331,15 +331,15 @@ export class LaneSpawner extends ObserverComponent {
         try {
             if (!settleStatus.win) {
                 this.moveChicken();
-                await this.chickenCtrl.playStep();
-                const laneItem = this.getLaneItem(this.currentLaneIndex);
-                laneItem?.playCrashVehicle(() => {
+                this.chickenCtrl.playStep();
+                this.scheduleOnce(() => {
+                    const laneItem = this.getLaneItem(this.currentLaneIndex);
+                    laneItem?.playCrashVehicle(() => { });
                     this.chickenCtrl.playCrash(this.scrollView.content.parent).then(() => {
                         this.triggerUpdateWinAmount();
                         this.triggerSettleStatus();
                     });
-
-                });
+                }, 0.7);
             }
         } catch (e) { }
     }

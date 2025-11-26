@@ -172,7 +172,7 @@ export class Vehicle extends Component {
         this.randomVehicle();
 
         const endPos = this.vehicleEndPoint.position;
-        const duration = 1;
+        const duration = 0.7;
         let isCollision = false;
         tween(this.vehicleNode)
             .to(duration, { position: v3(0, endPos.y, 0) }, {
