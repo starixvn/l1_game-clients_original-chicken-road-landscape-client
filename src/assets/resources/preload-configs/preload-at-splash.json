@@ -1,0 +1,10 @@
+{
+    "others": {
+        "resources": ["spines/chicken", "spines/barrier", "spines/firework", "images/chicken-road-altas"]
+    },
+    "localized": {
+        "resources": {
+            "1": ["txt_total_win"]
+        }
+    }
+}
