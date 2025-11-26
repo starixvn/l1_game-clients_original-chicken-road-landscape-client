@@ -242,6 +242,10 @@ export class LaneSpawner extends ObserverComponent {
                     this.scheduleOnce(() => this.chickenCtrl.chickenScare(), 0.8);
                 }
                 await this.chickenCtrl.playStep();
+                if (this.interrupted) {
+                    this.completeSettle();
+                    return;
+                }
                 if (!hasVehicle) {
                     this.chickenCtrl.chickenSmile();
                 } else {
@@ -277,7 +281,9 @@ export class LaneSpawner extends ObserverComponent {
     checkIfSettled() { }
 
     @handle(AutoPlayHandler, (handler) => handler.completeSettle())
-    completeSettle() { }
+    completeSettle() {
+        this.unscheduleAllCallbacks();
+    }
 
     @render(AutoPlayHandler, (handler) => handler.interrupted, { fireImmediately: false })
     renderInterrupted(interrupted: any) {
