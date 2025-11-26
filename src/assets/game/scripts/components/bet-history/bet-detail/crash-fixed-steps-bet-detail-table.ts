@@ -2,7 +2,6 @@ import gc from "@sg/game-client-base";
 import { _decorator, Color, Label, Prefab } from "cc";
 
 import { CrashGameBetDetailLogTable } from "db://shared-components/game-crash/bet-history-details/scripts/crash-game-bet-detail-log-table";
-import { ReachMaxWin } from "db://shared-components/game-crash/bet-history-details/scripts/reach-max-win";
 import Observer from "observer";
 import { BetHistoryLog } from "../../../handlers/crash-v2/bet/crash-bet-history-store";
 import { HashHandlers } from "../../hash/hash-handlers";
@@ -20,8 +19,6 @@ interface IBetDetailLog {
 
 @ccclass
 export class CrashFixedStepsBetDetailTable extends CrashGameBetDetailLogTable {
-    @property(ReachMaxWin)
-    cpnReachMaxWin: ReachMaxWin = null;
 
     @property(Label)
     lblTotalStake: Label = null;
@@ -41,7 +38,7 @@ export class CrashFixedStepsBetDetailTable extends CrashGameBetDetailLogTable {
     }
 
     @handle(gc.Audios.AudioHandler, (handle) => handle.playSFX(gc.Audios.AudioIds.CLICK))
-    playSoundClick() {}
+    playSoundClick() { }
 
     showBetDetail(bodyItemPrefab: Prefab, model: gc.BetHistory.BetDetailModel) {
         const { fractionalOddsFormat, betHistoryLog } = model;

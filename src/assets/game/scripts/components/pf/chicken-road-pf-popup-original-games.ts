@@ -15,11 +15,11 @@ export class ChickenRoadPFPopupOriginalGames extends ProvablyFairPopupRoundBase 
 
     @property(Label)
     lblCrashPoint: Label = null;
-    
-    @property({ type: Node, visible: false })
+
+    @property({ type: Node, visible: false, override: true })
     nodeResult: Node = null;
 
-    @property({ type: Node, visible: false })
+    @property({ type: Node, visible: false, override: true })
     clientSeedsContainer: Node = null;
 
     @render(HashStore, (store) => store.verification)
@@ -27,14 +27,14 @@ export class ChickenRoadPFPopupOriginalGames extends ProvablyFairPopupRoundBase 
         if (!verification) {
             return;
         }
-        
+
         super.renderVerification(verification);
         const { clientSeed, finalResult } = verification;
         this.lblCrashPoint.string = `${FormatUtils.numberWithCommas(finalResult, 2, false)}x`;
 
         clientSeed && this.lblMergeClientSeed.setString(clientSeed);
         this.lblMergeClientSeed.setActive(!!clientSeed);
-        
+
         this.nodeDisabledVerification.active = false;
     }
 
