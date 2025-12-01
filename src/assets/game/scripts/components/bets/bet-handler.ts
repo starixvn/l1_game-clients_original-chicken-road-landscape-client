@@ -209,6 +209,9 @@ export class BetHandler extends gc.Bet.BetHandler implements gc.Shared.IMultiple
     }
 
     handleEventCashOut(status: GameServiceMessage.Status) {
+        if (this.betsStore.uiState === BetUIState.Start) {
+            return;
+        }
         const isMining = this.betsStore.uiState === BetUIState.Mining;
         this.betsStore.uiState = BetUIState.Settle;
         this.clearAutoCashOut();
